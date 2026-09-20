@@ -1,0 +1,23 @@
+[project]
+name = "linear-probes"
+version = "0.1.0"
+description = "Minimal linear-probe training on residual-stream activations, local or NDIF"
+requires-python = ">=3.12"
+dependencies = [
+    "numpy",
+    "scikit-learn",
+]
+
+[project.optional-dependencies]
+local = ["torch", "transformers", "peft", "accelerate"]
+ndif = ["torch", "transformers", "nnsight"]
+
+[dependency-groups]
+dev = ["pytest"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["linear_probes"]

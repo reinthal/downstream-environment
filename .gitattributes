@@ -1,0 +1,4 @@
+experiments/**/transcripts_*.jsonl filter=lfs diff=lfs merge=lfs -text
+experiments/**/rollouts_*.jsonl filter=lfs diff=lfs merge=lfs -text
+experiments/**/judge_*.jsonl filter=lfs diff=lfs merge=lfs -text
+experiments/**/auditor_*.jsonl filter=lfs diff=lfs merge=lfs -text
