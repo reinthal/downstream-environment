@@ -106,12 +106,18 @@ class LocalBackend(ActivationBackend):
             model = PeftModel.from_pretrained(model, cfg.lora_id)
         model.eval()
 
+        # run the bare transformer (CausalLM -> LlamaModel etc.) — skips the LM head,
+        # whose vocab-sized logits are never read and dominate memory at long seqs
+        inner = model
+        while hasattr(inner, "model"):
+            inner = inner.model
+
         toks, spans = zip(*(tokenize_conversation(m, tokenizer, cfg.max_len) for m in conversations))
         rows = {}
         with torch.no_grad():
             for bpos, input_ids, attn, bspans in iter_batches(list(toks), list(spans),
                                                               _pad_id(tokenizer), cfg.batch_size):
-                out = model(input_ids=input_ids.to(model.device),
+                out = inner(input_ids=input_ids.to(model.device),
                             attention_mask=attn.to(model.device),
                             output_hidden_states=True)
                 # hidden_states[0] is the embeddings, so [layer + 1] is block `layer`'s output

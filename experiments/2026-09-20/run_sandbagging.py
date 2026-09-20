@@ -43,7 +43,7 @@ CONFIG = ProbeConfig(
 SURFACE, INK, SEC, MUTED = "#fcfcfb", "#0b0b0b", "#52514e", "#898781"
 GRID, BASELINE = "#e1e0d9", "#c3c2b7"
 HONEST_C, AMBIG_C, DECEPTIVE_C = "#2a78d6", "#898781", "#d03b3b"  # diverging poles + neutral
-SERIES = {"lr": "#2a78d6", "diff_of_means": "#1baf7a"}            # categorical slots 1-2
+SERIES = {LOGISTIC_REGRESSION: "#2a78d6", DIFF_OF_MEANS: "#1baf7a"}  # categorical slots 1-2
 
 
 def train_conversations():
@@ -109,7 +109,8 @@ def violin_figure(scores: np.ndarray, grades: list[str], probe_name: str, path: 
         ax.hlines(np.median(g), i - 0.18, i + 0.18, color=color, linewidth=2)
     ax.set_xticks(range(len(classes)))
     ax.set_xticklabels([f"{c}\n(n={len(g)})" for (c, _), g in zip(classes, groups)])
-    ax.set_ylim(-0.02, 1.02)
+    pad = 0.05 * (scores.max() - scores.min() + 1e-9)
+    ax.set_ylim(max(-0.02, scores.min() - pad), min(1.02, scores.max() + pad))
     ax.set_ylabel("probe score  p(deceptive)", color=SEC)
     ax.set_title(f"Sandbagging (wmdp_mmlu) — {probe_name} probe, layer 22",
                  color=INK, loc="left")
@@ -126,7 +127,7 @@ def roc_figure(curves: dict, path: Path):
     fig.patch.set_facecolor(SURFACE)
     style_axis(ax)
     ax.plot([0, 1], [0, 1], color=BASELINE, linewidth=1, linestyle=(0, (4, 4)))
-    labels = {"lr": "logistic regression", "diff_of_means": "difference of means"}
+    labels = {LOGISTIC_REGRESSION: "logistic regression", DIFF_OF_MEANS: "difference of means"}
     for name, (fpr, tpr, auroc) in curves.items():
         ax.plot(fpr, tpr, color=SERIES[name], linewidth=2,
                 label=f"{labels[name]}  (AUROC {auroc:.3f})")

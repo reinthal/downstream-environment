@@ -3,3 +3,4 @@ __pycache__/
 .venv*/
 .env
 vendor/
+experiments/**/activations_*.npz
