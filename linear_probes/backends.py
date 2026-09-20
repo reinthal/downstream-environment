@@ -91,6 +91,11 @@ class LocalBackend(ActivationBackend):
         cfg = self.config
         tokenizer = AutoTokenizer.from_pretrained(cfg.model_id)
         kwargs = {"dtype": getattr(torch, cfg.dtype), "device_map": cfg.device}
+        if cfg.truncate_layers:
+            from transformers import AutoConfig
+            mcfg = AutoConfig.from_pretrained(cfg.model_id)
+            mcfg.num_hidden_layers = cfg.layer + 1   # blocks > layer are never read; skip loading them
+            kwargs["config"] = mcfg
         try:
             model = AutoModelForCausalLM.from_pretrained(cfg.model_id, **kwargs)
         except TypeError:                        # transformers < 5 spells it torch_dtype

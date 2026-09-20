@@ -24,6 +24,8 @@ class ProbeConfig:
     # local backend only (the NDIF backend runs on the server's placement)
     device: str = "auto"
     dtype: str = "bfloat16"
+    truncate_layers: bool = True  # load only decoder blocks 0..layer — activations at <= layer are
+                                  # unchanged and a 70B probed at layer 22 needs ~1/4 of the weights
 
     # probe
     probe_type: str = LOGISTIC_REGRESSION   # DIFF_OF_MEANS | LOGISTIC_REGRESSION
