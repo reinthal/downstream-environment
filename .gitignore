@@ -4,3 +4,4 @@ __pycache__/
 .env
 vendor/
 experiments/**/activations_*.npz
+experiments/**/activations_alpaca_*.npz

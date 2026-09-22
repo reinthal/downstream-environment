@@ -27,23 +27,30 @@ same activations for comparison.
 - Eval data: `sandbagging_v2__wmdp_mmlu__llama-70b-3.3` rollouts (vendored
   from ApolloResearch/deception-detection), grades honest 512 / ambiguous 64 /
   deceptive 420 (4 `skip` rows dropped; 996 total).
-- Outputs: violin plots of probe scores per grade and honest-vs-deceptive ROC
-  curves, for both probe types.
+- Control data (follow-up run, 2026-09-22): `alpaca__plain__llama-70b-3.3`
+  rollouts — 9,994 benign instruction-following dialogues, scored with the
+  already-fitted probes to set the paper-style decision threshold (1% FPR on
+  control = 99th percentile of control scores).
+- Outputs: violin plots of probe scores per grade (+ alpaca control group and
+  threshold line) and honest-vs-deceptive ROC curves, for both probe types.
 
 Deviations from the paper's pipeline: one mean-pooled activation vector per
 dialogue over the whole final assistant turn (the paper scores per token and,
 for sandbagging, only from `<step4>` onward, i.e. reasoning trimmed; it also
-masks the last 5 words of each training fact); binary calls use a fixed 0.5
-threshold (the paper thresholds at 1% FPR on an alpaca control set, not run
-here).
+masks the last 5 words of each training fact). Binary calls originally used a
+fixed 0.5 threshold; the follow-up alpaca run adds the paper's 1%-FPR control
+threshold (sandbagging metrics at that threshold are in `results.json` under
+`alpaca_control`).
 
 ### Expected Outcome
 
-![alt text](image.png)
+![alt text](./images/deception-detection-og.png)
 
 ### Actual Outcome
 
-![alt text](violin_logistic_regression.png)
+
+Shapes look the same even though we didn't fully commit to the same implementation that the paper did.
+![alt text](./images/violin_logistic_regression.png)
 
 ### Parameters/Configurations
 
@@ -60,6 +67,9 @@ here).
 - A first run crashed with a CUDA launch failure in the LM-head matmul at long
   sequences; fixed by running the bare transformer (no LM head). Recoverable
   allocator OOM-retry warnings remain at the longest batches.
+- Control run: `uv run --no-sync python experiments/2026-09-20/add_alpaca_control.py`
+  (~35 min for 9,994 dialogues on the same 4 GPUs; reuses the saved probes, so
+  no retraining).
 
 ### Artifacts
 
@@ -67,6 +77,9 @@ here).
 - `experiments/2026-09-20/results.json` — metrics summary (AUROC, balanced
   accuracy, mean score per grade, class counts)
 - `experiments/2026-09-20/scores.csv` — per-rollout grade + both probes' scores
+- `experiments/2026-09-20/scores_alpaca.csv` — both probes' scores on the
+  9,994 control dialogues
+- `experiments/2026-09-20/add_alpaca_control.py` — control-set follow-up script
 - `experiments/2026-09-20/probe_logistic_regression.npz`,
   `experiments/2026-09-20/probe_diff_of_means.npz` — fitted probes
 - `experiments/2026-09-20/figures/violin_logistic_regression.png`
