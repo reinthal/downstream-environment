@@ -21,7 +21,7 @@ Train the paper's instructed-pairs probe locally and evaluate on the paper's
 own pre-graded sandbagging rollouts; fit a difference-of-means probe on the
 same activations for comparison.
 
-- Training data: `repe_honesty__plain` — 306 true facts, each under an honest
+- Training data: `repe_honesty__plain` — 306 true facts, each[text](.) under an honest
   and a dishonest instruction (612 conversations; label 1 = dishonest
   instruction).
 - Eval data: `sandbagging_v2__wmdp_mmlu__llama-70b-3.3` rollouts (vendored
@@ -39,7 +39,11 @@ here).
 
 ### Expected Outcome
 
+![alt text](image.png)
+
 ### Actual Outcome
+
+![alt text](violin_logistic_regression.png)
 
 ### Parameters/Configurations
 
