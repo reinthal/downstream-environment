@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rollout transcript viewer</title>
+<!--
+Reusable viewer for rollout data directories. Point it at a directory holding:
+  transcripts_<arm>.jsonl   (required; one message per line: game_id, seed_group,
+                             round, position, speaker, role, announcement, reasoning)
+  games_<arm>.json          (required; {"games": [{game_id, seed_group, parsnip, roles}]})
+  scores_<arm>.csv          (optional; per-message probe scores)
+  auditor_<arm>.jsonl       (optional; per game x condition auditor verdicts)
+
+Serve the repo and open with a data dir (relative to this file, or absolute URL path):
+  python3 -m http.server 8000 --bind 127.0.0.1
+  http://localhost:8000/rollouts/viewer/?data=/experiments/2026-09-22
+
+Arms are auto-discovered from the server's directory listing; if your server has
+no listing, pass them explicitly: ...&arms=base,steered
+-->
+<style>
+:root{
+  --surface:#fcfcfb; --panel:#f4f3f0; --ink:#0b0b0b; --sec:#52514e; --muted:#898781;
+  --line:#e1e0d9; --carrot:#2a78d6; --parsnip:#d03b3b; --good:#1baf7a;
+  --chip:#eceae5; --accent:#2a78d6;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --surface:#161614; --panel:#1f1e1b; --ink:#f2f1ee; --sec:#b5b3ac; --muted:#7d7b74;
+    --line:#33322e; --carrot:#5da2f0; --parsnip:#f07568; --good:#3ecf9a; --chip:#2a2926;
+    --accent:#5da2f0;
+  }
+}
+*{box-sizing:border-box;margin:0}
+body{font:14px/1.5 system-ui,sans-serif;background:var(--surface);color:var(--ink);display:flex;height:100vh;overflow:hidden}
+#side{width:290px;min-width:290px;border-right:1px solid var(--line);display:flex;flex-direction:column;background:var(--panel)}
+#side header{padding:14px 16px 10px;border-bottom:1px solid var(--line)}
+#side h1{font-size:15px}
+#side .sub{color:var(--muted);font-size:12px;margin-top:2px;word-break:break-all}
+#armrow{display:flex;gap:6px;padding:10px 16px;flex-wrap:wrap}
+#armrow button{flex:1;padding:6px 0;border:1px solid var(--line);border-radius:8px;background:transparent;color:var(--sec);cursor:pointer;font-size:13px}
+#armrow button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+#legend{padding:0 16px 8px;color:var(--muted);font-size:11.5px}
+#games{overflow-y:auto;flex:1}
+.g{padding:8px 16px;border-bottom:1px solid var(--line);cursor:pointer;display:flex;align-items:center;gap:8px}
+.g:hover{background:var(--chip)}
+.g.on{background:var(--chip);box-shadow:inset 3px 0 0 var(--accent)}
+.g .gid{font-family:ui-monospace,monospace;font-size:12.5px;width:52px}
+.g .pn{color:var(--sec);font-size:12.5px;flex:1}
+.dots{display:flex;gap:4px}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--line)}
+.dot.y{background:var(--good)}.dot.n{background:var(--parsnip);opacity:.55}
+#main{flex:1;overflow-y:auto;padding:22px 30px 60px}
+#main h2{font-size:17px;margin-bottom:2px}
+.meta{color:var(--sec);font-size:13px;margin-bottom:14px}
+.badge{display:inline-block;padding:1px 8px;border-radius:10px;font-size:11.5px;font-weight:600;color:#fff}
+.badge.Carrot{background:var(--carrot)}.badge.Parsnip{background:var(--parsnip)}
+.roundhdr{margin:20px 0 8px;color:var(--muted);font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+.msg{border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-bottom:10px;background:var(--panel)}
+.msg.parsnip{border-color:var(--parsnip)}
+.msghdr{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px}
+.msghdr .who{font-weight:650}
+.chips{display:flex;gap:5px;margin-left:auto}
+.chip{font-family:ui-monospace,monospace;font-size:11px;padding:1px 7px;border-radius:9px;background:var(--chip);color:var(--sec)}
+.ann{white-space:pre-wrap}
+.ann.silent{color:var(--muted);font-style:italic}
+details{margin-top:6px}
+summary{cursor:pointer;color:var(--muted);font-size:12px}
+.think{white-space:pre-wrap;color:var(--sec);font-size:12.5px;border-left:2px solid var(--line);padding:6px 0 2px 10px;margin-top:6px}
+#audit{margin-top:28px}
+#audit h3{font-size:14px;margin-bottom:10px}
+.acards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.acard{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--panel)}
+.acard .cond{font-size:11.5px;color:var(--muted);letter-spacing:.05em;text-transform:uppercase}
+.acard .guess{font-size:15px;font-weight:650;margin:2px 0}
+.ok{color:var(--good)}.bad{color:var(--parsnip)}
+.hint{color:var(--muted);margin-top:40px;text-align:center;white-space:pre-line}
+kbd{background:var(--chip);border-radius:4px;padding:0 5px;font-size:12px}
+</style>
+</head>
+<body>
+<div id="side">
+  <header><h1>Rollout games</h1><div class="sub" id="counts">loading…</div></header>
+  <div id="armrow"></div>
+  <div id="legend">dots = auditor correct per condition:<br>none &middot; lr &middot; dom &middot; random</div>
+  <div id="games"></div>
+</div>
+<div id="main"><div class="hint" id="status">Loading…</div></div>
+<script>
+// ── data loading (DOM-free; node-testable) ──────────────────────────────────
+const CONDS = ["none","lr","dom","random"];
+const CONDLBL = {none:"no probe", lr:"logistic regression", dom:"diff of means", random:"random probe"};
+
+function parseJsonl(text){
+  return text.split("\n").filter(l => l.trim()).map(l => JSON.parse(l));
+}
+
+// naive CSV (no quoted commas — true for scores_*.csv, which is ids + numbers);
+// python csv.writer emits \r\n, so strip CRs before splitting
+function parseCsv(text){
+  const lines = text.replace(/\r/g, "").split("\n").filter(l => l.trim());
+  const head = lines[0].split(",");
+  return lines.slice(1).map(l => Object.fromEntries(l.split(",").map((v, i) => [head[i], v])));
+}
+
+function discoverArmsFromListing(html){
+  return [...new Set([...html.matchAll(/transcripts_([A-Za-z0-9_.-]+?)\.jsonl/g)].map(m => m[1]))];
+}
+
+function assembleArm(msgs, gamesMeta, scoreRows, auditorRows){
+  const scores = {};
+  for (const r of scoreRows || []){
+    scores[`${r.game_id}|${r.round}|${r.position}`] = Object.fromEntries(
+      ["lr_full","dom_full","rand_full","lr_pub","dom_pub","rand_pub"]
+        .filter(k => k in r).map(k => [k, parseFloat(r[k])]));
+  }
+  const auditor = {};
+  for (const r of auditorRows || []){
+    (auditor[r.game_id] ??= {})[r.condition] =
+      {guess: r.guess, correct: r.correct, reasoning: r.reasoning, public: r.public};
+  }
+  const byGame = {};
+  for (const m of msgs) (byGame[m.game_id] ??= []).push(m);
+  const games = [...gamesMeta].sort((a, b) =>
+    a.seed_group - b.seed_group || a.game_idx - b.game_idx);
+  return {games: games.map(g => ({
+    id: g.game_id, seed_group: g.seed_group, parsnip: g.parsnip, roles: g.roles,
+    messages: (byGame[g.game_id] || [])
+      .sort((a, b) => a.round - b.round || a.position - b.position)
+      .map(m => ({round: m.round, position: m.position, speaker: m.speaker,
+                  role: m.role, announcement: m.announcement, reasoning: m.reasoning,
+                  scores: scores[`${m.game_id}|${m.round}|${m.position}`]})),
+    auditor: auditor[g.game_id] || {},
+  }))};
+}
+
+async function loadArm(dataDir, arm, fetcher){
+  const get = async (p, required) => {
+    try { const r = await fetcher(`${dataDir}/${p}`);
+          if (!r.ok) throw new Error(`${p}: HTTP ${r.status}`);
+          return r.text(); }
+    catch (e){ if (required) throw e; return null; }
+  };
+  const [t, g, s, a] = await Promise.all([
+    get(`transcripts_${arm}.jsonl`, true), get(`games_${arm}.json`, true),
+    get(`scores_${arm}.csv`, false), get(`auditor_${arm}.jsonl`, false)]);
+  return assembleArm(parseJsonl(t), JSON.parse(g).games,
+                     s && parseCsv(s), a && parseJsonl(a));
+}
+
+// ── app ──────────────────────────────────────────────────────────────────────
+async function main(){
+  const params = new URLSearchParams(location.search);
+  const dataDir = (params.get("data") || ".").replace(/\/+$/, "");
+  const status = t => { const s = document.getElementById("status"); if (s) s.textContent = t; };
+
+  let arms = params.get("arms")?.split(",").filter(Boolean);
+  if (!arms || !arms.length){
+    try { arms = discoverArmsFromListing(await (await fetch(dataDir + "/")).text()); }
+    catch (e){ arms = []; }
+  }
+  if (!arms.length){
+    status(`No transcripts_<arm>.jsonl found under "${dataDir}".\n` +
+           `Pass ?data=<dir> (and &arms=a,b if the server has no directory listing).`);
+    document.getElementById("counts").textContent = dataDir;
+    return;
+  }
+
+  const DATA = {};                    // arm -> assembled data (lazy)
+  let arm = arms[0], sel = 0;
+  const el = (t, cls, txt) => { const e = document.createElement(t);
+    if (cls) e.className = cls; if (txt !== undefined) e.textContent = txt; return e; };
+
+  async function ensureArm(a){
+    if (!DATA[a]){
+      status(`Loading ${a}…`);
+      try { DATA[a] = await loadArm(dataDir, a, fetch); }
+      catch (e){ status(`Failed to load arm "${a}": ${e.message}`); throw e; }
+    }
+    return DATA[a];
+  }
+
+  function renderSide(){
+    const armrow = document.getElementById("armrow"); armrow.innerHTML = "";
+    for (const a of arms){
+      const b = el("button", a === arm ? "on" : "", a);
+      b.onclick = async () => { arm = a; sel = 0; await ensureArm(a); renderSide(); renderGame(); };
+      armrow.appendChild(b);
+    }
+    const list = document.getElementById("games"); list.innerHTML = "";
+    (DATA[arm]?.games || []).forEach((g, i) => {
+      const row = el("div", "g" + (i === sel ? " on" : ""));
+      row.appendChild(el("span", "gid", g.id));
+      row.appendChild(el("span", "pn", g.parsnip));
+      const dots = el("span", "dots");
+      for (const c of CONDS){
+        const a = g.auditor[c];
+        dots.appendChild(el("span", "dot " + (a ? (a.correct ? "y" : "n") : ""), ""));
+      }
+      row.appendChild(dots);
+      row.onclick = () => { sel = i; renderSide(); renderGame(); };
+      list.appendChild(row);
+    });
+    document.getElementById("counts").textContent =
+      `${dataDir} · ${arms.map(a => DATA[a] ? `${a}: ${DATA[a].games.length}` : a).join(" · ")}`;
+  }
+
+  const chip = (label, v) => el("span", "chip",
+    `${label} ${v === undefined || Number.isNaN(v) ? "—" : v.toFixed(2)}`);
+
+  function renderGame(){
+    const g = DATA[arm].games[sel];
+    const m = document.getElementById("main"); m.innerHTML = "";
+    if (!g){ m.appendChild(el("div", "hint", "No games in this arm.")); return; }
+    m.appendChild(el("h2", "", `${g.id} — Parsnip: ${g.parsnip}`));
+    const roles = Object.entries(g.roles).map(([n, r]) => `${n}: ${r}`).join("  ·  ");
+    m.appendChild(el("div", "meta", `arm ${arm} · seed group ${g.seed_group} · ${roles}`));
+    let round = -1;
+    for (const msg of g.messages){
+      if (msg.round !== round){ round = msg.round; m.appendChild(el("div", "roundhdr", `Round ${round + 1}`)); }
+      const box = el("div", "msg" + (msg.role === "Parsnip" ? " parsnip" : ""));
+      const hdr = el("div", "msghdr");
+      hdr.appendChild(el("span", "who", msg.speaker));
+      hdr.appendChild(el("span", "badge " + msg.role, msg.role));
+      if (msg.scores){
+        const chips = el("span", "chips");
+        chips.appendChild(chip("lr", msg.scores.lr_full));
+        chips.appendChild(chip("dom", msg.scores.dom_full));
+        chips.appendChild(chip("rnd", msg.scores.rand_full));
+        hdr.appendChild(chips);
+      }
+      box.appendChild(hdr);
+      box.appendChild(msg.announcement ? el("div", "ann", msg.announcement)
+                                       : el("div", "ann silent", "(stays silent)"));
+      if (msg.reasoning){
+        const d = el("details"); d.appendChild(el("summary", "", "private reasoning"));
+        d.appendChild(el("div", "think", msg.reasoning)); box.appendChild(d);
+      }
+      m.appendChild(box);
+    }
+    const conds = CONDS.filter(c => g.auditor[c]);
+    if (conds.length){
+      const au = el("div", ""); au.id = "audit";
+      au.appendChild(el("h3", "", "Auditor verdicts"));
+      const cards = el("div", "acards");
+      for (const c of conds){
+        const a = g.auditor[c];
+        const card = el("div", "acard");
+        card.appendChild(el("div", "cond", CONDLBL[c] || c));
+        const gl = el("div", "guess"); gl.textContent = a.guess + " ";
+        gl.appendChild(el("span", a.correct ? "ok" : "bad", a.correct ? "✓" : "✗ (" + g.parsnip + ")"));
+        card.appendChild(gl);
+        const d = el("details"); d.appendChild(el("summary", "", "auditor reasoning"));
+        d.appendChild(el("div", "think", a.reasoning + (a.public ? "\n\n— answer —\n" + a.public : "")));
+        card.appendChild(d);
+        cards.appendChild(card);
+      }
+      au.appendChild(cards); m.appendChild(au);
+    }
+    m.scrollTop = 0;
+  }
+
+  document.addEventListener("keydown", e => {
+    if (e.target.tagName === "INPUT") return;
+    if (e.key === "j" || e.key === "k"){
+      const n = DATA[arm].games.length; if (!n) return;
+      sel = (sel + (e.key === "j" ? 1 : n - 1)) % n;
+      renderSide(); renderGame();
+      document.querySelector(".g.on")?.scrollIntoView({block: "nearest"});
+    }
+  });
+
+  await ensureArm(arm);
+  renderSide(); renderGame();
+}
+
+if (typeof window !== "undefined" && typeof document !== "undefined" && document.getElementById("side")){
+  main();
+}
+</script>
+</body>
+</html>
