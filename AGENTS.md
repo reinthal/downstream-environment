@@ -108,4 +108,13 @@ reason.
   possibly subclassed) holding ALL of the run's hyperparameters — scripts
   read it, never hardcode; `cfg.save(out_dir)` on run start. Skeleton:
   `experiments/_template/`.
+- **Every newly fitted probe gets a symlink in `probes/`** named
+  `<model>_layer<L>_<probe_type>.npz` (e.g.
+  `qwen3.5-27b_layer16_logistic_regression.npz`), pointing at the `.npz` in
+  its experiment folder. Downstream experiments load probes via `probes/`,
+  never by reaching into another experiment's directory.
+- Sampled data (`transcripts_/rollouts_/judge_/auditor_*.jsonl`) is
+  git-lfs-tracked via `.gitattributes`; regenerable activation `.npz` stays
+  untracked (gitignored). Keep new data files to these name patterns so LFS
+  picks them up.
 - `CLAUDE.md` is a symlink to this file.
