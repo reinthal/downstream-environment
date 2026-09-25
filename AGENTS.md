@@ -9,9 +9,20 @@ auditor). Read `research-log/log.md` for what has been run and why.
 - **Game design**: `game/Carrot-Parsnip/Carrot_Parsnip.py` is the game engine
   (seeded role assignment, players, log). New social-deduction experiments
   must reuse it — do not write a new engine. The discussion-only rollout
-  harness (speaking order, private-think turns, transcripts JSONL, outside
-  auditor) lives in `experiments/2026-09-22/run_games.py` / `run_auditor.py`;
-  copy or import that pattern for new experiments.
+  harness (speaking order, private-think turns, transcripts JSONL) lives in
+  `experiments/2026-09-22/run_games.py`; copy or import that pattern.
+- **Outside auditor**: the `auditor/` package (code) + a per-experiment
+  `config.json` (an `auditor.config.AuditorConfig` — all run parameters).
+  `python -m auditor.run --config experiments/<date>/config.json --arm base`
+  annotates announcements with a calibrated 1-7 suspicion grade
+  (`auditor.scale`: per-detector cutpoints at benign-control quantiles, saved
+  as `suspicion_scale.json`; per-seed-group lists for random controls) and
+  asks a fresh model to name the Parsnip. Prompts/parsing in
+  `auditor.prompts` are data-driven (player names from games_{arm}.json).
+  API-hosted auditing runs as an Inspect task (`auditor/inspect_task.py`,
+  OpenRouter provider, epochs = repeated audits per game; `inspect view`
+  shows every sample's exact prompt). The raw-score variant is history:
+  `experiments/2026-09-22/run_auditor.py`.
 - **Generation**: `rollouts/generation.py` — always use `make_backend(...)`.
   - `VLLMBackend` (`--backend vllm`, the default) for ALL bulk generation.
     ~10x faster than HF `generate`. Requires the vLLM env (below).
@@ -38,7 +49,9 @@ auditor). Read `research-log/log.md` for what has been run and why.
   - the coefficient is engine-global: `generate` runs one engine pass per
     distinct coef value (fine for the usual ±coef arms).
 - **Transcript viewer**: `rollouts/viewer/index.html` — static, reusable;
-  reads `transcripts_/games_/scores_/auditor_*` straight from any data dir.
+  reads `transcripts_/games_/scores_/auditor_*` (+ optional
+  `suspicion_scale.json` → shows the 1-7 grades) straight from any data dir;
+  symlink shared inputs into a new experiment folder to view it directly.
   `python3 -m http.server 8000 --bind 127.0.0.1` at repo root, then open
   `http://localhost:8000/rollouts/viewer/?data=/experiments/<date>`
   (add `&arms=a,b` if the server has no directory listing). New experiments

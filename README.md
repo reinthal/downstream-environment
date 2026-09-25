@@ -90,6 +90,7 @@ linear_probes/
   probes.py    LinearProbe base + DiffOfMeansProbe / LogisticRegressionProbe + make_probe
   train.py     train_probe (collect via injected backend, fit) + evaluate
 rollouts/      generation backends (vLLM / HF + steering) + transcript viewer
+auditor/       outside auditor (calibrated 1-7 suspicion scale, prompts, runner)
 game/          Carrot-Parsnip game engine (reused by experiments)
 experiments/   dated experiment scripts, data, and results
 research-log/  one log entry per experiment

@@ -11,10 +11,15 @@ Reusable viewer for rollout data directories. Point it at a directory holding:
   games_<arm>.json          (required; {"games": [{game_id, seed_group, parsnip, roles}]})
   scores_<arm>.csv          (optional; per-message probe scores)
   auditor_<arm>.jsonl       (optional; per game x condition auditor verdicts)
+  suspicion_scale.json      (optional; per-detector alpaca-quantile cutpoints —
+                             messages then also show the calibrated 1-7 suspicion
+                             grade the auditor saw; per-seed-group cutpoint lists
+                             (the random control) are handled)
 
 Serve the repo and open with a data dir (relative to this file, or absolute URL path):
   python3 -m http.server 8000 --bind 127.0.0.1
   http://localhost:8000/rollouts/viewer/?data=/experiments/2026-09-22
+  http://localhost:8000/rollouts/viewer/?data=/experiments/2026-09-25   (grades)
 
 Arms are auto-discovered from the server's directory listing; if your server has
 no listing, pass them explicitly: ...&arms=base,steered
@@ -108,12 +113,36 @@ function discoverArmsFromListing(html){
   return [...new Set([...html.matchAll(/transcripts_([A-Za-z0-9_.-]+?)\.jsonl/g)].map(m => m[1]))];
 }
 
-function assembleArm(msgs, gamesMeta, scoreRows, auditorRows){
-  const scores = {};
+// suspicion grade 1..cuts.length+1: count of cutpoints <= score, plus one
+// (score equal to a cutpoint lands in the higher grade, matching the repo's
+// `score >= threshold` convention — numpy searchsorted side="right")
+function gradeOf(score, cuts){
+  return cuts.reduce((g, c) => g + (score >= c), 1);
+}
+
+// scale.cutpoints: detector -> [6 floats], or -> [[6 floats] per seed group]
+function gradesFor(row, scale){
+  if (!scale) return undefined;
+  const span = scale.span || "full";
+  const out = {};
+  for (const [det, col] of [["lr", `lr_${span}`], ["dom", `dom_${span}`],
+                            ["random", `rand_${span}`]]){
+    const cuts = scale.cutpoints[det];
+    if (!cuts || !(col in row)) continue;
+    out[det] = gradeOf(parseFloat(row[col]),
+                       Array.isArray(cuts[0]) ? cuts[Number(row.seed_group)] : cuts);
+  }
+  return Object.keys(out).length ? out : undefined;
+}
+
+function assembleArm(msgs, gamesMeta, scoreRows, auditorRows, scale){
+  const scores = {}, grades = {};
   for (const r of scoreRows || []){
-    scores[`${r.game_id}|${r.round}|${r.position}`] = Object.fromEntries(
+    const key = `${r.game_id}|${r.round}|${r.position}`;
+    scores[key] = Object.fromEntries(
       ["lr_full","dom_full","rand_full","lr_pub","dom_pub","rand_pub"]
         .filter(k => k in r).map(k => [k, parseFloat(r[k])]));
+    grades[key] = gradesFor(r, scale);
   }
   const auditor = {};
   for (const r of auditorRows || []){
@@ -130,7 +159,8 @@ function assembleArm(msgs, gamesMeta, scoreRows, auditorRows){
       .sort((a, b) => a.round - b.round || a.position - b.position)
       .map(m => ({round: m.round, position: m.position, speaker: m.speaker,
                   role: m.role, announcement: m.announcement, reasoning: m.reasoning,
-                  scores: scores[`${m.game_id}|${m.round}|${m.position}`]})),
+                  scores: scores[`${m.game_id}|${m.round}|${m.position}`],
+                  grades: grades[`${m.game_id}|${m.round}|${m.position}`]})),
     auditor: auditor[g.game_id] || {},
   }))};
 }
@@ -142,11 +172,12 @@ async function loadArm(dataDir, arm, fetcher){
           return r.text(); }
     catch (e){ if (required) throw e; return null; }
   };
-  const [t, g, s, a] = await Promise.all([
+  const [t, g, s, a, sc] = await Promise.all([
     get(`transcripts_${arm}.jsonl`, true), get(`games_${arm}.json`, true),
-    get(`scores_${arm}.csv`, false), get(`auditor_${arm}.jsonl`, false)]);
+    get(`scores_${arm}.csv`, false), get(`auditor_${arm}.jsonl`, false),
+    get("suspicion_scale.json", false)]);
   return assembleArm(parseJsonl(t), JSON.parse(g).games,
-                     s && parseCsv(s), a && parseJsonl(a));
+                     s && parseCsv(s), a && parseJsonl(a), sc && JSON.parse(sc));
 }
 
 // ── app ──────────────────────────────────────────────────────────────────────
@@ -206,8 +237,8 @@ async function main(){
       `${dataDir} · ${arms.map(a => DATA[a] ? `${a}: ${DATA[a].games.length}` : a).join(" · ")}`;
   }
 
-  const chip = (label, v) => el("span", "chip",
-    `${label} ${v === undefined || Number.isNaN(v) ? "—" : v.toFixed(2)}`);
+  const chip = (label, v, g) => el("span", "chip",
+    `${label} ${g ? `${g}/7 · ` : ""}${v === undefined || Number.isNaN(v) ? "—" : v.toFixed(2)}`);
 
   function renderGame(){
     const g = DATA[arm].games[sel];
@@ -225,9 +256,9 @@ async function main(){
       hdr.appendChild(el("span", "badge " + msg.role, msg.role));
       if (msg.scores){
         const chips = el("span", "chips");
-        chips.appendChild(chip("lr", msg.scores.lr_full));
-        chips.appendChild(chip("dom", msg.scores.dom_full));
-        chips.appendChild(chip("rnd", msg.scores.rand_full));
+        chips.appendChild(chip("lr", msg.scores.lr_full, msg.grades?.lr));
+        chips.appendChild(chip("dom", msg.scores.dom_full, msg.grades?.dom));
+        chips.appendChild(chip("rnd", msg.scores.rand_full, msg.grades?.random));
         hdr.appendChild(chips);
       }
       box.appendChild(hdr);

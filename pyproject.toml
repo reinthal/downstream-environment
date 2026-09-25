@@ -4,7 +4,9 @@ version = "0.1.0"
 description = "Minimal linear-probe training on residual-stream activations, local or NDIF"
 requires-python = ">=3.12"
 dependencies = [
+    "inspect-ai>=0.3.268",
     "numpy",
+    "openai>=3.19.2",
     "scikit-learn",
 ]
 
