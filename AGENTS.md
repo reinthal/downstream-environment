@@ -112,7 +112,10 @@ reason.
   `<model>_layer<L>_<probe_type>.npz` (e.g.
   `qwen3.5-27b_layer16_logistic_regression.npz`), pointing at the `.npz` in
   its experiment folder. Downstream experiments load probes via `probes/`,
-  never by reaching into another experiment's directory.
+  never by reaching into another experiment's directory. Likewise, reusable
+  datasets get a described symlink in `data/` — both dirs carry a README
+  index (link -> source experiment -> contents) that MUST be updated with
+  each addition.
 - Sampled data (`transcripts_/rollouts_/judge_/auditor_*.jsonl`) is
   git-lfs-tracked via `.gitattributes`; regenerable activation `.npz` stays
   untracked (gitignored). Keep new data files to these name patterns so LFS
