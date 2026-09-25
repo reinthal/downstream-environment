@@ -2,7 +2,8 @@ __pycache__/
 *.egg-info/
 .venv*/
 .env
-vendor/
+vendor/*
+!vendor/deception-detection
 experiments/**/activations_*.npz
 experiments/**/activations_alpaca_*.npz
 experiments/**/message_activations_*.npz

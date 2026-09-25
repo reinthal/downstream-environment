@@ -16,6 +16,7 @@ Using Linear Probes* ([arXiv:2502.03407](https://arxiv.org/abs/2502.03407)):
 Deps are managed with uv (`uv.lock` is committed):
 
 ```bash
+git submodule update --init   # vendor/deception-detection (Apollo datasets + grading template)
 uv sync --extra ndif        # or --extra local; plain `uv sync` for probes-only (no model deps)
 uv run pytest               # synthetic probe tests, no model or network needed
 ```

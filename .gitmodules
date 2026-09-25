@@ -1,0 +1,3 @@
+[submodule "vendor/deception-detection"]
+	path = vendor/deception-detection
+	url = https://github.com/ApolloResearch/deception-detection.git
