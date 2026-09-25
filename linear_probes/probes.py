@@ -32,6 +32,7 @@ class LinearProbe(ABC):
         self.sd = None    # (d,) standardizer std
         self.w = None     # (d,) direction, in standardized space
         self.b = 0.0
+        self.raw_diff = None   # (d,) raw-activation-space class-gap vector (DoM only) — the steering direction
 
     @abstractmethod
     def fit(self, X, y) -> "LinearProbe":
@@ -53,9 +54,10 @@ class LinearProbe(ABC):
         return self.predict_proba(X) >= threshold
 
     def save(self, path: str) -> str:
+        extra = {} if self.raw_diff is None else {"raw_diff": self.raw_diff}
         np.savez(path, kind=self.kind, mu=self.mu, sd=self.sd, w=self.w, b=self.b,
                  model_id=self.config.model_id, layer=self.config.layer,
-                 lora_id=self.config.lora_id or "")
+                 lora_id=self.config.lora_id or "", **extra)
         return path
 
     @staticmethod
@@ -65,6 +67,8 @@ class LinearProbe(ABC):
                              lora_id=str(z["lora_id"]) or None, probe_type=str(z["kind"]))
         probe = make_probe(config)
         probe.mu, probe.sd, probe.w, probe.b = z["mu"], z["sd"], z["w"], float(z["b"])
+        if "raw_diff" in z:
+            probe.raw_diff = z["raw_diff"]
         return probe
 
 
@@ -78,6 +82,7 @@ class DiffOfMeansProbe(LinearProbe):
     def fit(self, X, y) -> "DiffOfMeansProbe":
         X = np.asarray(X, dtype=float)
         y = np.asarray(y).astype(bool)
+        self.raw_diff = X[y].mean(0) - X[~y].mean(0)   # unstandardized: usable for steering as-is
         Xs = self._fit_standardizer(X)
         d = Xs[y].mean(0) - Xs[~y].mean(0)
         p = Xs @ d

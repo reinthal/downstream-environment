@@ -72,6 +72,12 @@ def decoder_layers(model):
 class GenerationBackend(ABC):
     """Shared contract: ``generate(convs, max_new_tokens)`` -> raw completions."""
 
+    # instance-level overrides for ExperimentConfig injection; None means the
+    # module globals stay authoritative (scripts patch those, e.g. 2026-09-24
+    # sets generation.FORCE_CLOSE_TOKENS = 800)
+    gen_kwargs: dict | None = None
+    force_close_tokens: int | None = None
+
     def __init__(self, model_id: str):
         from transformers import AutoTokenizer
 
@@ -94,9 +100,11 @@ class GenerationBackend(ABC):
         idxs = [i for i, r in enumerate(raws) if "</think>" not in r]
         self.n_force_closed = len(idxs)
         if idxs:
+            fct = self.force_close_tokens if self.force_close_tokens is not None \
+                else FORCE_CLOSE_TOKENS
             cont = self._generate_texts(
                 [self.render(convs[i]) + raws[i] + CLOSE_CUE for i in idxs],
-                FORCE_CLOSE_TOKENS, seed + 1,
+                fct, seed + 1,
                 [coefs[i] for i in idxs] if coefs is not None else None)
             for i, c in zip(idxs, cont):
                 raws[i] = raws[i] + CLOSE_CUE + c
@@ -114,7 +122,8 @@ class VLLMBackend(GenerationBackend):
     """Offline vLLM engine. Run under `.venv-vllm` (see AGENTS.md)."""
 
     def __init__(self, model_id: str, tensor_parallel_size: int | None = None,
-                 max_model_len: int = 8192, gpu_memory_utilization: float = 0.90):
+                 max_model_len: int = 8192, gpu_memory_utilization: float = 0.90,
+                 enforce_eager: bool = False):
         super().__init__(model_id)
         import os
 
@@ -127,7 +136,8 @@ class VLLMBackend(GenerationBackend):
         tp = tensor_parallel_size or max(1, torch.cuda.device_count())
         self.llm = LLM(model=model_id, tensor_parallel_size=tp,
                        max_model_len=max_model_len, dtype="bfloat16",
-                       gpu_memory_utilization=gpu_memory_utilization)
+                       gpu_memory_utilization=gpu_memory_utilization,
+                       enforce_eager=enforce_eager)
 
     def _generate_texts(self, texts, max_new_tokens, seed, coefs):
         if coefs is not None:
@@ -135,7 +145,8 @@ class VLLMBackend(GenerationBackend):
         from vllm import SamplingParams
 
         sps = [SamplingParams(max_tokens=max_new_tokens,
-                              seed=seed * 100_003 + i, **GEN_KWARGS)
+                              seed=seed * 100_003 + i,
+                              **(self.gen_kwargs or GEN_KWARGS))
                for i in range(len(texts))]
         outs = self.llm.generate(texts, sps)
         return [o.outputs[0].text for o in outs]
@@ -176,7 +187,7 @@ class HFBackend(GenerationBackend):
                     gen = self.model.generate(
                         **enc, max_new_tokens=max_new_tokens, do_sample=True,
                         pad_token_id=self.tok.pad_token_id or self.tok.eos_token_id,
-                        **GEN_KWARGS)
+                        **(self.gen_kwargs or GEN_KWARGS))
             finally:
                 if self.steerer is not None:
                     self.steerer.clear()

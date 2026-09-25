@@ -1,0 +1,31 @@
+{
+ "model_id": "Qwen/Qwen3.5-27B",
+ "layer": 16,
+ "lora_id": null,
+ "batch_size": 6,
+ "max_len": 6144,
+ "device": "auto",
+ "dtype": "bfloat16",
+ "truncate_layers": true,
+ "probe_type": "logistic_regression",
+ "reg_coeff": 10.0,
+ "normalize": true,
+ "probe_paths": {
+  "lr": "experiments/2026-09-22/probes/probe_logistic_regression.npz",
+  "dom": "experiments/2026-09-22/probes/probe_diff_of_means.npz"
+ },
+ "steer_path": null,
+ "steer_coef": 0.0,
+ "gen_backend": "vllm",
+ "temperature": 0.7,
+ "top_p": 0.95,
+ "max_new_tokens": 6144,
+ "force_close_tokens": 800,
+ "tensor_parallel_size": 4,
+ "max_model_len": 8192,
+ "gen_chunk": 25,
+ "seed": 0,
+ "seed_groups": 1,
+ "dataset_sizes": {"sandbagging": 1000, "alpaca": 2000},
+ "out_dir": "experiments/2026-09-24"
+}

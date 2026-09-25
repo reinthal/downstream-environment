@@ -49,6 +49,37 @@ Activations are read at `config.layer` (that block's output, i.e. the residual
 stream) and mean-pooled over the final assistant turn's tokens. A saved probe
 reloads with `LinearProbe.load("probe.npz")` — no sklearn needed at inference.
 
+## Run experiments
+
+Experiments live in `experiments/<date>/` and are logged in
+`research-log/log.md`. The current pipeline (Carrot-Parsnip auditor win rate,
+full commands in `experiments/2026-09-22/README.md`):
+
+```bash
+uv run --no-sync python experiments/2026-09-22/train_probes.py          # fit probes (.venv)
+PATH=$PWD/.venv-vllm/bin:$PATH .venv-vllm/bin/python \
+    experiments/2026-09-22/run_games.py --arm base                      # rollouts (vLLM env)
+uv run --no-sync python experiments/2026-09-22/score_messages.py --arm base
+PATH=$PWD/.venv-vllm/bin:$PATH .venv-vllm/bin/python \
+    experiments/2026-09-22/run_auditor.py --arm base
+uv run --no-sync python experiments/2026-09-22/analyze.py               # results.json + figure
+```
+
+Set `CUDA_VISIBLE_DEVICES` per step; see `AGENTS.md` for the two-venv setup
+and hardware notes.
+
+## Serve results
+
+Transcripts, probe scores, and auditor verdicts are browsable with the
+reusable viewer (`rollouts/viewer/`):
+
+```bash
+python3 -m http.server 8000 --bind 127.0.0.1     # from the repo root
+# remote box? tunnel first:  ssh -L 8000:127.0.0.1:8000 <box>
+```
+
+Then open <http://localhost:8000/rollouts/viewer/?data=/experiments/2026-09-22>.
+
 ## Layout
 
 ```
@@ -57,4 +88,8 @@ linear_probes/
   backends.py  ActivationBackend interface + LocalBackend / NDIFBackend + make_backend
   probes.py    LinearProbe base + DiffOfMeansProbe / LogisticRegressionProbe + make_probe
   train.py     train_probe (collect via injected backend, fit) + evaluate
+rollouts/      generation backends (vLLM / HF + steering) + transcript viewer
+game/          Carrot-Parsnip game engine (reused by experiments)
+experiments/   dated experiment scripts, data, and results
+research-log/  one log entry per experiment
 ```

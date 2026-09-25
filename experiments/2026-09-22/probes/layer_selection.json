@@ -1,0 +1,49 @@
+{
+ "candidate_layers": [
+  16,
+  24,
+  32,
+  40,
+  48
+ ],
+ "val_metrics": {
+  "16": {
+   "accuracy": 1.0,
+   "balanced_accuracy": 1.0,
+   "auroc": 1.0
+  },
+  "24": {
+   "accuracy": 1.0,
+   "balanced_accuracy": 1.0,
+   "auroc": 1.0
+  },
+  "32": {
+   "accuracy": 1.0,
+   "balanced_accuracy": 1.0,
+   "auroc": 1.0
+  },
+  "40": {
+   "accuracy": 1.0,
+   "balanced_accuracy": 1.0,
+   "auroc": 1.0
+  },
+  "48": {
+   "accuracy": 1.0,
+   "balanced_accuracy": 1.0,
+   "auroc": 1.0
+  }
+ },
+ "best_layer": 16,
+ "final_in_fit_metrics": {
+  "logistic_regression": {
+   "accuracy": 1.0,
+   "balanced_accuracy": 1.0,
+   "auroc": 1.0
+  },
+  "diff_of_means": {
+   "accuracy": 1.0,
+   "balanced_accuracy": 1.0,
+   "auroc": 1.0
+  }
+ }
+}
