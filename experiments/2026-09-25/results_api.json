@@ -1,0 +1,190 @@
+{
+  "conditions": [
+    "none",
+    "lr",
+    "dom",
+    "random"
+  ],
+  "chance": 0.2,
+  "note": "cluster bootstrap over games (seeds within a game are correlated)",
+  "arms": {
+    "base": {
+      "model": "openrouter/qwen/qwen3.5-27b",
+      "n_audits": 2000,
+      "conditions": {
+        "none": {
+          "n_games": 50,
+          "n_seeds": 10,
+          "accuracy": 0.15,
+          "ci95_cluster": [
+            0.07400000000000001,
+            0.23199999999999998
+          ],
+          "majority_vote_accuracy": 0.2,
+          "delta_vs_none": 0.0,
+          "delta_ci95": [
+            0.0,
+            0.0
+          ],
+          "parse_failed": 113
+        },
+        "lr": {
+          "n_games": 50,
+          "n_seeds": 10,
+          "accuracy": 0.14,
+          "ci95_cluster": [
+            0.072,
+            0.21799999999999997
+          ],
+          "majority_vote_accuracy": 0.12,
+          "delta_vs_none": -0.009999999999999995,
+          "delta_ci95": [
+            -0.06599999999999999,
+            0.04
+          ],
+          "parse_failed": 125
+        },
+        "dom": {
+          "n_games": 50,
+          "n_seeds": 10,
+          "accuracy": 0.142,
+          "ci95_cluster": [
+            0.07200000000000001,
+            0.222
+          ],
+          "majority_vote_accuracy": 0.14,
+          "delta_vs_none": -0.007999999999999997,
+          "delta_ci95": [
+            -0.05999999999999999,
+            0.04200000000000001
+          ],
+          "parse_failed": 133
+        },
+        "random": {
+          "n_games": 50,
+          "n_seeds": 10,
+          "accuracy": 0.168,
+          "ci95_cluster": [
+            0.094,
+            0.24799999999999997
+          ],
+          "majority_vote_accuracy": 0.2,
+          "delta_vs_none": 0.017999999999999988,
+          "delta_ci95": [
+            -0.076,
+            0.11199999999999999
+          ],
+          "parse_failed": 144
+        }
+      }
+    },
+    "steered": {
+      "model": "openrouter/qwen/qwen3.5-27b",
+      "n_audits": 2000,
+      "conditions": {
+        "none": {
+          "n_games": 50,
+          "n_seeds": 10,
+          "accuracy": 0.18,
+          "ci95_cluster": [
+            0.098,
+            0.268
+          ],
+          "majority_vote_accuracy": 0.18,
+          "delta_vs_none": 0.0,
+          "delta_ci95": [
+            0.0,
+            0.0
+          ],
+          "parse_failed": 120
+        },
+        "lr": {
+          "n_games": 50,
+          "n_seeds": 10,
+          "accuracy": 0.144,
+          "ci95_cluster": [
+            0.07800000000000001,
+            0.21999999999999997
+          ],
+          "majority_vote_accuracy": 0.16,
+          "delta_vs_none": -0.036000000000000004,
+          "delta_ci95": [
+            -0.114,
+            0.041999999999999996
+          ],
+          "parse_failed": 120
+        },
+        "dom": {
+          "n_games": 50,
+          "n_seeds": 10,
+          "accuracy": 0.144,
+          "ci95_cluster": [
+            0.07800000000000001,
+            0.21600000000000003
+          ],
+          "majority_vote_accuracy": 0.14,
+          "delta_vs_none": -0.036000000000000004,
+          "delta_ci95": [
+            -0.11400000000000002,
+            0.042
+          ],
+          "parse_failed": 137
+        },
+        "random": {
+          "n_games": 50,
+          "n_seeds": 10,
+          "accuracy": 0.224,
+          "ci95_cluster": [
+            0.14,
+            0.312
+          ],
+          "majority_vote_accuracy": 0.22,
+          "delta_vs_none": 0.044000000000000004,
+          "delta_ci95": [
+            -0.042,
+            0.132
+          ],
+          "parse_failed": 133
+        }
+      }
+    }
+  },
+  "pooled": {
+    "none": {
+      "n_game_clusters": 100,
+      "n_audits": 1000,
+      "accuracy": 0.165,
+      "ci95_cluster": [
+        0.109,
+        0.226
+      ]
+    },
+    "lr": {
+      "n_game_clusters": 100,
+      "n_audits": 1000,
+      "accuracy": 0.14200000000000002,
+      "ci95_cluster": [
+        0.09299999999999999,
+        0.195
+      ]
+    },
+    "dom": {
+      "n_game_clusters": 100,
+      "n_audits": 1000,
+      "accuracy": 0.14300000000000002,
+      "ci95_cluster": [
+        0.09399999999999999,
+        0.196
+      ]
+    },
+    "random": {
+      "n_game_clusters": 100,
+      "n_audits": 1000,
+      "accuracy": 0.196,
+      "ci95_cluster": [
+        0.14,
+        0.255
+      ]
+    }
+  }
+}

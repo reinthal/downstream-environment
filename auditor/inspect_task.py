@@ -40,7 +40,12 @@ from auditor.run import build_grade_maps, read_jsonl  # noqa: E402
 from auditor.scale import load_scale  # noqa: E402
 
 
-def build_samples(cfg: ApiAuditorConfig, arm: str) -> tuple[list[Sample], list[str]]:
+from auditor.run import godmode_grade_map  # noqa: E402
+
+
+def build_samples(cfg: ApiAuditorConfig, arm: str,
+                  conditions: list[str] | None = None) -> tuple[list[Sample], list[str]]:
+    conditions = conditions or cfg.conditions
     data, out = cfg.path(cfg.data_dir), cfg.path(cfg.out_dir)
     scale = load_scale(out / "suspicion_scale.json")
 
@@ -61,11 +66,14 @@ def build_samples(cfg: ApiAuditorConfig, arm: str) -> tuple[list[Sample], list[s
 
     with open(data / f"scores_{arm}.csv") as f:
         score_rows = list(csv.DictReader(f))
-    grade_by_cond = build_grade_maps(score_rows, scale, cfg.conditions)
+    grade_by_cond = build_grade_maps(
+        score_rows, scale, [c for c in conditions if c != "godmode"])
+    if "godmode" in conditions:
+        grade_by_cond["godmode"] = godmode_grade_map(out, arm)
 
     samples = []
     for gid in game_ids:
-        for cond in cfg.conditions:
+        for cond in conditions:
             transcript = build_transcript(by_game[gid], grade_by_cond.get(cond))
             system = AUDITOR_SYSTEM.format(
                 players=", ".join(player_names), num_rounds=num_rounds,
@@ -96,9 +104,11 @@ def parsnip_scorer(player_names: list[str]):
 
 @task
 def carrot_auditor(arm: str = "base",
-                   config: str = "experiments/2026-09-25/config_api.json") -> Task:
+                   config: str = "experiments/2026-09-25/config_api.json",
+                   conditions: str | None = None) -> Task:
     cfg = ApiAuditorConfig.load(REPO / config)
-    samples, player_names = build_samples(cfg, arm)
+    samples, player_names = build_samples(
+        cfg, arm, conditions.split(",") if conditions else None)
     return Task(
         dataset=MemoryDataset(samples, name=f"carrot-parsnip-{arm}"),
         solver=generate(),

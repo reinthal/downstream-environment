@@ -54,9 +54,11 @@ def cluster_ci(game_means: np.ndarray, rng) -> list[float]:
 
 
 COND_LABEL = {"none": "no detector", "lr": "LR probe",
-              "dom": "diff-of-means", "random": "random probe"}
+              "dom": "diff-of-means", "random": "random probe",
+              "godmode": "god-mode judge"}
 COND_COLOR = {"none": "#898781", "lr": "#2a78d6",
-              "dom": "#1baf7a", "random": "#c2963f"}
+              "dom": "#1baf7a", "random": "#c2963f",
+              "godmode": "#8a5fd0"}
 
 
 def slide_figure(pooled: dict, subtitle: str, path: Path,
@@ -91,8 +93,9 @@ def slide_figure(pooled: dict, subtitle: str, path: Path,
             fontsize=13, ha="right")
     ax.set_xticks(range(len(conds)))
     ax.set_xticklabels([labels[c] for c in conds], fontsize=17, color="#0b0b0b")
-    ax.set_yticks([0, 0.25, 0.5])
-    ax.set_ylim(0, 0.55)
+    top = max(0.55, max(hi for _, _, hi in pooled.values()) + 0.12)
+    ax.set_yticks([t for t in (0, 0.25, 0.5, 0.75, 1.0) if t <= top])
+    ax.set_ylim(0, top)
     ax.yaxis.set_major_formatter(PercentFormatter(1.0))
     ax.tick_params(labelsize=15, colors="#52514e", length=0)
     ax.set_title("% auditor identifies the liar (higher better)",
@@ -107,7 +110,7 @@ def slide_figure(pooled: dict, subtitle: str, path: Path,
 
 def main():
     rng = np.random.default_rng(0)
-    conditions = ["none", "lr", "dom", "random"]
+    conditions = ["none", "lr", "dom", "random", "godmode"]
     results = {"conditions": conditions, "chance": CHANCE,
                "note": "cluster bootstrap over games (seeds within a game are correlated)",
                "arms": {}}

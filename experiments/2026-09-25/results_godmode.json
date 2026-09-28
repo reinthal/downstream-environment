@@ -1,0 +1,54 @@
+{
+  "base": {
+    "n_scored": 1492,
+    "auroc_parsnip_vs_carrot": 0.9998416066968128,
+    "mean_score_by_role": {
+      "Carrot": 1.0427493713327745,
+      "Parsnip": 6.923076923076923
+    },
+    "label_by_role": {
+      "Carrot": {
+        "honest": 1185,
+        "deceptive": 5,
+        "ambiguous": 3
+      },
+      "Parsnip": {
+        "deceptive": 296,
+        "honest": 1,
+        "ambiguous": 2
+      }
+    },
+    "auroc_vs_oracle_honest_deceptive": 0.9994226266496381,
+    "spearman_vs_oracle_score": 0.8102881785071062,
+    "probe_auroc_same_messages": {
+      "lr": 0.6153033161670503,
+      "dom": 0.6138146994592201
+    }
+  },
+  "steered": {
+    "n_scored": 1495,
+    "auroc_parsnip_vs_carrot": 0.9957061442265746,
+    "mean_score_by_role": {
+      "Carrot": 1.0727424749163879,
+      "Parsnip": 6.846153846153846
+    },
+    "label_by_role": {
+      "Carrot": {
+        "honest": 1184,
+        "deceptive": 11,
+        "ambiguous": 1
+      },
+      "Parsnip": {
+        "deceptive": 292,
+        "honest": 6,
+        "ambiguous": 1
+      }
+    },
+    "auroc_vs_oracle_honest_deceptive": 0.9956102475532527,
+    "spearman_vs_oracle_score": 0.8102681072868728,
+    "probe_auroc_same_messages": {
+      "lr": 0.436752664959005,
+      "dom": 0.43534747933468304
+    }
+  }
+}

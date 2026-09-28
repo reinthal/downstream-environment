@@ -87,6 +87,23 @@ folder holds the config and the experiment wiring:
   urllib runner for the same design (checkpoint/resume, no Inspect).
 - `violin_roles.py` → `figures/violin_roles_base_lr_full.png` (exploratory
   precursor: alpaca vs Carrot vs Parsnip LR score distributions)
+- `qualitative_correct_audits.md` — subagent-panel analysis of the 107
+  correctly-audited games (slip-up taxonomy, auditor luck rate, round-1-2
+  dynamics)
+- **God-mode grades → auditor** (local vLLM, zero API cost): `auditor/run.py
+  --seeds 10 --per-group 10 --conditions none,godmode` →
+  `auditor_seeds_{arm}.jsonl`; `analyze_local_seeds.py` →
+  `results_local_seeds.json`, `figures/slide_godmode_vs_none_local.png`.
+  Pooled: none 23.1% vs god-mode 77.1% [74.5, 79.7] — an informative
+  detector rescues the auditor immediately, so the probe conditions' failure
+  is detector signal, not the auditor pipeline.
+- `judge_godmode.py` → `judge_godmode_{arm}.jsonl`, `analyze_godmode.py` →
+  `results_godmode.json`, `figures/godmode_score_by_role.png` — god-mode
+  black-box lie detector: local Qwen3.5-27B reads public history + the
+  speaker's PRIVATE thinking + announcement (never the role), rates 1-7 on
+  the auditor legend, temperature 0. Parsnip-vs-carrot AUROC 1.000 base /
+  0.996 steered vs the probes' 0.615 / 0.437 on the same messages — the
+  text-access upper bound the activation probes are far from.
 - `transcripts_/games_/scores_*` — symlinks into `../2026-09-22` (shared
   inputs), so the transcript viewer works directly on this folder and shows
   the 1-7 grades next to raw scores:

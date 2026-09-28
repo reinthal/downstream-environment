@@ -18,35 +18,35 @@ LOGS = OUT / "inspect_logs"
 
 
 def main():
-    by_arm: dict[str, object] = {}
+    # merge every successful carrot_auditor log; for a duplicate
+    # (game, condition, epoch) the newest log (timestamp-sorted) wins
+    merged: dict[str, dict] = {}
     for path in sorted(LOGS.glob("*.eval")):        # sorted by timestamp prefix
-        log = read_eval_log(str(path), header_only=True)
-        if log.status != "success" or log.eval.task != "carrot_auditor":
+        head = read_eval_log(str(path), header_only=True)
+        if head.status != "success" or head.eval.task != "carrot_auditor":
             continue
-        arm = log.eval.task_args.get("arm", "base")
-        n = log.results.total_samples if log.results else 0
-        if n >= 2000:                               # full runs only, newest wins
-            by_arm[arm] = path
-
-    for arm, path in by_arm.items():
+        arm = head.eval.task_args.get("arm", "base")
         log = read_eval_log(str(path))
-        rows = []
+        n = 0
         for s in log.samples:
             gid, cond = str(s.id).split(":")
             sc = s.scores["parsnip_scorer"]
             guess = None if sc.answer == "(unparsed)" else sc.answer
-            rows.append({"arm": arm, "game_id": gid, "condition": cond,
-                         "auditor_seed": s.epoch - 1, "guess": guess,
-                         "parsnip": s.target, "correct": sc.value == "C",
-                         "parse_failed": guess is None,
-                         "judge_model": log.eval.model,
-                         "reasoning": "", "public": (s.output.completion or "")[-500:]})
-        rows.sort(key=lambda r: (r["game_id"], r["condition"], r["auditor_seed"]))
+            merged.setdefault(arm, {})[(gid, cond, s.epoch)] = {
+                "arm": arm, "game_id": gid, "condition": cond,
+                "auditor_seed": s.epoch - 1, "guess": guess,
+                "parsnip": s.target, "correct": sc.value == "C",
+                "parse_failed": guess is None, "judge_model": log.eval.model,
+                "reasoning": "", "public": (s.output.completion or "")[-500:]}
+            n += 1
+        print(f"{path.name[:45]}: {n} samples ({arm})")
+
+    for arm, rows in merged.items():
         out_path = OUT / f"auditor_api_{arm}.jsonl"
         with open(out_path, "w") as f:
-            for r in rows:
-                f.write(json.dumps(r) + "\n")
-        print(f"{arm}: {len(rows)} rows from {path.name} -> {out_path}")
+            for k in sorted(rows):
+                f.write(json.dumps(rows[k]) + "\n")
+        print(f"{arm}: {len(rows)} rows -> {out_path}")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,95 @@
+{
+  "conditions": [
+    "none",
+    "godmode"
+  ],
+  "chance": 0.2,
+  "arms": {
+    "base": {
+      "n_audits": 1000,
+      "conditions": {
+        "none": {
+          "n_games": 50,
+          "n_seeds": 10,
+          "accuracy": 0.18,
+          "ci95_cluster": [
+            0.09600000000000002,
+            0.272
+          ],
+          "majority_vote_accuracy": 0.16,
+          "delta_vs_none": 0.0,
+          "delta_ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "godmode": {
+          "n_games": 50,
+          "n_seeds": 10,
+          "accuracy": 0.748,
+          "ci95_cluster": [
+            0.7139999999999997,
+            0.7819999999999999
+          ],
+          "majority_vote_accuracy": 0.94,
+          "delta_vs_none": 0.568,
+          "delta_ci95": [
+            0.48,
+            0.65
+          ]
+        }
+      }
+    },
+    "steered": {
+      "n_audits": 1000,
+      "conditions": {
+        "none": {
+          "n_games": 50,
+          "n_seeds": 10,
+          "accuracy": 0.282,
+          "ci95_cluster": [
+            0.18400000000000002,
+            0.384
+          ],
+          "majority_vote_accuracy": 0.28,
+          "delta_vs_none": 0.0,
+          "delta_ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "godmode": {
+          "n_games": 50,
+          "n_seeds": 10,
+          "accuracy": 0.794,
+          "ci95_cluster": [
+            0.754,
+            0.834
+          ],
+          "majority_vote_accuracy": 0.96,
+          "delta_vs_none": 0.512,
+          "delta_ci95": [
+            0.43,
+            0.5920000000000001
+          ]
+        }
+      }
+    }
+  },
+  "pooled": {
+    "none": {
+      "accuracy": 0.23099999999999998,
+      "ci95_cluster": [
+        0.165,
+        0.301
+      ]
+    },
+    "godmode": {
+      "accuracy": 0.7710000000000001,
+      "ci95_cluster": [
+        0.745,
+        0.7970000000000003
+      ]
+    }
+  }
+}
