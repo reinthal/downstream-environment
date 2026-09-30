@@ -55,6 +55,17 @@ def test_generate_force_closes_unclosed_think():
     assert b.calls[1][0] == "PROMPT[b]<think>\nrambling forever" + CLOSE_CUE
 
 
+def test_generate_without_thinking_skips_force_close():
+    b = _FakeBackend()
+    b.enable_thinking = False
+    b.tok = type("T", (), {"apply_chat_template": lambda self, conv, **kw:
+                           f"P{kw.get('enable_thinking', True)}"})()
+    raws = b.generate([[{"role": "user", "content": "a"}]] * 2, max_new_tokens=100)
+    assert b.calls == [["PFalse", "PFalse"]]          # one pass, no continuation
+    assert b.n_force_closed == 0
+    assert split_think(raws[1]) == ("", "rambling forever")
+
+
 def test_make_backend_rejects_unknown():
     with pytest.raises(ValueError, match="unknown backend"):
         make_backend("triton", "some/model")

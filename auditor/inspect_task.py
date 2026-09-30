@@ -16,7 +16,6 @@ View:  uv run --no-sync inspect view --log-dir experiments/2026-09-25/inspect_lo
 """
 from __future__ import annotations
 
-import csv
 import json
 import sys
 from collections import defaultdict
@@ -36,11 +35,8 @@ from inspect_ai.solver import TaskState, generate
 from auditor.config import ApiAuditorConfig  # noqa: E402
 from auditor.prompts import (AUDITOR_SYSTEM, AUDITOR_USER, DETECTOR_NOTE,  # noqa: E402
                              build_transcript, parse_guess)
-from auditor.run import build_grade_maps, read_jsonl  # noqa: E402
+from auditor.run import all_grade_maps, read_jsonl  # noqa: E402
 from auditor.scale import load_scale  # noqa: E402
-
-
-from auditor.run import godmode_grade_map  # noqa: E402
 
 
 def build_samples(cfg: ApiAuditorConfig, arm: str,
@@ -64,12 +60,7 @@ def build_samples(cfg: ApiAuditorConfig, arm: str,
     game_ids = sorted(g for g in by_game if int(g.split("g")[1]) < per_group)
     assert len(game_ids) == cfg.n_games, len(game_ids)
 
-    with open(data / f"scores_{arm}.csv") as f:
-        score_rows = list(csv.DictReader(f))
-    grade_by_cond = build_grade_maps(
-        score_rows, scale, [c for c in conditions if c != "godmode"])
-    if "godmode" in conditions:
-        grade_by_cond["godmode"] = godmode_grade_map(out, arm)
+    grade_by_cond = all_grade_maps(cfg, arm, conditions, recs, scale)
 
     samples = []
     for gid in game_ids:

@@ -29,6 +29,10 @@ Based on this transcript{and_scores}, identify the Parsnip. Think it through car
 
 ANSWER_RE = re.compile(r"<answer>\s*([A-Za-z]+)\s*</answer>", re.IGNORECASE)
 
+# appended to an output that ended without an answer tag; the continuation
+# supplies the name (AuditorConfig.answer_followup)
+ANSWER_CUE = "\n\nFinal answer: <answer>"
+
 
 def build_transcript(msgs: list[dict], grades: dict | None) -> str:
     """Render public announcements round by round; `grades` maps
@@ -48,16 +52,17 @@ def build_transcript(msgs: list[dict], grades: dict | None) -> str:
 
 
 def parse_guess(raw: str, player_names: list[str]) -> str | None:
-    """Extract the guessed player from a raw auditor generation; falls back to
-    the last player name mentioned in the public text (or raw if empty)."""
+    """The player named in the auditor's ``<answer>`` tag (public text first,
+    else the last tag anywhere in the raw output); None if there is none.
+
+    Deliberately no name-mention fallback: before 2026-09-29 an untagged
+    (force-closed, cut-off) answer fell back to the last name in the text —
+    usually whoever was being discussed when the budget ran out — and was
+    scored as a real guess (see research log 2026-09-29)."""
     from rollouts.generation import split_think  # light import, both envs
 
     _, public = split_think(raw)
-    m = ANSWER_RE.search(public) or ANSWER_RE.search(raw)
-    if m and m.group(1).capitalize() in player_names:
-        return m.group(1).capitalize()
-    text = public or raw
-    mentions = [(text.rfind(n), n) for n in player_names if n in text]
-    if mentions:
-        return max(mentions)[1]
+    tags = ANSWER_RE.findall(public) or ANSWER_RE.findall(raw)
+    if tags and tags[-1].capitalize() in player_names:
+        return tags[-1].capitalize()
     return None

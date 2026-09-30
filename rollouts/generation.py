@@ -10,9 +10,9 @@ via ``make_backend`` and get the same contract from both.
     residual-stream steering hooks (:meth:`HFBackend.attach_steering`) and
     shares the weights/env with activation collection.
 
-Both render prompts with the model's chat template (thinking enabled), so
-completions start inside an open ``<think>`` block. If a completion never
-closes its think block, ``generate`` force-closes it (append a wrap-up cue +
+Both render prompts with the model's chat template (thinking enabled unless
+``enable_thinking = False``), so completions start inside an open ``<think>``
+block. If a completion never closes its think block, ``generate`` force-closes it (append a wrap-up cue +
 ``</think>``, then a bounded continuation) so the public message still gets
 produced; the count lands in ``backend.n_force_closed``.
 
@@ -77,6 +77,10 @@ class GenerationBackend(ABC):
     # sets generation.FORCE_CLOSE_TOKENS = 800)
     gen_kwargs: dict | None = None
     force_close_tokens: int | None = None
+    # False renders the chat template with an empty, closed think block (the
+    # model answers directly); completions are then returned as
+    # "</think>\n\n" + text so split_think still yields ("", text)
+    enable_thinking: bool = True
 
     def __init__(self, model_id: str):
         from transformers import AutoTokenizer
@@ -87,8 +91,15 @@ class GenerationBackend(ABC):
         self.n_force_closed = 0
 
     def render(self, conv: list[dict]) -> str:
+        kw = {} if self.enable_thinking else {"enable_thinking": False}
         return self.tok.apply_chat_template(conv, tokenize=False,
-                                            add_generation_prompt=True)
+                                            add_generation_prompt=True, **kw)
+
+    def complete(self, texts: list[str], max_new_tokens: int, *,
+                 seed: int = 0) -> list[str]:
+        """Plain continuation of already-rendered prompt strings (no chat
+        template, no force-close) — e.g. to finish a truncated answer."""
+        return self._generate_texts(texts, max_new_tokens, seed, None)
 
     def generate(self, convs: list[list[dict]], max_new_tokens: int, *,
                  seed: int = 0, coefs: list[float] | None = None) -> list[str]:
@@ -97,6 +108,9 @@ class GenerationBackend(ABC):
         ``coefs``: per-conversation steering coefficients (HF backend only)."""
         raws = self._generate_texts([self.render(c) for c in convs],
                                     max_new_tokens, seed, coefs)
+        if not self.enable_thinking:
+            self.n_force_closed = 0
+            return ["</think>\n\n" + r for r in raws]
         idxs = [i for i, r in enumerate(raws) if "</think>" not in r]
         self.n_force_closed = len(idxs)
         if idxs:

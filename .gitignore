@@ -8,3 +8,4 @@ experiments/**/activations_*.npz
 experiments/**/activations_alpaca_*.npz
 experiments/**/message_activations_*.npz
 experiments/**/train_activations.npz
+experiments/**/logs/

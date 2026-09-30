@@ -7,8 +7,10 @@ generation settings, conditions, span, and the grade legend. This module is
 pure code — nothing experiment-specific is hardcoded; player names and the
 round count are read from the game data.
 
-Conditions: "none" shows no annotations; every other condition name must
-have cutpoints in suspicion_scale.json and a `<cond>_<span>` (or
+Conditions: "none" shows no annotations; "gold" grades every Parsnip
+message 7 and every Carrot message 1; judge conditions ("godmode" and any in
+`judge_grades`) show a text judge's own 1-7 ratings; every other condition
+name must have cutpoints in suspicion_scale.json and a `<cond>_<span>` (or
 `rand_<span>` for "random") column in scores_{arm}.csv.
 
 Run (vLLM env):
@@ -32,10 +34,10 @@ if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
 from auditor.config import AuditorConfig  # noqa: E402
-from auditor.prompts import (AUDITOR_SYSTEM, AUDITOR_USER, DETECTOR_NOTE,  # noqa: E402
-                             build_transcript, parse_guess)
+from auditor.prompts import (ANSWER_CUE, AUDITOR_SYSTEM, AUDITOR_USER,  # noqa: E402
+                             DETECTOR_NOTE, build_transcript, parse_guess)
 from auditor.scale import grade, load_scale  # noqa: E402
-from rollouts.generation import make_backend, split_think  # noqa: E402
+from rollouts.generation import CLOSE_CUE, make_backend, split_think  # noqa: E402
 
 
 def read_jsonl(path: Path) -> list[dict]:
@@ -66,22 +68,43 @@ def build_grade_maps(score_rows: list[dict], scale: dict,
     return out
 
 
-def godmode_grade_map(out_dir: Path, arm: str) -> dict:
-    """(game_id, round, position) -> the god-mode judge's own 1-7 score
-    (judge_godmode_{arm}.jsonl); unparseable ratings fall back to 4 (unsure).
-    No calibration — the detector already speaks the auditor's scale."""
+def judge_grade_map(path: Path) -> dict:
+    """(game_id, round, position) -> a text judge's own 1-7 score;
+    unparseable ratings fall back to 4 (unsure). No calibration — the judge
+    already speaks the auditor's scale."""
     gm = {}
-    for line in open(out_dir / f"judge_godmode_{arm}.jsonl"):
+    for line in open(path):
         r = json.loads(line)
         gm[(r["game_id"], r["round"], r["position"])] = r["judge_score"] or 4
     return gm
+
+
+def all_grade_maps(cfg: AuditorConfig, arm: str, conditions: list[str],
+                   recs: list[dict], scale: dict) -> dict[str, dict]:
+    """condition -> grade map for every annotated condition (probe, judge,
+    gold); "none" gets no entry."""
+    judges = {"godmode": str(cfg.path(cfg.out_dir) / "judge_godmode_{arm}.jsonl"),
+              **cfg.judge_grades}
+    probe_conds = [c for c in conditions if c not in judges and c not in ("none", "gold")]
+    maps: dict[str, dict] = {}
+    if probe_conds:
+        with open(cfg.path(cfg.data_dir) / f"scores_{arm}.csv") as f:
+            maps.update(build_grade_maps(list(csv.DictReader(f)), scale, probe_conds))
+    if "gold" in conditions:
+        maps["gold"] = {(r["game_id"], r["round"], r["position"]):
+                        7 if r["role"] == "Parsnip" else 1 for r in recs}
+    for c in conditions:
+        if c in judges:
+            maps[c] = judge_grade_map(cfg.path(judges[c].format(arm=arm)))
+    return maps
 
 
 def main(argv: list[str] | None = None, default_config: str | Path | None = None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--config", default=default_config, required=default_config is None,
                     help="path to an AuditorConfig config.json")
-    ap.add_argument("--arm", choices=["base", "steered"], default="base")
+    ap.add_argument("--arm", default="base",
+                    help="reads transcripts_/games_/scores_{arm} from data_dir")
     ap.add_argument("--backend", choices=["vllm", "hf"], default=None)
     ap.add_argument("--conditions", type=str, default=None)
     ap.add_argument("--games", type=int, default=0, help="limit games (smoke test)")
@@ -119,19 +142,17 @@ def main(argv: list[str] | None = None, default_config: str | Path | None = None
                       if not args.per_group
                       or int(g.split("g")[1]) < args.per_group)[: args.games or None]
 
-    with open(data / f"scores_{args.arm}.csv") as f:
-        score_rows = list(csv.DictReader(f))
-    grade_by_cond = build_grade_maps(
-        score_rows, scale, [c for c in conditions if c != "godmode"])
-    if "godmode" in conditions:
-        grade_by_cond["godmode"] = godmode_grade_map(out, args.arm)
+    grade_by_cond = all_grade_maps(cfg, args.arm, conditions, recs, scale)
 
     jobs = [(gid, cond) for gid in game_ids for cond in conditions]
     print(f"{len(jobs)} auditor calls ({len(game_ids)} games x {conditions})", flush=True)
 
     backend = make_backend(backend_kind, cfg.model_id,
                            **({"chunk": args.chunk or cfg.gen_chunk}
-                              if backend_kind == "hf" else {}))
+                              if backend_kind == "hf" else
+                              {"tensor_parallel_size": cfg.tensor_parallel_size,
+                               "max_model_len": cfg.max_model_len}))
+    backend.force_close_tokens = cfg.force_close_tokens
 
     def build_conv(gid: str, cond: str) -> list[dict]:
         transcript = build_transcript(by_game[gid], grade_by_cond.get(cond))
@@ -161,12 +182,27 @@ def main(argv: list[str] | None = None, default_config: str | Path | None = None
         done_seeds = sum(1 for _ in open(out_path)) // len(jobs)
         print(f"resume: {done_seeds}/{args.seeds} seed passes done", flush=True)
 
+    def follow_up(raws: list[str], idxs: list[int], seed: int) -> dict[int, str | None]:
+        """Answer provenance per index: "tag" (the auditor wrote one),
+        "followup" (tag completed after ANSWER_CUE; raws updated in place),
+        or None (still unanswered)."""
+        src = {i: "tag" if parse_guess(raws[i], player_names) else None for i in idxs}
+        todo = [i for i in idxs if src[i] is None]
+        if cfg.answer_followup and todo:
+            conts = backend.complete([backend.render(convs[i]) + raws[i] + ANSWER_CUE
+                                      for i in todo], 10, seed=seed + 30_000)
+            for i, c in zip(todo, conts):
+                raws[i] = raws[i] + ANSWER_CUE + c
+                src[i] = "followup" if parse_guess(raws[i], player_names) else None
+        return src
+
     totals = defaultdict(int)
     with open(out_path, "a" if done_seeds else "w") as f:
         for si in range(done_seeds, args.seeds):
             t0 = time.time()
             seed = cfg.seed + 100 * si            # matches the API seed scheme
             raws = backend.generate(convs, cfg.max_new_tokens, seed=seed)
+            source = follow_up(raws, list(range(len(raws))), seed)
             retry_idx = [i for i, raw in enumerate(raws)
                          if parse_guess(raw, player_names) is None]
             if retry_idx:
@@ -175,8 +211,9 @@ def main(argv: list[str] | None = None, default_config: str | Path | None = None
                                               seed=seed + 20_000)
                 for i, raw in zip(retry_idx, retry_raws):
                     raws[i] = raw
+                source.update(follow_up(raws, retry_idx, seed + 20_000))
             n_correct = defaultdict(int)
-            for (gid, cond), raw in zip(jobs, raws):
+            for i, ((gid, cond), raw) in enumerate(zip(jobs, raws)):
                 guess = parse_guess(raw, player_names)
                 reasoning, public = split_think(raw)
                 correct = guess == parsnip[gid]
@@ -186,6 +223,8 @@ def main(argv: list[str] | None = None, default_config: str | Path | None = None
                     "arm": args.arm, "game_id": gid, "condition": cond,
                     "auditor_seed": si, "guess": guess, "parsnip": parsnip[gid],
                     "correct": bool(correct), "parse_failed": guess is None,
+                    "answer_source": source[i], "retried": i in retry_idx,
+                    "force_closed": CLOSE_CUE in raw,
                     "reasoning": reasoning, "public": public}) + "\n")
             f.flush()
             print(f"seed {si}: "

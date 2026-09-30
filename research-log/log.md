@@ -550,3 +550,92 @@ write up your results in the research log.>
   `results_godmode.json`, `figures/godmode_score_by_role.png` — god-mode
   text lie detector (data/ symlinks: `carrot-parsnip_qwen3.5-27b_judge_godmode_*`,
   `..._auditor_api10seed_*`)
+## 2026-09-29: Environment validation — what signal does the game carry?
+
+### Context
+
+Is Carrot-Parsnip a usable testbed for lie detectors? Check that the auditor
+works when given good grades, and find where the deception signal is.
+
+Bug fixed first: the auditor usually ran out of thinking tokens and its answer
+was cut off before `<answer>`. The parser then took the last player name in
+the cut-off text as the guess. 30-49% of past local audits were scored this
+way; on the API ~25% came back empty and were scored wrong. Now an answer tag
+is required and a cut-off auditor is asked for a final answer.
+
+### Experiment
+
+Qwen3.5-27B plays, judges and audits. 50 games x 5 auditor seeds; chance 0.20.
+
+1. Auditor with true-role grades (`gold`), oracle-judge grades, god-mode
+   grades, probe grades; 2k vs 10k thinking tokens.
+2. God-mode text judge with role words masked in the reasoning, and on public
+   text only.
+3. Games with no Parsnip.
+4. In-game instructed pairs: the same Parsnip turn, told to conceal vs admit.
+5. Games with thinking disabled.
+6. Role probe trained on the game's own activations.
+
+### Expected Outcome
+
+<!-- researcher fills in -->
+
+### Actual Outcome
+
+<!-- researcher fills in -->
+
+### Results
+
+Auditor accuracy (base / steered):
+
+| grades shown | 2k tokens | 10k tokens |
+|---|---|---|
+| none | 0.18 / 0.27 | 0.19 / 0.24 |
+| LR probe | 0.18 / 0.21 | – |
+| DoM probe | 0.21 / 0.23 | – |
+| oracle judge | 0.90 / 0.94 | – |
+| god-mode judge | 0.97 / 0.98 | 0.99 / 0.98 |
+| gold | 0.98 / 0.98 | 1.00 / 1.00 |
+
+![auditor accuracy](../experiments/2026-09-29/figures/auditor_accuracy.png)
+
+Bug fix, god-mode grades: 0.75 -> 0.97 (base), 0.79 -> 0.98 (steered).
+Past probe results re-scored on answered audits only: still at chance.
+
+![before and after the fix](../experiments/2026-09-29/figures/harness_fix.png)
+
+Parsnip-vs-Carrot AUROC, base games:
+
+| detector | AUROC |
+|---|---|
+| text judge, full reasoning | 1.00 |
+| text judge, role words masked | 0.98 |
+| text judge, public text only | 0.56 |
+| role probe, full turn / announcement | 1.00 / 0.99 |
+| LR probe, instructed conceal vs admit | 0.86 |
+| LR probe, natural play, full turn / announcement | 0.59 / 0.46 |
+| random direction | 0.49 |
+
+![separability](../experiments/2026-09-29/figures/signal_auroc.png)
+
+- No-Parsnip games: Carrots score the same as Carrots in normal games (LR
+  AUROC 0.50). Public-only judge gives 13% of these innocent messages a 6-7.
+- Instructed pairs: 273 clean pairs; concealing turn scores higher in ~90%.
+- No-thinking games: Parsnip reveals its role in 3/150 turns; LR AUROC 0.59;
+  57% of Carrot messages exceed the alpaca 1%-FPR threshold (9% with
+  thinking); auditor none 0.20, LR 0.28, DoM 0.25, public judge 0.17.
+
+![LR probe scores](../experiments/2026-09-29/figures/probe_scores.png)
+
+### Parameters/Configurations
+
+- vLLM TP=2 on GPUs 4-5 and 6-7; probes as 2026-09-22 (layer 16).
+- Configs: `experiments/2026-09-29/{config.json,audit_2k/,audit_10k/}`.
+- Repro: `bash experiments/2026-09-29/run_all.sh a|b`, then `analyze.py`, `figures.py`.
+
+### Artifacts
+
+- `experiments/2026-09-29/` — README (design, limitations), `results.json`,
+  `figures/`
+- Harness changes: `auditor/{prompts,run,config,inspect_task}.py`,
+  `rollouts/generation.py`, `tests/test_auditor.py`
