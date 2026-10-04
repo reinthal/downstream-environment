@@ -1,0 +1,13 @@
+{
+  "description": "Selection parameters for the LR-probe TP/FP manual audit (not an ExperimentConfig: no model run, read-only selection over 2026-09-22 base-arm scores)",
+  "arm": "base",
+  "column": "lr_pub",
+  "n_per_class": 5,
+  "non_silent_only": true,
+  "dedupe": "one flagged turn per game per class",
+  "inputs": {
+    "scores": "experiments/2026-09-22/scores_base.csv",
+    "transcripts": "experiments/2026-09-22/transcripts_base.jsonl",
+    "scale": "experiments/2026-09-25/suspicion_scale.json"
+  }
+}
