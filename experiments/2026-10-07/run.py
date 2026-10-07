@@ -50,27 +50,55 @@ def to_messages(r: dict) -> list[dict]:
     }]
 
 
+def render_prompt(tok, msgs: list[dict], cfg: ServingConfig) -> dict | None:
+    """The served model's client contract, mirrored for the reference path.
+    Returns {"text", "token_ids", "ref_span"} or None if over max_len.
+
+    MEAN (span probes): the whole rendered conversation, reference span = all.
+    LAST (DYL): conversation + follow-up pair, text ending exactly at the
+    "No"; reference span = that final token (DYLProbe's detect mask).
+    """
+    if cfg.pooling == "LAST":
+        from linear_probes.dyl_probe import FOLLOWUP_ANSWER, with_followup
+
+        conv = with_followup(msgs)
+        prefix = tok.apply_chat_template(conv[:-1], tokenize=False,
+                                         add_generation_prompt=True,
+                                         enable_thinking=False)
+        text = prefix + FOLLOWUP_ANSWER
+        ids = tok(text, add_special_tokens=False)["input_ids"]
+        n_no = len(tok(FOLLOWUP_ANSWER, add_special_tokens=False)["input_ids"])
+        if n_no != 1:
+            raise ValueError(f'"{FOLLOWUP_ANSWER}" is {n_no} tokens; LAST pooling '
+                             "reads exactly one")
+        span = (len(ids) - 1, len(ids))
+    else:
+        text = tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=False)
+        ids = tok(text, add_special_tokens=False)["input_ids"]
+        span = (0, len(ids))
+    if len(ids) > cfg.max_len:
+        return None
+    return {"text": text, "token_ids": ids, "ref_span": span}
+
+
 def read_jsonl(path: Path) -> list[dict]:
     with open(path) as f:
         return [json.loads(line) for line in f]
 
 
 def load_parity_prompts(cfg: ServingConfig) -> list[dict]:
-    """First n_parity conversations that fit max_len untruncated, rendered and
-    tokenized exactly as the probe-training path renders them."""
+    """First n_parity conversations that fit max_len untruncated, rendered per
+    the serving contract (render_prompt)."""
     from transformers import AutoTokenizer
 
     tok = AutoTokenizer.from_pretrained(cfg.model_id)
     rows = []
     for r in read_jsonl(REPO / cfg.parity_source):
-        text = tok.apply_chat_template(to_messages(r), tokenize=False,
-                                       add_generation_prompt=False)
-        ids = tok(text, add_special_tokens=False)["input_ids"]
-        if len(ids) > cfg.max_len:
+        p = render_prompt(tok, to_messages(r), cfg)
+        if p is None:
             continue
         rows.append({"game_id": r["game_id"], "round": r["round"],
-                     "speaker": r["speaker"], "role": r["role"],
-                     "text": text, "token_ids": ids})
+                     "speaker": r["speaker"], "role": r["role"], **p})
         if len(rows) == cfg.n_parity:
             return rows
     raise ValueError(f"only {len(rows)} of {cfg.n_parity} conversations fit "
@@ -98,7 +126,7 @@ def stage_score_hf(cfg: ServingConfig):
 
     model, tok = load_truncated_decoder(cfg.model_id, cfg.layer,
                                         dtype=cfg.dtype, device=cfg.device)
-    encoded = [(r["token_ids"], (0, len(r["token_ids"]))) for r in rows]
+    encoded = [(r["token_ids"], tuple(r["ref_span"])) for r in rows]
     X = collect_activations(model, tok, encoded, [cfg.layer], cfg.batch_size)[cfg.layer]
 
     logits = (X - probe.mu) / probe.sd @ probe.w + probe.b
@@ -182,12 +210,10 @@ def stage_dist_score_hf(cfg: ServingConfig):
     for name, src in cfg.dist_sources.items():
         rows = []
         for r in read_jsonl(REPO / src):
-            text = tok.apply_chat_template(to_messages(r), tokenize=False,
-                                           add_generation_prompt=False)
-            ids = tok(text, add_special_tokens=False)["input_ids"]
-            if len(ids) > cfg.max_len:
+            p = render_prompt(tok, to_messages(r), cfg)
+            if p is None:
                 continue
-            rows.append({"text": text, "token_ids": ids})
+            rows.append(p)
             if len(rows) == cfg.n_dist:
                 break
         if len(rows) < cfg.n_dist:
@@ -201,7 +227,7 @@ def stage_dist_score_hf(cfg: ServingConfig):
     model, _ = load_truncated_decoder(cfg.model_id, cfg.layer,
                                       dtype=cfg.dtype, device=cfg.device)
     for name, rows in prompts.items():
-        encoded = [(r["token_ids"], (0, len(r["token_ids"]))) for r in rows]
+        encoded = [(r["token_ids"], tuple(r["ref_span"])) for r in rows]
         X = collect_activations(model, tok, encoded, [cfg.layer], cfg.batch_size)[cfg.layer]
         logits = (X - probe.mu) / probe.sd @ probe.w + probe.b
         (OUT / f"dist_scores_hf_{name}.json").write_text(json.dumps(
@@ -350,10 +376,15 @@ STAGES = {"publish": stage_publish, "score_hf": stage_score_hf,
 
 
 def main():
+    global OUT
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--stage", required=True, choices=sorted(STAGES))
+    ap.add_argument("--config", default=str(OUT / "config.json"),
+                    help="ServingConfig json; artifacts go to its out_dir "
+                         "(default: this experiment's config.json)")
     args = ap.parse_args()
-    cfg = ServingConfig.load(OUT / "config.json")
+    cfg = ServingConfig.load(args.config)
+    OUT = REPO / cfg.out_dir
     cfg.save(OUT)
     STAGES[args.stage](cfg)
 

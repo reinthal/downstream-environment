@@ -23,6 +23,7 @@ class ServingConfig(ExperimentConfig):
     hf_repo_id: str = ""     # target repo, e.g. reinthal/qwen3.5-27b-deception-probe-l16-...
     publish_dir: str = ""    # repo-relative build dir for the checkpoint (gitignored)
     private: bool = False     # create the HF repo public
+    pooling: str = "MEAN"    # "MEAN" (span probes: all tokens) | "LAST" (DYL: the final token)
 
     # parity check (experiments/2026-10-07/run.py)
     n_parity: int = 64

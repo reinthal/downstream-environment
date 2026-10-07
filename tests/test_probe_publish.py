@@ -96,6 +96,7 @@ def test_config_surgery():
         == [3, 7, 11, 15]
     assert out["mtp_num_hidden_layers"] == 0
     assert out["id2label"] == {"0": "deceptive"}
+    assert out["probe_pooling"] == "MEAN"
     assert out["probe_meta"] == meta
     assert "vision_config" not in out
     assert "text_config" not in out
@@ -107,3 +108,9 @@ def test_config_surgery():
 def test_config_surgery_rejects_layer_out_of_range():
     with pytest.raises(ValueError):
         build_config(_src_config(n_layers=8), 16, {})
+
+
+def test_config_surgery_pooling():
+    assert build_config(_src_config(), 18, {}, pooling="LAST")["probe_pooling"] == "LAST"
+    with pytest.raises(ValueError):
+        build_config(_src_config(), 16, {}, pooling="CLS")
