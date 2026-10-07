@@ -63,12 +63,17 @@ class _TemplateProvider(dyn.ResourceProvider):
         return dyn.CreateResult(id_=data["id"], outs={**props, "templateId": data["id"]})
 
     def diff(self, id, olds, news):
-        changed = olds["body"] != news["body"]
-        return dyn.DiffResult(
-            changes=changed,
-            replaces=["body"] if changed else [],
-            delete_before_replace=True,
-        )
+        # Update in place: a template attached to a serverless endpoint
+        # cannot be deleted ("Template is associated with AI API ..."), so
+        # replacement would deadlock; PATCH also sidesteps the unique-name
+        # constraint on create.
+        return dyn.DiffResult(changes=olds["body"] != news["body"])
+
+    def update(self, id, olds, news):
+        # isServerless is create-only; PATCH rejects it ("Extra input keys").
+        body = {k: v for k, v in news["body"].items() if k != "isServerless"}
+        _request("PATCH", f"/templates/{id}", body)
+        return dyn.UpdateResult(outs={**news, "templateId": id})
 
     def delete(self, id, props):
         _request("DELETE", f"/templates/{id}")

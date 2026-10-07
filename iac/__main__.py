@@ -81,9 +81,11 @@ pulumi.export(
 # matter on the HF-transformers fallback path, which old images (vLLM 0.8.x,
 # e.g. v2.5.0stable) would hit for Qwen3.5.
 PROBE_WORKER_IMAGE = "runpod/worker-v1-vllm:v2.28.0"  # bundles vLLM v0.30.0
+# Tarball URL, not git+https: the vllm-openai release image has no git binary.
 PROBE_PLUGIN_INSTALL = (
     "pip install --no-deps "
-    "'git+https://github.com/reinthal/downstream-environment.git#subdirectory=serving/vllm_plugin'"
+    "'https://github.com/reinthal/downstream-environment/archive/main.tar.gz"
+    "#subdirectory=serving/vllm_plugin'"
 )
 # ~16 GB bf16 weights + GDN/KV cache at 8k context fit 24 GB cards; price order.
 PROBE_GPU_TYPE_IDS = [
