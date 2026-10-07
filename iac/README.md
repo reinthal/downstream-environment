@@ -43,6 +43,28 @@ never written to state.
 - template `7us1hklk1i`, image `runpod/worker-v1-vllm:v2.5.0stable-cuda12.1.0`
 - 1x 80 GB GPU per worker (A100 preferred, then H100), max 2 workers,
   FlashBoot on, `MAX_MODEL_LEN=32768`
+- **Known issue**: this image bundles vLLM 0.8.x, which predates Qwen3.5
+  support — generation requests likely fail; bump to a modern worker tag
+  (e.g. `v2.28.0`, vLLM 0.30.0) when next touched.
+
+### Probe classifier endpoints (2026-10-07)
+
+Serverless probe read-outs (`serving/README.md`), image
+`runpod/worker-v1-vllm:v2.28.0` (vLLM 0.30.0 — native qwen3_5 Triton GDN
+kernels, no pytorch-reference fallback), `RUNNER=pooling`, repo plugin
+pip-installed at container start, max 1 worker each (account quota 5):
+
+- `probe-l16-logistic` `4jg7t3qd7xasel` —
+  `reinthal/qwen3.5-27b-deception-probe-l16-logistic-regression` (MEAN pooling)
+- `probe-dyl-l18-logistic` `c97e4gem6s1icu` —
+  `reinthal/qwen3.5-27b-deception-probe-dyl-l18-logistic-regression` (LAST/"No" token)
+
+```sh
+curl -s https://api.runpod.ai/v2/<endpoint_id>/runsync \
+  -H "Authorization: Bearer $RUNPOD_API_KEY" -H "Content-Type: application/json" \
+  -d '{"input": {"route": "/classify", "method": "POST",
+       "body": {"input": ["<rendered text, see model card>"]}}}'
+```
 
 Smoke test (cold start pulls ~55 GB of weights — first request takes minutes
 and bills GPU time):
