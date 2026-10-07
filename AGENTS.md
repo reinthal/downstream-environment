@@ -4,6 +4,13 @@ Deception-probe research: linear probes on residual-stream activations,
 evaluated on downstream tasks (social-deduction games with an outside
 auditor). Read `research-log/log.md` for what has been run and why.
 
+**NO defensive programming without explicit instruction.** No fallback code
+paths, lenient parsing, or silent error recovery "just in case" — fail
+loudly on unexpected input. A last-name fallback in the auditor's
+`parse_guess` silently mis-parsed guesses and corrupted results (fixed in
+2d93adb by requiring an `<answer>` tag). If a fallback seems genuinely
+needed, propose it and let the researcher decide.
+
 ## Reuse, don't rebuild
 
 - **Game design**: `game/Carrot-Parsnip/Carrot_Parsnip.py` is the game engine

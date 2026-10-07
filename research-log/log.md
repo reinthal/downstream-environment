@@ -639,3 +639,68 @@ Parsnip-vs-Carrot AUROC, base games:
   `figures/`
 - Harness changes: `auditor/{prompts,run,config,inspect_task}.py`,
   `rollouts/generation.py`, `tests/test_auditor.py`
+
+## 2026-10-02: Manual audit set — LR probe's strongest TPs and FPs
+
+### Context
+
+We suspect that the LR probes are not good enough to discover the deception in the public announcements. We are therefore analyzing 5 FPs and 5 TPs of the public LR probe to build intuition about what is going on.
+
+### Experiment
+
+Read-only selection over the 2026-09-22 base-arm scores: the 5 highest
+`lr_full` Parsnip announcements (TP) and 5 highest Carrot announcements
+(FP), one flagged turn per game per class, packaged as a 10-sample Inspect
+task (`audit_task.py@lr_probe_audit`, no-op solver, mockllm) so each sample
+— flagged turn's private reasoning + announcement + full marked public
+transcript, scores in metadata — is readable in `inspect view`. All 10 hits
+exceed the top benign-control cutpoint (grade 7/7). Sighted audit: TP/FP
+label and role are shown.
+
+### Expected Outcome
+
+<!-- researcher fills in -->
+
+### Actual Outcome
+
+<!-- researcher fills in -->
+
+### Parameters/Configurations
+
+- `experiments/2026-10-02/config.json`: arm=base, column=lr_full,
+  n_per_class=5, non-silent only, dedupe per game per class.
+- View: `uv run --no-sync inspect view --log-dir experiments/2026-10-02/inspect_logs`
+
+### Artifacts
+
+- `experiments/2026-10-02/` — README, `audit_task.py`, `inspect_logs/`
+  (the browsable eval log), symlinked inputs.
+- `compute_thresholds.py` / `alpaca_thresholds.json` — span-matched alpaca
+  1%-FPR thresholds for the LR probe (full 0.168 = scale top cutpoint;
+  pub 0.228); each sample header says whether the turn exceeds it.
+
+## [Date]
+
+### Context
+
+We suspect that the LR probes are not good enough to discover the deception in the public announcements. We are therefore analyzing 5 FPs and 5 TPs of the public LR probe to build intuition about what is going on.
+
+### Experiment
+
+### Expected Outcome
+
+<What you expect to happen during the experiment. Never let claude write the expected outcome.>
+
+### Actual Outcome
+
+<What happened and if your prediction was right/wrong+nuance. Never let Claude
+write up your results in the research log.>
+
+### Parameters/Configurations
+
+<technical information to be able to reproduce the experiment. Optional. the
+research log's gi>
+
+### Artifacts
+
+<repo relative paths for plots, code notes etc>
