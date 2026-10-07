@@ -1,0 +1,8 @@
+[project]
+name = "runpod-iac"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "pulumi>=3.267.0",
+    "requests>=2.34.2",
+]

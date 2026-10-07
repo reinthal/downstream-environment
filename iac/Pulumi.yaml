@@ -1,0 +1,6 @@
+name: runpod-iac
+description: RunPod serverless vLLM endpoint for Qwen3.5-27B
+runtime:
+  name: python
+  options:
+    toolchain: uv
