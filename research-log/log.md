@@ -865,11 +865,14 @@ head holding the LR probe (standardizer folded in), vLLM classify task.
 
 Built `serving/` (publish script + vLLM plugin; the plugin swaps the final
 RMSNorm for a residual-add passthrough so pooled states are the raw
-activations the probe was trained on). Contract: mean over ALL submitted
-tokens; span selection is the client's job. Compared vLLM scores to the HF
-probe path on identical token ids: 64-conversation parity, then score
-distributions on 500 carrot-parsnip messages + 500 alpaca rollouts
-(figures/vllm_vs_hf.png).
+activations the probe was trained on). Two published models: the L16 LR
+span probe (contract: mean over ALL submitted tokens; span selection is the
+client's job) and the L18 DYL follow-up probe (`probe_pooling: LAST` — the
+client appends the follow-up pair and sends text ending at the "No").
+Compared vLLM scores to the HF probe path on identical token ids:
+64-conversation parity, then score distributions on 500 carrot-parsnip
+messages + 500 alpaca rollouts per model (figures/vllm_vs_hf.png in each
+experiment folder).
 
 ### Expected Outcome
 
@@ -882,6 +885,12 @@ r=0.99995 on logits, max|Δp|=7.9e-4; alpaca (n=500): r=1.00000,
 max|Δp|=9.4e-4. 64-conversation token-level parity: r=0.99994,
 max|Δp|=4.8e-4 (bf16 kernel noise between the two stacks).
 
+DYL model: same shape, bigger noise floor — single-token reads don't
+average out bf16 kernel noise. Parity r=0.991, max|Δp|=0.18; HF alone,
+rescored across batch sizes 4/12/1, shows the identical magnitude
+(max|Δp| 0.12–0.24, r≈0.990), so the reference itself is only this
+reproducible; vLLM adds nothing. Dist r=0.994 (CP) / 0.999 (alpaca).
+
 ![](../experiments/2026-10-07/figures/vllm_vs_hf.png)
 
 ### Parameters/Configurations
@@ -893,9 +902,11 @@ Plugin: `uv pip install --python .venv-vllm/bin/python -e serving/vllm_plugin`.
 ### Artifacts
 
 - `serving/` — publish.py, vllm_plugin/, README.md; `tests/test_probe_publish.py`
-- `experiments/2026-10-07/` — run.py, parity_report.json, dist_report.json,
+- `experiments/2026-10-07/` + `experiments/2026-10-07-dyl-serving/` —
+  run.py (shared via --config), parity_report.json, dist_report.json,
   figures/vllm_vs_hf.png
 - https://huggingface.co/reinthal/qwen3.5-27b-deception-probe-l16-logistic-regression
+- https://huggingface.co/reinthal/qwen3.5-27b-deception-probe-dyl-l18-logistic-regression
 
 ## 2026-10-07: DYL probe vs alpaca control, via the new DYLProbe primitive
 

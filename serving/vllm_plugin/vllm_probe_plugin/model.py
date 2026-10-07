@@ -22,7 +22,7 @@ from torch import nn
 from vllm.config import VllmConfig
 from vllm.model_executor.layers.linear import ReplicatedLinear
 from vllm.model_executor.layers.pooler import DispatchPooler
-from vllm.model_executor.layers.pooler.seqwise import MeanPool, pooler_for_classify
+from vllm.model_executor.layers.pooler.seqwise import LastPool, MeanPool, pooler_for_classify
 from vllm.model_executor.models.interfaces import HasInnerState, IsHybrid
 from vllm.model_executor.models.qwen3_5 import (
     Qwen3_5ForCausalLMBase,
@@ -75,9 +75,16 @@ class Qwen3_5ProbeForSequenceClassification(nn.Module, HasInnerState, IsHybrid):
         )
         pooler_config = vllm_config.model_config.pooler_config
         assert pooler_config is not None
-        # MEAN over all prompt tokens is the probe's contract, not a tunable.
+        # The pooling is the probe's contract, fixed at publish time:
+        # MEAN over all prompt tokens (span probes) or LAST token (DYL
+        # follow-up probes, which read the appended "No").
+        poolers = {"MEAN": MeanPool, "LAST": LastPool}
+        if config.probe_pooling not in poolers:
+            raise ValueError(f"probe_pooling must be one of {sorted(poolers)}, "
+                             f"got {config.probe_pooling!r}")
         self.pooler = DispatchPooler({
-            "classify": pooler_for_classify(pooler_config, pooling=MeanPool(),
+            "classify": pooler_for_classify(pooler_config,
+                                            pooling=poolers[config.probe_pooling](),
                                             classifier=self.score),
         })
         self.make_empty_intermediate_tensors = self.model.make_empty_intermediate_tensors
