@@ -1,0 +1,25 @@
+[project]
+name = "bash-arena-env"
+version = "0.1.0"
+description = "Runner + experiments for the BashArena ControlArena setting (Docker sandboxes, OpenRouter models)"
+requires-python = ">=3.12"
+# control-arena ships the bash_arena setting; the rest are the runner (inspect/
+# openai) and the trusted-monitoring experiment's analysis (numpy/sklearn/mpl).
+dependencies = [
+    "control-arena>=20.0.1",
+    "inspect-ai>=0.3.277",
+    "openai>=3.26.0",
+    "numpy>=2.5.3",
+    "scikit-learn>=1.9.1",
+    "matplotlib>=3.11.2",
+]
+
+# Intentionally separate from the repo-root pyproject (linear-probe deps:
+# torch/transformers). Run everything through uv, selecting this env with
+# `--directory environments/bash_arena`; uv creates/syncs its `.venv` from
+# uv.lock on first run. See CLAUDE.md in this directory.
+
+[tool.uv]
+# Deps-only env: these are runner scripts, not an installable package, so don't
+# try to build/install the project itself.
+package = false

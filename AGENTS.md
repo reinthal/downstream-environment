@@ -135,6 +135,13 @@ reason.
 
 ## Conventions
 
+- `environments/` holds runnable eval environments — self-contained uv projects,
+  each with its own `pyproject.toml`/`uv.lock` and `CLAUDE.md` (first one:
+  `environments/bash_arena/`, BashArena on Docker). Run an env's own scripts with
+  `uv run --directory environments/<name> <cmd>`. Experiments still go in
+  `experiments/<date>/` (below); one that runs on an environment selects it with
+  `uv run --project environments/<name> python experiments/<date>/...` (`--project`
+  picks the env without changing the working directory).
 - New experiments go in `experiments/<date>/` with a README stating design
   and deliberate limitations; log every run in `research-log/log.md`
   (Claude fills Context/Experiment/Parameters/Artifacts; Expected/Actual
