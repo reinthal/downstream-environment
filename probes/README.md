@@ -3,7 +3,9 @@
 Canonical entry points to every fitted probe, named
 `<model>_layer<L>_<probe_type>.npz`. Each link points into the experiment
 that trained it. Load with `linear_probes.probes.LinearProbe.load(path)`
-(steer vectors are raw `.npz` arrays, not LinearProbes). New probes MUST be
+(steer vectors are raw `.npz` arrays, not LinearProbes); score conversations
+with `linear_probes.LMProbe`, or `linear_probes.DYLProbe` for the `followup`
+probes (reads the follow-up "No", not a turn span). New probes MUST be
 added here (see AGENTS.md conventions).
 
 | link | from experiment | probe |

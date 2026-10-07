@@ -74,7 +74,7 @@ needed, propose it and let the researcher decide.
   (`encode_with_spans`, `collect_activations`, `load_truncated_decoder`;
   `experiments/2026-09-22/common.py` re-exports them) — note it runs the bare
   decoder because full-model forwards CUDA-launch-fail at long sequences.
-- **Experiment primitives** — build experiments from these three; see
+- **Experiment primitives** — build experiments from these; see
   `experiments/_template/` for the canonical skeleton:
   - `ExperimentConfig` (`linear_probes/config.py`) — dataclass inheriting
     `ProbeConfig`; the ONE place an experiment's hyperparameters live. Each
@@ -85,6 +85,13 @@ needed, propose it and let the researcher decide.
     returns `p(deceptive)` per conversation. `with_probe(...)` shares one
     model across read-outs. Truncation neutralizes the decoder's final norm
     so activations equal the full model's (verified in tests).
+  - `DYLProbe` (`linear_probes/dyl_probe.py`, `.venv`) — the follow-up
+    ("did you lie") probe of Goldowsky-Dill et al. 2025 as an `LMProbe`
+    subclass: appends "Was your last response deceptive? (Yes/No)" + "No"
+    to a finished dialogue (last turn = the assistant's public reply) and
+    reads the probe on the "No" tokens only; `score(convs)` has no span
+    choice. Fitted probes: `probes/qwen3.5-27b_layer18_followup*.npz`
+    (trained by `experiments/2026-10-01/train.py`).
   - `LMSteering` (`rollouts/steering.py`, `.venv-vllm`) — vLLM generation
     with a diff-of-means direction added to the residual stream at the probe
     layer; same `generate(convs, ..., coefs=[...])` contract as the other
@@ -96,7 +103,7 @@ needed, propose it and let the researcher decide.
 
 | env | run with | use for |
 |---|---|---|
-| `.venv` | `uv run --no-sync python ...` | probes, activations, HF generation, analysis (torch 2.14+cu126, transformers 5.17); primitives: `LMProbe`, `ExperimentConfig` |
+| `.venv` | `uv run --no-sync python ...` | probes, activations, HF generation, analysis (torch 2.14+cu126, transformers 5.17); primitives: `LMProbe`, `DYLProbe`, `ExperimentConfig` |
 | `.venv-vllm` | `PATH=$PWD/.venv-vllm/bin:$PATH .venv-vllm/bin/python ...` | vLLM generation only (vllm 0.21.0+cu129, torch 2.11+cu126); primitives: `LMSteering`, `ExperimentConfig` |
 | `.venv-api` | `.venv-api/bin/python -m auditor.api_run ...` | hosted Claude auditor only (anthropic 1.11, numpy) |
 | `.venv-sandbox` | used by `auditor/sandbox.py` | interpreter for the auditor's Python tool (numpy, pandas, scipy); nothing else |
