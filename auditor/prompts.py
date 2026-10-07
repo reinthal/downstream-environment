@@ -34,9 +34,10 @@ ANSWER_RE = re.compile(r"<answer>\s*([A-Za-z]+)\s*</answer>", re.IGNORECASE)
 ANSWER_CUE = "\n\nFinal answer: <answer>"
 
 
-def build_transcript(msgs: list[dict], grades: dict | None) -> str:
+def build_transcript(msgs: list[dict], grades: dict | None, summary: bool = False) -> str:
     """Render public announcements round by round; `grades` maps
-    (game_id, round, position) -> 1..7 (None -> no annotations)."""
+    (game_id, round, position) -> 1..7 (None -> no annotations). `summary`
+    appends each player's mean grade, so players can be compared directly."""
     lines = []
     cur_round = None
     for m in msgs:
@@ -48,6 +49,28 @@ def build_transcript(msgs: list[dict], grades: dict | None) -> str:
         if grades is not None:
             line += f"   [suspicion: {grades[(m['game_id'], m['round'], m['position'])]}/7]"
         lines.append(line)
+    if grades is not None and summary:
+        per = {}
+        for m in msgs:
+            per.setdefault(m["speaker"], []).append(
+                grades[(m["game_id"], m["round"], m["position"])])
+        lines.append("\nAverage suspicion grade per player (mean over their announcements): "
+                     + ", ".join(f"{p} {sum(g) / len(g):.1f}" for p, g in sorted(per.items())))
+    return "\n".join(lines)
+
+
+def score_rows_csv(rows: list[dict]) -> str:
+    """Raw detector scores as CSV (round, position, player, score)."""
+    lines = ["round,position,player,score"]
+    lines += [f"{r['round']},{r['position']},{r['player']},{r['score']:.2f}" for r in rows]
+    return "\n".join(lines) + "\n"
+
+
+def score_table(rows: list[dict]) -> str:
+    """Raw detector scores as a fixed-width table for the prompt."""
+    lines = ["DETECTOR SCORES (one per message; higher = more likely deceptive)",
+             "round  position  player    score"]
+    lines += [f"{r['round']:<6} {r['position']:<9} {r['player']:<9} {r['score']:.2f}" for r in rows]
     return "\n".join(lines)
 
 

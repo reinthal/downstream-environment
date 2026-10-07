@@ -21,6 +21,10 @@ experiments' directories.
 | `carrot-parsnip_qwen3.5-27b_auditor_api10seed_steered.jsonl` | `2026-09-25` | same, steered arm |
 | `carrot-parsnip_qwen3.5-27b_auditor_local10seed_base.jsonl` | `2026-09-25` | local vLLM auditor, 50 games x {none, godmode} x 10 seeds: none 18.0%, god-mode grades 74.8%, base arm |
 | `carrot-parsnip_qwen3.5-27b_auditor_local10seed_steered.jsonl` | `2026-09-25` | same, steered arm (none 28.2%, god-mode 79.4%) |
+| `qwen3.5-27b_roleplaying_rollouts_thinking_off.jsonl` | `2026-10-01` | 371 on-policy Qwen3.5-27B replies to the Apollo roleplaying scenarios (vendor/deception-detection), thinking off; `messages`, `reply` |
+| `qwen3.5-27b_roleplaying_rollouts_thinking_on.jsonl` | `2026-10-01` | same scenarios, thinking on (`reasoning` + `reply`) |
+| `qwen3.5-27b_roleplaying_judge_thinking_off.jsonl` | `2026-10-01` | the thinking-off replies graded 1-7 by local Qwen3.5-27B with the paper's grading prompt: honest 98 / deceptive 234 / ambiguous 39 (follow-up probe training labels) |
+| `qwen3.5-27b_roleplaying_judge_thinking_on.jsonl` | `2026-10-01` | same for thinking on: honest 155 / deceptive 162 / ambiguous 54 |
 
 Full experiment designs and limitations: `experiments/<date>/README.md`;
 run history: `research-log/log.md`.

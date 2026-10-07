@@ -65,7 +65,8 @@ def build_samples(cfg: ApiAuditorConfig, arm: str,
     samples = []
     for gid in game_ids:
         for cond in conditions:
-            transcript = build_transcript(by_game[gid], grade_by_cond.get(cond))
+            transcript = build_transcript(by_game[gid], grade_by_cond.get(cond),
+                                          summary=cond.endswith("_avg"))
             system = AUDITOR_SYSTEM.format(
                 players=", ".join(player_names), num_rounds=num_rounds,
                 detector_note=DETECTOR_NOTE.format(legend=cfg.grade_legend)

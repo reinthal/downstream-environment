@@ -13,7 +13,9 @@ added here (see AGENTS.md conventions).
 | `qwen3.5-27b_layer16_logistic_regression.npz` | `2026-09-22` | instructed-pairs LR probe, Qwen3.5-27B layer 16 (of 64) |
 | `qwen3.5-27b_layer16_diff_of_means.npz` | `2026-09-22` | diff-of-means probe on the same activations |
 | `qwen3.5-27b_layer16_steer_diff_of_means.npz` | `2026-09-22` | RAW-space diff-of-means steering vector (deceptive − honest mean, |v| ≈ 1.8) for residual-stream steering at layer 16 |
+| `qwen3.5-27b_layer18_followup_logistic_regression.npz` | `2026-10-01` | follow-up ("Was your last response deceptive? (Yes/No)" → "No") LR probe after Goldowsky-Dill et al. 2025: read on the "No" token, trained on graded thinking-off Apollo roleplaying replies, Qwen3.5-27B layer 18 (roleplaying val AUROC 0.887) |
+| `qwen3.5-27b_layer18_followup_thinking_logistic_regression.npz` | `2026-10-01` | same, trained on thinking-on roleplaying replies (val AUROC 0.862) |
 
 Training recipes: `experiments/2026-09-20/run_sandbagging.py`,
-`experiments/2026-09-22/train_probes.py`; evaluations across settings:
+`experiments/2026-09-22/train_probes.py`, `experiments/2026-10-01/train.py`; evaluations across settings:
 `research-log/log.md`.

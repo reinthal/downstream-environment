@@ -1,0 +1,108 @@
+{
+ "base": {
+  "God-mode judge (reads reasoning)": {
+   "highest_average_rule": 1.0,
+   "auditor_with_grades": 0.972
+  },
+  "Oracle judge (told the role)": {
+   "highest_average_rule": 1.0,
+   "auditor_with_grades": 0.904
+  },
+  "Judge, role words masked": {
+   "highest_average_rule": 1.0,
+   "auditor_with_grades": null
+  },
+  "Judge, public text only": {
+   "highest_average_rule": 0.22,
+   "auditor_with_grades": null
+  },
+  "Role probe (trained on game)": {
+   "highest_average_rule": 1.0,
+   "auditor_with_grades": null
+  },
+  "Follow-up probe": {
+   "highest_average_rule": 0.72,
+   "auditor_with_grades": 0.192
+  },
+  "LR probe": {
+   "highest_average_rule": 0.54,
+   "auditor_with_grades": 0.184
+  },
+  "Diff-of-means probe": {
+   "highest_average_rule": 0.48,
+   "auditor_with_grades": 0.212
+  },
+  "Random direction": {
+   "highest_average_rule": 0.28,
+   "auditor_with_grades": null
+  },
+  "No detector (auditor)": {
+   "highest_average_rule": null,
+   "auditor_with_grades": 0.176
+  }
+ },
+ "steered": {
+  "God-mode judge (reads reasoning)": {
+   "highest_average_rule": 1.0,
+   "auditor_with_grades": 0.984
+  },
+  "Oracle judge (told the role)": {
+   "highest_average_rule": 1.0,
+   "auditor_with_grades": 0.94
+  },
+  "Role probe (trained on game)": {
+   "highest_average_rule": 1.0,
+   "auditor_with_grades": null
+  },
+  "Follow-up probe": {
+   "highest_average_rule": 0.82,
+   "auditor_with_grades": 0.364
+  },
+  "LR probe": {
+   "highest_average_rule": 0.1,
+   "auditor_with_grades": 0.212
+  },
+  "Diff-of-means probe": {
+   "highest_average_rule": 0.08,
+   "auditor_with_grades": 0.232
+  },
+  "Random direction": {
+   "highest_average_rule": 0.38,
+   "auditor_with_grades": null
+  },
+  "No detector (auditor)": {
+   "highest_average_rule": null,
+   "auditor_with_grades": 0.272
+  }
+ },
+ "nothink": {
+  "Judge, public text only": {
+   "highest_average_rule": 0.167,
+   "auditor_with_grades": 0.168
+  },
+  "Role probe (trained on game)": {
+   "highest_average_rule": 1.0,
+   "auditor_with_grades": null
+  },
+  "Follow-up probe": {
+   "highest_average_rule": 0.72,
+   "auditor_with_grades": 0.204
+  },
+  "LR probe": {
+   "highest_average_rule": 0.48,
+   "auditor_with_grades": 0.28
+  },
+  "Diff-of-means probe": {
+   "highest_average_rule": 0.48,
+   "auditor_with_grades": 0.248
+  },
+  "Random direction": {
+   "highest_average_rule": 0.3,
+   "auditor_with_grades": null
+  },
+  "No detector (auditor)": {
+   "highest_average_rule": null,
+   "auditor_with_grades": 0.204
+  }
+ }
+}
