@@ -81,9 +81,11 @@ pulumi.export(
 # matter on the HF-transformers fallback path, which old images (vLLM 0.8.x,
 # e.g. v2.5.0stable) would hit for Qwen3.5.
 PROBE_WORKER_IMAGE = "runpod/worker-v1-vllm:v2.28.0"  # bundles vLLM v0.30.0
-# Tarball URL, not git+https: the vllm-openai release image has no git binary.
+# Tarball URL, not git+https (no git binary in the vllm-openai release
+# image); python3 -m pip, not bare pip (the image bootstraps pip via
+# ensurepip — the console script is not guaranteed on PATH).
 PROBE_PLUGIN_INSTALL = (
-    "pip install --no-deps "
+    "python3 -m pip install --no-deps "
     "'https://github.com/reinthal/downstream-environment/archive/main.tar.gz"
     "#subdirectory=serving/vllm_plugin'"
 )
