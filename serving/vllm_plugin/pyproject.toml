@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vllm-probe-plugin"
+version = "0.1.0"
+description = "Registers Qwen3_5ProbeForSequenceClassification (truncated decoder + linear probe head) with vLLM"
+requires-python = ">=3.12"
+dependencies = []
+
+[project.entry-points."vllm.general_plugins"]
+probe_models = "vllm_probe_plugin:register"
+
+[tool.setuptools.packages.find]
+include = ["vllm_probe_plugin*"]
