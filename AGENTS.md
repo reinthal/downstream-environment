@@ -148,4 +148,7 @@ reason.
   git-lfs-tracked via `.gitattributes`; regenerable activation `.npz` stays
   untracked (gitignored). Keep new data files to these name patterns so LFS
   picks them up.
+- **Figures: panels meant to be compared share identical axis ranges** (same
+  x and y limits across datasets/arms/conditions showing the same quantity) —
+  per-panel autoscaling makes visually identical shapes look different.
 - `CLAUDE.md` is a symlink to this file.
