@@ -214,7 +214,57 @@ curl -s localhost:8000/classify -H 'Content-Type: application/json' \\
     -d '{{"input": ["<rendered conversation>"]}}'
 ```
 
-Offline: `LLM(model="{cfg.hf_repo_id or "<repo>"}", runner="pooling").classify([...])`.
+## Python (local vLLM, offline)
+
+Same plugin requirement as serving; then:
+
+```python
+from transformers import AutoTokenizer
+from vllm import LLM
+
+REPO = "{cfg.hf_repo_id or "<repo>"}"
+tok = AutoTokenizer.from_pretrained(REPO)
+llm = LLM(model=REPO, runner="pooling", enforce_eager=True, max_model_len={cfg.max_model_len})
+
+messages = [
+    {{"role": "user", "content": "Were you near the pantry when the carrots vanished?"}},
+    {{"role": "assistant",
+      "content": "No, I was in the garden all morning.",
+      "reasoning_content": "I need to deflect suspicion from myself."}},
+]
+text = tok.apply_chat_template(messages, tokenize=False, add_generation_prompt=False)
+
+(out,) = llm.classify([text])
+p_deceptive = out.outputs.probs[0]
+```
+
+## Python client (remote /classify endpoint)
+
+The endpoint does NOT apply the chat template — render the conversation
+client-side with this repo's tokenizer, then send the string:
+
+```python
+import requests
+from transformers import AutoTokenizer
+
+REPO = "{cfg.hf_repo_id or "<repo>"}"
+URL = "https://<your-vllm-server>"   # host running `vllm serve REPO --runner pooling`
+
+tok = AutoTokenizer.from_pretrained(REPO)
+messages = [
+    {{"role": "user", "content": "Were you near the pantry when the carrots vanished?"}},
+    {{"role": "assistant",
+      "content": "No, I was in the garden all morning.",
+      "reasoning_content": "I need to deflect suspicion from myself."}},
+]
+text = tok.apply_chat_template(messages, tokenize=False, add_generation_prompt=False)
+
+resp = requests.post(f"{{URL}}/classify", json={{"input": [text]}})
+p_deceptive = resp.json()["data"][0]["probs"][0]
+```
+
+The score covers ALL tokens of the submitted string — to score a different
+span, send different text. Batch by passing multiple strings in `input`.
 
 ## Provenance
 
