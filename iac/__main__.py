@@ -125,7 +125,7 @@ def probe_endpoint(slug: str, hf_repo: str) -> runpod_rest.Endpoint:
             "gpuTypeIds": PROBE_GPU_TYPE_IDS,
             "gpuCount": 1,
             "workersMin": 0,
-            "workersMax": 2,
+            "workersMax": 1,  # account quota is 5 workers total; the gen endpoint holds 2
             "idleTimeout": 5,
             "scalerType": "QUEUE_DELAY",
             "scalerValue": 4,

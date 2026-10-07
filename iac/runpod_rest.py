@@ -83,7 +83,9 @@ class _EndpointProvider(dyn.ResourceProvider):
         return dyn.DiffResult(changes=olds["body"] != news["body"])
 
     def update(self, id, olds, news):
-        _request("PATCH", f"/endpoints/{id}", news["body"])
+        # computeType is create-only; PATCH rejects it ("Extra input keys").
+        body = {k: v for k, v in news["body"].items() if k != "computeType"}
+        _request("PATCH", f"/endpoints/{id}", body)
         return dyn.UpdateResult(outs={**news, "endpointId": id})
 
     def delete(self, id, props):
