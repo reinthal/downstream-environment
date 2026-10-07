@@ -53,7 +53,7 @@ def save(fig, name):
 
 
 # ── 1. auditor accuracy ──────────────────────────────────────────────────────
-CONDS = [("none", "No detector"), ("lr", "LR probe"), ("dom", "Diff-of-means probe"),
+CONDS = [("none", "No detector"), ("lr", "LR probe"),
          ("oracle", "Oracle judge (told the role)"),
          ("godmode", "God-mode judge (reads reasoning)"), ("gold", "Gold (true roles)")]
 a2k, a10k = R["2. new audits: audit_2k"], R["2. new audits: audit_10k"]
@@ -115,35 +115,26 @@ save(fig, "harness_fix.png")
 
 # ── 3. separability per detector ─────────────────────────────────────────────
 J, P = R["3. text judge views"], R["4a. probe scores by arm"]
-I, RP = R["4b. in-game instructed pairs (clean pairs only)"], R["5. role probe AUROC (Parsnip vs Carrot)"]
+RP = R["5. role probe AUROC (Parsnip vs Carrot)"]
 items = [
-    ("Text judge, full private reasoning", J["base/full"]["parsnip_vs_carrot_auroc"]),
-    ("Text judge, role words masked", J["base/redacted"]["parsnip_vs_carrot_auroc"]),
-    ("Text judge, public text only", J["base/public"]["parsnip_vs_carrot_auroc"]),
-    ("Role probe (trained on game data), full turn", RP["base/full (leave-one-seed-group-out)"]),
-    ("Role probe, announcement only", RP["base/pub (leave-one-seed-group-out)"]),
-    ("LR deception probe, instructed conceal vs admit", I["lr_full"]["deceptive_vs_honest_auroc"]),
-    ("LR deception probe, natural play, full turn", P["base (50 games)/lr_full"]["parsnip_vs_carrot_auroc"]),
-    ("LR deception probe, natural play, announcement", P["base (50 games)/lr_pub"]["parsnip_vs_carrot_auroc"]),
-    ("Random direction, natural play", P["base (50 games)/rand_full"]["parsnip_vs_carrot_auroc"]),
+    ("Judge reading private reasoning", J["base/full"]["parsnip_vs_carrot_auroc"]),
+    ("Judge reading public text only", J["base/public"]["parsnip_vs_carrot_auroc"]),
+    ("Role probe (trained on game)", RP["base/full (leave-one-seed-group-out)"]),
+    ("LR deception probe", P["base (50 games)/lr_full"]["parsnip_vs_carrot_auroc"]),
 ]
-fig, ax = plt.subplots(figsize=(8.6, 4.6))
+fig, ax = plt.subplots(figsize=(7.2, 3.3))
 for i, (label, v) in enumerate(items):
     y = len(items) - 1 - i
-    ax.plot([0.5, v], [y, y], color=BLUE, lw=2, solid_capstyle="round")
-    ax.scatter([v], [y], s=70, color=BLUE, edgecolor=SURFACE, lw=2, zorder=3)
-    ax.text(v + 0.015 if v >= 0.5 else v - 0.015, y, f"{v:.2f}", va="center",
-            ha="left" if v >= 0.5 else "right", fontsize=9, color=INK2)
-for y in (2.5, 5.5):
-    ax.axhline(y, color=GRID, lw=1)
+    ax.barh(y, v - 0.5, left=0.5, height=0.5, color=BLUE)
+    ax.text(v + 0.012, y, f"{v:.2f}", va="center", fontsize=11, color=INK)
 ax.axvline(0.5, color=MUTED, lw=1)
-ax.text(0.507, len(items) - 0.45, "chance", fontsize=8.5, color=MUTED, ha="left")
-ax.set(xlim=(0.4, 1.07), ylim=(-0.6, len(items) - 0.2), xlabel="AUROC",
+ax.set(xlim=(0.5, 1.08), ylim=(-0.5, len(items) - 0.5), xticks=[0.5, 0.75, 1.0],
+       xticklabels=["0.5\nchance", "0.75", "1.0\nperfect"],
        yticks=range(len(items)), yticklabels=[l for l, _ in items][::-1])
-titled(fig, "The Parsnip is easy to spot in its reasoning, not by the lie probes",
-       "AUROC for telling Parsnip messages from Carrot messages (instructed pairs: concealing "
-       "vs admitting Parsnip). Base games.")
-fig.subplots_adjust(left=0.44, right=0.97, top=0.82, bottom=0.12)
+ax.tick_params(axis="y", labelsize=11)
+titled(fig, "Who can tell the Parsnip from a Carrot?",
+       "AUROC on base-game messages.")
+fig.subplots_adjust(left=0.38, right=0.97, top=0.8, bottom=0.17)
 save(fig, "signal_auroc.png")
 
 # ── 4. LR probe score distributions ──────────────────────────────────────────

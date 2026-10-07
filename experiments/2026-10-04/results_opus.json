@@ -1,0 +1,138 @@
+{
+ "opus": {
+  "none": {
+   "n": 100,
+   "accuracy": 0.33,
+   "ci95": [
+    0.24,
+    0.43
+   ],
+   "cost_usd": 2.67
+  },
+  "fu_notool": {
+   "n": 100,
+   "accuracy": 0.85,
+   "ci95": [
+    0.77,
+    0.92
+   ],
+   "picks_raw_average_top": 0.91,
+   "picks_position_corrected_top": 0.78,
+   "overrides": 9,
+   "overrides_correct": 7,
+   "cost_usd": 3.06
+  },
+  "rand_tool": {
+   "n": 100,
+   "accuracy": 0.31,
+   "ci95": [
+    0.22,
+    0.4
+   ],
+   "picks_raw_average_top": 0.8,
+   "picks_position_corrected_top": 0.61,
+   "overrides": 20,
+   "overrides_correct": 7,
+   "mean_tool_calls": 1.0,
+   "code_adjusts_position": 0.0,
+   "code_adjusts_round": 0.73,
+   "cost_usd": 3.29
+  },
+  "fu_tool": {
+   "n": 100,
+   "accuracy": 0.81,
+   "ci95": [
+    0.73,
+    0.88
+   ],
+   "picks_raw_average_top": 0.84,
+   "picks_position_corrected_top": 0.78,
+   "overrides": 16,
+   "overrides_correct": 8,
+   "mean_tool_calls": 1.4,
+   "code_adjusts_position": 0.06,
+   "code_adjusts_round": 1.0,
+   "cost_usd": 3.76
+  }
+ },
+ "qwen": {
+  "none": {
+   "n": 200,
+   "accuracy": 0.22,
+   "ci95": [
+    0.145,
+    0.295
+   ]
+  },
+  "fu_tool": {
+   "n": 200,
+   "accuracy": 0.625,
+   "ci95": [
+    0.535,
+    0.715
+   ],
+   "picks_raw_average_top": 0.705,
+   "picks_position_corrected_top": 0.58,
+   "overrides": 59,
+   "overrides_correct": 7,
+   "mean_tool_calls": 2.08,
+   "code_adjusts_position": 0.005,
+   "code_adjusts_round": 0.795
+  },
+  "fu_notool": {
+   "n": 200,
+   "accuracy": 0.62,
+   "ci95": [
+    0.535,
+    0.705
+   ],
+   "picks_raw_average_top": 0.65,
+   "picks_position_corrected_top": 0.605,
+   "overrides": 70,
+   "overrides_correct": 11
+  },
+  "lr_tool": {
+   "n": 200,
+   "accuracy": 0.355,
+   "ci95": [
+    0.27,
+    0.445
+   ],
+   "picks_raw_average_top": 0.645,
+   "picks_position_corrected_top": 0.49,
+   "overrides": 71,
+   "overrides_correct": 5,
+   "mean_tool_calls": 2.08,
+   "code_adjusts_position": 0.015,
+   "code_adjusts_round": 0.82
+  },
+  "rand_tool": {
+   "n": 200,
+   "accuracy": 0.245,
+   "ci95": [
+    0.175,
+    0.32
+   ],
+   "picks_raw_average_top": 0.6,
+   "picks_position_corrected_top": 0.47,
+   "overrides": 80,
+   "overrides_correct": 14,
+   "mean_tool_calls": 2.33,
+   "code_adjusts_position": 0.005,
+   "code_adjusts_round": 0.76
+  },
+  "gold_prob": {
+   "n": 200,
+   "accuracy": 1.0,
+   "ci95": [
+    1.0,
+    1.0
+   ]
+  }
+ },
+ "opus_total_cost_usd": 12.78,
+ "opus_stop_reasons": {
+  "end_turn": 399,
+  "refusal": 1
+ }
+}

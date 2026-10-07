@@ -1,0 +1,22 @@
+{
+ "fu_prob": {
+  "top1": 0.92,
+  "calibration_error": 0.009
+ },
+ "lr_prob": {
+  "top1": 0.53,
+  "calibration_error": 0.02
+ },
+ "rand_prob": {
+  "top1": 0.23,
+  "calibration_error": 0.008
+ },
+ "godmode_prob": {
+  "top1": 1.0,
+  "calibration_error": 0.0
+ },
+ "gold_prob": {
+  "top1": 1.0,
+  "calibration_error": 0.0
+ }
+}

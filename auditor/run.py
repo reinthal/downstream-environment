@@ -7,7 +7,10 @@ generation settings, conditions, span, and the grade legend. This module is
 pure code — nothing experiment-specific is hardcoded; player names and the
 round count are read from the game data.
 
-Conditions: "none" shows no annotations; "gold" grades every Parsnip
+Conditions: "none" shows no annotations; conditions in `summaries` show a
+per-game detector summary after the transcript (no per-message grades);
+"<cond>_avg" shows <cond>'s grades
+plus each player's mean grade below the transcript; "gold" grades every Parsnip
 message 7 and every Carrot message 1; judge conditions ("godmode" and any in
 `judge_grades`) show a text judge's own 1-7 ratings; every other condition
 name must have cutpoints in suspicion_scale.json and a `<cond>_<span>` (or
@@ -28,6 +31,7 @@ import sys
 import time
 from collections import defaultdict
 from pathlib import Path
+from types import SimpleNamespace
 
 REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
@@ -35,7 +39,8 @@ if str(REPO) not in sys.path:
 
 from auditor.config import AuditorConfig  # noqa: E402
 from auditor.prompts import (ANSWER_CUE, AUDITOR_SYSTEM, AUDITOR_USER,  # noqa: E402
-                             DETECTOR_NOTE, build_transcript, parse_guess)
+                             DETECTOR_NOTE, build_transcript, parse_guess, score_rows_csv,
+                             score_table)
 from auditor.scale import grade, load_scale  # noqa: E402
 from rollouts.generation import CLOSE_CUE, make_backend, split_think  # noqa: E402
 
@@ -79,10 +84,15 @@ def judge_grade_map(path: Path) -> dict:
     return gm
 
 
+AVG = "_avg"      # condition suffix: same grades + per-player mean grade summary
+
+
 def all_grade_maps(cfg: AuditorConfig, arm: str, conditions: list[str],
                    recs: list[dict], scale: dict) -> dict[str, dict]:
     """condition -> grade map for every annotated condition (probe, judge,
-    gold); "none" gets no entry."""
+    gold); "none" gets no entry. "<cond>_avg" shares <cond>'s map."""
+    asked = [c for c in conditions if c not in cfg.summaries and c not in cfg.raw_scores]
+    conditions = list(dict.fromkeys(c.removesuffix(AVG) for c in asked))
     judges = {"godmode": str(cfg.path(cfg.out_dir) / "judge_godmode_{arm}.jsonl"),
               **cfg.judge_grades}
     probe_conds = [c for c in conditions if c not in judges and c not in ("none", "gold")]
@@ -96,7 +106,75 @@ def all_grade_maps(cfg: AuditorConfig, arm: str, conditions: list[str],
     for c in conditions:
         if c in judges:
             maps[c] = judge_grade_map(cfg.path(judges[c].format(arm=arm)))
-    return maps
+    return {c: maps[c.removesuffix(AVG)] for c in asked if c.removesuffix(AVG) in maps}
+
+
+def prepare(cfg: AuditorConfig, arm: str, conditions: list[str], games: int = 0,
+            per_group: int = 0) -> SimpleNamespace:
+    """Load the games and build every (game, condition) auditor conversation.
+    Shared by the local runner (main) and the API runner (auditor.api_run), so
+    both auditors see byte-identical prompts."""
+    data, out = cfg.path(cfg.data_dir), cfg.path(cfg.out_dir)
+    scale = load_scale(out / "suspicion_scale.json")
+    assert scale["span"] == cfg.span, (scale["span"], cfg.span)
+
+    recs = read_jsonl(data / f"transcripts_{arm}.jsonl")
+    games_meta = json.load(open(data / f"games_{arm}.json"))["games"]
+    parsnip = {g["game_id"]: g["parsnip"] for g in games_meta}
+    player_names = list(games_meta[0]["roles"])
+    num_rounds = max(r["round"] for r in recs) + 1
+    by_game = defaultdict(list)
+    for r in recs:
+        by_game[r["game_id"]].append(r)
+    for msgs in by_game.values():
+        msgs.sort(key=lambda m: (m["round"], m["position"]))
+    game_ids = sorted(g for g in by_game
+                      if not per_group
+                      or int(g.split("g")[1]) < per_group)[: games or None]
+
+    grade_by_cond = all_grade_maps(cfg, arm, conditions, recs, scale)
+
+    jobs = [(gid, cond) for gid in game_ids for cond in conditions]
+    print(f"{len(jobs)} auditor calls ({len(game_ids)} games x {conditions})", flush=True)
+
+    summaries = {c: json.loads(cfg.path(p.format(arm=arm)).read_text())
+                 for c, p in cfg.summaries.items() if c in conditions}
+
+    raw_scores = {c: json.loads(cfg.path(p.format(arm=arm)).read_text())
+                  for c, p in cfg.raw_scores.items() if c in conditions}
+
+    def build_conv(gid: str, cond: str) -> list[dict]:
+        if cond in raw_scores:
+            tool = cond in cfg.tool_conditions
+            transcript = build_transcript(by_game[gid], None) + "\n\n" + score_table(raw_scores[cond][gid])
+            note = cfg.raw_note + (" " + cfg.tool_note if tool else "")
+            system = AUDITOR_SYSTEM.format(players=", ".join(player_names), num_rounds=num_rounds,
+                                           detector_note="\n\n" + note)
+            user = AUDITOR_USER.format(transcript=transcript, and_scores=" and the detector scores",
+                                       example=player_names[0])
+            return [{"role": "system", "content": system}, {"role": "user", "content": user}]
+        if cond in summaries:
+            transcript = build_transcript(by_game[gid], None) + "\n\n" + summaries[cond][gid]
+            system = AUDITOR_SYSTEM.format(players=", ".join(player_names), num_rounds=num_rounds,
+                                           detector_note="\n\n" + cfg.summary_note)
+            user = AUDITOR_USER.format(transcript=transcript, and_scores=" and the detector summary",
+                                       example=player_names[0])
+            return [{"role": "system", "content": system}, {"role": "user", "content": user}]
+        transcript = build_transcript(by_game[gid], grade_by_cond.get(cond),
+                                      summary=cond.endswith(AVG))
+        system = AUDITOR_SYSTEM.format(
+            players=", ".join(player_names), num_rounds=num_rounds,
+            detector_note=DETECTOR_NOTE.format(legend=cfg.grade_legend)
+            if cond != "none" else "")
+        user = AUDITOR_USER.format(
+            transcript=transcript,
+            and_scores=" and the suspicion grades" if cond != "none" else "",
+            example=player_names[0])
+        return [{"role": "system", "content": system}, {"role": "user", "content": user}]
+
+    convs = [build_conv(gid, cond) for gid, cond in jobs]
+    return SimpleNamespace(jobs=jobs, convs=convs, game_ids=game_ids, parsnip=parsnip,
+                           player_names=player_names, raw_scores=raw_scores)
 
 
 def main(argv: list[str] | None = None, default_config: str | Path | None = None):
@@ -125,28 +203,9 @@ def main(argv: list[str] | None = None, default_config: str | Path | None = None
     if not smoke:
         cfg.save(out)
 
-    scale = load_scale(out / "suspicion_scale.json")
-    assert scale["span"] == cfg.span, (scale["span"], cfg.span)
-
-    recs = read_jsonl(data / f"transcripts_{args.arm}.jsonl")
-    games_meta = json.load(open(data / f"games_{args.arm}.json"))["games"]
-    parsnip = {g["game_id"]: g["parsnip"] for g in games_meta}
-    player_names = list(games_meta[0]["roles"])
-    num_rounds = max(r["round"] for r in recs) + 1
-    by_game = defaultdict(list)
-    for r in recs:
-        by_game[r["game_id"]].append(r)
-    for msgs in by_game.values():
-        msgs.sort(key=lambda m: (m["round"], m["position"]))
-    game_ids = sorted(g for g in by_game
-                      if not args.per_group
-                      or int(g.split("g")[1]) < args.per_group)[: args.games or None]
-
-    grade_by_cond = all_grade_maps(cfg, args.arm, conditions, recs, scale)
-
-    jobs = [(gid, cond) for gid in game_ids for cond in conditions]
-    print(f"{len(jobs)} auditor calls ({len(game_ids)} games x {conditions})", flush=True)
-
+    P = prepare(cfg, args.arm, conditions, args.games, args.per_group)
+    jobs, convs, game_ids, parsnip = P.jobs, P.convs, P.game_ids, P.parsnip
+    player_names, raw_scores = P.player_names, P.raw_scores
     backend = make_backend(backend_kind, cfg.model_id,
                            **({"chunk": args.chunk or cfg.gen_chunk}
                               if backend_kind == "hf" else
@@ -154,19 +213,6 @@ def main(argv: list[str] | None = None, default_config: str | Path | None = None
                                "max_model_len": cfg.max_model_len}))
     backend.force_close_tokens = cfg.force_close_tokens
 
-    def build_conv(gid: str, cond: str) -> list[dict]:
-        transcript = build_transcript(by_game[gid], grade_by_cond.get(cond))
-        system = AUDITOR_SYSTEM.format(
-            players=", ".join(player_names), num_rounds=num_rounds,
-            detector_note=DETECTOR_NOTE.format(legend=cfg.grade_legend)
-            if cond != "none" else "")
-        user = AUDITOR_USER.format(
-            transcript=transcript,
-            and_scores=" and the suspicion grades" if cond != "none" else "",
-            example=player_names[0])
-        return [{"role": "system", "content": system}, {"role": "user", "content": user}]
-
-    convs = [build_conv(gid, cond) for gid, cond in jobs]
     if smoke:
         print("=== sample system prompt (last job) ===", flush=True)
         print(convs[-1][0]["content"], flush=True)
@@ -201,10 +247,27 @@ def main(argv: list[str] | None = None, default_config: str | Path | None = None
         for si in range(done_seeds, args.seeds):
             t0 = time.time()
             seed = cfg.seed + 100 * si            # matches the API seed scheme
-            raws = backend.generate(convs, cfg.max_new_tokens, seed=seed)
-            source = follow_up(raws, list(range(len(raws))), seed)
-            retry_idx = [i for i, raw in enumerate(raws)
-                         if parse_guess(raw, player_names) is None]
+            tool_idx = [i for i, (_, c) in enumerate(jobs) if c in cfg.tool_conditions]
+            plain_idx = [i for i in range(len(jobs)) if i not in set(tool_idx)]
+            raws = [""] * len(jobs)
+            for i, r in zip(plain_idx, backend.generate([convs[i] for i in plain_idx],
+                                                        cfg.max_new_tokens, seed=seed)):
+                raws[i] = r
+            source = follow_up(raws, plain_idx, seed)
+            tool_logs = {}
+            if tool_idx:
+                from auditor.tools import run_tool_audits
+                results = run_tool_audits(
+                    backend, [convs[i] for i in tool_idx],
+                    [{"scores.csv": score_rows_csv(raw_scores[jobs[i][1]][jobs[i][0]])} for i in tool_idx],
+                    max_new_tokens=cfg.max_new_tokens, max_calls=cfg.max_tool_calls, seed=seed,
+                    player_names=player_names, force_close_tokens=cfg.force_close_tokens,
+                    answer_followup=cfg.answer_followup)
+                for i, (r, log) in zip(tool_idx, results):
+                    raws[i], tool_logs[i] = r, log
+                    source[i] = (None if parse_guess(r, player_names) is None else
+                                 "followup" if log.get("answer_followup") else "tag")
+            retry_idx = [i for i in plain_idx if parse_guess(raws[i], player_names) is None]
             if retry_idx:
                 retry_raws = backend.generate([convs[i] for i in retry_idx],
                                               cfg.max_new_tokens,
@@ -224,7 +287,7 @@ def main(argv: list[str] | None = None, default_config: str | Path | None = None
                     "auditor_seed": si, "guess": guess, "parsnip": parsnip[gid],
                     "correct": bool(correct), "parse_failed": guess is None,
                     "answer_source": source[i], "retried": i in retry_idx,
-                    "force_closed": CLOSE_CUE in raw,
+                    "force_closed": CLOSE_CUE in raw, "tool": tool_logs.get(i),
                     "reasoning": reasoning, "public": public}) + "\n")
             f.flush()
             print(f"seed {si}: "

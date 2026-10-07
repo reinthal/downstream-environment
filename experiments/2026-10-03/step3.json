@@ -1,0 +1,76 @@
+{
+ "none": {
+  "n": 400,
+  "accuracy": 0.215,
+  "ci95": [
+   0.142,
+   0.29
+  ],
+  "cut_off": 0.068
+ },
+ "fu_prob": {
+  "n": 400,
+  "accuracy": 0.91,
+  "ci95": [
+   0.853,
+   0.96
+  ],
+  "cut_off": 0.003,
+  "detector_alone_top1": 0.92,
+  "follows_detector_top": 0.99,
+  "overrides": 4,
+  "overrides_correct": 0,
+  "overrides_where_detector_was_right": 4
+ },
+ "lr_prob": {
+  "n": 400,
+  "accuracy": 0.43,
+  "ci95": [
+   0.345,
+   0.517
+  ],
+  "cut_off": 0.033,
+  "detector_alone_top1": 0.53,
+  "follows_detector_top": 0.755,
+  "overrides": 98,
+  "overrides_correct": 9,
+  "overrides_where_detector_was_right": 49
+ },
+ "rand_prob": {
+  "n": 400,
+  "accuracy": 0.215,
+  "ci95": [
+   0.15,
+   0.285
+  ],
+  "cut_off": 0.115,
+  "detector_alone_top1": 0.23,
+  "follows_detector_top": 0.215,
+  "overrides": 314,
+  "overrides_correct": 57,
+  "overrides_where_detector_was_right": 63
+ },
+ "godmode_prob": {
+  "n": 400,
+  "accuracy": 1.0,
+  "ci95": [
+   1.0,
+   1.0
+  ],
+  "cut_off": 0.0,
+  "detector_alone_top1": 1.0,
+  "follows_detector_top": 1.0,
+  "overrides": 0,
+  "overrides_correct": 0,
+  "overrides_where_detector_was_right": 0
+ },
+ "gold_prob": {
+  "n": 400,
+  "accuracy": 1.0,
+  "ci95": [
+   1.0,
+   1.0
+  ],
+  "cut_off": 0.003
+ }
+}
