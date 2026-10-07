@@ -58,10 +58,10 @@ class LMProbe:
 
     def with_probe(self, probe: LinearProbe | str | Path) -> "LMProbe":
         """A second read-out at the same layer, sharing this instance's model."""
-        other = LMProbe(self.model_id, self.layer, probe,
-                        batch_size=self.batch_size, max_len=self.max_len,
-                        dtype=self.dtype, device=self.device,
-                        truncate_layers=self.truncate_layers)
+        other = type(self)(self.model_id, self.layer, probe,
+                           batch_size=self.batch_size, max_len=self.max_len,
+                           dtype=self.dtype, device=self.device,
+                           truncate_layers=self.truncate_layers)
         other._model, other._tok = self._ensure_model()
         return other
 

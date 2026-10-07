@@ -16,7 +16,11 @@ _CHAT_TEMPLATE = (
     "<think> {{ m.reasoning_content | default('') }} </think> {{ m.content }}"
     "{% else %}{{ m.content }}{% endif %} <|im_end|> "
     "{% endfor %}"
-    "{% if add_generation_prompt %}<|im_start|> assistant : <think> {% endif %}"
+    "{% if add_generation_prompt %}<|im_start|> assistant : <think> "
+    # like Qwen3: enable_thinking=False closes an empty think block, matching
+    # how an assistant turn without reasoning_content renders
+    "{% if enable_thinking is defined and not enable_thinking %} </think> {% endif %}"
+    "{% endif %}"
 )
 
 TINY_LAYERS = 4

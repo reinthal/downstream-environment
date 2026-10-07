@@ -1,0 +1,36 @@
+{
+ "model_id": "Qwen/Qwen3.5-27B",
+ "layer": 18,
+ "lora_id": null,
+ "batch_size": 8,
+ "max_len": 4096,
+ "device": "auto",
+ "dtype": "bfloat16",
+ "truncate_layers": true,
+ "probe_type": "logistic_regression",
+ "reg_coeff": 10.0,
+ "normalize": true,
+ "probe_paths": {
+  "followup": "probes/qwen3.5-27b_layer18_followup_logistic_regression.npz"
+ },
+ "steer_path": null,
+ "steer_coef": 0.0,
+ "gen_backend": "vllm",
+ "temperature": 0.7,
+ "top_p": 0.95,
+ "max_new_tokens": 1800,
+ "force_close_tokens": 220,
+ "tensor_parallel_size": null,
+ "max_model_len": 8192,
+ "gen_chunk": 25,
+ "seed": 0,
+ "seed_groups": 1,
+ "dataset_sizes": {
+  "alpaca": 9994,
+  "base_turns": 1500
+ },
+ "out_dir": "experiments/2026-10-07-dyl-alpaca",
+ "alpaca_path": "rollouts_alpaca.jsonl",
+ "transcripts_path": "transcripts_base.jsonl",
+ "threshold_quantile": 0.99
+}
