@@ -30,6 +30,12 @@ needed, propose it and let the researcher decide.
   OpenRouter provider, epochs = repeated audits per game; `inspect view`
   shows every sample's exact prompt). The raw-score variant is history:
   `experiments/2026-09-22/run_auditor.py`.
+  Claude auditors (Anthropic Messages API via OpenRouter):
+  `auditor/api_run.py`, same prompts as `auditor.run` (`run.prepare`), live
+  cost tracking with a `max_cost_usd` cap. Conditions in `tool_conditions`
+  give the auditor a sandboxed Python tool over the detector scores
+  (`auditor/tools.py` loop, `auditor/sandbox.py` runner: no network, CPU /
+  memory / time limits).
 - **Generation**: `rollouts/generation.py` — always use `make_backend(...)`.
   - `VLLMBackend` (`--backend vllm`, the default) for ALL bulk generation.
     ~10x faster than HF `generate`. Requires the vLLM env (below).
@@ -86,12 +92,14 @@ needed, propose it and let the researcher decide.
     store `raw_diff` since 2026-09-24) or a `steer_vec` npz; rejects LR
     probes and bare arrays.
 
-## Two virtualenvs (do not merge them)
+## Virtualenvs (do not merge them)
 
 | env | run with | use for |
 |---|---|---|
 | `.venv` | `uv run --no-sync python ...` | probes, activations, HF generation, analysis (torch 2.14+cu126, transformers 5.17); primitives: `LMProbe`, `ExperimentConfig` |
 | `.venv-vllm` | `PATH=$PWD/.venv-vllm/bin:$PATH .venv-vllm/bin/python ...` | vLLM generation only (vllm 0.21.0+cu129, torch 2.11+cu126); primitives: `LMSteering`, `ExperimentConfig` |
+| `.venv-api` | `.venv-api/bin/python -m auditor.api_run ...` | hosted Claude auditor only (anthropic 1.11, numpy) |
+| `.venv-sandbox` | used by `auditor/sandbox.py` | interpreter for the auditor's Python tool (numpy, pandas, scipy); nothing else |
 
 `ExperimentConfig` imports in both envs (no heavy deps); `LMProbe` and
 `LMSteering` stay import-isolated per env — keep it that way (lazy imports,
