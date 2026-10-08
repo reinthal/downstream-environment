@@ -11,12 +11,22 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-local = ["torch", "transformers", "peft", "accelerate"]
+local = [
+    "torch",
+    "transformers",
+    "peft",
+    "accelerate",
+    "flash-linear-attention>=0.5.2",
+]
 ndif = ["torch", "transformers", "nnsight"]
 
 [dependency-groups]
 dev = [
+    "ipykernel>=7.4.0",
     "matplotlib>=3.11.2",
+    "nbclient>=0.11.0",
+    "nbformat>=5.11.1",
+    "plotly>=7.1.0",
     "pytest",
 ]
 

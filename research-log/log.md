@@ -1107,3 +1107,107 @@ Parsnip messages.
   `figures/{violins_alpaca,roc_alpaca}.png`
 - Primitive: `linear_probes/dyl_probe.py`, `tests/test_dyl_probe.py`;
   probes/ symlinks `qwen3.5-27b_layer18_followup*_logistic_regression.npz`
+
+## 2026-10-08: Labeling Carrot/Parsnip answers — exploration + preregistration
+
+### Context
+
+The auditor and probes judge *what* players say, but we have no description
+of the conversational structure of the games themselves: who defers, probes,
+accuses, defends, coordinates, and when. This experiment puts speech-act
+labels on every base-game announcement and tests how the mix shifts across
+rounds. The researcher preregistered (before any labeling): agents defer in
+early rounds and only start acting late; accusing in round 1 is rare (<5% at
+95% CI). Recorded caveat: games have exactly 3 rounds, so the literal
+"act on round 4" clause is untestable — the testable form is "action
+concentrates in the final round".
+
+### Experiment
+
+Phase 1 (this entry): qualitative exploration before freezing the label set.
+Read 3 full games with private reasoning (s0g0, s0g7, s0g13) + 2 more games'
+announcements from other seed groups (s2g4, s4g11), plus crude regex marker
+counts over all 1,500 announcements. Proposed 7-label speech-act taxonomy +
+2 binary flags written into the experiment README.
+
+Phase 2 (same day): all 1,500 announcements labeled by Qwen3.8-27B (local,
+`VLLMBackend`, TP=4 on GPUs 4-7; judge sees only the public discussion so
+far + the turn to label — no roles, no private reasoning; strict
+single-`<answer>`-tag JSON parsing, different-seed retry, zero turns lost:
+1,497/1,500 parsed on attempt 0, rest on retry). Judge is a different model
+generation than the players (Qwen3.5), avoiding pure self-judging. Kernels
+confirmed optimal for the box: FlashAttention-2 (full-attn layers),
+Triton/FLA GDN (linear-attn layers), FlashInfer sampler off. Analysis:
+per-round label mix + rates with game-clustered 95% bootstrap CIs
+(10k reps, 100 game clusters).
+
+### Expected Outcome
+
+<!-- researcher fills in -->
+
+### Actual Outcome
+
+<!-- researcher fills in -->
+
+### Observations (exploration, pre-labeling)
+
+- Round 1 is ritualized deference for BOTH roles — private reasoning shows
+  it is an explicit policy ("I should not accuse anyone yet"; Parsnip: "keep
+  it vague to avoid standing out"). Role claims ("I'm a Carrot") are common.
+- Round 2: probing + first targeted criticism; defenses begin. In s4g11 the
+  Parsnip fires the game's first accusation in round 2.
+- Round 3 is a phase transition: vote declarations live almost exclusively
+  here. Crude regex per round (n=500 each): vote-talk 2 → 9 → 339,
+  defer-markers 155 → 37 → 5.
+- Accusation cascades: the first aggressive accuser is often counter-accused
+  ("sudden push = classic Parsnip tactic") and flipped on (s0g0, s2g4); the
+  Parsnip's safest observed move is joining the majority vote.
+
+### Results
+
+Per-round primary-label mix (n=500 turns/round; rates with game-clustered
+95% bootstrap CIs):
+
+| round | defer | probe | flag | accuse | defend_self | defend_other | coordinate |
+|---|---|---|---|---|---|---|---|
+| 1 | 423 | 70 | 7 | 0 | 0 | 0 | 0 |
+| 2 | 133 | 200 | 102 | 8 | 46 | 7 | 4 |
+| 3 | 18 | 6 | 43 | 178 | 55 | 16 | 184 |
+
+- Round-1 accuse rate **0/500** (preregistered <5%: passes under any
+  method — the bootstrap CI is degenerately [0,0]; even a rule-of-three
+  upper bound is ~0.7%). Accuse-or-coordinate in round 1 is also 0/500.
+- Deferring dominates round 1 (0.846 [0.814, 0.878]) and collapses by
+  round 3 (0.036 [0.018, 0.056]); accusing rises 0 → 0.016 [0.004, 0.030]
+  → 0.356 [0.320, 0.392]. Action concentrates in the final round, with
+  round 2 as a probing/flagging transition — not a fixed deferral length.
+
+![Speech-act mix per round](../experiments/2026-10-08-labeling-answers/figures/label_mix_by_round.png)
+
+By role: the Parsnip defers MORE than Carrots (round 1: 97% vs 82%;
+round 2: 54% vs 20%), accuses less in round 3 (16% vs 40%) and
+coordinates more (42% vs 36%) — the "hide, then join the majority"
+strategy from the exploration reading, now quantified.
+
+![Speech-act mix per round, by role](../experiments/2026-10-08-labeling-answers/figures/label_mix_by_role.png)
+
+### Parameters/Configurations
+
+- `experiments/2026-10-08-labeling-answers/config.json` (`LabelingConfig`):
+  judge Qwen/Qwen3.8-27B, temperature 0.7, max_new_tokens 1800,
+  force_close 220, max_model_len 8192, parse_retries 2, bootstrap 10k.
+- Repro: `CUDA_VISIBLE_DEVICES=4,5,6,7 PATH=$PWD/.venv-vllm/bin:$PATH
+  .venv-vllm/bin/python experiments/2026-10-08-labeling-answers/label.py
+  --stage label`, then `uv run --no-sync python ... --stage analyze` (CPU).
+
+### Artifacts
+
+- `experiments/2026-10-08-labeling-answers/` — README (exploration notes,
+  preregistered hypothesis verbatim, frozen label set),
+  `judge_labels_base.jsonl` (1,500 labels + judge reasoning, LFS),
+  `results.json`, `figures/label_mix_by_{round,role}.png`, `label.py`,
+  symlink `transcripts_base.jsonl` → 2026-09-29.
+- `violin_explorer.ipynb` / `.html` — interactive plotly violins of
+  DYL-probe scores (alpaca / Carrot / Parsnip × round) filterable by
+  speech-act label; joins the 2026-10-07-dyl-alpaca scores (symlinked)
+  with the labels.

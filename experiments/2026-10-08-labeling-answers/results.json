@@ -1,0 +1,84 @@
+{
+ "n_turns": 1500,
+ "judge_model": "Qwen/Qwen3.8-27B",
+ "per_round_counts": {
+  "round1": {
+   "defer": 423,
+   "probe": 70,
+   "flag": 7,
+   "accuse": 0,
+   "defend_self": 0,
+   "defend_other": 0,
+   "coordinate": 0
+  },
+  "round2": {
+   "defer": 133,
+   "probe": 200,
+   "flag": 102,
+   "accuse": 8,
+   "defend_self": 46,
+   "defend_other": 7,
+   "coordinate": 4
+  },
+  "round3": {
+   "defer": 18,
+   "probe": 6,
+   "flag": 43,
+   "accuse": 178,
+   "defend_self": 55,
+   "defend_other": 16,
+   "coordinate": 184
+  }
+ },
+ "rates": {
+  "round1_accuse": {
+   "rate": 0.0,
+   "ci95": [
+    0.0,
+    0.0
+   ]
+  },
+  "round1_defer": {
+   "rate": 0.846,
+   "ci95": [
+    0.814,
+    0.878
+   ]
+  },
+  "round2_accuse": {
+   "rate": 0.016,
+   "ci95": [
+    0.004,
+    0.03
+   ]
+  },
+  "round2_defer": {
+   "rate": 0.266,
+   "ci95": [
+    0.218,
+    0.316
+   ]
+  },
+  "round3_accuse": {
+   "rate": 0.356,
+   "ci95": [
+    0.32,
+    0.392
+   ]
+  },
+  "round3_defer": {
+   "rate": 0.036,
+   "ci95": [
+    0.018,
+    0.056
+   ]
+  },
+  "round1_accuse_or_coordinate": {
+   "rate": 0.0,
+   "ci95": [
+    0.0,
+    0.0
+   ]
+  }
+ }
+}
