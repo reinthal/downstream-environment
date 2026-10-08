@@ -4,3 +4,8 @@ runtime:
   name: python
   options:
     toolchain: uv
+# State lives IN the repo (iac/state/, git-tracked): single-operator stack,
+# no secrets in state (RUNPOD_API_KEY is read from env at operation time).
+# Commit after every `pulumi up`; pull before running from another clone.
+backend:
+  url: file://./state
