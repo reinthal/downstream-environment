@@ -118,8 +118,12 @@ as `rollouts/generation.py` does).
 is mandatory — a bare sync strips the `local` extra, i.e. torch and
 transformers, which is why everything runs `uv run --no-sync`). GPU extras live in the
 `local` optional extra (torch, transformers, flash-linear-attention, ...).
-The one exception that stays manual, documented above: `.venv-vllm`
-(built from the GitHub release `+cu129` wheel, not from pyproject).
+The other three venvs (`.venv-vllm`, `.venv-api`, `.venv-sandbox`) are not
+pyproject-managed; they are frozen to `requirements/venv-*.lock.txt` and
+rebuilt with `requirements/setup.sh [vllm|api|sandbox|all]` (the vllm pin
+is the GitHub-release `+cu129` wheel URL; torch comes from the cu126
+index). After changing one of them, re-freeze:
+`uv pip freeze --python .venv-<name>/bin/python > requirements/venv-<name>.lock.txt`.
 
 The PATH prefix matters: vLLM's spawned workers JIT-compile with `ninja`,
 which lives in `.venv-vllm/bin` and is not found when the venv python is
