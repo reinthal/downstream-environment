@@ -112,6 +112,15 @@ needed, propose it and let the researcher decide.
 `LMSteering` stay import-isolated per env — keep it that way (lazy imports,
 as `rollouts/generation.py` does).
 
+**Dependencies are tracked with uv — never ad-hoc `pip install` /
+`uv pip install`.** Add `.venv` deps to `pyproject.toml` with
+`uv add --no-sync` (tooling goes in the `dev` dependency group; `--no-sync`
+is mandatory — a bare sync strips the `local` extra, i.e. torch and
+transformers, which is why everything runs `uv run --no-sync`). GPU extras live in the
+`local` optional extra (torch, transformers, flash-linear-attention, ...).
+The one exception that stays manual, documented above: `.venv-vllm`
+(built from the GitHub release `+cu129` wheel, not from pyproject).
+
 The PATH prefix matters: vLLM's spawned workers JIT-compile with `ninja`,
 which lives in `.venv-vllm/bin` and is not found when the venv python is
 invoked directly without it (`FileNotFoundError: 'ninja'`).
