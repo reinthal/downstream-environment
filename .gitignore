@@ -13,3 +13,10 @@ experiments/**/logs/
 
 # probe-serving build artifacts (17GB checkpoints; regenerable via serving/publish.py)
 experiments/**/published/
+
+# pulumi repo-local backend: track live state, not its churn
+iac/state/.pulumi/**/*.bak
+iac/state/.pulumi/**/*.bak.attrs
+iac/state/.pulumi/locks/
+iac/state/.pulumi/backups/
+iac/state/.pulumi/history/

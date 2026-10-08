@@ -33,9 +33,16 @@ pulumi destroy   # tear down endpoint + template
 pulumi stack output openai_base_url
 ```
 
-State: local file backend (`pulumi login --local`, lives under `~/.pulumi`),
-stack `dev`. The API key is read from the environment at operation time and is
-never written to state.
+State: **repo-local file backend, git-tracked** — `Pulumi.yaml` pins
+`backend: url: file://./state`, so the state JSON lives at
+`iac/state/.pulumi/stacks/runpod-iac/dev.json` and travels with the repo (no
+`pulumi login` needed; `PULUMI_CONFIG_PASSPHRASE=""`). This is deliberate:
+single-operator stack, and the state contains no secrets — the API key is
+read from the environment at operation time and never written to state.
+Discipline it requires: **commit after every `pulumi up`**, and never apply
+from a second clone without pulling first (git is the lock). Backup/lock
+churn (`*.bak`, `locks/`, `history/`) is gitignored. The pre-migration copy
+remains under `~/.pulumi` (stale as of 2026-10-08).
 
 ## Current deployment (2026-10-07)
 
