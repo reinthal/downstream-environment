@@ -44,15 +44,14 @@ from a second clone without pulling first (git is the lock). Backup/lock
 churn (`*.bak`, `locks/`, `history/`) is gitignored. The pre-migration copy
 remains under `~/.pulumi` (stale as of 2026-10-08).
 
-## Current deployment (2026-10-07)
+## Current deployment (2026-10-08)
 
 - endpoint `jd42hxujb3bagp` → `https://api.runpod.ai/v2/jd42hxujb3bagp/openai/v1`
-- template `7us1hklk1i`, image `runpod/worker-v1-vllm:v2.5.0stable-cuda12.1.0`
+- template `7us1hklk1i`, image `runpod/worker-v1-vllm:v2.28.0` (vLLM 0.30.0,
+  native qwen3_5 kernels; bumped 2026-10-08 from `v2.5.0stable`, whose
+  vLLM 0.8.x never served a request)
 - 1x 80 GB GPU per worker (A100 preferred, then H100), max 2 workers,
   FlashBoot on, `MAX_MODEL_LEN=32768`
-- **Known issue**: this image bundles vLLM 0.8.x, which predates Qwen3.5
-  support — generation requests likely fail; bump to a modern worker tag
-  (e.g. `v2.28.0`, vLLM 0.30.0) when next touched.
 
 ### Probe classifier endpoints (2026-10-07)
 
@@ -61,9 +60,9 @@ Serverless probe read-outs (`serving/README.md`), image
 kernels, no pytorch-reference fallback), `RUNNER=pooling`, repo plugin
 pip-installed at container start, max 1 worker each (account quota 5):
 
-- `probe-l16-logistic` `4jg7t3qd7xasel` —
+- `qwen35-27b-probe-l16-logistic` `4jg7t3qd7xasel` —
   `reinthal/qwen3.5-27b-deception-probe-l16-logistic-regression` (MEAN pooling)
-- `probe-dyl-l18-logistic` `c97e4gem6s1icu` —
+- `qwen35-27b-probe-dyl-l18-logistic` `c97e4gem6s1icu` —
   `reinthal/qwen3.5-27b-deception-probe-dyl-l18-logistic-regression` (LAST/"No" token)
 
 ```sh

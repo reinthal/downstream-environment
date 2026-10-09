@@ -1,0 +1,44 @@
+{
+ "model_id": "Qwen/Qwen3.5-27B",
+ "layer": 16,
+ "lora_id": null,
+ "batch_size": 8,
+ "max_len": 256,
+ "device": "auto",
+ "dtype": "bfloat16",
+ "truncate_layers": true,
+ "probe_type": "logistic_regression",
+ "reg_coeff": 10.0,
+ "normalize": true,
+ "probe_paths": {},
+ "steer_path": null,
+ "steer_coef": 0.0,
+ "gen_backend": "vllm",
+ "temperature": 0.7,
+ "top_p": 0.95,
+ "max_new_tokens": 1800,
+ "force_close_tokens": 220,
+ "tensor_parallel_size": null,
+ "max_model_len": 8192,
+ "gen_chunk": 25,
+ "seed": 0,
+ "seed_groups": 1,
+ "dataset_sizes": {},
+ "out_dir": "experiments/2026-10-08-runpod-serving",
+ "gen_endpoint_id": "jd42hxujb3bagp",
+ "probe_endpoints": {
+  "lr_l16": {
+   "endpoint_id": "4jg7t3qd7xasel",
+   "pooling": "MEAN",
+   "hf_repo": "reinthal/qwen3.5-27b-deception-probe-l16-logistic-regression"
+  },
+  "dyl_l18": {
+   "endpoint_id": "c97e4gem6s1icu",
+   "pooling": "LAST",
+   "hf_repo": "reinthal/qwen3.5-27b-deception-probe-dyl-l18-logistic-regression"
+  }
+ },
+ "gen_timeout_s": 180,
+ "probe_timeout_s": 600,
+ "gen_max_tokens": 20
+}
