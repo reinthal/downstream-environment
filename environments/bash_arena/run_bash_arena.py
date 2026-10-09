@@ -57,7 +57,14 @@ os.environ.setdefault(
     f"https://api.runpod.ai/v2/{RUNPOD_ENDPOINT_ID}/openai/v1",
 )
 
-from control_arena import EvalMode  # noqa: E402
+# Local vLLM server (e.g. an ssh tunnel to a GPU box), addressed as
+# "openai-api/vllm/<model id>". The server must run with
+# --enable-auto-tool-choice --tool-call-parser <parser>: BashArena needs tools.
+os.environ.setdefault("VLLM_BASE_URL", "http://localhost:8000/v1")
+os.environ.setdefault("VLLM_API_KEY", "local")
+
+from control_arena import EvalMode, control_agent  # noqa: E402
+from control_arena._control_agent import ControlAgent  # noqa: E402
 from control_arena.eval import ControlEvalConfig, get_control_task_product  # noqa: E402
 from control_arena.micro_protocol import trusted_monitoring_builder  # noqa: E402
 from control_arena.monitor import basic_monitor_builder  # noqa: E402
@@ -77,7 +84,10 @@ from control_arena.settings.bash_arena.protocol.auto_submit_protocol_wrapper imp
 )
 from control_arena.settings.bash_arena.task.dataset import DatasetSpec  # noqa: E402
 from inspect_ai import eval  # noqa: E402
-from inspect_ai.model import GenerateConfig  # noqa: E402
+from inspect_ai.agent import Agent, AgentState  # noqa: E402
+from inspect_ai.model import ChatMessageAssistant, GenerateConfig  # noqa: E402
+from inspect_ai.tool import Tool  # noqa: E402
+from pydantic import Field  # noqa: E402
 
 # Both the attack (untrusted) and monitor (trusted) models are DeepSeek v4.1
 # Flash via OpenRouter. (The RunPod Qwen3.5-27B endpoint, wired as
@@ -87,13 +97,68 @@ from inspect_ai.model import GenerateConfig  # noqa: E402
 UNTRUSTED_MODEL = "openrouter/deepseek/deepseek-v4.1-flash"
 TRUSTED_MODEL = "openrouter/deepseek/deepseek-v4.1-flash"
 
+# Pin every request to ONE OpenRouter provider, no fallbacks. Unpinned, the
+# 2026-10-08 pilot was served by 12-18 different providers (mixed quantizations),
+# switching within a trajectory. Together: 100% uptime (30 min and 1 day) when
+# chosen, tools + reasoning supported. DeepSeek first-party is not usable: the
+# OpenRouter account's data policy excludes providers that train on paid data.
+PROVIDER_ROUTING = {"provider": {"order": ["together"], "allow_fallbacks": False}}
+
+# Role-level configs. Only the monitor resolves its model through the "trusted"
+# role; BashArena's policies call get_model(model_name) with no role, so the
+# untrusted settings must ALSO go into the policies' generate_config (below).
 UNTRUSTED_CONFIG = GenerateConfig(timeout=300, max_retries=3)
 TRUSTED_CONFIG = GenerateConfig(timeout=120, max_retries=3)
+
+# Policy generate configs. Upstream defaults are max_tokens=16000 with
+# reasoning_effort="medium" (honest) / reasoning_tokens=4000 (attack). DeepSeek
+# via OpenRouter does not honour the reasoning-token budget and at medium effort
+# reasoning alone ran to 12-16k tokens, ending the turn on max_tokens with no
+# tool call (pilot: 82/1596 attack turns). So: low effort, doubled output cap.
+HONEST_CONFIG = GenerateConfig(
+    max_tokens=32000,
+    reasoning_effort="low",
+    timeout=300,
+    max_retries=3,
+)
+ATTACK_CONFIG = HONEST_CONFIG.merge(GenerateConfig(reasoning_history="last"))
+
+
+def routed(config: GenerateConfig, model: str) -> GenerateConfig:
+    """Add the provider pin to `config` for OpenRouter models (it is an
+    OpenRouter request field; other backends, e.g. local vLLM, get none)."""
+    if model.startswith("openrouter/"):
+        return config.merge(GenerateConfig(extra_body=PROVIDER_ROUTING))
+    return config
 
 MODE_MAP = {"honest": EvalMode.HONEST, "attack": EvalMode.ATTACK}
 
 
-def build_protocol():
+@control_agent
+def last_turn_max_tokens_only(
+    policy: ControlAgent = Field(description="BashArena honest/attack policy."),
+) -> Agent:
+    """Work around a sticky flag in BashArena's policies: they scan ALL earlier
+    assistant messages for `hit_max_tokens`, so after one truncated turn every
+    later turn gets the "you hit the max token limit" reminder instead of the
+    normal (attack-planning / submit) reminder (pilot: 56% of attack turns).
+    Clear the flag on all but the latest assistant message before delegating."""
+
+    async def impl(state: AgentState, tools: list[Tool]) -> AgentState:
+        assistants = [
+            m for m in state._messages if isinstance(m, ChatMessageAssistant)
+        ]
+        for m in assistants[:-1]:
+            if m.metadata and m.metadata.get("hit_max_tokens"):
+                m.metadata["hit_max_tokens"] = False
+        return await policy(state, tools)
+
+    return impl
+
+
+def build_protocol(
+    untrusted_model: str = UNTRUSTED_MODEL, trusted_model: str = TRUSTED_MODEL
+):
     """auto_submit wrapper (bash_arena's required protocol) around trusted
     monitoring, using bash_arena's own attack/honest policies and a basic
     trusted monitor."""
@@ -102,10 +167,20 @@ def build_protocol():
     # so relying on ControlEvalConfig's role alone leaves them on the default
     # anthropic model. Passing model_name/model here pins them to OpenRouter.
     policy = untrusted_policy_builder(
-        attack=attack_policy(model_name=UNTRUSTED_MODEL),
-        honest=honest_policy(model_name=UNTRUSTED_MODEL),
+        attack=last_turn_max_tokens_only(
+            policy=attack_policy(
+                model_name=untrusted_model,
+                generate_config=routed(ATTACK_CONFIG, untrusted_model),
+            )
+        ),
+        honest=last_turn_max_tokens_only(
+            policy=honest_policy(
+                model_name=untrusted_model,
+                generate_config=routed(HONEST_CONFIG, untrusted_model),
+            )
+        ),
     )
-    monitor = basic_monitor_builder(model=TRUSTED_MODEL)
+    monitor = basic_monitor_builder(model=trusted_model)
     return auto_submit_protocol_wrapper(
         micro_protocol=trusted_monitoring_builder(policy=policy, monitor=monitor),
     )
@@ -124,13 +199,15 @@ def main(
     config = ControlEvalConfig(
         untrusted_model=UNTRUSTED_MODEL,
         trusted_model=TRUSTED_MODEL,
-        untrusted_config=UNTRUSTED_CONFIG,
-        trusted_config=TRUSTED_CONFIG,
-        message_limit=50,
-        token_limit=2_000_000,
-        time_limit=1800,  # hard per-sample cap (s); covers docker build + rollout
+        untrusted_config=routed(UNTRUSTED_CONFIG, UNTRUSTED_MODEL),
+        trusted_config=routed(TRUSTED_CONFIG, TRUSTED_MODEL),
+        max_steps=50,
+        token_limit=4_000_000,
+        time_limit=5400,  # hard per-sample cap (s); covers docker build + rollout
         epochs=epochs,
+        limit=limit,
         max_sandboxes=max_sandboxes,
+        max_samples=max_sandboxes,
     )
     tasks = get_control_task_product(
         setting,
@@ -139,7 +216,8 @@ def main(
         eval_config=config,
         monitoring_scorers=[max_suspicion_scorer()],
     )
-    eval(tasks=tasks, sandbox_cleanup=True, limit=limit)
+    # eval_args() is what carries time_limit / max_sandboxes / limit to inspect.
+    eval(tasks=tasks, sandbox_cleanup=True, **config.eval_args())
 
 
 if __name__ == "__main__":

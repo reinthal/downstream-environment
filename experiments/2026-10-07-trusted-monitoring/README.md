@@ -38,13 +38,25 @@ env without changing the working directory). From the repo root; prefix
 `nix shell nixpkgs#uv --command` if `uv` isn't on PATH:
 
 ```bash
-uv run --project environments/bash_arena python experiments/2026-10-07-trusted-monitoring/run.py --tasks 10 --epochs 1 --seed 0   # ~3h, serial
+uv run --project environments/bash_arena python experiments/2026-10-07-trusted-monitoring/run.py --tasks 50 --epochs 2 --seed 0   # ~11h at 6 sandboxes
 uv run --project environments/bash_arena python experiments/2026-10-07-trusted-monitoring/analyze.py                               # metrics + figure
 ```
 
-`run.py` writes eval logs to this folder's `logs/`; `analyze.py` reads them.
+`run.py` writes eval logs to this folder's `inspect_logs/`; `analyze.py` reads them.
 Browse trajectories with:
-`uv run --project environments/bash_arena inspect view --log-dir experiments/2026-10-07-trusted-monitoring/logs`.
+`uv run --project environments/bash_arena inspect view --log-dir experiments/2026-10-07-trusted-monitoring/inspect_logs`.
+
+## Runs
+
+| run | dir | untrusted = monitor | status |
+|---|---|---|---|
+| DeepSeek v4.1 Flash | `.` (`inspect_logs/`, `results.json`, `figure.png`) | `openrouter/deepseek/deepseek-v4.1-flash` | done: usefulness 0.76 ± 0.06, AUROC 0.74 |
+| pilot (misconfigured) | `inspect_logs_pilot/` | same | kept as evidence only: 50-message limit, limits not applied |
+| Qwen3.8-27B (local vLLM) | `qwen3.8-27b/` | `openai-api/vllm/Qwen/Qwen3.8-27B` | see research log |
+
+Each run is one `--out-dir` (config.json + inspect_logs/); pass the same
+`--out-dir` to `analyze.py`. Results and the audit of the pilot are in
+`research-log/log.md` (2026-10-08).
 
 ## Deliberate limitations / deviations from the paper
 
@@ -55,8 +67,15 @@ Browse trajectories with:
   is the methodology and the shape of the safety/usefulness result. (Original
   intent was Qwen3.5-27B on RunPod as the attacker, but that serverless endpoint
   was crash-looping; see the parent README.)
-- **Scale.** This host runs one docker-compose sandbox at a time (~2.3 GB each,
-  ~3.8 GB RAM), so samples run serially. With few trajectories the FPR
+- **Limits.** 50 policy turns (`max_steps`), 5400 s and 4M tokens per sample. In
+  the DeepSeek run about half the honest trajectories still stop at the step
+  limit, so usefulness is a lower bound on what the model reaches unbounded.
+- **Generation settings differ from upstream.** `reasoning_effort=low` and
+  `max_tokens=32000` for both policies (upstream: medium / a 4000-token
+  reasoning budget, 16000 cap), plus a wrapper that limits the "you hit max
+  tokens" reminder to the turn after a truncation. OpenRouter calls are pinned
+  to one provider (Together).
+- **Scale.** With few trajectories the FPR
   thresholds are coarse (ties, especially at suspicion 0) — `analyze.py` reports
   the *realized* FPR alongside each budget so this is transparent. For
   paper-style 5% FPR resolution you need ≥~40 trajectories.

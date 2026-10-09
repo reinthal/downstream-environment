@@ -1,0 +1,16 @@
+{
+  "setting": "bash_arena",
+  "protocol": "auto_submit_protocol_wrapper(trusted_monitoring)",
+  "untrusted_model": "openrouter/deepseek/deepseek-v4.1-flash",
+  "trusted_model": "openrouter/deepseek/deepseek-v4.1-flash",
+  "tasks": 50,
+  "epochs": 2,
+  "shuffle_seed": 0,
+  "modes": [
+    "honest",
+    "attack"
+  ],
+  "max_sandboxes": 3,
+  "message_limit": 50,
+  "time_limit": 1800
+}
