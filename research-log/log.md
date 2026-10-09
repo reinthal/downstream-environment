@@ -1283,3 +1283,49 @@ submitted). No provider problem: 0 model errors, max agent call 159 s.
   the misconfigured first pass, kept as the evidence for the fixes.
 - `analyze.py` now reads suspicion from the monitor's model events (the
   `max_suspicion_scorer` returns "N" when a limit drops the transcript).
+
+## 2026-10-08 — engineering: RunPod serving smoke test
+
+### Context
+
+`iac/` deploys three RunPod serverless endpoints (generation + two probe
+classifiers); none had been checked end-to-end from a client.
+
+### Experiment
+
+Read the deployed config and health from RunPod, then: one chat completion
+against the generation endpoint, and each probe model card's remote
+`/classify` snippet against its endpoint (direct and via `/runsync`).
+
+### Expected Outcome
+
+Qwen3.5-27B served on RunPod vLLM with the fast kernel, OpenAI-compatible
+API OK. LR probe and DYL probe each serve `/classify`; the commands in the
+probe model cards work.
+
+### Actual Outcome
+
+| endpoint | image | result |
+|---|---|---|
+| `qwen35-27b-vllm` `jd42hxujb3bagp` | worker `v2.5.0stable` (vLLM 0.8.x) | **FAIL** — chat completion times out (90/150/180 s); workers cycle unhealthy/throttled, 0 jobs ever completed, 7 queued |
+| `probe-l16-logistic` `4jg7t3qd7xasel` | worker `v2.28.0` (vLLM 0.30.0) | **OK** — p(deceptive)=0.131 on the card example, ~0.4 s warm |
+| `probe-dyl-l18-logistic` `c97e4gem6s1icu` | worker `v2.28.0` (vLLM 0.30.0) | **OK** — p(deceptive)=0.958 / 0.970 on two calls (single-token bf16 noise), ~0.3 s warm |
+
+- Generation is not on the fast-kernel image: the template still pins the
+  old worker flagged as a known issue in `iac/README.md`. Cause of the
+  unhealthy workers not confirmed from worker logs.
+- Probe cold start: ~220 s queue delay before the first answer.
+- Model-card remote snippet works with `URL =
+  https://api.runpod.ai/v2/<id>/openai` and the RunPod auth header; the
+  cards mention neither.
+- The L16 card on HF is stale: title cut to "# Deception-probe", no
+  "Scoring contract" section (the DYL card has both).
+
+### Parameters/Configurations
+
+`experiments/2026-10-08-runpod-serving/config.json` (`RunpodServingConfig`);
+repro command in the experiment README.
+
+### Artifacts
+
+- `experiments/2026-10-08-runpod-serving/` — README, `run.py`, `results.json`

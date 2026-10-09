@@ -11,17 +11,20 @@ import runpod_rest
 
 MODEL_NAME = "Qwen/Qwen3.5-27B"
 # runpod/worker-v1-vllm, pinned for reproducibility.
-WORKER_IMAGE = "runpod/worker-v1-vllm:v2.5.0stable-cuda12.1.0"
+WORKER_IMAGE = "runpod/worker-v1-vllm:v2.28.0"  # bundles vLLM v0.30.0 (native qwen3_5 kernels)
 MAX_MODEL_LEN = 32768
-# bf16 27B weights are ~55 GB: 80 GB cards only. Order = rental priority
-# (A100 tiers are cheaper than H100).
+# 48 GB cards: in far better supply on RunPod than 80 GB A100/H100 (those
+# sat `throttled` for the whole 2026-10-08 smoke test). Shared by every
+# endpoint in this stack.
 GPU_TYPE_IDS = [
-    "NVIDIA A100 80GB PCIe",
-    "NVIDIA A100-SXM4-80GB",
-    "NVIDIA H100 PCIe",
-    "NVIDIA H100 80GB HBM3",
-    "NVIDIA H100 NVL",
+    "NVIDIA RTX A6000",
+    "NVIDIA A40",
+    "NVIDIA L40",
+    "NVIDIA L40S",
 ]
+# bf16 27B weights are ~51 GiB — more than one 48 GB card, so the generation
+# endpoint runs 2 GPUs per worker with tensor parallelism.
+GEN_GPU_COUNT = 2
 # Weights are downloaded onto the container disk on cold start.
 CONTAINER_DISK_GB = 100
 
@@ -35,6 +38,12 @@ template = runpod_rest.Template(
         "env": {
             "MODEL_NAME": MODEL_NAME,
             "MAX_MODEL_LEN": str(MAX_MODEL_LEN),
+            # RunPod secret reference, resolved at container start (never in state).
+            "HF_TOKEN": "{{ RUNPOD_SECRET_HF_TOKEN }}",
+            # CUDA-graph capture OOMed at startup on 1x80 GB (51 GiB weights;
+            # worker logs 2026-10-08) and the worker crash-loops; run eager.
+            "ENFORCE_EAGER": "true",
+            "TENSOR_PARALLEL_SIZE": str(GEN_GPU_COUNT),
         },
         "readme": f"Serverless vLLM worker serving {MODEL_NAME} (managed by Pulumi, iac/).",
     },
@@ -47,7 +56,7 @@ endpoint = runpod_rest.Endpoint(
         "templateId": template.templateId,
         "computeType": "GPU",
         "gpuTypeIds": GPU_TYPE_IDS,
-        "gpuCount": 1,
+        "gpuCount": GEN_GPU_COUNT,
         "workersMin": 0,  # scale to zero: no cost while idle
         "workersMax": 2,
         "idleTimeout": 5,
@@ -89,21 +98,17 @@ PROBE_PLUGIN_INSTALL = (
     "'https://github.com/reinthal/downstream-environment/archive/main.tar.gz"
     "#subdirectory=serving/vllm_plugin'"
 )
-# ~16 GB bf16 weights + GDN/KV cache at 8k context fit 24 GB cards; price order.
-PROBE_GPU_TYPE_IDS = [
-    "NVIDIA RTX A5000",
-    "NVIDIA A40",
-    "NVIDIA L4",
-    "NVIDIA RTX A6000",
-    "NVIDIA GeForce RTX 4090",
-]
+# ~16 GB bf16 weights + GDN/KV cache at 8k context: one card of GPU_TYPE_IDS.
 
 
 def probe_endpoint(slug: str, hf_repo: str) -> runpod_rest.Endpoint:
+    # slug stays the Pulumi logical name (renaming it would replace the
+    # endpoint and change its id); the RunPod-side name carries the model.
+    name = f"qwen35-27b-{slug}"
     tmpl = runpod_rest.Template(
         f"{slug}-template",
         body={
-            "name": slug,
+            "name": name,
             "imageName": PROBE_WORKER_IMAGE,
             "isServerless": True,
             "containerDiskInGb": 80,
@@ -114,6 +119,7 @@ def probe_endpoint(slug: str, hf_repo: str) -> runpod_rest.Endpoint:
                 "MAX_MODEL_LEN": "8192",
                 "RUNNER": "pooling",
                 "GPU_MEMORY_UTILIZATION": "0.95",
+                "HF_TOKEN": "{{ RUNPOD_SECRET_HF_TOKEN }}",
             },
             "readme": f"Serverless vLLM probe classifier serving {hf_repo} "
                       "(managed by Pulumi, iac/). POST /classify via the generic "
@@ -123,10 +129,10 @@ def probe_endpoint(slug: str, hf_repo: str) -> runpod_rest.Endpoint:
     ep = runpod_rest.Endpoint(
         slug,
         body={
-            "name": slug,
+            "name": name,
             "templateId": tmpl.templateId,
             "computeType": "GPU",
-            "gpuTypeIds": PROBE_GPU_TYPE_IDS,
+            "gpuTypeIds": GPU_TYPE_IDS,
             "gpuCount": 1,
             "workersMin": 0,
             "workersMax": 1,  # account quota is 5 workers total; the gen endpoint holds 2

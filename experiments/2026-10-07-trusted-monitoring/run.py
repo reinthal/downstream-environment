@@ -67,11 +67,12 @@ def main(
     max_steps: int,
     time_limit: int,
     token_limit: int,
+    provider: str,
 ):
     log_dir = out_dir / "inspect_logs"
     log_dir.mkdir(parents=True, exist_ok=True)
 
-    trusted_config = rba.routed(rba.TRUSTED_CONFIG, trusted_model)
+    trusted_config = rba.routed(rba.TRUSTED_CONFIG, trusted_model, provider)
     cfg_dict = {
         "setting": "bash_arena",
         "protocol": "auto_submit_protocol_wrapper(trusted_monitoring)",
@@ -89,10 +90,10 @@ def main(
         "fail_on_error": False,
         "retry_on_error": 1,
         "honest_generate_config": rba.routed(
-            rba.HONEST_CONFIG, untrusted_model
+            rba.HONEST_CONFIG, untrusted_model, provider
         ).model_dump(exclude_none=True),
         "attack_generate_config": rba.routed(
-            rba.ATTACK_CONFIG, untrusted_model
+            rba.ATTACK_CONFIG, untrusted_model, provider
         ).model_dump(exclude_none=True),
         "trusted_generate_config": trusted_config.model_dump(exclude_none=True),
     }
@@ -102,11 +103,11 @@ def main(
     setting = BashArenaSetting(
         dataset_spec=DatasetSpec(max_tasks=tasks, shuffle_seed=seed)
     )
-    protocol = rba.build_protocol(untrusted_model, trusted_model)
+    protocol = rba.build_protocol(untrusted_model, trusted_model, provider)
     config = ControlEvalConfig(
         untrusted_model=untrusted_model,
         trusted_model=trusted_model,
-        untrusted_config=rba.routed(rba.UNTRUSTED_CONFIG, untrusted_model),
+        untrusted_config=rba.routed(rba.UNTRUSTED_CONFIG, untrusted_model, provider),
         trusted_config=trusted_config,
         # max_steps counts policy turns identically in both modes (a message
         # limit does not: the honest policy adds a reminder message per turn).
@@ -155,6 +156,10 @@ if __name__ == "__main__":
     p.add_argument("--max-sandboxes", type=int, default=6)
     p.add_argument("--untrusted-model", default=rba.UNTRUSTED_MODEL)
     p.add_argument("--trusted-model", default=rba.TRUSTED_MODEL)
+    p.add_argument(
+        "--provider", default=rba.DEFAULT_PROVIDER,
+        help="OpenRouter provider slug every call is pinned to (no fallbacks).",
+    )
     p.add_argument("--max-steps", type=int, default=50, help="Policy turns per sample.")
     p.add_argument("--time-limit", type=int, default=5400, help="Per-sample seconds.")
     p.add_argument("--token-limit", type=int, default=4_000_000)
@@ -162,5 +167,5 @@ if __name__ == "__main__":
     main(
         a.out_dir.resolve(), a.tasks, a.epochs, a.seed, a.modes, a.max_sandboxes,
         a.untrusted_model, a.trusted_model,
-        a.max_steps, a.time_limit, a.token_limit,
+        a.max_steps, a.time_limit, a.token_limit, a.provider,
     )

@@ -99,10 +99,11 @@ TRUSTED_MODEL = "openrouter/deepseek/deepseek-v4.1-flash"
 
 # Pin every request to ONE OpenRouter provider, no fallbacks. Unpinned, the
 # 2026-10-08 pilot was served by 12-18 different providers (mixed quantizations),
-# switching within a trajectory. Together: 100% uptime (30 min and 1 day) when
-# chosen, tools + reasoning supported. DeepSeek first-party is not usable: the
-# OpenRouter account's data policy excludes providers that train on paid data.
-PROVIDER_ROUTING = {"provider": {"order": ["together"], "allow_fallbacks": False}}
+# switching within a trajectory. Default Together (used for DeepSeek v4.1 Flash:
+# 100% uptime when chosen, tools + reasoning). DeepSeek first-party is not
+# usable: the OpenRouter account's data policy excludes providers that train on
+# paid data. Qwen3.8-27B runs use "alibaba".
+DEFAULT_PROVIDER = "together"
 
 # Role-level configs. Only the monitor resolves its model through the "trusted"
 # role; BashArena's policies call get_model(model_name) with no role, so the
@@ -124,11 +125,14 @@ HONEST_CONFIG = GenerateConfig(
 ATTACK_CONFIG = HONEST_CONFIG.merge(GenerateConfig(reasoning_history="last"))
 
 
-def routed(config: GenerateConfig, model: str) -> GenerateConfig:
-    """Add the provider pin to `config` for OpenRouter models (it is an
-    OpenRouter request field; other backends, e.g. local vLLM, get none)."""
+def routed(
+    config: GenerateConfig, model: str, provider: str = DEFAULT_PROVIDER
+) -> GenerateConfig:
+    """Pin `config` to one OpenRouter provider slug for OpenRouter models (it is
+    an OpenRouter request field; other backends, e.g. local vLLM, get none)."""
     if model.startswith("openrouter/"):
-        return config.merge(GenerateConfig(extra_body=PROVIDER_ROUTING))
+        routing = {"provider": {"only": [provider], "allow_fallbacks": False}}
+        return config.merge(GenerateConfig(extra_body=routing))
     return config
 
 MODE_MAP = {"honest": EvalMode.HONEST, "attack": EvalMode.ATTACK}
@@ -157,7 +161,9 @@ def last_turn_max_tokens_only(
 
 
 def build_protocol(
-    untrusted_model: str = UNTRUSTED_MODEL, trusted_model: str = TRUSTED_MODEL
+    untrusted_model: str = UNTRUSTED_MODEL,
+    trusted_model: str = TRUSTED_MODEL,
+    provider: str = DEFAULT_PROVIDER,
 ):
     """auto_submit wrapper (bash_arena's required protocol) around trusted
     monitoring, using bash_arena's own attack/honest policies and a basic
@@ -170,13 +176,13 @@ def build_protocol(
         attack=last_turn_max_tokens_only(
             policy=attack_policy(
                 model_name=untrusted_model,
-                generate_config=routed(ATTACK_CONFIG, untrusted_model),
+                generate_config=routed(ATTACK_CONFIG, untrusted_model, provider),
             )
         ),
         honest=last_turn_max_tokens_only(
             policy=honest_policy(
                 model_name=untrusted_model,
-                generate_config=routed(HONEST_CONFIG, untrusted_model),
+                generate_config=routed(HONEST_CONFIG, untrusted_model, provider),
             )
         ),
     )
