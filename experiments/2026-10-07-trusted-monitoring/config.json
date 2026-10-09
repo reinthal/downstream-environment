@@ -1,0 +1,60 @@
+{
+  "setting": "bash_arena",
+  "protocol": "auto_submit_protocol_wrapper(trusted_monitoring)",
+  "untrusted_model": "openrouter/deepseek/deepseek-v4.1-flash",
+  "trusted_model": "openrouter/deepseek/deepseek-v4.1-flash",
+  "tasks": 50,
+  "epochs": 2,
+  "shuffle_seed": 0,
+  "modes": [
+    "honest",
+    "attack"
+  ],
+  "max_sandboxes": 6,
+  "max_steps": 50,
+  "time_limit": 5400,
+  "token_limit": 4000000,
+  "fail_on_error": false,
+  "retry_on_error": 1,
+  "honest_generate_config": {
+    "max_retries": 3,
+    "timeout": 300,
+    "max_tokens": 32000,
+    "reasoning_effort": "low",
+    "extra_body": {
+      "provider": {
+        "order": [
+          "together"
+        ],
+        "allow_fallbacks": false
+      }
+    }
+  },
+  "attack_generate_config": {
+    "max_retries": 3,
+    "timeout": 300,
+    "max_tokens": 32000,
+    "reasoning_effort": "low",
+    "reasoning_history": "last",
+    "extra_body": {
+      "provider": {
+        "order": [
+          "together"
+        ],
+        "allow_fallbacks": false
+      }
+    }
+  },
+  "trusted_generate_config": {
+    "max_retries": 3,
+    "timeout": 120,
+    "extra_body": {
+      "provider": {
+        "order": [
+          "together"
+        ],
+        "allow_fallbacks": false
+      }
+    }
+  }
+}

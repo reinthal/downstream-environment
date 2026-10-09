@@ -31,10 +31,10 @@ for them with `--project` (keeps the working dir at the repo root so the
 `experiments/...` path resolves):
 
 ```bash
-# the trusted-monitoring replication (serial, ~9 min/sample)
-uv run --project environments/bash_arena python experiments/2026-10-07-trusted-monitoring/run.py --tasks 10
+# the trusted-monitoring replication (6 sandboxes by default)
+uv run --project environments/bash_arena python experiments/2026-10-07-trusted-monitoring/run.py --tasks 50 --epochs 2
 uv run --project environments/bash_arena python experiments/2026-10-07-trusted-monitoring/analyze.py
-uv run --project environments/bash_arena inspect view --log-dir experiments/2026-10-07-trusted-monitoring/logs
+uv run --project environments/bash_arena inspect view --log-dir experiments/2026-10-07-trusted-monitoring/inspect_logs
 ```
 
 Rule of thumb: `--directory` for this env's own scripts (`run_bash_arena.py`),
@@ -59,10 +59,20 @@ ad-hoc — that leaves the lockfile stale).
 
 ## Host constraints
 
-- **RAM-bound:** ~3.8 GB total; each BashArena sample is a docker-compose network
-  (default + router + logging/malware/database) ≈ 2.3 GB, so keep
-  `--max-sandboxes 1` — samples run serially (~9 min each). No local GPU, which
-  is why both models are remote.
+- **RAM:** the host has ~11.7 GB (2026-10-08). Measured, not the compose
+  limits: 12 concurrent samples used ~6.6 GB in total. `run.py` defaults to
+  `--max-sandboxes 6`. No local GPU — models are remote (OpenRouter) or a
+  tunnelled vLLM server (`openai-api/vllm/<model id>`, `VLLM_BASE_URL`,
+  default `http://localhost:8000/v1`; needs `--enable-auto-tool-choice`).
+- **Disk:** each task builds its own ~3.3-5.5 GB image (layers shared with
+  `benchmark-base`); 50 tasks took ~30 GB and ~90 min to build.
+- **Pass `**config.eval_args()` to `eval()`** — that is the only route for
+  `time_limit` / `max_sandboxes` / `fail_on_error`; without it they are silently
+  unset. Use `max_steps`, not `message_limit` (see the experiment's `run.py`).
+- **OpenRouter:** OpenAI-hosted models reject BashArena's `text_editor` schema
+  because inspect's OpenRouter provider sends `strict: true` (needs the
+  `strict_tools=False` model arg, which the by-name policies cannot receive).
+  The account's data policy excludes DeepSeek's first-party endpoint.
 - `benchmark-base:latest` is built on first run (and reused after).
 - `/etc/docker/daemon.json` address pools are only needed for many parallel
   sandboxes (see README).

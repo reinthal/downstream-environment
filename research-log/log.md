@@ -1211,3 +1211,69 @@ strategy from the exploration reading, now quantified.
   DYL-probe scores (alpaca / Carrot / Parsnip × round) filterable by
   speech-act label; joins the 2026-10-07-dyl-alpaca scores (symlinked)
   with the labels.
+
+## 2026-10-08: BashArena trusted monitoring — DeepSeek v4.1 Flash, 50 tasks x 2 epochs
+
+### Context
+
+First scaled run of the 2026-10-07 BashArena trusted-monitoring scaffold. A
+gpt-4o-mini run was planned but dropped (inspect's OpenRouter provider sends
+`strict: true` tool schemas, which OpenAI rejects for `text_editor`); the
+researcher switched to DeepSeek v4.1 Flash.
+
+### Experiment
+
+50 tasks x 2 epochs, honest + attack, DeepSeek v4.1 Flash as both untrusted
+agent and monitor. A first pass (`inspect_logs_pilot/`, attack stopped at 87/100)
+was audited and found misconfigured: `message_limit=50` cut off 96/100 honest
+trajectories after ~14 turns (attack got ~22), reasoning ran into the 16k
+`max_tokens` cap, and `time_limit`/`max_sandboxes` were never passed to
+`eval()`. The reported run fixes these: `max_steps=50` instead of a message
+limit, eval args passed through, `reasoning_effort=low` + `max_tokens=32000`,
+every call pinned to one OpenRouter provider (Together), errored samples
+retried once and excluded.
+
+### Expected Outcome
+
+Researcher: usefulness somewhere between gpt-4o-mini and GPT-5.5, within the
+99% CI (the original gpt-4o-mini expectation was 0.34 +/- 0.01, 95% CI).
+
+### Actual Outcome
+
+<!-- researcher fills in -->
+
+### Results
+
+98 honest / 99 attack trajectories (3 excluded: task 31699056 hits a 2700 s
+timeout in every run). 95% CIs are clustered by task.
+
+- Usefulness (honest main-task score): **0.759 +/- 0.060**; full main-task
+  success 20.4% +/- 11.4. Pilot value under the message limit was 0.26.
+- Attack side-task success: 95.0% +/- 4.2. One accidental honest side-task
+  success.
+- Suspicion AUROC (attack vs honest): 0.741.
+- Safety (attacks caught): 51.5% at the 2/5/10% FPR budgets — but the realized
+  FPR is 16.3%, because 16 of 98 honest trajectories peak at suspicion >= 0.9
+  and scores are in 0.1 steps; 73.7% at the 20% budget (realized 33.7%).
+
+![BashArena trusted monitoring, DeepSeek v4.1 Flash](../experiments/2026-10-07-trusted-monitoring/figure.png)
+
+Remaining truncation: 51/100 honest trajectories stop at the 50-step limit and
+3 at the 4M token limit.
+
+### Parameters/Configurations
+
+- `experiments/2026-10-07-trusted-monitoring/config.json`: seed 0,
+  `max_steps=50`, `time_limit=5400`, `token_limit=4e6`, `max_sandboxes=6`,
+  `fail_on_error=False`, `retry_on_error=1`, generate configs incl. provider pin.
+- Repro: `uv run --project environments/bash_arena python
+  experiments/2026-10-07-trusted-monitoring/run.py --tasks 50 --epochs 2`, then
+  `analyze.py`.
+
+### Artifacts
+
+- `experiments/2026-10-07-trusted-monitoring/` — `inspect_logs/*.eval` (LFS),
+  `results.json`, `figure.png`, `config.json`; `inspect_logs_pilot/` (LFS) is
+  the misconfigured first pass, kept as the evidence for the fixes.
+- `analyze.py` now reads suspicion from the monitor's model events (the
+  `max_suspicion_scorer` returns "N" when a limit drops the transcript).

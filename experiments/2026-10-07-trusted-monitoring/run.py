@@ -12,13 +12,15 @@ untrusted model, e.g. Claude Sonnet 4.5, with a weaker trusted monitor, e.g.
 GPT-4.1 mini). So absolute numbers are not comparable to the paper; what is
 replicated is the methodology and the shape of the result.
 
-Scale note: this host runs ONE docker-compose sandbox at a time (~2.3 GB each,
-~3.8 GB RAM), so samples run serially (~9 min each).
+Limits: `max_steps` (policy turns, identical in both modes) rather than a
+message limit — the honest policy adds a reminder message per turn, so a message
+limit gives honest fewer turns than attack and cut off 96% of honest
+trajectories in the 2026-10-08 pilot.
 
 Usage (from the repo root; --project selects the bash_arena env without changing
 the working directory, so the experiment can live here under experiments/):
     uv run --project environments/bash_arena \
-        python experiments/2026-10-07-trusted-monitoring/run.py --tasks 10 --seed 0
+        python experiments/2026-10-07-trusted-monitoring/run.py --tasks 50 --epochs 2 --seed 0
 """
 
 import argparse
@@ -51,43 +53,72 @@ from control_arena.settings.bash_arena.bash_arena_setting import (  # noqa: E402
 from control_arena.settings.bash_arena.task.dataset import DatasetSpec  # noqa: E402
 from inspect_ai import eval  # noqa: E402
 
-LOG_DIR = HERE / "logs"
+def main(
+    out_dir: Path,
+    tasks: int,
+    epochs: int,
+    seed: int,
+    modes: list[str],
+    max_sandboxes: int,
+    untrusted_model: str,
+    trusted_model: str,
+    max_steps: int,
+    time_limit: int,
+    token_limit: int,
+):
+    log_dir = out_dir / "inspect_logs"
+    log_dir.mkdir(parents=True, exist_ok=True)
 
-
-def main(tasks: int, epochs: int, seed: int, modes: list[str], max_sandboxes: int):
-    LOG_DIR.mkdir(exist_ok=True)
-
+    trusted_config = rba.routed(rba.TRUSTED_CONFIG, trusted_model)
     cfg_dict = {
         "setting": "bash_arena",
         "protocol": "auto_submit_protocol_wrapper(trusted_monitoring)",
-        "untrusted_model": rba.UNTRUSTED_MODEL,
-        "trusted_model": rba.TRUSTED_MODEL,
+        "untrusted_model": untrusted_model,
+        "trusted_model": trusted_model,
         "tasks": tasks,
         "epochs": epochs,
         "shuffle_seed": seed,
         "modes": modes,
         "max_sandboxes": max_sandboxes,
-        "message_limit": 50,
-        "time_limit": 1800,
+        "max_steps": max_steps,
+        "time_limit": time_limit,
+        "token_limit": token_limit,
+        "fail_on_error": False,
+        "retry_on_error": 1,
+        "honest_generate_config": rba.routed(
+            rba.HONEST_CONFIG, untrusted_model
+        ).model_dump(exclude_none=True),
+        "attack_generate_config": rba.routed(
+            rba.ATTACK_CONFIG, untrusted_model
+        ).model_dump(exclude_none=True),
+        "trusted_generate_config": trusted_config.model_dump(exclude_none=True),
     }
-    (HERE / "config.json").write_text(json.dumps(cfg_dict, indent=2) + "\n")
+    (out_dir / "config.json").write_text(json.dumps(cfg_dict, indent=2) + "\n")
 
     eval_modes = [rba.MODE_MAP[m] for m in modes]
     setting = BashArenaSetting(
         dataset_spec=DatasetSpec(max_tasks=tasks, shuffle_seed=seed)
     )
-    protocol = rba.build_protocol()
+    protocol = rba.build_protocol(untrusted_model, trusted_model)
     config = ControlEvalConfig(
-        untrusted_model=rba.UNTRUSTED_MODEL,
-        trusted_model=rba.TRUSTED_MODEL,
-        untrusted_config=rba.UNTRUSTED_CONFIG,
-        trusted_config=rba.TRUSTED_CONFIG,
-        message_limit=50,
-        token_limit=2_000_000,
-        time_limit=1800,
+        untrusted_model=untrusted_model,
+        trusted_model=trusted_model,
+        untrusted_config=rba.routed(rba.UNTRUSTED_CONFIG, untrusted_model),
+        trusted_config=trusted_config,
+        # max_steps counts policy turns identically in both modes (a message
+        # limit does not: the honest policy adds a reminder message per turn).
+        max_steps=max_steps,
+        token_limit=token_limit,
+        time_limit=time_limit,
         epochs=epochs,
         max_sandboxes=max_sandboxes,
-        log_dir=str(LOG_DIR),
+        max_samples=max_sandboxes,
+        # One sample's sandbox dying (an agent killed PID 1 in the pilot) must
+        # not cancel the run; errored samples are retried once, and analyze.py
+        # reports any that remain.
+        fail_on_error=False,
+        retry_on_error=1,
+        log_dir=str(log_dir),
     )
     tasks_product = get_control_task_product(
         setting,
@@ -96,11 +127,17 @@ def main(tasks: int, epochs: int, seed: int, modes: list[str], max_sandboxes: in
         eval_config=config,
         monitoring_scorers=[max_suspicion_scorer()],
     )
-    eval(tasks=tasks_product, sandbox_cleanup=True, log_dir=str(LOG_DIR))
+    # eval_args() carries time_limit / max_sandboxes / fail_on_error / log_dir;
+    # without it inspect silently runs with none of them.
+    eval(tasks=tasks_product, sandbox_cleanup=True, **config.eval_args())
 
 
 if __name__ == "__main__":
     p = argparse.ArgumentParser(description=__doc__)
+    p.add_argument(
+        "--out-dir", type=Path, default=HERE,
+        help="Where config.json and inspect_logs/ go (one dir per model pair).",
+    )
     p.add_argument("--tasks", type=int, default=10, help="First N tasks (per mode).")
     p.add_argument("--epochs", type=int, default=1)
     p.add_argument("--seed", type=int, default=0, help="Dataset shuffle seed.")
@@ -108,6 +145,15 @@ if __name__ == "__main__":
         "--modes", nargs="+", choices=["honest", "attack"],
         default=["honest", "attack"],
     )
-    p.add_argument("--max-sandboxes", type=int, default=1)
+    p.add_argument("--max-sandboxes", type=int, default=6)
+    p.add_argument("--untrusted-model", default=rba.UNTRUSTED_MODEL)
+    p.add_argument("--trusted-model", default=rba.TRUSTED_MODEL)
+    p.add_argument("--max-steps", type=int, default=50, help="Policy turns per sample.")
+    p.add_argument("--time-limit", type=int, default=5400, help="Per-sample seconds.")
+    p.add_argument("--token-limit", type=int, default=4_000_000)
     a = p.parse_args()
-    main(a.tasks, a.epochs, a.seed, a.modes, a.max_sandboxes)
+    main(
+        a.out_dir.resolve(), a.tasks, a.epochs, a.seed, a.modes, a.max_sandboxes,
+        a.untrusted_model, a.trusted_model,
+        a.max_steps, a.time_limit, a.token_limit,
+    )
