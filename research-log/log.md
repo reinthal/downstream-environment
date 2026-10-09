@@ -1541,3 +1541,49 @@ limit, 1 at the token limit.
 - `experiments/2026-10-10-qwen-logit-monitor/` — `PREREGISTRATION.md`,
   `inspect_logs/*.eval` (LFS), `results.json`, `figure.png`, configs.
 - Monitor: `logit_monitor_builder` in `environments/bash_arena/run_bash_arena.py`.
+
+## 2026-10-09: 3-player Carrot-Parsnip on the new engine — auditor speaking-position bias
+
+### Context
+
+The game engine moved to `environments/carrot_parsnip/` with YAML
+`GameConfig`s. The researcher wants to study the 3-player game (simpler to
+analyse) and whether the "last-mover disadvantage" — a late speaker being
+voted out whatever they say — is gone there. A check of the old 5-player
+audits (Qwen auditor, tagged answers only) found no last-speaker bias without
+scores (0.18 vs 0.20 chance) but a first-speaker bias in round 3 (0.47-0.51),
+so the preregistered position became the first speaker of round 3.
+
+### Experiment
+
+100 three-player games (2 Carrots, 1 Parsnip, 3 discussion rounds, engine
+default prompts) played by the engine's own Inspect orchestrator with
+Qwen3.5-27B via OpenRouter. Announcements, speaking orders and votes are read
+back from the Inspect logs; each announcement gets a raw follow-up-probe score
+from the RunPod probe endpoint; Claude Opus 5.5 names the Parsnip with and
+without the raw score table (as 2026-10-04, no tool). Primary metric: how
+often Opus, without scores, names the first speaker of round 3 when that
+speaker is a Carrot, against the uniform 1/3 ± 0.10.
+
+### Expected Outcome
+
+Preregistered (`experiments/2026-10-09-3p-game/PREREGISTRATION.md`): for the
+first speaker of round 3, "Not preregistered". Given earlier for the last
+speaker of round 3, before the metric changed: "0.35 0.01 pm 80 ci".
+
+### Actual Outcome
+
+<!-- researcher fills in -->
+
+### Parameters/Configurations
+
+- `experiments/2026-10-09-3p-game/game.yaml` (GameConfig), `config.json`
+  (seeds 1000-1099, probe endpoint, analysis thresholds), `audit/config.json`
+  (Opus 5.5, adaptive thinking, effort medium, 1 seed, `none` + `fu_notool`).
+- Repro commands in the experiment README.
+
+### Artifacts
+
+- `experiments/2026-10-09-3p-game/` — PREREGISTRATION, README, scripts
+- `auditor/prompts.py::auditor_system` — player count in the auditor's system
+  prompt is now data-driven (unchanged text for 5 players)

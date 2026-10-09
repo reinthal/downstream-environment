@@ -1,0 +1,17 @@
+{
+ "model_id": "Qwen/Qwen3.5-27B",
+ "layer": 18,
+ "max_len": 8192,
+ "seed": 1000,
+ "out_dir": "experiments/2026-10-09-3p-game",
+ "game_config": "experiments/2026-10-09-3p-game/game.yaml",
+ "n_games": 100,
+ "pilot_seed": 0,
+ "probe_endpoint_id": "c97e4gem6s1icu",
+ "probe_hf_repo": "reinthal/qwen3.5-27b-deception-probe-dyl-l18-logistic-regression",
+ "probe_timeout_s": 900,
+ "probe_batch": 16,
+ "bias_band": 0.10,
+ "void_fraction": 0.10,
+ "n_boot": 2000
+}
