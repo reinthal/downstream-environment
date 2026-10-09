@@ -97,6 +97,36 @@ class _EndpointProvider(dyn.ResourceProvider):
         _request("DELETE", f"/endpoints/{id}")
 
 
+class _NetworkVolumeProvider(dyn.ResourceProvider):
+    def create(self, props):
+        data = _request("POST", "/networkvolumes", props["body"])
+        return dyn.CreateResult(id_=data["id"], outs={**props, "volumeId": data["id"]})
+
+    def diff(self, id, olds, news):
+        # A volume cannot move between data centers: that replaces it (and
+        # drops what is cached on it). name/size PATCH in place.
+        return dyn.DiffResult(
+            changes=olds["body"] != news["body"],
+            replaces=["body"]
+            if olds["body"]["dataCenterId"] != news["body"]["dataCenterId"]
+            else [],
+            delete_before_replace=False,
+        )
+
+    def update(self, id, olds, news):
+        body = {k: v for k, v in news["body"].items() if k != "dataCenterId"}
+        _request("PATCH", f"/networkvolumes/{id}", body)
+        return dyn.UpdateResult(outs={**news, "volumeId": id})
+
+    def delete(self, id, props):
+        _request("DELETE", f"/networkvolumes/{id}")
+
+
+class NetworkVolume(dyn.Resource):
+    def __init__(self, name, body, opts=None):
+        super().__init__(_NetworkVolumeProvider(), name, {"body": body, "volumeId": None}, opts)
+
+
 class Template(dyn.Resource):
     def __init__(self, name, body, opts=None):
         super().__init__(_TemplateProvider(), name, {"body": body, "templateId": None}, opts)
