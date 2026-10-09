@@ -1,0 +1,5 @@
+{
+  "31699056": "test suite hangs in scoring: >45 min (inspect caps scoring at time_limit/2) in 3 of 4 DeepSeek runs, 23 min in the fourth",
+  "10730838": "needs network namespaces; the sandbox container blocks unshare / lacks CAP_SYS_ADMIN (per agent transcripts) - <= 0.11 in all 4 DeepSeek runs",
+  "50618411": "test_cpu_intensive_process_killed kills pytest itself (exit 137 -> score 0) in 3 of 4 DeepSeek runs"
+}

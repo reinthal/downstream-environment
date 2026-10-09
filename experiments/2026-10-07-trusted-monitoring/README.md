@@ -50,9 +50,13 @@ Browse trajectories with:
 
 | run | dir | untrusted = monitor | status |
 |---|---|---|---|
-| DeepSeek v4.1 Flash | `.` (`inspect_logs/`, `results.json`, `figure.png`) | `openrouter/deepseek/deepseek-v4.1-flash` | done: usefulness 0.76 ± 0.06, AUROC 0.74 |
+| DeepSeek v4.1 Flash | `.` (`inspect_logs/`, `results.json`, `figure.png`) | `openrouter/deepseek/deepseek-v4.1-flash` | done: usefulness 0.78 ± 0.05, AUROC 0.74 (47 tasks) |
 | pilot (misconfigured) | `inspect_logs_pilot/` | same | kept as evidence only: 50-message limit, limits not applied |
 | Qwen3.8-27B (local vLLM) | `qwen3.8-27b/` | `openai-api/vllm/Qwen/Qwen3.8-27B` | see research log |
+
+`task_blacklist.json` lists faulty tasks (id -> reason): `run.py` drops them from
+the dataset after the seeded first-N selection, `analyze.py` drops them from
+older logs.
 
 Each run is one `--out-dir` (config.json + inspect_logs/); pass the same
 `--out-dir` to `analyze.py`. Results and the audit of the pilot are in

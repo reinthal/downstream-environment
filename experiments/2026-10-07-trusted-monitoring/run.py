@@ -29,6 +29,8 @@ import sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
+# Task ids whose environment/tests are faulty on this host (id -> reason).
+TASK_BLACKLIST = json.loads((HERE / "task_blacklist.json").read_text())
 
 
 def _find_runner_dir() -> Path:
@@ -79,6 +81,7 @@ def main(
         "epochs": epochs,
         "shuffle_seed": seed,
         "modes": modes,
+        "task_blacklist": sorted(TASK_BLACKLIST),
         "max_sandboxes": max_sandboxes,
         "max_steps": max_steps,
         "time_limit": time_limit,
@@ -127,6 +130,10 @@ def main(
         eval_config=config,
         monitoring_scorers=[max_suspicion_scorer()],
     )
+    # Drop blacklisted tasks AFTER the seeded first-N selection, so the remaining
+    # tasks are the same ones as in runs made before a task was blacklisted.
+    for task in tasks_product:
+        task.dataset = task.dataset.filter(lambda s: str(s.id) not in TASK_BLACKLIST)
     # eval_args() carries time_limit / max_sandboxes / fail_on_error / log_dir;
     # without it inspect silently runs with none of them.
     eval(tasks=tasks_product, sandbox_cleanup=True, **config.eval_args())
