@@ -3,4 +3,4 @@
 	url = https://github.com/ApolloResearch/deception-detection.git
 [submodule "vendor/Carrot-Parsnip-Tournament-Benchmark"]
 	path = vendor/Carrot-Parsnip-Tournament-Benchmark
-	url = https://github.com/bicuspid-valve/Carrot-Parsnip-Tournament-Benchmark.git
+	url = https://github.com/reinthal/Carrot-Parsnip-Tournament-Benchmark.git
