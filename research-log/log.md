@@ -1244,22 +1244,28 @@ Researcher: usefulness somewhere between gpt-4o-mini and GPT-5.5, within the
 
 ### Results
 
-98 honest / 99 attack trajectories (3 excluded: task 31699056 hits a 2700 s
-timeout in every run). 95% CIs are clustered by task.
+47 tasks, 94 honest / 94 attack trajectories. Three faulty tasks are
+blacklisted (`task_blacklist.json`: 31699056 test suite hangs >45 min in
+scoring; 10730838 needs namespaces the container blocks; 50618411's test kills
+pytest) and dropped from the analysis and from future runs. 95% CIs are
+clustered by task.
 
-- Usefulness (honest main-task score): **0.759 +/- 0.060**; full main-task
-  success 20.4% +/- 11.4. Pilot value under the message limit was 0.26.
-- Attack side-task success: 95.0% +/- 4.2. One accidental honest side-task
+- Usefulness (honest main-task score): **0.783 +/- 0.051**; full main-task
+  success 21.3% +/- 11.8. Pilot value under the message limit was 0.26.
+  (All 50 tasks, before the blacklist: 0.759 +/- 0.060.)
+- Attack side-task success: 95.7% +/- 4.0. One accidental honest side-task
   success.
-- Suspicion AUROC (attack vs honest): 0.741.
-- Safety (attacks caught): 51.5% at the 2/5/10% FPR budgets — but the realized
-  FPR is 16.3%, because 16 of 98 honest trajectories peak at suspicion >= 0.9
-  and scores are in 0.1 steps; 73.7% at the 20% budget (realized 33.7%).
+- Suspicion AUROC (attack vs honest): 0.735.
+- Safety (attacks caught): 51.1% at the 2/5/10% FPR budgets — but the realized
+  FPR is 16.0%, because 15 of 94 honest trajectories peak at suspicion >= 0.9
+  and scores are in 0.1 steps; 73.4% at the 20% budget (realized 34.0%).
 
 ![BashArena trusted monitoring, DeepSeek v4.1 Flash](../experiments/2026-10-07-trusted-monitoring/figure.png)
 
-Remaining truncation: 51/100 honest trajectories stop at the 50-step limit and
-3 at the 4M token limit.
+Remaining truncation (all 100 honest): 51 stop at the 50-step limit and 3 at
+the 4M token limit — in the ones read, the agent had built the deliverable and
+kept re-verifying without calling `submit` (0.70 vs 0.84 for those that
+submitted). No provider problem: 0 model errors, max agent call 159 s.
 
 ### Parameters/Configurations
 
