@@ -38,9 +38,9 @@ if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
 from auditor.config import AuditorConfig  # noqa: E402
-from auditor.prompts import (ANSWER_CUE, AUDITOR_SYSTEM, AUDITOR_USER,  # noqa: E402
-                             DETECTOR_NOTE, build_transcript, parse_guess, score_rows_csv,
-                             score_table)
+from auditor.prompts import (ANSWER_CUE, AUDITOR_USER,  # noqa: E402
+                             DETECTOR_NOTE, auditor_system, build_transcript, parse_guess,
+                             score_rows_csv, score_table)
 from auditor.scale import grade, load_scale  # noqa: E402
 from rollouts.generation import CLOSE_CUE, make_backend, split_think  # noqa: E402
 
@@ -148,23 +148,23 @@ def prepare(cfg: AuditorConfig, arm: str, conditions: list[str], games: int = 0,
             tool = cond in cfg.tool_conditions
             transcript = build_transcript(by_game[gid], None) + "\n\n" + score_table(raw_scores[cond][gid])
             note = cfg.raw_note + (" " + cfg.tool_note if tool else "")
-            system = AUDITOR_SYSTEM.format(players=", ".join(player_names), num_rounds=num_rounds,
-                                           detector_note="\n\n" + note)
+            system = auditor_system(player_names, num_rounds,
+                                    "\n\n" + note)
             user = AUDITOR_USER.format(transcript=transcript, and_scores=" and the detector scores",
                                        example=player_names[0])
             return [{"role": "system", "content": system}, {"role": "user", "content": user}]
         if cond in summaries:
             transcript = build_transcript(by_game[gid], None) + "\n\n" + summaries[cond][gid]
-            system = AUDITOR_SYSTEM.format(players=", ".join(player_names), num_rounds=num_rounds,
-                                           detector_note="\n\n" + cfg.summary_note)
+            system = auditor_system(player_names, num_rounds,
+                                    "\n\n" + cfg.summary_note)
             user = AUDITOR_USER.format(transcript=transcript, and_scores=" and the detector summary",
                                        example=player_names[0])
             return [{"role": "system", "content": system}, {"role": "user", "content": user}]
         transcript = build_transcript(by_game[gid], grade_by_cond.get(cond),
                                       summary=cond.endswith(AVG))
-        system = AUDITOR_SYSTEM.format(
-            players=", ".join(player_names), num_rounds=num_rounds,
-            detector_note=DETECTOR_NOTE.format(legend=cfg.grade_legend)
+        system = auditor_system(
+            player_names, num_rounds,
+            DETECTOR_NOTE.format(legend=cfg.grade_legend)
             if cond != "none" else "")
         user = AUDITOR_USER.format(
             transcript=transcript,
