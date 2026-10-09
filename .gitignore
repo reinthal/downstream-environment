@@ -9,7 +9,6 @@ experiments/**/activations_alpaca_*.npz
 experiments/**/message_activations_*.npz
 experiments/**/train_activations.npz
 experiments/**/logs/
-!vendor/Carrot-Parsnip-Tournament-Benchmark
 
 # probe-serving build artifacts (17GB checkpoints; regenerable via serving/publish.py)
 experiments/**/published/
