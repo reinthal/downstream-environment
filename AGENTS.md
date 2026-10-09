@@ -13,9 +13,17 @@ needed, propose it and let the researcher decide.
 
 ## Reuse, don't rebuild
 
-- **Game design**: `game/Carrot-Parsnip/Carrot_Parsnip.py` is the game engine
-  (seeded role assignment, players, log). New social-deduction experiments
-  must reuse it — do not write a new engine. The discussion-only rollout
+- **Game design**: `environments/carrot_parsnip/Carrot_Parsnip.py` is the
+  game engine (seeded role assignment, players, log; runtime YAML game
+  configuration via `game_config.py::GameConfig` + `configs/`). It is a git
+  submodule of `reinthal/Carrot-Parsnip-Tournament-Benchmark`
+  (`git submodule update --init environments/carrot_parsnip`). New
+  social-deduction experiments must reuse it — do not write a new engine.
+  **DEPRECATED: `game/Carrot-Parsnip/`** — an older in-tree copy of the
+  engine, kept only so the experiments that import it
+  (`experiments/2026-09-22/`, `experiments/2026-09-29/`) still reproduce. Do
+  not import it in new code and do not edit it; engine changes go to the
+  submodule's upstream. The discussion-only rollout
   harness (speaking order, private-think turns, transcripts JSONL) lives in
   `experiments/2026-09-22/run_games.py`; copy or import that pattern.
 - **Outside auditor**: the `auditor/` package (code) + a per-experiment
@@ -150,7 +158,9 @@ reason.
 
 - `environments/` holds runnable eval environments — self-contained uv projects,
   each with its own `pyproject.toml`/`uv.lock` and `CLAUDE.md` (first one:
-  `environments/bash_arena/`, BashArena on Docker). Run an env's own scripts with
+  `environments/bash_arena/`, BashArena on Docker). Exception:
+  `environments/carrot_parsnip/` is a git submodule (the Carrot-Parsnip game
+  engine) with only an upstream `requirements.txt` — no uv project yet. Run an env's own scripts with
   `uv run --directory environments/<name> <cmd>`. Experiments still go in
   `experiments/<date>/` (below); one that runs on an environment selects it with
   `uv run --project environments/<name> python experiments/<date>/...` (`--project`
@@ -159,6 +169,13 @@ reason.
   and deliberate limitations; log every run in `research-log/log.md`
   (Claude fills Context/Experiment/Parameters/Artifacts; Expected/Actual
   Outcome are the researcher's).
+- **Preregister before running**: a new experiment starts with the
+  `/preregister` skill (`.claude/skills/preregister/`), which interrogates the
+  researcher and writes `experiments/<date>/PREREGISTRATION.md` (hypothesis,
+  prediction, primary metric, analysis plan, exclusions, de-risking,
+  pre-agreed conclusions). It is committed before the first non-pilot run and
+  its frozen sections are never edited afterwards — changes are appended
+  under "Deviations". The answers are the researcher's, recorded verbatim.
 - Every experiment folder carries a `config.json` (an `ExperimentConfig`,
   possibly subclassed) holding ALL of the run's hyperparameters — scripts
   read it, never hardcode; `cfg.save(out_dir)` on run start. Skeleton:

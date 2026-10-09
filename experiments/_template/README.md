@@ -3,6 +3,9 @@
 Copy this folder to `experiments/<date>/`, edit `config.json`, and write the
 stages of `run.py`. The contract:
 
+- **`PREREGISTRATION.md` comes first.** Run the `/preregister` skill; it fills
+  the form from the researcher's answers. Commit it before the first
+  non-pilot run; later changes go under its "Deviations" heading.
 - **`config.json` is the single place hyperparameters live.** Scripts read
   `ExperimentConfig` (or a subclass adding experiment-specific fields) and
   build everything from it — no constants scattered across scripts.
