@@ -1329,3 +1329,132 @@ repro command in the experiment README.
 ### Artifacts
 
 - `experiments/2026-10-08-runpod-serving/` — README, `run.py`, `results.json`
+
+## 2026-10-10 — engineering: local Qwen3.8-27B vLLM server on the A40 box
+
+### Context
+
+Agentic / eval workloads (BashArena trajectories, auditor runs) were paying
+for the RunPod `qwen38-27b-vllm` endpoint (`iac/`, ~$4.9/h, 3.5 min cold
+starts). The 8x A40 box can host the same model, but it had no Python, no uv
+and no vLLM env, and the box is shared: at most **four GPUs** may be used
+without asking (Giuseppe runs jobs on the others).
+
+### Experiment
+
+Build a vLLM serving env for `Qwen/Qwen3.8-27B` (revision
+`1d4bf0f2…`), serve it OpenAI-compatible on port 8001 from a Python script in
+`serving/`, and pick the configuration with the best output-token throughput
+on four GPUs by measuring: (a) 2 replicas x tensor parallel 2 vs 1 x tensor
+parallel 4; (b) MTP speculative decoding (the checkpoint's own MTP layer,
+depth 3) on vs off. Verify from the startup log that the native kernels are
+used (Triton gated-delta-net kernels, FlashAttention 2 on sm86), and that the
+reasoning and tool-call parsers work.
+
+### Expected Outcome
+
+<researcher to fill>
+
+### Actual Outcome
+
+Server up: `http://10.146.113.164:8001/v1`, model id `Qwen/Qwen3.8-27B`,
+GPUs 1,2,6,7 (the two PCIe-sibling pairs), ~4 min startup. Chat, reasoning
+split into `message.reasoning`, and `tool_calls` parsing all verified.
+
+`vllm bench serve`, 256 requests, 64 in flight, `--ignore-eos`, output
+tok/s summed over the server (TPOT in parentheses):
+
+| layout | MTP | random 2048 in / 512 out | ShareGPT (real prompts) |
+|---|---|---|---|
+| 2 x TP2 | off | 632 (80 ms) | 738 (69 ms) |
+| **2 x TP2** | **3** | 567 (73 ms) | **1046 (51 ms)** |
+| 1 x TP4 | 3 | 257 (208 ms) | 466 (153 ms) |
+
+- Two TP2 replicas beat one TP4 engine by >2x (PCIe-only box; every layer's
+  all-reduce in TP4 crosses the inter-socket link).
+- MTP: +42% on real text (0.53-0.57 of draft tokens accepted, ~1.6 extra
+  tokens per step), −10% on random-token prompts where the drafter cannot
+  predict. Default on.
+- Kernels in the log: `Using Triton/FLA GDN prefill kernel` (vLLM's vendored
+  flash-linear-attention + compiled causal_conv1d), Triton GDN decode path
+  (the fused CUDA decode op is not built in the cu129 wheel),
+  `FLASH_ATTN` backend / FlashAttention 2, CUDA graphs + torch.compile.
+- Failures on the way: PyPI `torchcodec` is CUDA-13-linked and kills
+  `vllm serve` at import on this CUDA-12 driver (pinned the `+cpu` build);
+  `gpu_memory_utilization 0.92` CUDA-OOMs under load with MTP (now 0.88 and
+  128 seqs per replica); `mamba_cache_mode all` is unsupported for qwen3_5
+  in vLLM 0.31.0 (prefix caching runs in `align` mode, 784-token blocks).
+
+**Configurations that can confound research run against this server**
+(all are deliberate throughput choices; each has an off switch):
+
+1. **Sampling defaults come from the model, not from OpenAI conventions.**
+   A request that omits `temperature`/`top_p`/`top_k` gets
+   `temperature 1.0, top_k 20, top_p 0.95` (vLLM applies the checkpoint's
+   `generation_config.json`; warning in the startup log). The repo's
+   `ExperimentConfig` default is `temperature 0.7, top_p 0.95` with no top_k.
+   Always pass sampling params explicitly, or relaunch with
+   `--extra_args --generation-config vllm`.
+2. **Thinking is on by default at `reasoning_effort: xhigh`.** Outputs are
+   long; a small `max_tokens` truncates inside the reasoning and returns
+   `finish_reason: length` with empty `content`. Check `finish_reason` and
+   `completion_tokens_details.reasoning_tokens`; control with
+   `chat_template_kwargs: {"enable_thinking": false}` or
+   `{"reasoning_effort": "low"|"medium"}`.
+3. **Reasoning is stripped from `content`** (`--reasoning-parser qwen3`) into
+   `message.reasoning`. Anything that scores or audits the *full* generation
+   (probe spans, the auditor's transcripts) must reassemble it; `transcripts`
+   written from `content` alone silently lose the think block.
+4. **Multi-turn: prior-turn reasoning is kept in the prompt**
+   (`preserve_thinking` defaults to true in the chat template) if the client
+   sends assistant messages back with their `reasoning` field. Qwen3/3.5
+   style pipelines that assumed earlier thinking is dropped now condition on
+   it. Pass `chat_template_kwargs: {"preserve_thinking": false}` to get the
+   old behaviour.
+5. **MTP speculative decoding** (`mtp_tokens 3`). Rejection sampling is
+   designed to preserve the target distribution, but the implementation is
+   not bit-identical to plain decoding (bf16 draft/verify numerics, batch
+   composition), so samples are not reproducible across MTP on/off.
+   `--mtp_tokens 0` for a clean comparison.
+6. **Non-determinism from batching and two replicas.** Outputs depend on
+   what else is in the batch (no batch-invariant kernels by default) and on
+   which replica the load balancer picks; a per-request `seed` does not make
+   runs bit-reproducible. `VLLM_BATCH_INVARIANT=1` exists in vLLM 0.31 at a
+   throughput cost (untested here); for exact reproducibility use the HF
+   backend.
+7. **Prefix caching ('align' mode, 784-token blocks)**: cached GDN/KV state
+   vs recomputed can differ in the last bits; a prompt's result can depend on
+   whether a sibling request warmed the cache. `--enable_prefix_caching
+   false` to rule it out.
+8. **Text only** (`--language-model-only`): image/video inputs are rejected,
+   not ignored; multimodal probes must not be pointed here.
+9. **Model mismatch with the repo's probes.** `probes/qwen3.5-27b_*` were
+   fitted on Qwen3.5-27B activations; this server runs Qwen3.8-27B (same
+   `qwen3_5` architecture family, different weights). Generated
+   transcripts are fine as *data*, but probe read-outs need either Qwen3.5
+   generation or probes re-fitted on 3.8.
+10. **Shared GPUs**: throughput/latency, not outputs, change when Giuseppe's
+    jobs run; timeouts in a client are a load symptom, not a model one.
+    Capacity is 256 requests in flight (128 per replica), the rest queue.
+
+### Parameters/Configurations
+
+`serving/serve_qwen38.py::ServeConfig` (defaults = the served config; print
+with `--dump-config`): TP 2 x DP 2 on GPUs 1,2,6,7; bf16; `max_model_len
+262144`; `max_num_seqs 128` per replica; `max_num_batched_tokens 8192`;
+`gpu_memory_utilization 0.88`; prefix caching (`align`); MTP depth 3;
+`--reasoning-parser qwen3`; `--tool-call-parser qwen3_xml` + auto tool
+choice; `--language-model-only`; async scheduling; 2 API-server processes.
+Env: `.venv-serve` (vllm 0.31.0+cu129, torch 2.13+cu129,
+`requirements/venv-serve.lock.txt`, `requirements/setup.sh serve`).
+
+### Artifacts
+
+- `serving/serve_qwen38.py` (serve / print / bench), `serving/README.md`
+  ("Qwen3.8-27B generation server": usage, layout, kernels, numbers, gotchas).
+- `requirements/venv-serve.lock.txt`, `setup.sh serve` target; `AGENTS.md`
+  venv table + reuse entry.
+- Server logs per configuration under `serving/logs/` (gitignored, on the
+  box): `serve_8001_baseline.log`, `serve_8001_mtp3_oom.log`,
+  `serve_8001_mtp3_dp2tp2.log`, `serve_8001_mtp3_tp4.log`, `serve_8001.log`
+  (the running default).

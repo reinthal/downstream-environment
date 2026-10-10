@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Rebuild the three manually-managed venvs from their frozen locks.
+# Rebuild the four manually-managed venvs from their frozen locks.
 # (.venv itself is uv-managed: pyproject.toml + uv.lock, synced with
 #  `uv sync --extra local --group dev` — do not use this script for it.)
 #
@@ -11,7 +11,15 @@
 #   - run vLLM with  PATH=$PWD/.venv-vllm/bin:$PATH .venv-vllm/bin/python
 #     (spawned workers need ninja on PATH).
 #
-# Usage: requirements/setup.sh [vllm|api|sandbox|all]
+#   - .venv-serve (Qwen3.8-27B generation server, serving/serve_qwen38.py):
+#     vllm 0.31.0 +cu129 GitHub wheel, torch 2.13+cu129 from the cu129 index
+#     (CUDA 12.9 runtime runs on driver 535 via minor-version compat),
+#     torchcodec pinned to the +cpu build: PyPI's torchcodec 0.17.0 links
+#     libnvrtc.so.13 and `vllm serve` dies at import. No nvcc here either, so
+#     the server sets VLLM_USE_FLASHINFER_SAMPLER=0; attention (FA2), the
+#     Triton GDN kernels and causal_conv1d all ship pre-built in the wheel.
+#
+# Usage: requirements/setup.sh [vllm|serve|api|sandbox|all]
 set -euo pipefail
 cd "$(dirname "$0")/.."
 target="${1:-all}"
@@ -29,6 +37,12 @@ if [[ "$target" == vllm || "$target" == all ]]; then
     # editable in-repo plugin (kept out of the lock: absolute-path -e line)
     uv pip install --python .venv-vllm/bin/python --no-deps -e serving/vllm_plugin
     .venv-vllm/bin/python -c "import vllm; print('vllm', vllm.__version__)"
+fi
+if [[ "$target" == serve || "$target" == all ]]; then
+    build serve --extra-index-url https://download.pytorch.org/whl/cu129 \
+                --extra-index-url https://download.pytorch.org/whl/cpu \
+                --index-strategy unsafe-best-match
+    .venv-serve/bin/python -c "import vllm; print('vllm', vllm.__version__)"
 fi
 if [[ "$target" == api || "$target" == all ]]; then
     build api

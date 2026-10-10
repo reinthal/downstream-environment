@@ -44,6 +44,12 @@ needed, propose it and let the researcher decide.
   give the auditor a sandboxed Python tool over the detector scores
   (`auditor/tools.py` loop, `auditor/sandbox.py` runner: no network, CPU /
   memory / time limits).
+- **Local Qwen3.8-27B API server**: `serving/serve_qwen38.py` (`.venv-serve`)
+  serves `Qwen/Qwen3.8-27B` OpenAI-compatible on `http://<box>:8001/v1`
+  (reasoning + tool-call parsers, 262k context) on exactly four GPUs — the
+  box is shared, never widen `gpus` without asking. Details, measured
+  throughput and gotchas: `serving/README.md` ("Qwen3.8-27B generation
+  server"). Point agentic/eval clients at it instead of the RunPod endpoint.
 - **Generation**: `rollouts/generation.py` — always use `make_backend(...)`.
   - `VLLMBackend` (`--backend vllm`, the default) for ALL bulk generation.
     ~10x faster than HF `generate`. Requires the vLLM env (below).
@@ -113,6 +119,7 @@ needed, propose it and let the researcher decide.
 |---|---|---|
 | `.venv` | `uv run --no-sync python ...` | probes, activations, HF generation, analysis (torch 2.14+cu126, transformers 5.17); primitives: `LMProbe`, `DYLProbe`, `ExperimentConfig` |
 | `.venv-vllm` | `PATH=$PWD/.venv-vllm/bin:$PATH .venv-vllm/bin/python ...` | vLLM generation only (vllm 0.21.0+cu129, torch 2.11+cu126); primitives: `LMSteering`, `ExperimentConfig` |
+| `.venv-serve` | `.venv-serve/bin/python serving/serve_qwen38.py` | the Qwen3.8-27B OpenAI-compatible server on :8001 only (vllm 0.31.0+cu129, torch 2.13+cu129); nothing else imports from it |
 | `.venv-api` | `.venv-api/bin/python -m auditor.api_run ...` | hosted Claude auditor only (anthropic 1.11, numpy) |
 | `.venv-sandbox` | used by `auditor/sandbox.py` | interpreter for the auditor's Python tool (numpy, pandas, scipy); nothing else |
 
@@ -126,9 +133,9 @@ as `rollouts/generation.py` does).
 is mandatory — a bare sync strips the `local` extra, i.e. torch and
 transformers, which is why everything runs `uv run --no-sync`). GPU extras live in the
 `local` optional extra (torch, transformers, flash-linear-attention, ...).
-The other three venvs (`.venv-vllm`, `.venv-api`, `.venv-sandbox`) are not
+The other four venvs (`.venv-vllm`, `.venv-serve`, `.venv-api`, `.venv-sandbox`) are not
 pyproject-managed; they are frozen to `requirements/venv-*.lock.txt` and
-rebuilt with `requirements/setup.sh [vllm|api|sandbox|all]` (the vllm pin
+rebuilt with `requirements/setup.sh [vllm|serve|api|sandbox|all]` (the vllm pin
 is the GitHub-release `+cu129` wheel URL; torch comes from the cu126
 index). After changing one of them, re-freeze:
 `uv pip freeze --python .venv-<name>/bin/python > requirements/venv-<name>.lock.txt`.
@@ -140,7 +147,9 @@ invoked directly without it (`FileNotFoundError: 'ninja'`).
 The box's NVIDIA driver is 535 (CUDA 12.x): **no cu13-built wheels run here**.
 vLLM must stay at 0.21.0 with the `+cu129` wheel from the GitHub release
 (the PyPI wheel of the same version is CUDA-13-built and fails with
-`libcudart.so.13` missing) unless the driver is upgraded. Do not let a vLLM
+`libcudart.so.13` missing) unless the driver is upgraded. The same rule
+built `.venv-serve` (vllm 0.31.0 `+cu129` GitHub wheel, torch from the
+cu129 index; PyPI `torchcodec` is CUDA-13-linked too, hence the `+cpu` pin). Do not let a vLLM
 upgrade replace torch in `.venv` — pyproject pins the cu126 index for a
 reason.
 
