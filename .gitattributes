@@ -5,3 +5,4 @@ experiments/**/auditor_*.jsonl filter=lfs diff=lfs merge=lfs -text
 experiments/**/parity_tokens.jsonl filter=lfs diff=lfs merge=lfs -text
 experiments/**/dist_tokens_*.jsonl filter=lfs diff=lfs merge=lfs -text
 experiments/2026-10-07-trusted-monitoring/**/*.eval filter=lfs diff=lfs merge=lfs -text
+experiments/2026-10-10-qwen-logit-monitor/**/*.eval filter=lfs diff=lfs merge=lfs -text

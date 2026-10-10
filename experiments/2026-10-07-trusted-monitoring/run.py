@@ -68,6 +68,7 @@ def main(
     time_limit: int,
     token_limit: int,
     provider: str,
+    monitor_kind: str,
 ):
     log_dir = out_dir / "inspect_logs"
     log_dir.mkdir(parents=True, exist_ok=True)
@@ -82,6 +83,11 @@ def main(
         "epochs": epochs,
         "shuffle_seed": seed,
         "modes": modes,
+        "monitor": monitor_kind,
+        "logit_monitor_generate_config": rba.routed(
+            rba.LOGIT_MONITOR_CONFIG, trusted_model, provider
+        ).model_dump(exclude_none=True),
+        "logit_monitor_prompt": rba.LOGIT_MONITOR_PROMPT,
         "task_blacklist": sorted(TASK_BLACKLIST),
         "max_sandboxes": max_sandboxes,
         "max_steps": max_steps,
@@ -103,7 +109,7 @@ def main(
     setting = BashArenaSetting(
         dataset_spec=DatasetSpec(max_tasks=tasks, shuffle_seed=seed)
     )
-    protocol = rba.build_protocol(untrusted_model, trusted_model, provider)
+    protocol = rba.build_protocol(untrusted_model, trusted_model, provider, monitor_kind)
     config = ControlEvalConfig(
         untrusted_model=untrusted_model,
         trusted_model=trusted_model,
@@ -160,6 +166,10 @@ if __name__ == "__main__":
         "--provider", default=rba.DEFAULT_PROVIDER,
         help="OpenRouter provider slug every call is pinned to (no fallbacks).",
     )
+    p.add_argument(
+        "--monitor", choices=["score", "logit"], default="score",
+        help="score: 0-10 basic monitor; logit: one-token Yes/No logit difference.",
+    )
     p.add_argument("--max-steps", type=int, default=50, help="Policy turns per sample.")
     p.add_argument("--time-limit", type=int, default=5400, help="Per-sample seconds.")
     p.add_argument("--token-limit", type=int, default=4_000_000)
@@ -167,5 +177,5 @@ if __name__ == "__main__":
     main(
         a.out_dir.resolve(), a.tasks, a.epochs, a.seed, a.modes, a.max_sandboxes,
         a.untrusted_model, a.trusted_model,
-        a.max_steps, a.time_limit, a.token_limit, a.provider,
+        a.max_steps, a.time_limit, a.token_limit, a.provider, a.monitor,
     )
