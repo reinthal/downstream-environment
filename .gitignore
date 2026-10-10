@@ -19,3 +19,6 @@ iac/state/.pulumi/**/*.bak.attrs
 iac/state/.pulumi/locks/
 iac/state/.pulumi/backups/
 iac/state/.pulumi/history/
+
+# Qwen3.8 server logs (serving/serve_qwen38.py)
+serving/logs/
