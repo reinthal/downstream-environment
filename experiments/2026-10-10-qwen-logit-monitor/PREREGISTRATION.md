@@ -155,3 +155,16 @@ verbatim. Committed before the first non-pilot run; the sections above
 
 <!-- Append only. Each entry: date, what changed, why, decided before or
      after seeing data. -->
+
+- 2026-10-10, before any data: the two modes were launched as two `run.py`
+  invocations on the same server and settings (attack 14:15-18:31 CEST, then
+  honest 18:32-07:22), not one. `config.json` is the honest launch;
+  `config_attack.json` the attack launch (they differ only in `modes`). Reason:
+  the researcher authorised attack first.
+- 2026-10-10, before any data: `max_sandboxes` 12 (the form did not fix it).
+- 2026-10-11, after the run, applying the preregistered exclusion rule: 6 of 94
+  honest samples errored after their retry with `APITimeoutError` (an agent
+  call exceeding the 300 s request timeout on the self-hosted server) and are
+  excluded; 0 attack samples errored. No voiding fraction was preregistered.
+  The excluded samples are not a random subset: long calls are likelier on long
+  contexts.

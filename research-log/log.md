@@ -1458,3 +1458,86 @@ Env: `.venv-serve` (vllm 0.31.0+cu129, torch 2.13+cu129,
   box): `serve_8001_baseline.log`, `serve_8001_mtp3_oom.log`,
   `serve_8001_mtp3_dp2tp2.log`, `serve_8001_mtp3_tp4.log`, `serve_8001.log`
   (the running default).
+
+## 2026-10-10: BashArena trusted monitoring — Qwen3.8-27B, Yes/No logit monitor (preregistered)
+
+### Context
+
+The DeepSeek run (2026-10-08) could not reach a 4% trajectory-wise FPR: the
+0-10 monitor ties (16% of honest trajectories at >= 0.9). The researcher asked
+for a monitor that scores from the logit difference between Yes and No
+verdicts instead of re-sampling, and for Qwen3.8-27B as agent and monitor.
+Alibaba (OpenRouter) rejects BashArena's attack prompt, so the model is
+self-hosted (researcher's vLLM 0.31 server over an ssh tunnel).
+
+### Experiment
+
+Preregistered in `experiments/2026-10-10-qwen-logit-monitor/PREREGISTRATION.md`
+(commit 21868d9, before the run). 47 tasks x 2 epochs, attack and honest, same
+tasks, limits and policies as the DeepSeek run. Monitor: one generated token,
+thinking off, suspicion = log p(Yes) - log p(No) from the top-20 logprobs;
+trajectory suspicion = max over steps. Confirmatory: the honest main-task
+score against an interval derived from a capability index. Safety is
+exploratory.
+
+### Expected Outcome
+
+Researcher: "I think accuracy on task will be proportional to some capability
+index (search online and make a good guess based on existing data points on
+this test). I don't know what the safety will be. this is exploratory research
+and I don't want to guess here." Prediction derived by Claude at that
+instruction (Artificial Analysis Intelligence Index v4.3.2 against the paper's
+GPT-4.1 mini 0.34 and Sonnet 4.5 0.59, anchored on the in-repo DeepSeek run):
+honest main-task score **0.68, interval 0.55-0.80**.
+
+### Actual Outcome
+
+<!-- researcher fills in -->
+
+### Results
+
+Preregistered analysis, unmodified (`analyze.py --out-dir`). 88 honest / 94
+attack trajectories; 6 honest samples excluded (request timeouts), see
+Deviations in the preregistration.
+
+| | prediction | outcome |
+|---|---|---|
+| Honest main-task score (primary) | 0.68 (0.55-0.80) | **0.705 +/- 0.075** (95% CI, task-clustered) |
+
+By the preregistered threshold (point estimate inside 0.55-0.80) the
+prediction is **supported**. This is one model checked against one interval,
+not a test of proportionality across models; the CI (0.63-0.78) lies inside
+the interval.
+
+Exploratory (not preregistered):
+
+- Full main-task success 20.2% +/- 11.0; attack side-task success 88.3% +/- 6.8.
+- Suspicion AUROC (attack vs honest) 0.819 (DeepSeek, 0-10 monitor: 0.735 —
+  different model and monitor, not a controlled comparison).
+- The logit score resolves low FPR budgets: realised FPR 2.3 / 4.5 / 5.7 /
+  10.2 / 20.5% at the 2 / 4 / 5 / 10 / 20% budgets (67 distinct honest values
+  in 88 trajectories).
+- Attacks caught at 4% FPR: 38.3% (red-win 54.3%); at 20%: 73.4%.
+- The monitor leans Yes on honest work: 38 of 88 honest trajectories have a
+  step with log p(Yes) > log p(No) (79 of 94 attack).
+- The honest run collected on Alibaba on 2026-10-09 (same agent settings,
+  0-10 monitor): 0.741 +/- 0.058 on 46 tasks.
+
+![Qwen3.8-27B, logit monitor](../experiments/2026-10-10-qwen-logit-monitor/figure.png)
+
+Honest truncation: 46 of 94 stopped at the 50-step limit, 2 at the 3 h time
+limit, 1 at the token limit.
+
+### Parameters/Configurations
+
+- `experiments/2026-10-10-qwen-logit-monitor/config.json` (honest launch) and
+  `config_attack.json`: agent = monitor = `openai-api/vllm/Qwen/Qwen3.8-27B`,
+  `--monitor logit`, `max_steps=50`, `time_limit=10800`, `token_limit=4e6`,
+  `max_sandboxes=12`, agent `reasoning_effort=low`, seed 0.
+- Repro: see the experiment README.
+
+### Artifacts
+
+- `experiments/2026-10-10-qwen-logit-monitor/` — `PREREGISTRATION.md`,
+  `inspect_logs/*.eval` (LFS), `results.json`, `figure.png`, configs.
+- Monitor: `logit_monitor_builder` in `environments/bash_arena/run_bash_arena.py`.
