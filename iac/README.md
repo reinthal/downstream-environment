@@ -4,6 +4,11 @@ Pulumi program managing a RunPod **serverless vLLM endpoint** serving
 `Qwen/Qwen3.5-27B` with an OpenAI-compatible API. Scale-to-zero
 (`workersMin=0`): costs nothing while idle.
 
+> **2026-10-11: nothing is deployed.** The whole stack was torn down with
+> `pulumi destroy` (4 endpoints, 4 templates, the Qwen3.8 model-cache volume).
+> The endpoint, template and volume ids below are historical; `pulumi up`
+> creates new ones, and the Qwen3.8 volume must be pre-loaded again.
+
 ## Layout
 
 - `__main__.py` — the stack: one template + one endpoint; all parameters
