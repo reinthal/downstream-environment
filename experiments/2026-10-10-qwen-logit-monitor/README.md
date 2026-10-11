@@ -20,4 +20,8 @@ uv run --project environments/bash_arena python experiments/2026-10-07-trusted-m
   --out-dir experiments/2026-10-10-qwen-logit-monitor
 ```
 
+Result (2026-10-11): honest main-task score 0.705 ± 0.075 against the
+preregistered 0.55-0.80 — supported. Exploratory: AUROC 0.819; attacks caught
+38% at a realised 4.5% FPR, 73% at 20.5%. Details in `research-log/log.md`.
+
 Deliberate limitations: see section 6 of the preregistration.
