@@ -197,3 +197,12 @@ implementation choices, not the researcher's answers.
 
 <!-- Append only. Each entry: date, what changed, why, decided before or
      after seeing data. -->
+
+- 2026-10-09 — New exclusion: a game in which a player posts more than one
+  announcement in a single turn is dropped (1 game, g085: one model response
+  carried two different MakeAnnouncementTool calls and the engine posted
+  both). Why: the transcript, probe and auditor formats assume one
+  announcement per turn, and the preregistered rules did not cover the case.
+  Decided by Claude after the games were played and before any probe score or
+  audit existed; not yet confirmed by the researcher. It counts toward the
+  10% void threshold.
