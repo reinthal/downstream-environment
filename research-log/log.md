@@ -1573,7 +1573,10 @@ speaker of round 3, before the metric changed: "0.35 0.01 pm 80 ci".
 
 ### Actual Outcome
 
-<!-- researcher fills in -->
+Researcher, 2026-10-12, verbatim: "I conclude this experiment as not supported.
+We also saw that there is a slight bias with scores to not pick the last
+speaker - however, this is expected as most information has already been
+submited to the game by this point."
 
 ### Results
 
@@ -1619,3 +1622,8 @@ Exploratory:
 - `experiments/2026-10-09-3p-game/` — PREREGISTRATION, README, scripts
 - `auditor/prompts.py::auditor_system` — player count in the auditor's system
   prompt is now data-driven (unchanged text for 5 players)
+- Exploratory figures (2026-10-12), each with its `plot_*.py` in the same
+  folder: `scores_by_round.svg` (probe score per round, by role and by
+  speaking position), `tp_fp_total_score.svg` (total score of the player
+  Opus named, true vs false positives), `position_share.svg` (share of all
+  99 games naming the first / last speaker of round 3)
