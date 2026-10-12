@@ -1625,5 +1625,78 @@ Exploratory:
 - Exploratory figures (2026-10-12), each with its `plot_*.py` in the same
   folder: `scores_by_round.svg` (probe score per round, by role and by
   speaking position), `tp_fp_total_score.svg` (total score of the player
-  Opus named, true vs false positives), `position_share.svg` (share of all
-  99 games naming the first / last speaker of round 3)
+  Opus named, true vs false positives), `position_share_first.svg` /
+  `position_share_last.svg` (Opus without scores naming the first / last
+  speaker of round 3, minus the uniform rate; 5-player before vs 3-player
+  after, see the 2026-10-12 entry)
+
+## 2026-10-12: Opus re-audit of the 5-player games — speaking position, 3p vs 5p (exploratory)
+
+### Context
+
+The researcher asked for the 3-player position figure
+(`experiments/2026-10-09-3p-game/position_share.svg`, since split into
+`position_share_first.svg` / `position_share_last.svg`) next to the 5-player
+setting. The per-game Opus audits of 2026-10-04
+(`audit_opus/auditor_base.jsonl`) are not on disk or in git — only
+`results_opus.json` survives — and the Qwen audits of 2026-09-25 predate the
+answer-parsing fix. The researcher chose to re-run Opus. Not preregistered:
+an exploratory comparison added to a concluded experiment.
+
+### Experiment
+
+Claude Opus 5.5 re-audits the 100 five-player games of 2026-09-22 (data dir
+`experiments/2026-10-04`: transcripts, games, raw follow-up scores) under
+`none` and `fu_notool`, 1 seed, the 2026-10-04 `audit_opus` config otherwise
+unchanged. `plot_position_share.py` then shows, for the first and the last
+speaker of round 3, the share of games in which Opus without scores named
+that speaker minus the uniform rate, 5-player ("before") against 3-player
+("after"), with the change between them (independent game bootstraps). At
+the researcher's request the with-scores condition, the players' vote and
+the Parsnip's real position are not plotted. The settings differ in more than player count: the
+5-player games come from the old engine and discussion-only harness (no
+player vote), and their probe scores from 2026-10-04.
+
+### Expected Outcome
+
+<!-- researcher fills in -->
+
+### Actual Outcome
+
+<!-- researcher fills in -->
+
+### Results
+
+200 audits, 1 dropped (`none`, no tagged answer). Accuracy: `none` 29/99 =
+0.29, `fu_notool` 81/100 = 0.81 (2026-10-04: 0.33 and 0.85). Cost $5.76.
+
+| 5-player, round 3 | first speaker | last speaker |
+|---|---|---|
+| Opus, no scores | 30/99 = 0.30 [0.21, 0.39] | 19/99 = 0.19 [0.12, 0.27] |
+| Opus, with scores | 36/100 = 0.36 [0.27, 0.45] | 24/100 = 0.24 [0.16, 0.33] |
+| Parsnip really there | 26/100 = 0.26 | 28/100 = 0.28 |
+
+Uniform is 0.20. 3-player values are in the 2026-10-09 entry's figure.
+
+Pick rate minus uniform, Opus without scores (as plotted):
+
+| round 3 | before: 5 players | after: 3 players | change |
+|---|---|---|---|
+| first speaker | +0.10 [+0.01, +0.19] | −0.04 [−0.13, +0.05] | −0.14 [−0.26, −0.02] |
+| last speaker | −0.01 [−0.08, +0.07] | +0.05 [−0.04, +0.15] | +0.06 [−0.06, +0.18] |
+
+The raw first-speaker rate is 0.30 before and 0.29 after; the change comes
+from the uniform rate rising from 1/5 to 1/3.
+
+### Parameters/Configurations
+
+- `experiments/2026-10-09-3p-game/audit_5p/config.json` (copy of
+  `experiments/2026-10-04/audit_opus/config.json`; conditions `none` +
+  `fu_notool`, no tool conditions, `max_cost_usd` 15).
+- Run: `.venv-api/bin/python -m auditor.api_run --config experiments/2026-10-09-3p-game/audit_5p/config.json --arm base`
+
+### Artifacts
+
+- `experiments/2026-10-09-3p-game/audit_5p/auditor_base.jsonl`
+- `experiments/2026-10-09-3p-game/position_share_first.svg`,
+  `position_share_last.svg`, `plot_position_share.py`
