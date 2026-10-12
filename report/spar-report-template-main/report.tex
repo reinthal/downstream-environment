@@ -16,11 +16,11 @@
 % ============================================================================
 % METADATA
 % ============================================================================
-\title{Your Report Title Here}
+\title{Environments for testing Methods for Lie Detection in LLMs}
 
 \author{
-  \textbf{Your Name}\\
-  \texttt{your.email@example.com}
+  \textbf{Alexander reinthal}\\
+  \texttt{email@reinthal.me}
   % Optional: Add institution/affiliation (recommended for arXiv mode):
   % \\
   % Your Institution
@@ -31,7 +31,7 @@
   % Mentor Institution
 }
 
-\sparround{Fall 2025}
+\sparround{Fall 2026}
 
 % ============================================================================
 % DOCUMENT BEGINS
@@ -49,7 +49,7 @@
 % mention the specific threat model, vector, or vulnerability. Keep this
 % accessible to readers outside your subfield. No footnotes or citations.
 \begin{abstract}
-Your abstract goes here. Describe your research question, why it matters for AI safety, your approach, and preliminary findings (100-200 words).
+Can deception detectors help agents make better decisions in deception-related environments? Your abstract goes here. Describe your research question, why it matters for AI safety, your approach, and preliminary findings (100-200 words).
 \end{abstract}
 
 % Keywords (optional but recommended, especially for arXiv submission)
@@ -66,7 +66,25 @@ Your abstract goes here. Describe your research question, why it matters for AI 
 % to be valuable?
 \section{Introduction}
 
-Introduce your research problem and explain its significance for AI safety. Describe the gap you're filling or risk you're addressing. Explain what success would look like for this project.
+Understanding how large language models lie is becoming more important as their capabilities increase.
+One way of evaluating large langauge models has been to use what is called a black-box evaluator, a different large-langauge model that checks the output for falsehoods. 
+However, such models have limitations and can be computationally expensive.
+White-box detectors complement this approach by applying simpler statistical models to the internal datastreams of LLMs.
+As LLMs are increasingly used as agents in helping with research, booking-systems and coding, there is a growing need for evaluating these methods in settings where they are most likely to be used.
+Previous research has found th lie-detection methods often fail to generalize to new datasets or model families.
+Defining what a lie is is also methodologically fraught with risk. 
+As such, creating correct labels for datasets can often result in noisy evaluations.
+To address this problem in evaluating lie detection, we have tested two previously untested environments for evaluating lie detection methods in large language models over X many different model families, sizes and probe architectures.
+
+Our main contributions are as follows:
+
+\begin{itemize}
+  \item first
+  \item second
+  \item third
+\end{itemize}
+
+
 
 % ============================================================================
 % METHODOLOGY (200-500 words)
@@ -119,7 +137,11 @@ Describe your research approach and methods.
 % incomplete.
 \section{Preliminary Results}
 
-Present your findings so far. Use subsections and visualizations as appropriate.
+\begin{itemize}
+\item We evaluated Carrot-parsnip as a simple social deduction game to test lie detection methods in 
+\item We found that strong auditors (Opus 5.5) can benefit from weak probes in this setting
+\item We also found that if the probe is too weak, strong auditors can be hurt by weak probes
+\end{itemize}
 
 % ============================================================================
 % CHALLENGES & OPEN QUESTIONS (100-300 words, optional but encouraged)
@@ -129,7 +151,12 @@ Present your findings so far. Use subsections and visualizations as appropriate.
 % figuring things out or where the path forward is uncertain.
 \section{Challenges \& Open Questions}
 
-Describe obstacles you've encountered and areas of uncertainty.
+% Describe obstacles you've encountered and areas of uncertainty.
+
+\begin{itemize}
+  \item How do we differentiate between a weak probe and a broken environment?
+  \item How do we make sure that our experiments and environment design is robust to different kinds of probes? 
+\end{itemize}
 
 % ============================================================================
 % NEXT STEPS (150-400 words)
