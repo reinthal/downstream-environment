@@ -42,10 +42,17 @@ def with_followup(messages: list[dict]) -> list[dict]:
             {"role": "assistant", "content": FOLLOWUP_ANSWER}]
 
 
-def encode_no_span(tok, conv: list[dict], max_len: int = 4096):
+def encode_no_span(tok, conv: list[dict], max_len: int = 4096, *,
+                   enable_thinking: bool | None = None):
     """(ids, (start, end)) with the span covering exactly the tokens of the
-    final "No" (the paper's detect mask on the follow-up answer)."""
-    full = tok.apply_chat_template(conv, tokenize=False)
+    final "No" (the paper's detect mask on the follow-up answer).
+
+    ``enable_thinking`` (when not None) is passed to the full dialogue's
+    chat template. Qwen3.8's template prepends a "Reasoning effort ..."
+    system preamble unless thinking is off, so dialogues generated with
+    thinking off must be rendered with ``enable_thinking=False``."""
+    kw = {} if enable_thinking is None else {"enable_thinking": enable_thinking}
+    full = tok.apply_chat_template(conv, tokenize=False, **kw)
     prefix = tok.apply_chat_template(conv[:-1], tokenize=False, add_generation_prompt=True,
                                      enable_thinking=False)
     assert full.startswith(prefix + FOLLOWUP_ANSWER), (prefix[-80:], full[-80:])
