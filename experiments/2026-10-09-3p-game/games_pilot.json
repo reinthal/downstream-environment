@@ -1,0 +1,44 @@
+{
+ "arm": "pilot",
+ "game_config": "experiments/2026-10-09-3p-game/game.yaml",
+ "games": [
+  {
+   "game_id": "g001",
+   "seed_group": 0,
+   "game_idx": 1,
+   "game_seed": 1,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Parsnip",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Bob",
+   "orders": [
+    [
+     2,
+     1,
+     0
+    ],
+    [
+     1,
+     0,
+     2
+    ],
+    [
+     0,
+     2,
+     1
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Alice",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Carrot"
+  }
+ ]
+}

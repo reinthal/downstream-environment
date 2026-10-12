@@ -1541,3 +1541,82 @@ limit, 1 at the token limit.
 - `experiments/2026-10-10-qwen-logit-monitor/` — `PREREGISTRATION.md`,
   `inspect_logs/*.eval` (LFS), `results.json`, `figure.png`, configs.
 - Monitor: `logit_monitor_builder` in `environments/bash_arena/run_bash_arena.py`.
+
+
+## 2026-10-09: 3-player Carrot-Parsnip on the new engine — auditor speaking-position bias
+
+### Context
+
+The game engine moved to `environments/carrot_parsnip/` with YAML
+`GameConfig`s. The researcher wants to study the 3-player game (simpler to
+analyse) and whether the "last-mover disadvantage" — a late speaker being
+voted out whatever they say — is gone there. A check of the old 5-player
+audits (Qwen auditor, tagged answers only) found no last-speaker bias without
+scores (0.18 vs 0.20 chance) but a first-speaker bias in round 3 (0.47-0.51),
+so the preregistered position became the first speaker of round 3.
+
+### Experiment
+
+100 three-player games (2 Carrots, 1 Parsnip, 3 discussion rounds, engine
+default prompts) played by the engine's own Inspect orchestrator with
+Qwen3.5-27B via OpenRouter. Announcements, speaking orders and votes are read
+back from the Inspect logs; each announcement gets a raw follow-up-probe score
+from the RunPod probe endpoint; Claude Opus 5.5 names the Parsnip with and
+without the raw score table (as 2026-10-04, no tool). Primary metric: how
+often Opus, without scores, names the first speaker of round 3 when that
+speaker is a Carrot, against the uniform 1/3 ± 0.10.
+
+### Expected Outcome
+
+Preregistered (`experiments/2026-10-09-3p-game/PREREGISTRATION.md`): for the
+first speaker of round 3, "Not preregistered". Given earlier for the last
+speaker of round 3, before the metric changed: "0.35 0.01 pm 80 ci".
+
+### Actual Outcome
+
+<!-- researcher fills in -->
+
+### Results
+
+99 valid games of 100 (1 excluded: two announcements in one turn, logged
+under Deviations); no audit dropped.
+
+| | prediction | outcome |
+|---|---|---|
+| Primary: Opus, no scores, names the first speaker of round 3 (Carrot) | "Not preregistered" | 12/73 = 0.164, 95% CI [0.082, 0.247] |
+
+Preregistered rule (whole interval inside 1/3 ± 0.10 = [0.233, 0.433]): the
+interval straddles the lower edge, so the result is **inconclusive**; per the
+preregistration, "Report inconclusive, stop". The rate is low because Opus is
+accurate (0.667 without scores), which leaves (1 − 0.667)/2 = 0.167 per
+Carrot — the failure mode named in the pre-mortem.
+
+Exploratory:
+
+- First-speaker Carrot's share of Carrot picks (chance 0.5, independent of
+  accuracy): none 12/24 = 0.50 [0.29, 0.71]; with probe scores 24/39 = 0.62
+  [0.46, 0.77].
+- Last speaker of round 3 / round 2 picked when a Carrot, none: 0.186 / 0.153.
+- Accuracy: none 0.667 [0.576, 0.758]; `fu_notool` 0.465 [0.364, 0.566].
+  The detector alone (highest mean raw score) is at chance, 0.364 [0.273,
+  0.465]; raw scores sit at −21.6 to −5.3 log-odds (mean −13.9; Parsnip −13.7
+  vs Carrot −14.0), the bottom of the 2026-10-04 range (−17.7 to 5.6).
+- Adding probe scores raised the primary pick rate by 0.164 [0.041, 0.274]
+  (paired), in line with the drop in accuracy.
+- Players' own vote: Parsnip eliminated in 0.566 of games; first / last
+  speaker of round 3 eliminated when a Carrot 0.288 / 0.203.
+- Cost: Opus $6.21; OpenRouter's account-wide usage rose $14.92 during
+  generation (shared key, so an upper bound for the games).
+
+### Parameters/Configurations
+
+- `experiments/2026-10-09-3p-game/game.yaml` (GameConfig), `config.json`
+  (seeds 1000-1099, probe endpoint, analysis thresholds), `audit/config.json`
+  (Opus 5.5, adaptive thinking, effort medium, 1 seed, `none` + `fu_notool`).
+- Repro commands in the experiment README.
+
+### Artifacts
+
+- `experiments/2026-10-09-3p-game/` — PREREGISTRATION, README, scripts
+- `auditor/prompts.py::auditor_system` — player count in the auditor's system
+  prompt is now data-driven (unchanged text for 5 players)

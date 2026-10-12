@@ -33,7 +33,7 @@ from inspect_ai.scorer import (CORRECT, INCORRECT, Score, Target, accuracy,
 from inspect_ai.solver import TaskState, generate
 
 from auditor.config import ApiAuditorConfig  # noqa: E402
-from auditor.prompts import (AUDITOR_SYSTEM, AUDITOR_USER, DETECTOR_NOTE,  # noqa: E402
+from auditor.prompts import (AUDITOR_USER, DETECTOR_NOTE, auditor_system,  # noqa: E402
                              build_transcript, parse_guess)
 from auditor.run import all_grade_maps, read_jsonl  # noqa: E402
 from auditor.scale import load_scale  # noqa: E402
@@ -67,9 +67,9 @@ def build_samples(cfg: ApiAuditorConfig, arm: str,
         for cond in conditions:
             transcript = build_transcript(by_game[gid], grade_by_cond.get(cond),
                                           summary=cond.endswith("_avg"))
-            system = AUDITOR_SYSTEM.format(
-                players=", ".join(player_names), num_rounds=num_rounds,
-                detector_note=DETECTOR_NOTE.format(legend=cfg.grade_legend)
+            system = auditor_system(
+                player_names, num_rounds,
+                DETECTOR_NOTE.format(legend=cfg.grade_legend)
                 if cond != "none" else "")
             user = AUDITOR_USER.format(
                 transcript=transcript,

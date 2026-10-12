@@ -1,0 +1,1916 @@
+Downloading openai (2.1MiB)
+ Downloaded openai
+Installed 85 packages in 50ms
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_0 (1 sample): openrouter/qwen/qwen3.5-27b                 │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:12:50                                            
+openrouter/qwen/qwen3.5-27b  72,956 tokens [I: 52,138, CW: 0, CR: 384, O:       
+                           20,434, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-0
+_DAAyxfhGsm9L63zaj8NVuC.eval                                                    
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_1 (1 sample): openrouter/qwen/qwen3.5-27b                 │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:11:32                                            
+openrouter/qwen/qwen3.5-27b  80,365 tokens [I: 57,463, CW: 0, CR: 384, O:       
+                           22,518, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-1
+_BxpVpduJdpNqFt9cAmdJwQ.eval                                                    
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_2 (1 sample): openrouter/qwen/qwen3.5-27b                 │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:11:29                                            
+openrouter/qwen/qwen3.5-27b  82,764 tokens [I: 59,113, CW: 0, CR: 192, O:       
+                           23,459, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-2
+_YBxnm8gpSj52aKytzo7QoX.eval                                                    
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_3 (1 sample): openrouter/qwen/qwen3.5-27b                 │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:10:39                                            
+openrouter/qwen/qwen3.5-27b  89,375 tokens [I: 63,899, CW: 0, CR: 0, O: 25,476, 
+                           R: 0]                                                
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-3
+_GiieKX52X8PNHByFWgUrig.eval                                                    
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_4 (1 sample): openrouter/qwen/qwen3.5-27b                 │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:11:28                                            
+openrouter/qwen/qwen3.5-27b  103,936 tokens [I: 72,837, CW: 0, CR: 0, O: 31,099,
+                           R: 0]                                                
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-4
+_cw9bMLFimuuoQEuykVMPuQ.eval                                                    
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_5 (1 sample): openrouter/qwen/qwen3.5-27b                 │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:13:30                                            
+openrouter/qwen/qwen3.5-27b  79,339 tokens [I: 55,921, CW: 0, CR: 320, O:       
+                           23,098, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-5
+_Zavv4nzBkWmqbhTZZkWThD.eval                                                    
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_6 (1 sample): openrouter/qwen/qwen3.5-27b                 │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:16:21                                            
+openrouter/qwen/qwen3.5-27b  92,575 tokens [I: 61,319, CW: 0, CR: 768, O:       
+                           30,488, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-6
+_dcch8DKEHFS5jDYAEPNNQG.eval                                                    
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_7 (1 sample): openrouter/qwen/qwen3.5-27b                 │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:12:26                                            
+openrouter/qwen/qwen3.5-27b  93,022 tokens [I: 63,996, CW: 0, CR: 0, O: 29,026, 
+                           R: 0]                                                
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-7
+_avo8Zze5PcLoQ62Lng4SHU.eval                                                    
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_8 (1 sample): openrouter/qwen/qwen3.5-27b                 │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:12:41                                            
+openrouter/qwen/qwen3.5-27b  90,806 tokens [I: 64,451, CW: 0, CR: 0, O: 26,355, 
+                           R: 0]                                                
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-8
+_DnB9wpwarcrvHfsU2gF6Gw.eval                                                    
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_9 (1 sample): openrouter/qwen/qwen3.5-27b                 │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:09:46                                            
+openrouter/qwen/qwen3.5-27b  79,303 tokens [I: 56,152, CW: 0, CR: 0, O: 23,151, 
+                           R: 0]                                                
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-9
+_DzNGHfRo9to5UxPJBWvmD6.eval                                                    
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_10 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:21:09                                            
+openrouter/qwen/qwen3.5-27b  108,251 tokens [I: 70,875, CW: 0, CR: 384, O:      
+                           36,992, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-1
+0_io5fPGjGx94UcQQJ8mEqrq.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_11 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:14:17                                            
+openrouter/qwen/qwen3.5-27b  92,882 tokens [I: 64,733, CW: 0, CR: 0, O: 28,149, 
+                           R: 0]                                                
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-1
+1_TV4P6DpEfkivDYQdzfH4z6.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_12 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:18:07                                            
+openrouter/qwen/qwen3.5-27b  99,621 tokens [I: 67,698, CW: 0, CR: 0, O: 31,923, 
+                           R: 0]                                                
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-1
+2_NNgNmjDNu6AE8LhH6f4ew4.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_13 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:14:35                                            
+openrouter/qwen/qwen3.5-27b  91,012 tokens [I: 63,257, CW: 0, CR: 0, O: 27,755, 
+                           R: 0]                                                
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-1
+3_HzbsPPf3g2TUsKAggQigTa.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_14 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:16:45                                            
+openrouter/qwen/qwen3.5-27b  93,904 tokens [I: 63,445, CW: 0, CR: 640, O:       
+                           29,819, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-1
+4_JgnJSRuXsaQWuBPL3isJvs.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_15 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:18:51                                            
+openrouter/qwen/qwen3.5-27b  98,477 tokens [I: 68,199, CW: 0, CR: 0, O: 30,278, 
+                           R: 0]                                                
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-1
+5_G8PTxgFhn8jV8P6YZ7juX3.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_16 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:12:25                                            
+openrouter/qwen/qwen3.5-27b  84,479 tokens [I: 59,297, CW: 0, CR: 576, O:       
+                           24,606, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-1
+6_BsNh5V3pC2uDexhiyCw2hm.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_17 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:17:21                                            
+openrouter/qwen/qwen3.5-27b  100,011 tokens [I: 69,024, CW: 0, CR: 0, O: 30,987,
+                           R: 0]                                                
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-1
+7_T6WtPKtkfVZcXd9r3TRN2F.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_18 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:13:49                                            
+openrouter/qwen/qwen3.5-27b  79,893 tokens [I: 55,581, CW: 0, CR: 192, O:       
+                           24,120, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-1
+8_6PZCPRcaY8pJvaSHztCchg.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_19 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:12:14                                            
+openrouter/qwen/qwen3.5-27b  93,772 tokens [I: 63,715, CW: 0, CR: 0, O: 30,057, 
+                           R: 0]                                                
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-1
+9_aVkqmXVsyTPfU5moAHwmUD.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_20 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:11:51                                            
+openrouter/qwen/qwen3.5-27b  89,631 tokens [I: 62,430, CW: 0, CR: 192, O:       
+                           27,009, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-2
+0_XaRzpbnertDFdUHjDzcSZW.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_21 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:18:49                                            
+openrouter/qwen/qwen3.5-27b  125,989 tokens [I: 88,195, CW: 0, CR: 192, O:      
+                           37,602, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-2
+1_T9R8XrCwVhLk5shbDXAg4n.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_22 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:12:32                                            
+openrouter/qwen/qwen3.5-27b  76,218 tokens [I: 54,949, CW: 0, CR: 0, O: 21,269, 
+                           R: 0]                                                
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-2
+2_RZNpTp3QVtd5765ULZ2zvR.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_23 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:11:43                                            
+openrouter/qwen/qwen3.5-27b  89,789 tokens [I: 63,447, CW: 0, CR: 0, O: 26,342, 
+                           R: 0]                                                
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-2
+3_eHNkLCxtT2B7hVzd96fDCL.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_24 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:13:57                                            
+openrouter/qwen/qwen3.5-27b  104,618 tokens [I: 72,525, CW: 0, CR: 0, O: 32,093,
+                           R: 0]                                                
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-2
+4_h8ZJKc756UmN233eybwMHJ.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_25 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:12:50                                            
+openrouter/qwen/qwen3.5-27b  91,599 tokens [I: 64,213, CW: 0, CR: 0, O: 27,386, 
+                           R: 0]                                                
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-2
+5_iJkiJia98ch225iBXNiNio.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_26 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:14:42                                            
+openrouter/qwen/qwen3.5-27b  81,812 tokens [I: 58,124, CW: 0, CR: 192, O:       
+                           23,496, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-2
+6_fDQCyLBABZGpMeQeJ9K8Gf.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_27 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:13:37                                            
+openrouter/qwen/qwen3.5-27b  90,519 tokens [I: 61,826, CW: 0, CR: 768, O:       
+                           27,925, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-2
+7_ZsUxkBMTd8bDikm7NFJZxB.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_28 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:12:31                                            
+openrouter/qwen/qwen3.5-27b  80,181 tokens [I: 57,922, CW: 0, CR: 320, O:       
+                           21,939, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-2
+8_KgtMRdLTDWesq9CHFeZ4o9.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_29 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:17:14                                            
+openrouter/qwen/qwen3.5-27b  103,889 tokens [I: 71,731, CW: 0, CR: 0, O: 32,158,
+                           R: 0]                                                
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-2
+9_BVnDMNnVyzdoP9UivFbwYv.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_30 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:12:36                                            
+openrouter/qwen/qwen3.5-27b  83,249 tokens [I: 57,458, CW: 0, CR: 832, O:       
+                           24,959, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-3
+0_FfXxQ2nYM9iSh2kxUM9W4A.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_31 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:12:41                                            
+openrouter/qwen/qwen3.5-27b  88,664 tokens [I: 65,213, CW: 0, CR: 192, O:       
+                           23,259, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-3
+1_SiKiY64QMnu9C3iL8J6S6z.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_32 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:12:13                                            
+openrouter/qwen/qwen3.5-27b  92,485 tokens [I: 66,573, CW: 0, CR: 0, O: 25,912, 
+                           R: 0]                                                
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-3
+2_ZRXP9p8Bw8RXfiYapeTDQJ.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_33 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:09:05                                            
+openrouter/qwen/qwen3.5-27b  69,697 tokens [I: 50,264, CW: 0, CR: 640, O:       
+                           18,793, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-3
+3_PDtHmjkJDm8aLfycjc5puR.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_34 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:16:03                                            
+openrouter/qwen/qwen3.5-27b  89,461 tokens [I: 60,820, CW: 0, CR: 768, O:       
+                           27,873, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-3
+4_P5kFwpZsJ7pAyoyqoKzNMx.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_35 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:08:10                                            
+openrouter/qwen/qwen3.5-27b  79,850 tokens [I: 57,675, CW: 0, CR: 192, O:       
+                           21,983, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-3
+5_3JXmwKp5h3oGdyscRKfwhB.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_36 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:06:52                                            
+openrouter/qwen/qwen3.5-27b  80,995 tokens [I: 59,825, CW: 0, CR: 192, O:       
+                           20,978, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-3
+6_j4mJsXsVtsNtkXUC23DQTY.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_37 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:12:35                                            
+openrouter/qwen/qwen3.5-27b  85,974 tokens [I: 61,374, CW: 0, CR: 192, O:       
+                           24,408, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-3
+7_Q6MdzHRTK6tYY9AbeCi2ms.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_38 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:06:41                                            
+openrouter/qwen/qwen3.5-27b  83,005 tokens [I: 57,814, CW: 0, CR: 0, O: 25,191, 
+                           R: 0]                                                
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-3
+8_PdYG2ruuqKEQAGvF8RFmoK.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_39 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:19:18                                            
+openrouter/qwen/qwen3.5-27b  108,207 tokens [I: 70,538, CW: 0, CR: 0, O: 37,669,
+                           R: 0]                                                
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-3
+9_D6Udi2gLmK8k8fs8cX9BN4.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_40 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:16:23                                            
+openrouter/qwen/qwen3.5-27b  109,111 tokens [I: 72,357, CW: 0, CR: 0, O: 36,754,
+                           R: 0]                                                
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-4
+0_Q7AP6dvsbpG8TXXnUTbzyf.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_41 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:12:12                                            
+openrouter/qwen/qwen3.5-27b  100,669 tokens [I: 67,024, CW: 0, CR: 704, O:      
+                           32,941, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-4
+1_XRfKaaqQVTtXGBJG6Mre3a.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_42 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:12:43                                            
+openrouter/qwen/qwen3.5-27b  92,395 tokens [I: 64,517, CW: 0, CR: 256, O:       
+                           27,622, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-4
+2_KLkkTvZw7TZNYT5Q7wNi3q.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_43 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:11:09                                            
+openrouter/qwen/qwen3.5-27b  82,082 tokens [I: 58,323, CW: 0, CR: 320, O:       
+                           23,439, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-4
+3_JriceazGMvHAX9XD5pAVhc.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_44 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:10:56                                            
+openrouter/qwen/qwen3.5-27b  76,045 tokens [I: 54,382, CW: 0, CR: 768, O:       
+                           20,895, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-4
+4_DWVKwPpGeJxsKncVdGZgE9.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_45 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:09:47                                            
+openrouter/qwen/qwen3.5-27b  73,626 tokens [I: 52,608, CW: 0, CR: 704, O:       
+                           20,314, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-4
+5_FfFpQY9rkMFqwxwSWJLSre.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_46 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:12:15                                            
+openrouter/qwen/qwen3.5-27b  100,815 tokens [I: 67,173, CW: 0, CR: 0, O: 33,642,
+                           R: 0]                                                
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-4
+6_8xnQDwpdUCvgbocMGszbRJ.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_47 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:10:30                                            
+openrouter/qwen/qwen3.5-27b  85,039 tokens [I: 60,062, CW: 0, CR: 448, O:       
+                           24,529, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-4
+7_X8kpWkMbaPGGG9BzAfaUnG.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_48 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:15:26                                            
+openrouter/qwen/qwen3.5-27b  94,784 tokens [I: 66,167, CW: 0, CR: 0, O: 28,617, 
+                           R: 0]                                                
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-4
+8_RVkPbRVF3RTeJ8bJdD7fJe.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_49 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:12:27                                            
+openrouter/qwen/qwen3.5-27b  83,508 tokens [I: 58,902, CW: 0, CR: 0, O: 24,606, 
+                           R: 0]                                                
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-4
+9_VZ8JwekmpFspqAFNcKRGrj.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_50 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:14:40                                            
+openrouter/qwen/qwen3.5-27b  93,221 tokens [I: 63,402, CW: 0, CR: 256, O:       
+                           29,563, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-5
+0_jokRyEdHiUKXQdLTfAit67.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_51 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:10:23                                            
+openrouter/qwen/qwen3.5-27b  74,382 tokens [I: 52,785, CW: 0, CR: 768, O:       
+                           20,829, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-5
+1_YznZUvGTwoue7vAR5H6rrk.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_52 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:14:02                                            
+openrouter/qwen/qwen3.5-27b  91,435 tokens [I: 62,848, CW: 0, CR: 256, O:       
+                           28,331, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-5
+2_EayWLDimapLRbMSe2Hky6f.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_53 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:11:43                                            
+openrouter/qwen/qwen3.5-27b  89,639 tokens [I: 62,307, CW: 0, CR: 704, O:       
+                           26,628, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-5
+3_b7enTNSAzQ7BNkocRStjSP.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_54 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:08:19                                            
+openrouter/qwen/qwen3.5-27b  79,136 tokens [I: 56,260, CW: 0, CR: 192, O:       
+                           22,684, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-5
+4_TuFbm3gWQRL5rtQnssXheh.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_55 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:14:23                                            
+openrouter/qwen/qwen3.5-27b  90,933 tokens [I: 61,368, CW: 0, CR: 576, O:       
+                           28,989, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-5
+5_nCis2y3a3rqGCZvPsPVKch.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_56 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:08:21                                            
+openrouter/qwen/qwen3.5-27b  74,794 tokens [I: 55,117, CW: 0, CR: 704, O:       
+                           18,973, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-5
+6_FsgYKF4GWPdevpFN5enhbY.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_57 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:10:27                                            
+openrouter/qwen/qwen3.5-27b  72,323 tokens [I: 51,983, CW: 0, CR: 576, O:       
+                           19,764, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-5
+7_dZzAmkdQEKEWAjaAo8YBmh.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_58 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:11:15                                            
+openrouter/qwen/qwen3.5-27b  106,000 tokens [I: 72,937, CW: 0, CR: 384, O:      
+                           32,679, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-5
+8_9Kn96UbXoW5ZdcxopqNEM7.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_59 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:08:02                                            
+openrouter/qwen/qwen3.5-27b  87,514 tokens [I: 63,710, CW: 0, CR: 0, O: 23,804, 
+                           R: 0]                                                
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-5
+9_eT6hbDpyvEQmTKos97Fnu6.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_60 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:08:40                                            
+openrouter/qwen/qwen3.5-27b  73,415 tokens [I: 52,449, CW: 0, CR: 640, O:       
+                           20,326, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-6
+0_gUrUq4ctsz9N2VdYagLwkr.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_61 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:07:53                                            
+openrouter/qwen/qwen3.5-27b  83,783 tokens [I: 59,868, CW: 0, CR: 0, O: 23,915, 
+                           R: 0]                                                
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-6
+1_ZjbGRYNTk36V2tmmx3GP6N.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_62 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:11:05                                            
+openrouter/qwen/qwen3.5-27b  74,428 tokens [I: 51,424, CW: 0, CR: 640, O:       
+                           22,364, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-6
+2_Xvk7qyWATmmjQjPDs8t3rU.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_63 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:12:55                                            
+openrouter/qwen/qwen3.5-27b  93,585 tokens [I: 64,290, CW: 0, CR: 0, O: 29,295, 
+                           R: 0]                                                
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-6
+3_TyG5oz3qsGYGyY6wvr7ASP.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_64 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:14:00                                            
+openrouter/qwen/qwen3.5-27b  105,331 tokens [I: 71,416, CW: 0, CR: 256, O:      
+                           33,659, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-6
+4_mSF4MJ6XUa5mVtCn9eyerE.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_65 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:11:45                                            
+openrouter/qwen/qwen3.5-27b  84,414 tokens [I: 60,086, CW: 0, CR: 192, O:       
+                           24,136, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-6
+5_7kXqUW9PAjaEZpYTx3EYKU.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_66 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:10:07                                            
+openrouter/qwen/qwen3.5-27b  75,280 tokens [I: 53,705, CW: 0, CR: 640, O:       
+                           20,935, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-6
+6_CgsR4fMiDQuPPyXnFeKcpC.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_67 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:10:59                                            
+openrouter/qwen/qwen3.5-27b  83,959 tokens [I: 58,055, CW: 0, CR: 1,152, O:     
+                           24,752, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-6
+7_YFpAk3DzbwN4u8hXFjfNfQ.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_68 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:09:49                                            
+openrouter/qwen/qwen3.5-27b  107,037 tokens [I: 71,650, CW: 0, CR: 0, O: 35,387,
+                           R: 0]                                                
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-6
+8_gLibRy4vKfiDyfzPmwvQtU.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_69 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:11:06                                            
+openrouter/qwen/qwen3.5-27b  79,531 tokens [I: 55,368, CW: 0, CR: 640, O:       
+                           23,523, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-6
+9_B3dLdpCcyBHfCEnuscEG24.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_70 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:12:17                                            
+openrouter/qwen/qwen3.5-27b  80,421 tokens [I: 58,794, CW: 0, CR: 0, O: 21,627, 
+                           R: 0]                                                
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-7
+0_gEAcCTJXHoX427VU97T62D.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_71 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:16:29                                            
+openrouter/qwen/qwen3.5-27b  102,645 tokens [I: 69,628, CW: 0, CR: 0, O: 33,017,
+                           R: 0]                                                
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-33-00-00_carrot-parsnip-game-7
+1_oBxFmVGrAshur7kpkUKmwm.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_72 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:13:10                                            
+openrouter/qwen/qwen3.5-27b  94,766 tokens [I: 63,470, CW: 0, CR: 0, O: 31,296, 
+                           R: 0]                                                
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-34-00-00_carrot-parsnip-game-7
+2_gVUksUky9ctkcfNVCNBHSn.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_73 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:13:09                                            
+openrouter/qwen/qwen3.5-27b  88,728 tokens [I: 61,609, CW: 0, CR: 192, O:       
+                           26,927, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-34-00-00_carrot-parsnip-game-7
+3_NPYMU2PRniebgt2epHPApb.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_74 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:16:11                                            
+openrouter/qwen/qwen3.5-27b  97,123 tokens [I: 64,855, CW: 0, CR: 320, O:       
+                           31,948, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-34-00-00_carrot-parsnip-game-7
+4_C8Eqsh8mKVQGueorw7pkNx.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_75 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:09:19                                            
+openrouter/qwen/qwen3.5-27b  66,932 tokens [I: 48,132, CW: 0, CR: 768, O:       
+                           18,032, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-34-00-00_carrot-parsnip-game-7
+5_hmmvaT2zUW48Ze9sPohWFw.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_76 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:09:03                                            
+openrouter/qwen/qwen3.5-27b  92,572 tokens [I: 65,246, CW: 0, CR: 0, O: 27,326, 
+                           R: 0]                                                
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-34-00-00_carrot-parsnip-game-7
+6_h4BjszP33dHB2FnpbzLU3p.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_77 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:10:34                                            
+openrouter/qwen/qwen3.5-27b  80,030 tokens [I: 58,270, CW: 0, CR: 832, O:       
+                           20,928, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-34-00-00_carrot-parsnip-game-7
+7_BGHrJmSujzPW68Y8DhyGoG.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_78 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:13:49                                            
+openrouter/qwen/qwen3.5-27b  89,385 tokens [I: 60,300, CW: 0, CR: 192, O:       
+                           28,893, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-34-00-00_carrot-parsnip-game-7
+8_9PsrLx5PruMsVBxX3zqYyJ.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_79 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:14:50                                            
+openrouter/qwen/qwen3.5-27b  95,417 tokens [I: 65,449, CW: 0, CR: 0, O: 29,968, 
+                           R: 0]                                                
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-34-00-00_carrot-parsnip-game-7
+9_5Sc6YL4oCHaaMgovyx5tuj.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_80 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:09:27                                            
+openrouter/qwen/qwen3.5-27b  74,021 tokens [I: 53,036, CW: 0, CR: 192, O:       
+                           20,793, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-34-00-00_carrot-parsnip-game-8
+0_oAY6o7pubrME9fG5VW7Rjs.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_81 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:13:34                                            
+openrouter/qwen/qwen3.5-27b  100,366 tokens [I: 69,343, CW: 0, CR: 0, O: 31,023,
+                           R: 0]                                                
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-34-00-00_carrot-parsnip-game-8
+1_BkCJ4N4BJrq2QeBERPxNXy.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_82 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:15:59                                            
+openrouter/qwen/qwen3.5-27b  83,865 tokens [I: 57,467, CW: 0, CR: 448, O:       
+                           25,950, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-34-00-00_carrot-parsnip-game-8
+2_J5em6Tx9JJCsJbvAcQkrnG.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_83 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:15:16                                            
+openrouter/qwen/qwen3.5-27b  89,550 tokens [I: 60,659, CW: 0, CR: 384, O:       
+                           28,507, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-34-00-00_carrot-parsnip-game-8
+3_gEpWCsqtJ2JVVVQ7yKvTsq.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_84 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:10:23                                            
+openrouter/qwen/qwen3.5-27b  96,780 tokens [I: 70,732, CW: 0, CR: 0, O: 26,048, 
+                           R: 0]                                                
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-34-00-00_carrot-parsnip-game-8
+4_Fk9MFquqfTc8cL35vhGgvb.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_85 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:10:23                                            
+openrouter/qwen/qwen3.5-27b  86,977 tokens [I: 63,627, CW: 0, CR: 576, O:       
+                           22,774, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-34-00-00_carrot-parsnip-game-8
+5_YFsR27hrgBf8NCtZ6qZDvQ.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_86 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:17:56                                            
+openrouter/qwen/qwen3.5-27b  103,656 tokens [I: 70,868, CW: 0, CR: 0, O: 32,788,
+                           R: 0]                                                
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-34-00-00_carrot-parsnip-game-8
+6_ajxiFt9jceusW2r7btSuYB.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_87 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:11:44                                            
+openrouter/qwen/qwen3.5-27b  99,775 tokens [I: 69,546, CW: 0, CR: 192, O:       
+                           30,037, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-34-00-00_carrot-parsnip-game-8
+7_Xuee2SdRTxPn2czwFRJfex.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_88 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:10:09                                            
+openrouter/qwen/qwen3.5-27b  95,955 tokens [I: 63,730, CW: 0, CR: 0, O: 32,225, 
+                           R: 0]                                                
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-34-00-00_carrot-parsnip-game-8
+8_55hAXyjhs7MuzVuVYJ3vvD.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_89 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:12:49                                            
+openrouter/qwen/qwen3.5-27b  75,268 tokens [I: 52,162, CW: 0, CR: 0, O: 23,106, 
+                           R: 0]                                                
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-34-00-00_carrot-parsnip-game-8
+9_5BiiCWWv7BwFeG4mkhheqD.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_90 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:11:28                                            
+openrouter/qwen/qwen3.5-27b  77,796 tokens [I: 55,858, CW: 0, CR: 256, O:       
+                           21,682, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-34-00-00_carrot-parsnip-game-9
+0_6ETAxVrxLxonzPkxHHNbrG.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_91 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:13:06                                            
+openrouter/qwen/qwen3.5-27b  79,585 tokens [I: 55,392, CW: 0, CR: 640, O:       
+                           23,553, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-34-00-00_carrot-parsnip-game-9
+1_WK44FR57WXPqRpJMfSiLZB.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_92 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:14:54                                            
+openrouter/qwen/qwen3.5-27b  81,519 tokens [I: 57,780, CW: 0, CR: 0, O: 23,739, 
+                           R: 0]                                                
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-34-00-00_carrot-parsnip-game-9
+2_cFRqxc7M6yYkbHQ4HCGnFp.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_93 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:20:40                                            
+openrouter/qwen/qwen3.5-27b  107,098 tokens [I: 71,174, CW: 0, CR: 0, O: 35,924,
+                           R: 0]                                                
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-34-00-00_carrot-parsnip-game-9
+3_QQwgYp3gAMXXusMhoeaYz4.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_94 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:14:56                                            
+openrouter/qwen/qwen3.5-27b  83,291 tokens [I: 58,496, CW: 0, CR: 512, O:       
+                           24,283, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-34-00-00_carrot-parsnip-game-9
+4_DfEPXtxDzxjvT6xWo4hTYw.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_95 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:15:09                                            
+openrouter/qwen/qwen3.5-27b  77,574 tokens [I: 53,004, CW: 0, CR: 512, O:       
+                           24,058, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-34-00-00_carrot-parsnip-game-9
+5_3HRtYqWj3SMZsmWa2JrNth.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_96 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:14:48                                            
+openrouter/qwen/qwen3.5-27b  81,735 tokens [I: 56,313, CW: 0, CR: 256, O:       
+                           25,166, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-34-00-00_carrot-parsnip-game-9
+6_FhrpWUuo5LeKk5J35vkiWG.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_97 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:15:09                                            
+openrouter/qwen/qwen3.5-27b  74,724 tokens [I: 52,443, CW: 0, CR: 256, O:       
+                           22,025, R: 0]                                        
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-34-00-00_carrot-parsnip-game-9
+7_8RQVH4nqinMcGJxKe2butA.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_98 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:15:00                                            
+openrouter/qwen/qwen3.5-27b  90,230 tokens [I: 59,875, CW: 0, CR: 0, O: 30,355, 
+                           R: 0]                                                
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-34-00-00_carrot-parsnip-game-9
+8_Ppz2yLSbHKqcZAUf3qoB9w.eval                                                   
+                                                                                
+╭──────────────────────────────────────────────────────────────────────────────╮
+│carrot_parsnip_game_99 (1 sample): openrouter/qwen/qwen3.5-27b                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+message_limit: 200, max_tasks: 20, dataset: (samples)                           
+                                                                                
+total time:                  0:16:53                                            
+openrouter/qwen/qwen3.5-27b  96,319 tokens [I: 64,975, CW: 0, CR: 0, O: 31,344, 
+                           R: 0]                                                
+                                                                                
+                                                                                
+                                                                                
+Log:                                                                            
+environments/carrot_parsnip/logs/2026-10-09T15-57-34-00-00_carrot-parsnip-game-9
+9_K2gKhjSD3mZTcUsLFcTEXN.eval                                                   
+                                                                                
+============================================================
+  Carrot-Parsnip — 100 games (draws OFF)
+============================================================
+  Carrot wins                       : 57/100  (57.0%)
+  Parsnip wins (other eliminated)    : 40/100  (40.0%)
+  Parsnip wins (nobody eliminated)   : 3/100  (3.0%)
+────────────────────────────────────────────────────────────
+  Per-game breakdown:
+    Game 0: Parsnip win (other eliminated) (Parsnip was Alice)
+      Alice [Parsnip, qwen3.5-27b]: voted Bob (Carrot)
+      Bob [Carrot, qwen3.5-27b]: voted Charlie (Carrot)  ✗
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Carrot)  ✗
+    Game 1: Carrot win (Parsnip was Bob)
+      Alice [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+      Bob [Parsnip, qwen3.5-27b]: voted Alice (Carrot)
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+    Game 2: Carrot win (Parsnip was Charlie)
+      Alice [Carrot, qwen3.5-27b]: voted Charlie (Parsnip)  ✓
+      Bob [Carrot, qwen3.5-27b]: voted Charlie (Parsnip)  ✓
+      Charlie [Parsnip, qwen3.5-27b]: voted Bob (Carrot)
+    Game 3: Carrot win (Parsnip was Bob)
+      Alice [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+      Bob [Parsnip, qwen3.5-27b]: voted Alice (Carrot)
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+    Game 4: Parsnip win (other eliminated) (Parsnip was Alice)
+      Alice [Parsnip, qwen3.5-27b]: voted Bob (Carrot)
+      Bob [Carrot, qwen3.5-27b]: voted Charlie (Carrot)  ✗
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Carrot)  ✗
+    Game 5: Parsnip win (other eliminated) (Parsnip was Bob)
+      Alice [Carrot, qwen3.5-27b]: voted Charlie (Carrot)  ✗
+      Bob [Parsnip, qwen3.5-27b]: voted Charlie (Carrot)
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+    Game 6: Parsnip win (other eliminated) (Parsnip was Alice)
+      Alice [Parsnip, qwen3.5-27b]: voted Charlie (Carrot)
+      Bob [Carrot, qwen3.5-27b]: voted Charlie (Carrot)  ✗
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Carrot)  ✗
+    Game 7: Carrot win (Parsnip was Bob)
+      Alice [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+      Bob [Parsnip, qwen3.5-27b]: voted Alice (Carrot)
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+    Game 8: Carrot win (Parsnip was Charlie)
+      Alice [Carrot, qwen3.5-27b]: voted Charlie (Parsnip)  ✓
+      Bob [Carrot, qwen3.5-27b]: voted Charlie (Parsnip)  ✓
+      Charlie [Parsnip, qwen3.5-27b]: voted Bob (Carrot)
+    Game 9: Carrot win (Parsnip was Bob)
+      Alice [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+      Bob [Parsnip, qwen3.5-27b]: voted Charlie (Carrot)
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+    Game 10: Parsnip win (nobody eliminated) (Parsnip was Charlie)
+      Alice [Carrot, qwen3.5-27b]: voted Bob (Carrot)  ✗
+      Bob [Carrot, qwen3.5-27b]: voted Charlie (Parsnip)  ✓
+      Charlie [Parsnip, qwen3.5-27b]: voted Alice (Carrot)
+    Game 11: Carrot win (Parsnip was Bob)
+      Alice [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+      Bob [Parsnip, qwen3.5-27b]: voted Alice (Carrot)
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+    Game 12: Parsnip win (other eliminated) (Parsnip was Alice)
+      Alice [Parsnip, qwen3.5-27b]: voted Bob (Carrot)
+      Bob [Carrot, qwen3.5-27b]: voted Charlie (Carrot)  ✗
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Carrot)  ✗
+    Game 13: Parsnip win (other eliminated) (Parsnip was Bob)
+      Alice [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+      Bob [Parsnip, qwen3.5-27b]: voted Alice (Carrot)
+      Charlie [Carrot, qwen3.5-27b]: voted Alice (Carrot)  ✗
+    Game 14: Parsnip win (other eliminated) (Parsnip was Charlie)
+      Alice [Carrot, qwen3.5-27b]: voted Bob (Carrot)  ✗
+      Bob [Carrot, qwen3.5-27b]: voted Alice (Carrot)  ✗
+      Charlie [Parsnip, qwen3.5-27b]: voted Bob (Carrot)
+    Game 15: Carrot win (Parsnip was Alice)
+      Alice [Parsnip, qwen3.5-27b]: voted Charlie (Carrot)
+      Bob [Carrot, qwen3.5-27b]: voted Alice (Parsnip)  ✓
+      Charlie [Carrot, qwen3.5-27b]: voted Alice (Parsnip)  ✓
+    Game 16: Carrot win (Parsnip was Bob)
+      Alice [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+      Bob [Parsnip, qwen3.5-27b]: voted Charlie (Carrot)
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+    Game 17: Parsnip win (other eliminated) (Parsnip was Bob)
+      Alice [Carrot, qwen3.5-27b]: voted Charlie (Carrot)  ✗
+      Bob [Parsnip, qwen3.5-27b]: voted Alice (Carrot)
+      Charlie [Carrot, qwen3.5-27b]: voted Alice (Carrot)  ✗
+    Game 18: Carrot win (Parsnip was Bob)
+      Alice [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+      Bob [Parsnip, qwen3.5-27b]: voted Alice (Carrot)
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+    Game 19: Parsnip win (other eliminated) (Parsnip was Alice)
+      Alice [Parsnip, qwen3.5-27b]: voted Charlie (Carrot)
+      Bob [Carrot, qwen3.5-27b]: voted Charlie (Carrot)  ✗
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Carrot)  ✗
+    Game 20: Carrot win (Parsnip was Bob)
+      Alice [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+      Bob [Parsnip, qwen3.5-27b]: voted Charlie (Carrot)
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+    Game 21: Parsnip win (other eliminated) (Parsnip was Charlie)
+      Alice [Carrot, qwen3.5-27b]: voted Bob (Carrot)  ✗
+      Bob [Carrot, qwen3.5-27b]: voted Alice (Carrot)  ✗
+      Charlie [Parsnip, qwen3.5-27b]: voted Bob (Carrot)
+    Game 22: Carrot win (Parsnip was Alice)
+      Alice [Parsnip, qwen3.5-27b]: voted Bob (Carrot)
+      Bob [Carrot, qwen3.5-27b]: voted Alice (Parsnip)  ✓
+      Charlie [Carrot, qwen3.5-27b]: voted Alice (Parsnip)  ✓
+    Game 23: Carrot win (Parsnip was Bob)
+      Alice [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+      Bob [Parsnip, qwen3.5-27b]: voted Alice (Carrot)
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+    Game 24: Carrot win (Parsnip was Alice)
+      Alice [Parsnip, qwen3.5-27b]: voted Bob (Carrot)
+      Bob [Carrot, qwen3.5-27b]: voted Alice (Parsnip)  ✓
+      Charlie [Carrot, qwen3.5-27b]: voted Alice (Parsnip)  ✓
+    Game 25: Parsnip win (other eliminated) (Parsnip was Bob)
+      Alice [Carrot, qwen3.5-27b]: voted Charlie (Carrot)  ✗
+      Bob [Parsnip, qwen3.5-27b]: voted Charlie (Carrot)
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+    Game 26: Parsnip win (other eliminated) (Parsnip was Alice)
+      Alice [Parsnip, qwen3.5-27b]: voted Charlie (Carrot)
+      Bob [Carrot, qwen3.5-27b]: voted Charlie (Carrot)  ✗
+      Charlie [Carrot, qwen3.5-27b]: voted Alice (Parsnip)  ✓
+    Game 27: Parsnip win (other eliminated) (Parsnip was Bob)
+      Alice [Carrot, qwen3.5-27b]: voted Charlie (Carrot)  ✗
+      Bob [Parsnip, qwen3.5-27b]: voted Charlie (Carrot)
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+    Game 28: Carrot win (Parsnip was Bob)
+      Alice [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+      Bob [Parsnip, qwen3.5-27b]: voted Alice (Carrot)
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+    Game 29: Parsnip win (other eliminated) (Parsnip was Charlie)
+      Alice [Carrot, qwen3.5-27b]: voted Bob (Carrot)  ✗
+      Bob [Carrot, qwen3.5-27b]: voted Alice (Carrot)  ✗
+      Charlie [Parsnip, qwen3.5-27b]: voted Bob (Carrot)
+    Game 30: Parsnip win (other eliminated) (Parsnip was Alice)
+      Alice [Parsnip, qwen3.5-27b]: voted Bob (Carrot)
+      Bob [Carrot, qwen3.5-27b]: voted Charlie (Carrot)  ✗
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Carrot)  ✗
+    Game 31: Carrot win (Parsnip was Charlie)
+      Alice [Carrot, qwen3.5-27b]: voted Charlie (Parsnip)  ✓
+      Bob [Carrot, qwen3.5-27b]: voted Charlie (Parsnip)  ✓
+      Charlie [Parsnip, qwen3.5-27b]: voted Alice (Carrot)
+    Game 32: Carrot win (Parsnip was Bob)
+      Alice [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+      Bob [Parsnip, qwen3.5-27b]: voted Alice (Carrot)
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+    Game 33: Carrot win (Parsnip was Charlie)
+      Alice [Carrot, qwen3.5-27b]: voted Charlie (Parsnip)  ✓
+      Bob [Carrot, qwen3.5-27b]: voted Charlie (Parsnip)  ✓
+      Charlie [Parsnip, qwen3.5-27b]: voted Bob (Carrot)
+    Game 34: Carrot win (Parsnip was Bob)
+      Alice [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+      Bob [Parsnip, qwen3.5-27b]: voted Alice (Carrot)
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+    Game 35: Carrot win (Parsnip was Charlie)
+      Alice [Carrot, qwen3.5-27b]: voted Charlie (Parsnip)  ✓
+      Bob [Carrot, qwen3.5-27b]: voted Charlie (Parsnip)  ✓
+      Charlie [Parsnip, qwen3.5-27b]: voted Bob (Carrot)
+    Game 36: Carrot win (Parsnip was Alice)
+      Alice [Parsnip, qwen3.5-27b]: voted Charlie (Carrot)
+      Bob [Carrot, qwen3.5-27b]: voted Alice (Parsnip)  ✓
+      Charlie [Carrot, qwen3.5-27b]: voted Alice (Parsnip)  ✓
+    Game 37: Parsnip win (other eliminated) (Parsnip was Alice)
+      Alice [Parsnip, qwen3.5-27b]: voted Bob (Carrot)
+      Bob [Carrot, qwen3.5-27b]: voted Charlie (Carrot)  ✗
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Carrot)  ✗
+    Game 38: Carrot win (Parsnip was Bob)
+      Alice [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+      Bob [Parsnip, qwen3.5-27b]: voted Alice (Carrot)
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+    Game 39: Parsnip win (other eliminated) (Parsnip was Charlie)
+      Alice [Carrot, qwen3.5-27b]: voted Bob (Carrot)  ✗
+      Bob [Carrot, qwen3.5-27b]: voted Alice (Carrot)  ✗
+      Charlie [Parsnip, qwen3.5-27b]: voted Alice (Carrot)
+    Game 40: Parsnip win (other eliminated) (Parsnip was Alice)
+      Alice [Parsnip, qwen3.5-27b]: voted Charlie (Carrot)
+      Bob [Carrot, qwen3.5-27b]: voted Charlie (Carrot)  ✗
+      Charlie [Carrot, qwen3.5-27b]: voted Alice (Parsnip)  ✓
+    Game 41: Carrot win (Parsnip was Alice)
+      Alice [Parsnip, qwen3.5-27b]: voted Bob (Carrot)
+      Bob [Carrot, qwen3.5-27b]: voted Alice (Parsnip)  ✓
+      Charlie [Carrot, qwen3.5-27b]: voted Alice (Parsnip)  ✓
+    Game 42: Parsnip win (other eliminated) (Parsnip was Bob)
+      Alice [Carrot, qwen3.5-27b]: voted Charlie (Carrot)  ✗
+      Bob [Parsnip, qwen3.5-27b]: voted Alice (Carrot)
+      Charlie [Carrot, qwen3.5-27b]: voted Alice (Carrot)  ✗
+    Game 43: Carrot win (Parsnip was Charlie)
+      Alice [Carrot, qwen3.5-27b]: voted Charlie (Parsnip)  ✓
+      Bob [Carrot, qwen3.5-27b]: voted Charlie (Parsnip)  ✓
+      Charlie [Parsnip, qwen3.5-27b]: voted Alice (Carrot)
+    Game 44: Carrot win (Parsnip was Alice)
+      Alice [Parsnip, qwen3.5-27b]: voted Charlie (Carrot)
+      Bob [Carrot, qwen3.5-27b]: voted Alice (Parsnip)  ✓
+      Charlie [Carrot, qwen3.5-27b]: voted Alice (Parsnip)  ✓
+    Game 45: Parsnip win (other eliminated) (Parsnip was Charlie)
+      Alice [Carrot, qwen3.5-27b]: voted Bob (Carrot)  ✗
+      Bob [Carrot, qwen3.5-27b]: voted Alice (Carrot)  ✗
+      Charlie [Parsnip, qwen3.5-27b]: voted Bob (Carrot)
+    Game 46: Parsnip win (other eliminated) (Parsnip was Bob)
+      Alice [Carrot, qwen3.5-27b]: voted Charlie (Carrot)  ✗
+      Bob [Parsnip, qwen3.5-27b]: voted Alice (Carrot)
+      Charlie [Carrot, qwen3.5-27b]: voted Alice (Carrot)  ✗
+    Game 47: Parsnip win (other eliminated) (Parsnip was Alice)
+      Alice [Parsnip, qwen3.5-27b]: voted Bob (Carrot)
+      Bob [Carrot, qwen3.5-27b]: voted Alice (Parsnip)  ✓
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Carrot)  ✗
+    Game 48: Carrot win (Parsnip was Bob)
+      Alice [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+      Bob [Parsnip, qwen3.5-27b]: voted Charlie (Carrot)
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+    Game 49: Parsnip win (other eliminated) (Parsnip was Charlie)
+      Alice [Carrot, qwen3.5-27b]: voted Charlie (Parsnip)  ✓
+      Bob [Carrot, qwen3.5-27b]: voted Alice (Carrot)  ✗
+      Charlie [Parsnip, qwen3.5-27b]: voted Alice (Carrot)
+    Game 50: Carrot win (Parsnip was Bob)
+      Alice [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+      Bob [Parsnip, qwen3.5-27b]: voted Alice (Carrot)
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+    Game 51: Carrot win (Parsnip was Bob)
+      Alice [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+      Bob [Parsnip, qwen3.5-27b]: voted Charlie (Carrot)
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+    Game 52: Carrot win (Parsnip was Bob)
+      Alice [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+      Bob [Parsnip, qwen3.5-27b]: voted Alice (Carrot)
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+    Game 53: Parsnip win (other eliminated) (Parsnip was Bob)
+      Alice [Carrot, qwen3.5-27b]: voted Charlie (Carrot)  ✗
+      Bob [Parsnip, qwen3.5-27b]: voted Charlie (Carrot)
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+    Game 54: Carrot win (Parsnip was Bob)
+      Alice [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+      Bob [Parsnip, qwen3.5-27b]: voted Charlie (Carrot)
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+    Game 55: Parsnip win (other eliminated) (Parsnip was Bob)
+      Alice [Carrot, qwen3.5-27b]: voted Charlie (Carrot)  ✗
+      Bob [Parsnip, qwen3.5-27b]: voted Charlie (Carrot)
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+    Game 56: Carrot win (Parsnip was Bob)
+      Alice [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+      Bob [Parsnip, qwen3.5-27b]: voted Alice (Carrot)
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+    Game 57: Carrot win (Parsnip was Charlie)
+      Alice [Carrot, qwen3.5-27b]: voted Charlie (Parsnip)  ✓
+      Bob [Carrot, qwen3.5-27b]: voted Charlie (Parsnip)  ✓
+      Charlie [Parsnip, qwen3.5-27b]: voted Alice (Carrot)
+    Game 58: Parsnip win (other eliminated) (Parsnip was Alice)
+      Alice [Parsnip, qwen3.5-27b]: voted Bob (Carrot)
+      Bob [Carrot, qwen3.5-27b]: voted Alice (Parsnip)  ✓
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Carrot)  ✗
+    Game 59: Carrot win (Parsnip was Bob)
+      Alice [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+      Bob [Parsnip, qwen3.5-27b]: voted Charlie (Carrot)
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+    Game 60: Carrot win (Parsnip was Bob)
+      Alice [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+      Bob [Parsnip, qwen3.5-27b]: voted Charlie (Carrot)
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+    Game 61: Carrot win (Parsnip was Charlie)
+      Alice [Carrot, qwen3.5-27b]: voted Charlie (Parsnip)  ✓
+      Bob [Carrot, qwen3.5-27b]: voted Charlie (Parsnip)  ✓
+      Charlie [Parsnip, qwen3.5-27b]: voted Bob (Carrot)
+    Game 62: Parsnip win (nobody eliminated) (Parsnip was Bob)
+      Alice [Carrot, qwen3.5-27b]: voted Charlie (Carrot)  ✗
+      Bob [Parsnip, qwen3.5-27b]: voted Alice (Carrot)
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+    Game 63: Carrot win (Parsnip was Bob)
+      Alice [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+      Bob [Parsnip, qwen3.5-27b]: voted Charlie (Carrot)
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+    Game 64: Parsnip win (other eliminated) (Parsnip was Bob)
+      Alice [Carrot, qwen3.5-27b]: voted Charlie (Carrot)  ✗
+      Bob [Parsnip, qwen3.5-27b]: voted Charlie (Carrot)
+      Charlie [Carrot, qwen3.5-27b]: voted Alice (Carrot)  ✗
+    Game 65: Carrot win (Parsnip was Charlie)
+      Alice [Carrot, qwen3.5-27b]: voted Charlie (Parsnip)  ✓
+      Bob [Carrot, qwen3.5-27b]: voted Charlie (Parsnip)  ✓
+      Charlie [Parsnip, qwen3.5-27b]: voted Alice (Carrot)
+    Game 66: Carrot win (Parsnip was Bob)
+      Alice [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+      Bob [Parsnip, qwen3.5-27b]: voted Alice (Carrot)
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+    Game 67: Parsnip win (nobody eliminated) (Parsnip was Alice)
+      Alice [Parsnip, qwen3.5-27b]: voted Alice (Parsnip)
+      Bob [Carrot, qwen3.5-27b]: voted Charlie (Carrot)  ✗
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Carrot)  ✗
+    Game 68: Parsnip win (other eliminated) (Parsnip was Bob)
+      Alice [Carrot, qwen3.5-27b]: voted Charlie (Carrot)  ✗
+      Bob [Parsnip, qwen3.5-27b]: voted Alice (Carrot)
+      Charlie [Carrot, qwen3.5-27b]: voted Alice (Carrot)  ✗
+    Game 69: Parsnip win (other eliminated) (Parsnip was Alice)
+      Alice [Parsnip, qwen3.5-27b]: voted Charlie (Carrot)
+      Bob [Carrot, qwen3.5-27b]: voted Charlie (Carrot)  ✗
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Carrot)  ✗
+    Game 70: Carrot win (Parsnip was Alice)
+      Alice [Parsnip, qwen3.5-27b]: voted Bob (Carrot)
+      Bob [Carrot, qwen3.5-27b]: voted Alice (Parsnip)  ✓
+      Charlie [Carrot, qwen3.5-27b]: voted Alice (Parsnip)  ✓
+    Game 71: Carrot win (Parsnip was Alice)
+      Alice [Parsnip, qwen3.5-27b]: voted Bob (Carrot)
+      Bob [Carrot, qwen3.5-27b]: voted Alice (Parsnip)  ✓
+      Charlie [Carrot, qwen3.5-27b]: voted Alice (Parsnip)  ✓
+    Game 72: Parsnip win (other eliminated) (Parsnip was Bob)
+      Alice [Carrot, qwen3.5-27b]: voted Charlie (Carrot)  ✗
+      Bob [Parsnip, qwen3.5-27b]: voted Charlie (Carrot)
+      Charlie [Carrot, qwen3.5-27b]: voted Alice (Carrot)  ✗
+    Game 73: Carrot win (Parsnip was Alice)
+      Alice [Parsnip, qwen3.5-27b]: voted Bob (Carrot)
+      Bob [Carrot, qwen3.5-27b]: voted Alice (Parsnip)  ✓
+      Charlie [Carrot, qwen3.5-27b]: voted Alice (Parsnip)  ✓
+    Game 74: Parsnip win (other eliminated) (Parsnip was Charlie)
+      Alice [Carrot, qwen3.5-27b]: voted Bob (Carrot)  ✗
+      Bob [Carrot, qwen3.5-27b]: voted Alice (Carrot)  ✗
+      Charlie [Parsnip, qwen3.5-27b]: voted Bob (Carrot)
+    Game 75: Carrot win (Parsnip was Alice)
+      Alice [Parsnip, qwen3.5-27b]: voted Alice (Parsnip)
+      Bob [Carrot, qwen3.5-27b]: voted Alice (Parsnip)  ✓
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Carrot)  ✗
+    Game 76: Carrot win (Parsnip was Alice)
+      Alice [Parsnip, qwen3.5-27b]: voted Bob (Carrot)
+      Bob [Carrot, qwen3.5-27b]: voted Alice (Parsnip)  ✓
+      Charlie [Carrot, qwen3.5-27b]: voted Alice (Parsnip)  ✓
+    Game 77: Carrot win (Parsnip was Charlie)
+      Alice [Carrot, qwen3.5-27b]: voted Charlie (Parsnip)  ✓
+      Bob [Carrot, qwen3.5-27b]: voted Charlie (Parsnip)  ✓
+      Charlie [Parsnip, qwen3.5-27b]: voted Bob (Carrot)
+    Game 78: Carrot win (Parsnip was Bob)
+      Alice [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+      Bob [Parsnip, qwen3.5-27b]: voted Charlie (Carrot)
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+    Game 79: Parsnip win (other eliminated) (Parsnip was Charlie)
+      Alice [Carrot, qwen3.5-27b]: voted Charlie (Parsnip)  ✓
+      Bob [Carrot, qwen3.5-27b]: voted Alice (Carrot)  ✗
+      Charlie [Parsnip, qwen3.5-27b]: voted Alice (Carrot)
+    Game 80: Carrot win (Parsnip was Bob)
+      Alice [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+      Bob [Parsnip, qwen3.5-27b]: voted Alice (Carrot)
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+    Game 81: Parsnip win (other eliminated) (Parsnip was Bob)
+      Alice [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+      Bob [Parsnip, qwen3.5-27b]: voted Alice (Carrot)
+      Charlie [Carrot, qwen3.5-27b]: voted Alice (Carrot)  ✗
+    Game 82: Parsnip win (other eliminated) (Parsnip was Bob)
+      Alice [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+      Bob [Parsnip, qwen3.5-27b]: voted Alice (Carrot)
+      Charlie [Carrot, qwen3.5-27b]: voted Alice (Carrot)  ✗
+    Game 83: Carrot win (Parsnip was Alice)
+      Alice [Parsnip, qwen3.5-27b]: voted Bob (Carrot)
+      Bob [Carrot, qwen3.5-27b]: voted Alice (Parsnip)  ✓
+      Charlie [Carrot, qwen3.5-27b]: voted Alice (Parsnip)  ✓
+    Game 84: Carrot win (Parsnip was Charlie)
+      Alice [Carrot, qwen3.5-27b]: voted Charlie (Parsnip)  ✓
+      Bob [Carrot, qwen3.5-27b]: voted Charlie (Parsnip)  ✓
+      Charlie [Parsnip, qwen3.5-27b]: voted Alice (Carrot)
+    Game 85: Carrot win (Parsnip was Charlie)
+      Alice [Carrot, qwen3.5-27b]: voted Charlie (Parsnip)  ✓
+      Bob [Carrot, qwen3.5-27b]: voted Charlie (Parsnip)  ✓
+      Charlie [Parsnip, qwen3.5-27b]: voted Bob (Carrot)
+    Game 86: Carrot win (Parsnip was Charlie)
+      Alice [Carrot, qwen3.5-27b]: voted Charlie (Parsnip)  ✓
+      Bob [Carrot, qwen3.5-27b]: voted Charlie (Parsnip)  ✓
+      Charlie [Parsnip, qwen3.5-27b]: voted Alice (Carrot)
+    Game 87: Carrot win (Parsnip was Bob)
+      Alice [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+      Bob [Parsnip, qwen3.5-27b]: voted Charlie (Carrot)
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+    Game 88: Parsnip win (other eliminated) (Parsnip was Charlie)
+      Alice [Carrot, qwen3.5-27b]: voted Bob (Carrot)  ✗
+      Bob [Carrot, qwen3.5-27b]: voted Alice (Carrot)  ✗
+      Charlie [Parsnip, qwen3.5-27b]: voted Bob (Carrot)
+    Game 89: Parsnip win (other eliminated) (Parsnip was Bob)
+      Alice [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+      Bob [Parsnip, qwen3.5-27b]: voted Alice (Carrot)
+      Charlie [Carrot, qwen3.5-27b]: voted Alice (Carrot)  ✗
+    Game 90: Carrot win (Parsnip was Alice)
+      Alice [Parsnip, qwen3.5-27b]: voted Charlie (Carrot)
+      Bob [Carrot, qwen3.5-27b]: voted Alice (Parsnip)  ✓
+      Charlie [Carrot, qwen3.5-27b]: voted Alice (Parsnip)  ✓
+    Game 91: Carrot win (Parsnip was Alice)
+      Alice [Parsnip, qwen3.5-27b]: voted Charlie (Carrot)
+      Bob [Carrot, qwen3.5-27b]: voted Alice (Parsnip)  ✓
+      Charlie [Carrot, qwen3.5-27b]: voted Alice (Parsnip)  ✓
+    Game 92: Carrot win (Parsnip was Charlie)
+      Alice [Carrot, qwen3.5-27b]: voted Charlie (Parsnip)  ✓
+      Bob [Carrot, qwen3.5-27b]: voted Charlie (Parsnip)  ✓
+      Charlie [Parsnip, qwen3.5-27b]: voted Bob (Carrot)
+    Game 93: Parsnip win (other eliminated) (Parsnip was Bob)
+      Alice [Carrot, qwen3.5-27b]: voted Charlie (Carrot)  ✗
+      Bob [Parsnip, qwen3.5-27b]: voted Alice (Carrot)
+      Charlie [Carrot, qwen3.5-27b]: voted Alice (Carrot)  ✗
+    Game 94: Parsnip win (other eliminated) (Parsnip was Charlie)
+      Alice [Carrot, qwen3.5-27b]: voted Bob (Carrot)  ✗
+      Bob [Carrot, qwen3.5-27b]: voted Alice (Carrot)  ✗
+      Charlie [Parsnip, qwen3.5-27b]: voted Alice (Carrot)
+    Game 95: Parsnip win (other eliminated) (Parsnip was Bob)
+      Alice [Carrot, qwen3.5-27b]: voted Charlie (Carrot)  ✗
+      Bob [Parsnip, qwen3.5-27b]: voted Charlie (Carrot)
+      Charlie [Carrot, qwen3.5-27b]: voted Bob (Parsnip)  ✓
+    Game 96: Parsnip win (other eliminated) (Parsnip was Charlie)
+      Alice [Carrot, qwen3.5-27b]: voted Bob (Carrot)  ✗
+      Bob [Carrot, qwen3.5-27b]: voted Alice (Carrot)  ✗
+      Charlie [Parsnip, qwen3.5-27b]: voted Alice (Carrot)
+    Game 97: Carrot win (Parsnip was Charlie)
+      Alice [Carrot, qwen3.5-27b]: voted Charlie (Parsnip)  ✓
+      Bob [Carrot, qwen3.5-27b]: voted Charlie (Parsnip)  ✓
+      Charlie [Parsnip, qwen3.5-27b]: voted Bob (Carrot)
+    Game 98: Carrot win (Parsnip was Alice)
+      Alice [Parsnip, qwen3.5-27b]: voted Bob (Carrot)
+      Bob [Carrot, qwen3.5-27b]: voted Alice (Parsnip)  ✓
+      Charlie [Carrot, qwen3.5-27b]: voted Alice (Parsnip)  ✓
+    Game 99: Carrot win (Parsnip was Alice)
+      Alice [Parsnip, qwen3.5-27b]: voted Charlie (Carrot)
+      Bob [Carrot, qwen3.5-27b]: voted Alice (Parsnip)  ✓
+      Charlie [Carrot, qwen3.5-27b]: voted Alice (Parsnip)  ✓
+────────────────────────────────────────────────────────────
+  Cost: $14.9166  (usage $95.1080 -> $110.0246)  | limit $250.0000, remaining $139.9754
+============================================================
+
+copied 100 logs to /home/kog/downstream-environment/experiments/2026-10-09-3p-game/inspect_logs_base

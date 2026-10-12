@@ -1,0 +1,5546 @@
+{
+ "g000": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Alice",
+   "score": -12.34
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Bob",
+   "score": -15.82
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Charlie",
+   "score": -18.82
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Alice",
+   "score": -15.16
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Bob",
+   "score": -14.98
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Charlie",
+   "score": -16.07
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Alice",
+   "score": -18.92
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Charlie",
+   "score": -13.64
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Bob",
+   "score": -15.0
+  }
+ ],
+ "g001": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Alice",
+   "score": -13.91
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Bob",
+   "score": -12.12
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Charlie",
+   "score": -15.35
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Alice",
+   "score": -14.43
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Bob",
+   "score": -12.36
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Charlie",
+   "score": -12.83
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Bob",
+   "score": -11.49
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Charlie",
+   "score": -13.51
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Alice",
+   "score": -13.23
+  }
+ ],
+ "g002": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Charlie",
+   "score": -12.78
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Alice",
+   "score": -12.05
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Bob",
+   "score": -10.89
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Alice",
+   "score": -11.26
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Charlie",
+   "score": -14.55
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Bob",
+   "score": -15.09
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Alice",
+   "score": -12.82
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Charlie",
+   "score": -12.2
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Bob",
+   "score": -14.67
+  }
+ ],
+ "g003": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Bob",
+   "score": -10.98
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Charlie",
+   "score": -16.29
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Alice",
+   "score": -11.69
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Bob",
+   "score": -14.1
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Charlie",
+   "score": -14.26
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Alice",
+   "score": -14.35
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Bob",
+   "score": -14.98
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Alice",
+   "score": -11.74
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Charlie",
+   "score": -15.53
+  }
+ ],
+ "g004": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Alice",
+   "score": -12.13
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Bob",
+   "score": -13.92
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Charlie",
+   "score": -15.65
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Alice",
+   "score": -12.92
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Charlie",
+   "score": -15.25
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Bob",
+   "score": -20.23
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Alice",
+   "score": -14.59
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Charlie",
+   "score": -15.58
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Bob",
+   "score": -9.79
+  }
+ ],
+ "g005": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Charlie",
+   "score": -12.04
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Bob",
+   "score": -12.02
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Alice",
+   "score": -15.81
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Bob",
+   "score": -12.76
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Charlie",
+   "score": -14.63
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Alice",
+   "score": -15.48
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Charlie",
+   "score": -14.43
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Bob",
+   "score": -14.46
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Alice",
+   "score": -16.86
+  }
+ ],
+ "g006": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Bob",
+   "score": -11.05
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Alice",
+   "score": -10.82
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Charlie",
+   "score": -15.71
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Bob",
+   "score": -15.67
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Alice",
+   "score": -16.12
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Charlie",
+   "score": -10.79
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Bob",
+   "score": -13.57
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Alice",
+   "score": -14.44
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Charlie",
+   "score": -16.25
+  }
+ ],
+ "g007": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Alice",
+   "score": -11.23
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Charlie",
+   "score": -17.5
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Bob",
+   "score": -13.69
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Alice",
+   "score": -15.51
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Bob",
+   "score": -17.65
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Charlie",
+   "score": -12.85
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Bob",
+   "score": -11.67
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Alice",
+   "score": -13.38
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Charlie",
+   "score": -16.49
+  }
+ ],
+ "g008": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Alice",
+   "score": -13.97
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Charlie",
+   "score": -12.33
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Bob",
+   "score": -14.45
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Charlie",
+   "score": -14.79
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Bob",
+   "score": -14.75
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Alice",
+   "score": -16.29
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Bob",
+   "score": -16.68
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Charlie",
+   "score": -14.02
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Alice",
+   "score": -21.57
+  }
+ ],
+ "g009": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Bob",
+   "score": -11.71
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Alice",
+   "score": -17.82
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Charlie",
+   "score": -15.06
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Bob",
+   "score": -16.26
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Alice",
+   "score": -10.99
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Charlie",
+   "score": -10.56
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Alice",
+   "score": -12.49
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Charlie",
+   "score": -11.77
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Bob",
+   "score": -13.41
+  }
+ ],
+ "g010": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Alice",
+   "score": -14.12
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Charlie",
+   "score": -14.36
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Bob",
+   "score": -13.1
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Charlie",
+   "score": -16.85
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Bob",
+   "score": -13.54
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Alice",
+   "score": -18.43
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Charlie",
+   "score": -13.82
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Bob",
+   "score": -13.0
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Alice",
+   "score": -15.47
+  }
+ ],
+ "g011": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Charlie",
+   "score": -14.6
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Alice",
+   "score": -15.28
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Bob",
+   "score": -16.23
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Alice",
+   "score": -15.7
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Charlie",
+   "score": -13.58
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Bob",
+   "score": -14.17
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Alice",
+   "score": -12.94
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Bob",
+   "score": -18.92
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Charlie",
+   "score": -14.64
+  }
+ ],
+ "g012": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Bob",
+   "score": -13.89
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Charlie",
+   "score": -14.76
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Alice",
+   "score": -15.75
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Bob",
+   "score": -10.43
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Charlie",
+   "score": -14.84
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Alice",
+   "score": -14.53
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Bob",
+   "score": -9.12
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Alice",
+   "score": -14.51
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Charlie",
+   "score": -14.9
+  }
+ ],
+ "g013": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Charlie",
+   "score": -12.41
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Alice",
+   "score": -12.53
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Bob",
+   "score": -13.84
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Alice",
+   "score": -13.31
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Charlie",
+   "score": -14.35
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Bob",
+   "score": -13.04
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Alice",
+   "score": -15.91
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Charlie",
+   "score": -10.54
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Bob",
+   "score": -14.85
+  }
+ ],
+ "g014": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Charlie",
+   "score": -12.96
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Alice",
+   "score": -14.29
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Bob",
+   "score": -12.8
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Alice",
+   "score": -12.75
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Bob",
+   "score": -14.5
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Charlie",
+   "score": -9.58
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Alice",
+   "score": -12.67
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Bob",
+   "score": -8.3
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Charlie",
+   "score": -13.86
+  }
+ ],
+ "g015": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Alice",
+   "score": -12.75
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Bob",
+   "score": -15.11
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Charlie",
+   "score": -9.66
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Alice",
+   "score": -14.01
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Bob",
+   "score": -13.76
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Charlie",
+   "score": -13.25
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Alice",
+   "score": -5.3
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Bob",
+   "score": -18.47
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Charlie",
+   "score": -13.82
+  }
+ ],
+ "g016": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Alice",
+   "score": -13.05
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Charlie",
+   "score": -14.02
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Bob",
+   "score": -15.2
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Charlie",
+   "score": -14.44
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Bob",
+   "score": -14.46
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Alice",
+   "score": -11.04
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Bob",
+   "score": -10.78
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Alice",
+   "score": -13.51
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Charlie",
+   "score": -15.29
+  }
+ ],
+ "g017": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Bob",
+   "score": -13.23
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Charlie",
+   "score": -14.95
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Alice",
+   "score": -16.0
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Charlie",
+   "score": -13.43
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Alice",
+   "score": -18.54
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Bob",
+   "score": -13.7
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Charlie",
+   "score": -12.64
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Alice",
+   "score": -18.37
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Bob",
+   "score": -14.76
+  }
+ ],
+ "g018": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Bob",
+   "score": -12.36
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Alice",
+   "score": -12.48
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Charlie",
+   "score": -15.91
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Bob",
+   "score": -12.41
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Charlie",
+   "score": -17.69
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Alice",
+   "score": -14.37
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Charlie",
+   "score": -14.44
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Alice",
+   "score": -15.88
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Bob",
+   "score": -14.25
+  }
+ ],
+ "g019": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Bob",
+   "score": -12.42
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Alice",
+   "score": -13.6
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Charlie",
+   "score": -12.23
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Bob",
+   "score": -15.06
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Alice",
+   "score": -13.67
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Charlie",
+   "score": -16.86
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Alice",
+   "score": -14.94
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Bob",
+   "score": -13.88
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Charlie",
+   "score": -16.4
+  }
+ ],
+ "g020": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Alice",
+   "score": -15.72
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Bob",
+   "score": -14.04
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Charlie",
+   "score": -15.7
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Bob",
+   "score": -11.18
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Alice",
+   "score": -15.25
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Charlie",
+   "score": -14.06
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Alice",
+   "score": -12.86
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Bob",
+   "score": -8.89
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Charlie",
+   "score": -15.09
+  }
+ ],
+ "g021": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Alice",
+   "score": -13.22
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Charlie",
+   "score": -12.63
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Bob",
+   "score": -15.92
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Alice",
+   "score": -10.05
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Bob",
+   "score": -10.87
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Charlie",
+   "score": -13.42
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Bob",
+   "score": -13.87
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Alice",
+   "score": -14.55
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Charlie",
+   "score": -13.74
+  }
+ ],
+ "g022": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Bob",
+   "score": -15.47
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Alice",
+   "score": -14.5
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Charlie",
+   "score": -13.97
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Alice",
+   "score": -14.63
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Bob",
+   "score": -14.07
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Charlie",
+   "score": -13.87
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Alice",
+   "score": -12.83
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Bob",
+   "score": -15.11
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Charlie",
+   "score": -13.07
+  }
+ ],
+ "g023": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Alice",
+   "score": -13.06
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Charlie",
+   "score": -16.55
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Bob",
+   "score": -14.27
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Alice",
+   "score": -11.71
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Charlie",
+   "score": -12.24
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Bob",
+   "score": -11.93
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Alice",
+   "score": -11.2
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Bob",
+   "score": -10.66
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Charlie",
+   "score": -13.82
+  }
+ ],
+ "g024": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Bob",
+   "score": -12.13
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Charlie",
+   "score": -14.17
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Alice",
+   "score": -7.56
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Charlie",
+   "score": -16.35
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Bob",
+   "score": -14.37
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Alice",
+   "score": -16.8
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Bob",
+   "score": -11.67
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Alice",
+   "score": -13.66
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Charlie",
+   "score": -13.47
+  }
+ ],
+ "g025": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Bob",
+   "score": -12.37
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Alice",
+   "score": -11.13
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Charlie",
+   "score": -12.46
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Bob",
+   "score": -17.02
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Alice",
+   "score": -14.55
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Charlie",
+   "score": -15.71
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Alice",
+   "score": -12.93
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Bob",
+   "score": -15.5
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Charlie",
+   "score": -12.86
+  }
+ ],
+ "g026": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Charlie",
+   "score": -16.09
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Alice",
+   "score": -13.34
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Bob",
+   "score": -14.54
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Charlie",
+   "score": -12.64
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Bob",
+   "score": -18.02
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Alice",
+   "score": -13.72
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Bob",
+   "score": -15.4
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Alice",
+   "score": -15.35
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Charlie",
+   "score": -15.56
+  }
+ ],
+ "g027": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Alice",
+   "score": -12.52
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Bob",
+   "score": -12.8
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Charlie",
+   "score": -12.55
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Alice",
+   "score": -11.38
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Charlie",
+   "score": -9.21
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Bob",
+   "score": -15.65
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Alice",
+   "score": -14.03
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Bob",
+   "score": -12.19
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Charlie",
+   "score": -14.73
+  }
+ ],
+ "g028": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Charlie",
+   "score": -13.58
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Alice",
+   "score": -12.12
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Bob",
+   "score": -14.59
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Alice",
+   "score": -14.21
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Bob",
+   "score": -13.3
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Charlie",
+   "score": -15.04
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Alice",
+   "score": -12.26
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Charlie",
+   "score": -14.1
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Bob",
+   "score": -15.25
+  }
+ ],
+ "g029": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Alice",
+   "score": -14.01
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Charlie",
+   "score": -12.63
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Bob",
+   "score": -12.31
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Alice",
+   "score": -14.76
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Bob",
+   "score": -13.31
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Charlie",
+   "score": -13.92
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Bob",
+   "score": -13.33
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Charlie",
+   "score": -13.99
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Alice",
+   "score": -12.32
+  }
+ ],
+ "g030": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Alice",
+   "score": -12.05
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Bob",
+   "score": -15.04
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Charlie",
+   "score": -12.52
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Bob",
+   "score": -12.16
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Charlie",
+   "score": -15.1
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Alice",
+   "score": -14.11
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Bob",
+   "score": -13.27
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Charlie",
+   "score": -18.99
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Alice",
+   "score": -12.62
+  }
+ ],
+ "g031": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Bob",
+   "score": -10.96
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Charlie",
+   "score": -13.52
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Alice",
+   "score": -14.83
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Charlie",
+   "score": -15.28
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Alice",
+   "score": -16.66
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Bob",
+   "score": -17.04
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Alice",
+   "score": -16.4
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Bob",
+   "score": -15.37
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Charlie",
+   "score": -12.86
+  }
+ ],
+ "g032": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Alice",
+   "score": -12.04
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Charlie",
+   "score": -13.61
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Bob",
+   "score": -13.19
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Alice",
+   "score": -10.04
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Charlie",
+   "score": -10.07
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Bob",
+   "score": -14.65
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Alice",
+   "score": -15.93
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Bob",
+   "score": -19.43
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Charlie",
+   "score": -14.86
+  }
+ ],
+ "g033": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Alice",
+   "score": -13.7
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Bob",
+   "score": -11.45
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Charlie",
+   "score": -13.37
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Bob",
+   "score": -14.94
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Charlie",
+   "score": -11.63
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Alice",
+   "score": -10.55
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Bob",
+   "score": -12.18
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Charlie",
+   "score": -11.14
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Alice",
+   "score": -12.97
+  }
+ ],
+ "g034": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Bob",
+   "score": -12.15
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Charlie",
+   "score": -14.34
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Alice",
+   "score": -12.56
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Bob",
+   "score": -11.86
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Alice",
+   "score": -10.98
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Charlie",
+   "score": -10.15
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Bob",
+   "score": -13.78
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Alice",
+   "score": -13.64
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Charlie",
+   "score": -14.55
+  }
+ ],
+ "g035": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Bob",
+   "score": -13.19
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Charlie",
+   "score": -20.77
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Alice",
+   "score": -14.02
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Charlie",
+   "score": -9.28
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Alice",
+   "score": -14.93
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Bob",
+   "score": -13.05
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Charlie",
+   "score": -16.1
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Alice",
+   "score": -19.05
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Bob",
+   "score": -13.99
+  }
+ ],
+ "g036": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Bob",
+   "score": -15.7
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Alice",
+   "score": -15.27
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Charlie",
+   "score": -14.78
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Bob",
+   "score": -14.59
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Alice",
+   "score": -14.47
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Charlie",
+   "score": -15.61
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Bob",
+   "score": -17.53
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Charlie",
+   "score": -13.29
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Alice",
+   "score": -14.96
+  }
+ ],
+ "g037": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Charlie",
+   "score": -11.43
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Alice",
+   "score": -8.19
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Bob",
+   "score": -15.05
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Alice",
+   "score": -16.63
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Charlie",
+   "score": -14.57
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Bob",
+   "score": -10.58
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Charlie",
+   "score": -16.47
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Bob",
+   "score": -17.73
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Alice",
+   "score": -17.55
+  }
+ ],
+ "g038": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Charlie",
+   "score": -14.16
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Bob",
+   "score": -11.59
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Alice",
+   "score": -17.19
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Bob",
+   "score": -11.62
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Charlie",
+   "score": -15.12
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Alice",
+   "score": -12.72
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Bob",
+   "score": -16.44
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Charlie",
+   "score": -16.12
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Alice",
+   "score": -17.35
+  }
+ ],
+ "g039": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Alice",
+   "score": -9.05
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Bob",
+   "score": -12.68
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Charlie",
+   "score": -15.22
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Bob",
+   "score": -13.0
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Charlie",
+   "score": -13.23
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Alice",
+   "score": -11.41
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Bob",
+   "score": -12.35
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Alice",
+   "score": -13.74
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Charlie",
+   "score": -13.56
+  }
+ ],
+ "g040": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Charlie",
+   "score": -13.99
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Bob",
+   "score": -13.79
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Alice",
+   "score": -14.28
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Charlie",
+   "score": -13.87
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Alice",
+   "score": -14.36
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Bob",
+   "score": -14.14
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Alice",
+   "score": -14.35
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Bob",
+   "score": -14.93
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Charlie",
+   "score": -14.31
+  }
+ ],
+ "g041": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Bob",
+   "score": -12.0
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Alice",
+   "score": -12.14
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Charlie",
+   "score": -13.25
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Bob",
+   "score": -13.58
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Charlie",
+   "score": -13.93
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Alice",
+   "score": -13.35
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Charlie",
+   "score": -11.75
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Bob",
+   "score": -16.1
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Alice",
+   "score": -18.18
+  }
+ ],
+ "g042": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Bob",
+   "score": -13.1
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Charlie",
+   "score": -15.89
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Alice",
+   "score": -16.68
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Charlie",
+   "score": -15.78
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Alice",
+   "score": -14.29
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Bob",
+   "score": -16.27
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Charlie",
+   "score": -11.99
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Bob",
+   "score": -18.03
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Alice",
+   "score": -14.17
+  }
+ ],
+ "g043": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Alice",
+   "score": -14.83
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Bob",
+   "score": -15.13
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Charlie",
+   "score": -15.6
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Alice",
+   "score": -15.88
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Charlie",
+   "score": -14.35
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Bob",
+   "score": -13.16
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Alice",
+   "score": -11.05
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Bob",
+   "score": -12.17
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Charlie",
+   "score": -13.65
+  }
+ ],
+ "g044": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Alice",
+   "score": -14.88
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Charlie",
+   "score": -13.66
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Bob",
+   "score": -17.13
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Alice",
+   "score": -11.76
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Bob",
+   "score": -15.52
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Charlie",
+   "score": -9.59
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Alice",
+   "score": -16.6
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Bob",
+   "score": -15.11
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Charlie",
+   "score": -14.63
+  }
+ ],
+ "g045": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Charlie",
+   "score": -10.81
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Bob",
+   "score": -15.75
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Alice",
+   "score": -17.72
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Bob",
+   "score": -14.74
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Alice",
+   "score": -16.31
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Charlie",
+   "score": -16.19
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Bob",
+   "score": -11.67
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Charlie",
+   "score": -16.63
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Alice",
+   "score": -14.77
+  }
+ ],
+ "g046": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Bob",
+   "score": -11.62
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Charlie",
+   "score": -12.08
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Alice",
+   "score": -15.38
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Bob",
+   "score": -13.87
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Alice",
+   "score": -9.0
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Charlie",
+   "score": -13.33
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Bob",
+   "score": -14.67
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Alice",
+   "score": -7.55
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Charlie",
+   "score": -14.56
+  }
+ ],
+ "g047": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Charlie",
+   "score": -12.67
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Alice",
+   "score": -15.37
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Bob",
+   "score": -17.34
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Charlie",
+   "score": -15.57
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Bob",
+   "score": -17.71
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Alice",
+   "score": -16.16
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Bob",
+   "score": -17.49
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Charlie",
+   "score": -15.05
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Alice",
+   "score": -14.88
+  }
+ ],
+ "g048": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Alice",
+   "score": -12.95
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Charlie",
+   "score": -12.2
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Bob",
+   "score": -13.33
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Charlie",
+   "score": -15.33
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Bob",
+   "score": -15.24
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Alice",
+   "score": -11.58
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Bob",
+   "score": -8.88
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Alice",
+   "score": -17.78
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Charlie",
+   "score": -9.82
+  }
+ ],
+ "g049": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Bob",
+   "score": -10.52
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Charlie",
+   "score": -11.88
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Alice",
+   "score": -14.66
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Charlie",
+   "score": -14.79
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Alice",
+   "score": -13.46
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Bob",
+   "score": -12.82
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Alice",
+   "score": -11.29
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Bob",
+   "score": -14.91
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Charlie",
+   "score": -17.18
+  }
+ ],
+ "g050": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Alice",
+   "score": -16.79
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Charlie",
+   "score": -15.36
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Bob",
+   "score": -11.73
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Charlie",
+   "score": -13.57
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Alice",
+   "score": -12.08
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Bob",
+   "score": -14.74
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Alice",
+   "score": -12.46
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Bob",
+   "score": -14.54
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Charlie",
+   "score": -18.17
+  }
+ ],
+ "g051": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Bob",
+   "score": -14.5
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Alice",
+   "score": -11.48
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Charlie",
+   "score": -16.28
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Bob",
+   "score": -17.55
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Charlie",
+   "score": -15.38
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Alice",
+   "score": -14.11
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Bob",
+   "score": -13.74
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Alice",
+   "score": -13.09
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Charlie",
+   "score": -13.92
+  }
+ ],
+ "g052": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Alice",
+   "score": -15.09
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Charlie",
+   "score": -17.06
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Bob",
+   "score": -14.37
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Alice",
+   "score": -15.02
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Charlie",
+   "score": -14.64
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Bob",
+   "score": -13.89
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Alice",
+   "score": -13.2
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Charlie",
+   "score": -13.21
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Bob",
+   "score": -17.36
+  }
+ ],
+ "g053": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Alice",
+   "score": -11.74
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Bob",
+   "score": -11.37
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Charlie",
+   "score": -14.78
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Alice",
+   "score": -15.62
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Charlie",
+   "score": -11.79
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Bob",
+   "score": -13.54
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Charlie",
+   "score": -11.99
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Alice",
+   "score": -11.53
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Bob",
+   "score": -14.63
+  }
+ ],
+ "g054": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Bob",
+   "score": -11.56
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Charlie",
+   "score": -12.65
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Alice",
+   "score": -13.69
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Charlie",
+   "score": -14.13
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Bob",
+   "score": -18.53
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Alice",
+   "score": -16.29
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Charlie",
+   "score": -14.89
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Bob",
+   "score": -11.69
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Alice",
+   "score": -16.14
+  }
+ ],
+ "g055": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Alice",
+   "score": -16.26
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Charlie",
+   "score": -15.04
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Bob",
+   "score": -16.42
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Alice",
+   "score": -9.99
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Charlie",
+   "score": -11.28
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Bob",
+   "score": -12.38
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Charlie",
+   "score": -14.4
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Alice",
+   "score": -12.06
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Bob",
+   "score": -12.7
+  }
+ ],
+ "g056": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Bob",
+   "score": -13.55
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Charlie",
+   "score": -15.9
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Alice",
+   "score": -13.77
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Bob",
+   "score": -11.11
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Charlie",
+   "score": -14.72
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Alice",
+   "score": -16.53
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Bob",
+   "score": -14.67
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Charlie",
+   "score": -15.34
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Alice",
+   "score": -15.96
+  }
+ ],
+ "g057": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Bob",
+   "score": -14.33
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Alice",
+   "score": -13.1
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Charlie",
+   "score": -12.91
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Alice",
+   "score": -14.36
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Bob",
+   "score": -12.12
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Charlie",
+   "score": -12.52
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Alice",
+   "score": -14.02
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Charlie",
+   "score": -13.12
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Bob",
+   "score": -14.82
+  }
+ ],
+ "g058": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Alice",
+   "score": -14.88
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Charlie",
+   "score": -13.2
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Bob",
+   "score": -17.86
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Charlie",
+   "score": -17.99
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Bob",
+   "score": -16.84
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Alice",
+   "score": -6.98
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Bob",
+   "score": -16.86
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Charlie",
+   "score": -17.24
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Alice",
+   "score": -17.65
+  }
+ ],
+ "g059": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Alice",
+   "score": -13.22
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Bob",
+   "score": -14.75
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Charlie",
+   "score": -14.53
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Bob",
+   "score": -15.06
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Charlie",
+   "score": -15.31
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Alice",
+   "score": -10.46
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Charlie",
+   "score": -13.41
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Alice",
+   "score": -10.9
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Bob",
+   "score": -14.65
+  }
+ ],
+ "g060": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Bob",
+   "score": -12.91
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Alice",
+   "score": -14.57
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Charlie",
+   "score": -15.82
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Bob",
+   "score": -10.69
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Alice",
+   "score": -12.48
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Charlie",
+   "score": -16.71
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Alice",
+   "score": -13.03
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Charlie",
+   "score": -16.96
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Bob",
+   "score": -10.84
+  }
+ ],
+ "g061": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Charlie",
+   "score": -16.1
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Alice",
+   "score": -15.54
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Bob",
+   "score": -15.77
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Charlie",
+   "score": -13.43
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Alice",
+   "score": -18.99
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Bob",
+   "score": -16.27
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Alice",
+   "score": -17.07
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Charlie",
+   "score": -11.84
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Bob",
+   "score": -14.67
+  }
+ ],
+ "g062": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Alice",
+   "score": -12.88
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Charlie",
+   "score": -12.17
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Bob",
+   "score": -16.66
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Charlie",
+   "score": -14.22
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Bob",
+   "score": -18.51
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Alice",
+   "score": -13.71
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Charlie",
+   "score": -12.11
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Alice",
+   "score": -18.78
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Bob",
+   "score": -16.48
+  }
+ ],
+ "g063": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Bob",
+   "score": -12.44
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Charlie",
+   "score": -12.83
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Alice",
+   "score": -14.82
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Charlie",
+   "score": -12.42
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Bob",
+   "score": -16.19
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Alice",
+   "score": -14.91
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Charlie",
+   "score": -16.15
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Alice",
+   "score": -13.48
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Bob",
+   "score": -14.56
+  }
+ ],
+ "g064": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Alice",
+   "score": -13.71
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Bob",
+   "score": -16.01
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Charlie",
+   "score": -15.07
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Alice",
+   "score": -13.02
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Bob",
+   "score": -9.3
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Charlie",
+   "score": -13.64
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Bob",
+   "score": -16.81
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Charlie",
+   "score": -15.97
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Alice",
+   "score": -13.77
+  }
+ ],
+ "g065": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Alice",
+   "score": -11.15
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Bob",
+   "score": -13.4
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Charlie",
+   "score": -10.01
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Alice",
+   "score": -15.8
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Charlie",
+   "score": -10.78
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Bob",
+   "score": -14.25
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Alice",
+   "score": -11.06
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Charlie",
+   "score": -12.59
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Bob",
+   "score": -14.05
+  }
+ ],
+ "g066": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Alice",
+   "score": -13.73
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Bob",
+   "score": -15.73
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Charlie",
+   "score": -15.29
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Alice",
+   "score": -13.2
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Charlie",
+   "score": -14.2
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Bob",
+   "score": -9.28
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Alice",
+   "score": -13.97
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Charlie",
+   "score": -16.73
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Bob",
+   "score": -14.62
+  }
+ ],
+ "g067": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Charlie",
+   "score": -11.07
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Alice",
+   "score": -12.26
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Bob",
+   "score": -14.98
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Alice",
+   "score": -10.36
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Charlie",
+   "score": -15.66
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Bob",
+   "score": -14.71
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Alice",
+   "score": -15.55
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Charlie",
+   "score": -13.98
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Bob",
+   "score": -13.04
+  }
+ ],
+ "g068": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Bob",
+   "score": -13.94
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Charlie",
+   "score": -13.17
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Alice",
+   "score": -13.14
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Charlie",
+   "score": -14.19
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Bob",
+   "score": -15.59
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Alice",
+   "score": -13.07
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Charlie",
+   "score": -16.59
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Bob",
+   "score": -16.39
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Alice",
+   "score": -15.11
+  }
+ ],
+ "g069": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Bob",
+   "score": -11.43
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Alice",
+   "score": -15.16
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Charlie",
+   "score": -14.1
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Alice",
+   "score": -11.11
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Charlie",
+   "score": -14.58
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Bob",
+   "score": -15.4
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Charlie",
+   "score": -12.3
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Bob",
+   "score": -17.97
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Alice",
+   "score": -13.02
+  }
+ ],
+ "g070": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Charlie",
+   "score": -11.39
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Alice",
+   "score": -12.91
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Bob",
+   "score": -13.5
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Alice",
+   "score": -15.57
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Bob",
+   "score": -16.93
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Charlie",
+   "score": -16.62
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Alice",
+   "score": -14.68
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Charlie",
+   "score": -14.18
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Bob",
+   "score": -14.8
+  }
+ ],
+ "g071": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Alice",
+   "score": -12.0
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Charlie",
+   "score": -13.42
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Bob",
+   "score": -10.37
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Charlie",
+   "score": -11.32
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Bob",
+   "score": -13.78
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Alice",
+   "score": -13.02
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Bob",
+   "score": -14.07
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Alice",
+   "score": -12.1
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Charlie",
+   "score": -14.81
+  }
+ ],
+ "g072": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Bob",
+   "score": -11.04
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Charlie",
+   "score": -14.45
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Alice",
+   "score": -13.89
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Charlie",
+   "score": -15.91
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Alice",
+   "score": -13.53
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Bob",
+   "score": -12.94
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Alice",
+   "score": -13.06
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Charlie",
+   "score": -14.15
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Bob",
+   "score": -12.04
+  }
+ ],
+ "g073": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Charlie",
+   "score": -15.61
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Bob",
+   "score": -13.57
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Alice",
+   "score": -11.61
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Charlie",
+   "score": -18.7
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Bob",
+   "score": -16.57
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Alice",
+   "score": -13.46
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Charlie",
+   "score": -14.25
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Alice",
+   "score": -15.69
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Bob",
+   "score": -12.01
+  }
+ ],
+ "g074": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Alice",
+   "score": -9.46
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Charlie",
+   "score": -12.81
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Bob",
+   "score": -11.73
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Alice",
+   "score": -12.16
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Charlie",
+   "score": -13.06
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Bob",
+   "score": -14.05
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Charlie",
+   "score": -12.11
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Alice",
+   "score": -10.61
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Bob",
+   "score": -14.09
+  }
+ ],
+ "g075": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Alice",
+   "score": -10.5
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Charlie",
+   "score": -11.15
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Bob",
+   "score": -13.66
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Charlie",
+   "score": -13.36
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Bob",
+   "score": -10.66
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Alice",
+   "score": -14.09
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Charlie",
+   "score": -15.74
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Bob",
+   "score": -14.69
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Alice",
+   "score": -16.43
+  }
+ ],
+ "g076": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Bob",
+   "score": -16.0
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Charlie",
+   "score": -15.1
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Alice",
+   "score": -14.6
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Charlie",
+   "score": -14.27
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Bob",
+   "score": -13.49
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Alice",
+   "score": -13.52
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Bob",
+   "score": -9.47
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Alice",
+   "score": -15.93
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Charlie",
+   "score": -16.92
+  }
+ ],
+ "g077": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Bob",
+   "score": -13.48
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Charlie",
+   "score": -15.33
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Alice",
+   "score": -13.37
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Bob",
+   "score": -12.33
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Alice",
+   "score": -13.07
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Charlie",
+   "score": -13.12
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Alice",
+   "score": -15.85
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Bob",
+   "score": -16.87
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Charlie",
+   "score": -11.63
+  }
+ ],
+ "g078": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Alice",
+   "score": -12.19
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Bob",
+   "score": -10.13
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Charlie",
+   "score": -16.6
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Alice",
+   "score": -13.71
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Bob",
+   "score": -11.23
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Charlie",
+   "score": -12.94
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Alice",
+   "score": -13.98
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Charlie",
+   "score": -11.88
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Bob",
+   "score": -10.1
+  }
+ ],
+ "g079": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Bob",
+   "score": -16.28
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Alice",
+   "score": -14.77
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Charlie",
+   "score": -13.74
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Alice",
+   "score": -15.8
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Bob",
+   "score": -16.61
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Charlie",
+   "score": -12.23
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Alice",
+   "score": -11.41
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Charlie",
+   "score": -13.36
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Bob",
+   "score": -15.38
+  }
+ ],
+ "g080": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Bob",
+   "score": -9.37
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Charlie",
+   "score": -15.66
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Alice",
+   "score": -13.69
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Charlie",
+   "score": -13.88
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Bob",
+   "score": -10.93
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Alice",
+   "score": -12.3
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Bob",
+   "score": -14.83
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Charlie",
+   "score": -18.3
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Alice",
+   "score": -12.38
+  }
+ ],
+ "g081": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Alice",
+   "score": -10.15
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Charlie",
+   "score": -11.68
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Bob",
+   "score": -13.89
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Alice",
+   "score": -14.81
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Bob",
+   "score": -14.9
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Charlie",
+   "score": -13.57
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Alice",
+   "score": -6.97
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Charlie",
+   "score": -14.42
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Bob",
+   "score": -16.28
+  }
+ ],
+ "g082": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Bob",
+   "score": -9.59
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Alice",
+   "score": -13.53
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Charlie",
+   "score": -15.58
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Alice",
+   "score": -5.91
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Charlie",
+   "score": -15.96
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Bob",
+   "score": -15.79
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Alice",
+   "score": -14.42
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Charlie",
+   "score": -12.05
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Bob",
+   "score": -12.83
+  }
+ ],
+ "g083": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Charlie",
+   "score": -13.44
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Alice",
+   "score": -12.12
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Bob",
+   "score": -12.36
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Alice",
+   "score": -11.8
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Bob",
+   "score": -12.96
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Charlie",
+   "score": -10.57
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Bob",
+   "score": -10.88
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Charlie",
+   "score": -10.46
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Alice",
+   "score": -10.66
+  }
+ ],
+ "g084": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Bob",
+   "score": -12.15
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Alice",
+   "score": -12.74
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Charlie",
+   "score": -13.92
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Bob",
+   "score": -14.56
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Alice",
+   "score": -14.02
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Charlie",
+   "score": -18.55
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Alice",
+   "score": -14.46
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Charlie",
+   "score": -12.33
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Bob",
+   "score": -17.63
+  }
+ ],
+ "g086": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Alice",
+   "score": -15.26
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Bob",
+   "score": -11.42
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Charlie",
+   "score": -15.35
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Alice",
+   "score": -14.13
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Charlie",
+   "score": -12.21
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Bob",
+   "score": -14.33
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Charlie",
+   "score": -13.02
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Alice",
+   "score": -13.09
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Bob",
+   "score": -15.92
+  }
+ ],
+ "g087": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Charlie",
+   "score": -13.69
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Bob",
+   "score": -14.9
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Alice",
+   "score": -16.55
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Bob",
+   "score": -9.4
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Alice",
+   "score": -11.06
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Charlie",
+   "score": -12.2
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Alice",
+   "score": -12.64
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Bob",
+   "score": -15.96
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Charlie",
+   "score": -13.69
+  }
+ ],
+ "g088": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Bob",
+   "score": -14.23
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Alice",
+   "score": -15.75
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Charlie",
+   "score": -9.54
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Bob",
+   "score": -10.89
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Alice",
+   "score": -13.12
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Charlie",
+   "score": -16.78
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Bob",
+   "score": -10.82
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Charlie",
+   "score": -9.43
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Alice",
+   "score": -11.76
+  }
+ ],
+ "g089": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Alice",
+   "score": -12.24
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Bob",
+   "score": -11.48
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Charlie",
+   "score": -14.38
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Alice",
+   "score": -12.52
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Charlie",
+   "score": -13.53
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Bob",
+   "score": -15.42
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Alice",
+   "score": -13.27
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Charlie",
+   "score": -17.89
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Bob",
+   "score": -14.87
+  }
+ ],
+ "g090": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Charlie",
+   "score": -12.89
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Alice",
+   "score": -13.39
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Bob",
+   "score": -14.78
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Alice",
+   "score": -13.45
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Charlie",
+   "score": -17.37
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Bob",
+   "score": -13.91
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Charlie",
+   "score": -12.09
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Bob",
+   "score": -12.23
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Alice",
+   "score": -13.32
+  }
+ ],
+ "g091": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Bob",
+   "score": -11.97
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Alice",
+   "score": -8.85
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Charlie",
+   "score": -10.89
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Bob",
+   "score": -14.46
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Charlie",
+   "score": -15.38
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Alice",
+   "score": -9.33
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Bob",
+   "score": -19.24
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Charlie",
+   "score": -17.37
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Alice",
+   "score": -13.98
+  }
+ ],
+ "g092": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Charlie",
+   "score": -11.19
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Bob",
+   "score": -16.63
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Alice",
+   "score": -13.55
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Charlie",
+   "score": -14.62
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Bob",
+   "score": -13.72
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Alice",
+   "score": -17.73
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Bob",
+   "score": -13.94
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Alice",
+   "score": -14.69
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Charlie",
+   "score": -12.37
+  }
+ ],
+ "g093": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Alice",
+   "score": -12.62
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Bob",
+   "score": -14.2
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Charlie",
+   "score": -9.7
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Alice",
+   "score": -13.23
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Bob",
+   "score": -14.41
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Charlie",
+   "score": -16.49
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Alice",
+   "score": -16.1
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Charlie",
+   "score": -14.18
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Bob",
+   "score": -12.78
+  }
+ ],
+ "g094": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Charlie",
+   "score": -12.34
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Bob",
+   "score": -12.95
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Alice",
+   "score": -14.13
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Bob",
+   "score": -10.25
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Alice",
+   "score": -13.13
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Charlie",
+   "score": -15.7
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Bob",
+   "score": -14.6
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Charlie",
+   "score": -19.11
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Alice",
+   "score": -14.58
+  }
+ ],
+ "g095": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Charlie",
+   "score": -15.17
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Alice",
+   "score": -15.31
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Bob",
+   "score": -14.38
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Alice",
+   "score": -12.28
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Charlie",
+   "score": -15.16
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Bob",
+   "score": -15.01
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Charlie",
+   "score": -13.62
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Bob",
+   "score": -17.48
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Alice",
+   "score": -9.71
+  }
+ ],
+ "g096": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Bob",
+   "score": -12.5
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Charlie",
+   "score": -16.5
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Alice",
+   "score": -16.0
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Bob",
+   "score": -12.17
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Alice",
+   "score": -11.95
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Charlie",
+   "score": -12.41
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Alice",
+   "score": -11.02
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Bob",
+   "score": -14.53
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Charlie",
+   "score": -16.77
+  }
+ ],
+ "g097": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Alice",
+   "score": -11.54
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Charlie",
+   "score": -10.61
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Bob",
+   "score": -12.47
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Charlie",
+   "score": -15.08
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Alice",
+   "score": -14.2
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Bob",
+   "score": -13.84
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Alice",
+   "score": -13.01
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Bob",
+   "score": -9.97
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Charlie",
+   "score": -15.26
+  }
+ ],
+ "g098": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Bob",
+   "score": -15.59
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Charlie",
+   "score": -13.88
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Alice",
+   "score": -16.05
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Charlie",
+   "score": -15.05
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Alice",
+   "score": -13.6
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Bob",
+   "score": -17.39
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Alice",
+   "score": -15.85
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Bob",
+   "score": -11.71
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Charlie",
+   "score": -20.87
+  }
+ ],
+ "g099": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Bob",
+   "score": -14.91
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Charlie",
+   "score": -15.22
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Alice",
+   "score": -10.04
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Bob",
+   "score": -11.01
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Charlie",
+   "score": -12.25
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Alice",
+   "score": -15.41
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Charlie",
+   "score": -18.54
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Alice",
+   "score": -14.69
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Bob",
+   "score": -7.28
+  }
+ ]
+}

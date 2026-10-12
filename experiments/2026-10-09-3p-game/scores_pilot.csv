@@ -1,0 +1,10 @@
+game_id,seed_group,round,position,speaker,role,followup_p,followup_logodds,prompt_tokens,trimmed
+g001,0,0,0,Charlie,Carrot,0.000000,-14.5518,2373,0
+g001,0,0,1,Bob,Parsnip,0.000000,-17.0204,3233,0
+g001,0,0,2,Alice,Carrot,0.000000,-15.6274,4045,0
+g001,0,1,0,Bob,Parsnip,0.000001,-13.6322,5447,0
+g001,0,1,1,Alice,Carrot,0.000001,-13.5027,3475,0
+g001,0,1,2,Charlie,Carrot,0.000000,-16.6454,3473,0
+g001,0,2,0,Alice,Carrot,0.000002,-13.1339,2652,0
+g001,0,2,1,Charlie,Carrot,0.000000,-16.1144,5956,0
+g001,0,2,2,Bob,Parsnip,0.000000,-15.0567,6229,0

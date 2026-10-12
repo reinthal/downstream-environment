@@ -1,0 +1,13 @@
+# 3-player Carrot-Parsnip (2 Carrots vs 1 Parsnip), three discussion rounds,
+# default prompts unchanged. Only deltas from the engine's
+# environments/carrot_parsnip/configs/default.yaml are listed.
+carrot:
+  count: 2
+parsnip:
+  count: 1
+ejection_threshold: 2
+num_rounds_discussion: 3
+
+eval_model: openrouter/qwen/qwen3.5-27b
+max_tokens: 4000
+max_concurrent_games: 20
