@@ -1,0 +1,14 @@
+# 3-player Carrot-Parsnip (2 Carrots vs 1 Parsnip), three discussion rounds,
+# default prompts unchanged — as experiments/2026-10-09-3p-game/game.yaml,
+# with the players on the local Qwen3.8-27B server (serving/serve_qwen38.py,
+# thinking off by default; inspect reads VLLM_BASE_URL / VLLM_API_KEY).
+carrot:
+  count: 2
+parsnip:
+  count: 1
+ejection_threshold: 2
+num_rounds_discussion: 3
+
+eval_model: openai-api/vllm/Qwen/Qwen3.8-27B
+max_tokens: 4000
+max_concurrent_games: 50
