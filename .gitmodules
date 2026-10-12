@@ -4,3 +4,6 @@
 [submodule "vendor/Carrot-Parsnip-Tournament-Benchmark"]
 	path = environments/carrot_parsnip
 	url = https://github.com/reinthal/Carrot-Parsnip-Tournament-Benchmark.git
+[submodule "vendor/caught-in-the-act-probes"]
+	path = vendor/caught-in-the-act-probes
+	url = https://github.com/AlignmentResearch/caught-in-the-act-probes.git

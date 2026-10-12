@@ -4,6 +4,7 @@ __pycache__/
 .env
 vendor/*
 !vendor/deception-detection
+!vendor/caught-in-the-act-probes
 experiments/**/activations_*.npz
 experiments/**/activations_alpaca_*.npz
 experiments/**/message_activations_*.npz
