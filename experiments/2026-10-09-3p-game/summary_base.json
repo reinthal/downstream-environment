@@ -1,0 +1,3319 @@
+{
+ "total_games": 100,
+ "completed_games": 100,
+ "failed_games": 0,
+ "failures": [],
+ "carrot_wins": 57,
+ "parsnip_wins": 43,
+ "parsnip_wins_other_eliminated": 40,
+ "parsnip_wins_nobody_eliminated": 3,
+ "draws": 0,
+ "draws_enabled": false,
+ "include_parsnip": true,
+ "carrot_win_rate": 0.57,
+ "parsnip_win_rate": 0.43,
+ "cost": 14.916600360000004,
+ "games": [
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": false
+    }
+   ],
+   "parsnip_player": "Alice",
+   "parsnip_eliminated": false,
+   "winner": "Parsnip",
+   "outcome": "parsnip_win_other_eliminated",
+   "game_id": 0
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Bob",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 1
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Charlie",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": null
+    }
+   ],
+   "parsnip_player": "Charlie",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 2
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Bob",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 3
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": false
+    }
+   ],
+   "parsnip_player": "Alice",
+   "parsnip_eliminated": false,
+   "winner": "Parsnip",
+   "outcome": "parsnip_win_other_eliminated",
+   "game_id": 4
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Bob",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Bob",
+   "parsnip_eliminated": false,
+   "winner": "Parsnip",
+   "outcome": "parsnip_win_other_eliminated",
+   "game_id": 5
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": false
+    }
+   ],
+   "parsnip_player": "Alice",
+   "parsnip_eliminated": false,
+   "winner": "Parsnip",
+   "outcome": "parsnip_win_other_eliminated",
+   "game_id": 6
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Bob",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 7
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Charlie",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": null
+    }
+   ],
+   "parsnip_player": "Charlie",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 8
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Bob",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 9
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Charlie",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": null
+    }
+   ],
+   "parsnip_player": "Charlie",
+   "parsnip_eliminated": false,
+   "winner": "Parsnip",
+   "outcome": "parsnip_win_nobody_eliminated",
+   "game_id": 10
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Bob",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 11
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": false
+    }
+   ],
+   "parsnip_player": "Alice",
+   "parsnip_eliminated": false,
+   "winner": "Parsnip",
+   "outcome": "parsnip_win_other_eliminated",
+   "game_id": 12
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": false
+    }
+   ],
+   "parsnip_player": "Bob",
+   "parsnip_eliminated": false,
+   "winner": "Parsnip",
+   "outcome": "parsnip_win_other_eliminated",
+   "game_id": 13
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Charlie",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": null
+    }
+   ],
+   "parsnip_player": "Charlie",
+   "parsnip_eliminated": false,
+   "winner": "Parsnip",
+   "outcome": "parsnip_win_other_eliminated",
+   "game_id": 14
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Alice",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 15
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Bob",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 16
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Bob",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": false
+    }
+   ],
+   "parsnip_player": "Bob",
+   "parsnip_eliminated": false,
+   "winner": "Parsnip",
+   "outcome": "parsnip_win_other_eliminated",
+   "game_id": 17
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Bob",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 18
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": false
+    }
+   ],
+   "parsnip_player": "Alice",
+   "parsnip_eliminated": false,
+   "winner": "Parsnip",
+   "outcome": "parsnip_win_other_eliminated",
+   "game_id": 19
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Bob",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 20
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Charlie",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": null
+    }
+   ],
+   "parsnip_player": "Charlie",
+   "parsnip_eliminated": false,
+   "winner": "Parsnip",
+   "outcome": "parsnip_win_other_eliminated",
+   "game_id": 21
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Alice",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 22
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Bob",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 23
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Alice",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 24
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Bob",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Bob",
+   "parsnip_eliminated": false,
+   "winner": "Parsnip",
+   "outcome": "parsnip_win_other_eliminated",
+   "game_id": 25
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Alice",
+   "parsnip_eliminated": false,
+   "winner": "Parsnip",
+   "outcome": "parsnip_win_other_eliminated",
+   "game_id": 26
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Bob",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Bob",
+   "parsnip_eliminated": false,
+   "winner": "Parsnip",
+   "outcome": "parsnip_win_other_eliminated",
+   "game_id": 27
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Bob",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 28
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Charlie",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": null
+    }
+   ],
+   "parsnip_player": "Charlie",
+   "parsnip_eliminated": false,
+   "winner": "Parsnip",
+   "outcome": "parsnip_win_other_eliminated",
+   "game_id": 29
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": false
+    }
+   ],
+   "parsnip_player": "Alice",
+   "parsnip_eliminated": false,
+   "winner": "Parsnip",
+   "outcome": "parsnip_win_other_eliminated",
+   "game_id": 30
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Charlie",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": null
+    }
+   ],
+   "parsnip_player": "Charlie",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 31
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Bob",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 32
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Charlie",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": null
+    }
+   ],
+   "parsnip_player": "Charlie",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 33
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Bob",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 34
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Charlie",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": null
+    }
+   ],
+   "parsnip_player": "Charlie",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 35
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Alice",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 36
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": false
+    }
+   ],
+   "parsnip_player": "Alice",
+   "parsnip_eliminated": false,
+   "winner": "Parsnip",
+   "outcome": "parsnip_win_other_eliminated",
+   "game_id": 37
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Bob",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 38
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Charlie",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": null
+    }
+   ],
+   "parsnip_player": "Charlie",
+   "parsnip_eliminated": false,
+   "winner": "Parsnip",
+   "outcome": "parsnip_win_other_eliminated",
+   "game_id": 39
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Alice",
+   "parsnip_eliminated": false,
+   "winner": "Parsnip",
+   "outcome": "parsnip_win_other_eliminated",
+   "game_id": 40
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Alice",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 41
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Bob",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": false
+    }
+   ],
+   "parsnip_player": "Bob",
+   "parsnip_eliminated": false,
+   "winner": "Parsnip",
+   "outcome": "parsnip_win_other_eliminated",
+   "game_id": 42
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Charlie",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": null
+    }
+   ],
+   "parsnip_player": "Charlie",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 43
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Alice",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 44
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Charlie",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": null
+    }
+   ],
+   "parsnip_player": "Charlie",
+   "parsnip_eliminated": false,
+   "winner": "Parsnip",
+   "outcome": "parsnip_win_other_eliminated",
+   "game_id": 45
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Bob",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": false
+    }
+   ],
+   "parsnip_player": "Bob",
+   "parsnip_eliminated": false,
+   "winner": "Parsnip",
+   "outcome": "parsnip_win_other_eliminated",
+   "game_id": 46
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": false
+    }
+   ],
+   "parsnip_player": "Alice",
+   "parsnip_eliminated": false,
+   "winner": "Parsnip",
+   "outcome": "parsnip_win_other_eliminated",
+   "game_id": 47
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Bob",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 48
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Charlie",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": null
+    }
+   ],
+   "parsnip_player": "Charlie",
+   "parsnip_eliminated": false,
+   "winner": "Parsnip",
+   "outcome": "parsnip_win_other_eliminated",
+   "game_id": 49
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Bob",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 50
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Bob",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 51
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Bob",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 52
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Bob",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Bob",
+   "parsnip_eliminated": false,
+   "winner": "Parsnip",
+   "outcome": "parsnip_win_other_eliminated",
+   "game_id": 53
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Bob",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 54
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Bob",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Bob",
+   "parsnip_eliminated": false,
+   "winner": "Parsnip",
+   "outcome": "parsnip_win_other_eliminated",
+   "game_id": 55
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Bob",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 56
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Charlie",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": null
+    }
+   ],
+   "parsnip_player": "Charlie",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 57
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": false
+    }
+   ],
+   "parsnip_player": "Alice",
+   "parsnip_eliminated": false,
+   "winner": "Parsnip",
+   "outcome": "parsnip_win_other_eliminated",
+   "game_id": 58
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Bob",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 59
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Bob",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 60
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Charlie",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": null
+    }
+   ],
+   "parsnip_player": "Charlie",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 61
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Bob",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Bob",
+   "parsnip_eliminated": false,
+   "winner": "Parsnip",
+   "outcome": "parsnip_win_nobody_eliminated",
+   "game_id": 62
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Bob",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 63
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Bob",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": false
+    }
+   ],
+   "parsnip_player": "Bob",
+   "parsnip_eliminated": false,
+   "winner": "Parsnip",
+   "outcome": "parsnip_win_other_eliminated",
+   "game_id": 64
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Charlie",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": null
+    }
+   ],
+   "parsnip_player": "Charlie",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 65
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Bob",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 66
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Parsnip",
+     "correct": null
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": false
+    }
+   ],
+   "parsnip_player": "Alice",
+   "parsnip_eliminated": false,
+   "winner": "Parsnip",
+   "outcome": "parsnip_win_nobody_eliminated",
+   "game_id": 67
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Bob",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": false
+    }
+   ],
+   "parsnip_player": "Bob",
+   "parsnip_eliminated": false,
+   "winner": "Parsnip",
+   "outcome": "parsnip_win_other_eliminated",
+   "game_id": 68
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": false
+    }
+   ],
+   "parsnip_player": "Alice",
+   "parsnip_eliminated": false,
+   "winner": "Parsnip",
+   "outcome": "parsnip_win_other_eliminated",
+   "game_id": 69
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Alice",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 70
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Alice",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 71
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Bob",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": false
+    }
+   ],
+   "parsnip_player": "Bob",
+   "parsnip_eliminated": false,
+   "winner": "Parsnip",
+   "outcome": "parsnip_win_other_eliminated",
+   "game_id": 72
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Alice",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 73
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Charlie",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": null
+    }
+   ],
+   "parsnip_player": "Charlie",
+   "parsnip_eliminated": false,
+   "winner": "Parsnip",
+   "outcome": "parsnip_win_other_eliminated",
+   "game_id": 74
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Parsnip",
+     "correct": null
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": false
+    }
+   ],
+   "parsnip_player": "Alice",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 75
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Alice",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 76
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Charlie",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": null
+    }
+   ],
+   "parsnip_player": "Charlie",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 77
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Bob",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 78
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Charlie",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": null
+    }
+   ],
+   "parsnip_player": "Charlie",
+   "parsnip_eliminated": false,
+   "winner": "Parsnip",
+   "outcome": "parsnip_win_other_eliminated",
+   "game_id": 79
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Bob",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 80
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": false
+    }
+   ],
+   "parsnip_player": "Bob",
+   "parsnip_eliminated": false,
+   "winner": "Parsnip",
+   "outcome": "parsnip_win_other_eliminated",
+   "game_id": 81
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": false
+    }
+   ],
+   "parsnip_player": "Bob",
+   "parsnip_eliminated": false,
+   "winner": "Parsnip",
+   "outcome": "parsnip_win_other_eliminated",
+   "game_id": 82
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Alice",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 83
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Charlie",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": null
+    }
+   ],
+   "parsnip_player": "Charlie",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 84
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Charlie",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": null
+    }
+   ],
+   "parsnip_player": "Charlie",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 85
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Charlie",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": null
+    }
+   ],
+   "parsnip_player": "Charlie",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 86
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Bob",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 87
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Charlie",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": null
+    }
+   ],
+   "parsnip_player": "Charlie",
+   "parsnip_eliminated": false,
+   "winner": "Parsnip",
+   "outcome": "parsnip_win_other_eliminated",
+   "game_id": 88
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": false
+    }
+   ],
+   "parsnip_player": "Bob",
+   "parsnip_eliminated": false,
+   "winner": "Parsnip",
+   "outcome": "parsnip_win_other_eliminated",
+   "game_id": 89
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Alice",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 90
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Alice",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 91
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Charlie",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": null
+    }
+   ],
+   "parsnip_player": "Charlie",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 92
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Bob",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": false
+    }
+   ],
+   "parsnip_player": "Bob",
+   "parsnip_eliminated": false,
+   "winner": "Parsnip",
+   "outcome": "parsnip_win_other_eliminated",
+   "game_id": 93
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Charlie",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": null
+    }
+   ],
+   "parsnip_player": "Charlie",
+   "parsnip_eliminated": false,
+   "winner": "Parsnip",
+   "outcome": "parsnip_win_other_eliminated",
+   "game_id": 94
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Bob",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Bob",
+   "parsnip_eliminated": false,
+   "winner": "Parsnip",
+   "outcome": "parsnip_win_other_eliminated",
+   "game_id": 95
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": false
+    },
+    {
+     "name": "Charlie",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Carrot",
+     "correct": null
+    }
+   ],
+   "parsnip_player": "Charlie",
+   "parsnip_eliminated": false,
+   "winner": "Parsnip",
+   "outcome": "parsnip_win_other_eliminated",
+   "game_id": 96
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Charlie",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": null
+    }
+   ],
+   "parsnip_player": "Charlie",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 97
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Bob",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Alice",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 98
+  },
+  {
+   "votes": [
+    {
+     "name": "Alice",
+     "role": "Parsnip",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Charlie",
+     "target_role": "Carrot",
+     "correct": null
+    },
+    {
+     "name": "Bob",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Parsnip",
+     "correct": true
+    },
+    {
+     "name": "Charlie",
+     "role": "Carrot",
+     "model": "openrouter/qwen/qwen3.5-27b",
+     "target": "Alice",
+     "target_role": "Parsnip",
+     "correct": true
+    }
+   ],
+   "parsnip_player": "Alice",
+   "parsnip_eliminated": true,
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "game_id": 99
+  }
+ ],
+ "base_seed": 1000
+}

@@ -40,7 +40,8 @@ VOTED = "Elimination vote cast"
 
 
 class GameFailed(Exception):
-    """The game did not complete (provider error, missing vote, ...)."""
+    """The game did not complete (provider error, missing vote, ...) or broke
+    the one-announcement-per-turn format (see PREREGISTRATION.md, Deviations)."""
 
 
 def turns(sample) -> list[dict]:
@@ -99,7 +100,7 @@ def parse_game(log, game_cfg: GameConfig) -> tuple[dict, list[dict]]:
         made = [x for x in t["tools"] if x.function == "MakeAnnouncementTool"
                 and str(x.result).startswith(ANNOUNCED)]
         if len(made) > 1:
-            raise ValueError(f"{speaker} made {len(made)} announcements in one turn")
+            raise GameFailed(f"{speaker} made {len(made)} announcements in one turn")
         first_call = t["calls"][0]
         rows.append({
             "round": rnd - 1, "position": pos, "speaker": speaker,
@@ -138,7 +139,7 @@ def main():
         try:
             meta, rows = parse_game(read_eval_log(str(path), resolve_attachments=True), game_cfg)
         except GameFailed as exc:
-            excluded.append({**ident, "reason": f"failed game: {exc}"})
+            excluded.append({**ident, "reason": str(exc)})
             continue
         silent = [r["speaker"] for r in rows if r["round"] == last_round and not r["announcement"]]
         if silent:

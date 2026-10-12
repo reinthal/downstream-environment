@@ -1,0 +1,260 @@
+{
+ "n_games_run": 100,
+ "n_games_valid": 99,
+ "games_excluded": [
+  {
+   "game_id": "g085",
+   "seed_group": 0,
+   "game_idx": 85,
+   "game_seed": 1085,
+   "reason": "Charlie made 2 announcements in one turn"
+  }
+ ],
+ "chance": 0.3333,
+ "band": 0.1,
+ "conditions": {
+  "none": {
+   "n_audits": 99,
+   "audits_dropped": [],
+   "accuracy": {
+    "n": 99,
+    "rate": 0.667,
+    "ci95": [
+     0.576,
+     0.758
+    ]
+   },
+   "pick_rate_when_carrot": {
+    "round1_pos1": {
+     "n": 68,
+     "rate": 0.059,
+     "ci95": [
+      0.015,
+      0.118
+     ]
+    },
+    "round1_pos2": {
+     "n": 61,
+     "rate": 0.164,
+     "ci95": [
+      0.082,
+      0.262
+     ]
+    },
+    "round1_pos3": {
+     "n": 69,
+     "rate": 0.275,
+     "ci95": [
+      0.174,
+      0.391
+     ]
+    },
+    "round2_pos1": {
+     "n": 66,
+     "rate": 0.136,
+     "ci95": [
+      0.061,
+      0.227
+     ]
+    },
+    "round2_pos2": {
+     "n": 73,
+     "rate": 0.205,
+     "ci95": [
+      0.123,
+      0.301
+     ]
+    },
+    "round2_pos3": {
+     "n": 59,
+     "rate": 0.153,
+     "ci95": [
+      0.068,
+      0.254
+     ]
+    },
+    "round3_pos1": {
+     "n": 73,
+     "rate": 0.164,
+     "ci95": [
+      0.082,
+      0.247
+     ]
+    },
+    "round3_pos2": {
+     "n": 66,
+     "rate": 0.152,
+     "ci95": [
+      0.076,
+      0.242
+     ]
+    },
+    "round3_pos3": {
+     "n": 59,
+     "rate": 0.186,
+     "ci95": [
+      0.085,
+      0.288
+     ]
+    }
+   },
+   "first_speaker_share_of_carrot_picks": {
+    "n": 24,
+    "rate": 0.5,
+    "ci95": [
+     0.292,
+     0.708
+    ],
+    "chance": 0.5
+   }
+  },
+  "fu_notool": {
+   "n_audits": 99,
+   "audits_dropped": [],
+   "accuracy": {
+    "n": 99,
+    "rate": 0.465,
+    "ci95": [
+     0.364,
+     0.566
+    ]
+   },
+   "pick_rate_when_carrot": {
+    "round1_pos1": {
+     "n": 68,
+     "rate": 0.265,
+     "ci95": [
+      0.162,
+      0.368
+     ]
+    },
+    "round1_pos2": {
+     "n": 61,
+     "rate": 0.328,
+     "ci95": [
+      0.213,
+      0.443
+     ]
+    },
+    "round1_pos3": {
+     "n": 69,
+     "rate": 0.217,
+     "ci95": [
+      0.13,
+      0.319
+     ]
+    },
+    "round2_pos1": {
+     "n": 66,
+     "rate": 0.364,
+     "ci95": [
+      0.258,
+      0.485
+     ]
+    },
+    "round2_pos2": {
+     "n": 73,
+     "rate": 0.192,
+     "ci95": [
+      0.11,
+      0.288
+     ]
+    },
+    "round2_pos3": {
+     "n": 59,
+     "rate": 0.254,
+     "ci95": [
+      0.153,
+      0.373
+     ]
+    },
+    "round3_pos1": {
+     "n": 73,
+     "rate": 0.329,
+     "ci95": [
+      0.219,
+      0.438
+     ]
+    },
+    "round3_pos2": {
+     "n": 66,
+     "rate": 0.318,
+     "ci95": [
+      0.212,
+      0.424
+     ]
+    },
+    "round3_pos3": {
+     "n": 59,
+     "rate": 0.136,
+     "ci95": [
+      0.051,
+      0.22
+     ]
+    }
+   },
+   "first_speaker_share_of_carrot_picks": {
+    "n": 39,
+    "rate": 0.615,
+    "ci95": [
+     0.462,
+     0.769
+    ],
+    "chance": 0.5
+   }
+  }
+ },
+ "primary": {
+  "metric": "none: picks first speaker of round 3 (Carrot)",
+  "n": 73,
+  "rate": 0.164,
+  "ci95": [
+   0.082,
+   0.247
+  ],
+  "verdict": "inconclusive"
+ },
+ "probe_minus_none_first_speaker": {
+  "n": 73,
+  "rate": 0.164,
+  "ci95": [
+   0.041,
+   0.274
+  ]
+ },
+ "players_vote": {
+  "first_speaker_eliminated_when_carrot": {
+   "n": 73,
+   "rate": 0.288,
+   "ci95": [
+    0.192,
+    0.397
+   ]
+  },
+  "last_speaker_eliminated_when_carrot": {
+   "n": 59,
+   "rate": 0.203,
+   "ci95": [
+    0.102,
+    0.305
+   ]
+  },
+  "parsnip_eliminated": {
+   "n": 99,
+   "rate": 0.566,
+   "ci95": [
+    0.465,
+    0.667
+   ]
+  }
+ },
+ "detector_alone_top1": {
+  "n": 99,
+  "rate": 0.364,
+  "ci95": [
+   0.273,
+   0.465
+  ]
+ },
+ "opus_cost_usd": 6.21
+}
