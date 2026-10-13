@@ -1936,6 +1936,42 @@ Public announcement:
 
 > I'm confident I'm a Carrot, and Bob's been straightforward about his role. Charlie's hesitation and attempts to create doubt are exactly what a Parsnip would do - if we can't agree on a vote, the Pars […]
 
+#### Comparison probes on the same announcements (exploratory, added 2026-10-13)
+
+Requested after the main run: a random direction, the Apollo probe and the
+"did you lie" probes, with ROC curves. Definitions and full tables in the
+experiment README ("Comparison probes").
+
+| probe | read | pooled AUROC [95% game CI] | 3p | 5p |
+|---|---|---|---|---|
+| fibs linear (primary) | follow-up, full stop, Yes. − No., layers 19-58 | 0.989 [0.985, 0.992] | 0.986 | 0.990 |
+| AISI DYL (fitted at layer 38) | same stored activations, layer 35, full stop, Yes. − No. | 0.862 [0.843, 0.880] | 0.895 | 0.842 |
+| in-house DYL, thinking-off (fitted at layer 18) | same stored activations, layer 19, full stop, Yes. − No. | 0.520 [0.498, 0.542] | 0.467 | 0.521 |
+| in-house DYL, thinking-on (fitted at layer 18) | same | 0.377 [0.354, 0.398] | 0.306 | 0.465 |
+| Apollo LR (fitted at layer 16) | no follow-up; announcement tokens except the last 5; layer 19 | 0.562 [0.543, 0.582] | 0.586 | 0.500 |
+| Apollo LR | same, layer 16 | 0.522 [0.503, 0.542] | 0.544 | 0.473 |
+| random direction, matched to fibs linear | fibs read, 10 seeds | min 0.056 / median 0.411 / max 0.837 | 0.047-0.844 | 0.066-0.845 |
+
+![ROC curves per probe, 3p and 5p](../experiments/2026-10-12-fibs-probes/figures/roc.svg)
+
+ROC per probe, 3p left and 5p right, full curve above and a zoom on FPR
+0-0.2, TPR 0.8-1 below; the dashed line is random seed 0, the best of the
+ten seeds on the pooled AUROC, not a typical one.
+
+- The DYL and Apollo probes are applied off-layer (18 → 19, 38 → 35, 16 → 19),
+  the researcher's choice ("I acknowledge this limitation"), because the
+  stored activations do not include their layers; the DYL probes are also
+  read on a question and prefills they were not fitted on.
+- In-house DYL stays near chance on the fibs read, thinking-off and
+  thinking-on alike; Apollo is near chance on the announcement tokens.
+- AISI DYL reaches about 0.86, below every fibs probe. Its own random
+  directions at layer 35 span 0.017-0.931, and the fibs-matched random
+  directions span 0.056-0.837: on the follow-up read, role is visible along
+  many single directions, so "better than random" is a weak bar here. Not
+  investigated further.
+- This supersedes "no upstream Qwen DYL probe exists" above: the AISI probe
+  is one. Its run in its own model-card format (`aisi_dyl.py`) is pending.
+
 ### Parameters/Configurations
 
 `experiments/2026-10-12-fibs-probes/config.json` and `game_{3p,5p,3p_cc,5p_cc}.yaml`:

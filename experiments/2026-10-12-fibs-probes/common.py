@@ -83,6 +83,8 @@ class FibsRunConfig(ExperimentConfig):
     apollo_batch_size: int = 4
     roc_probes: list[str] = field(default_factory=lambda: ["linear", "mlp", "efc", "axial", "dyl", "apollo", "aisi"])  # solid lines of figures/roc.svg, in order (names: roc.py PROBES)
     roc_random_seed: int = 0          # the dashed random-direction line (linear-matched)
+    roc_zoom_fpr: list[float] = field(default_factory=lambda: [0.0, 0.2])   # x-range of the zoomed ROC panels
+    roc_zoom_tpr: list[float] = field(default_factory=lambda: [0.8, 1.0])   # y-range of the zoomed ROC panels
     # ── other probes on the fibs probes' own read (same_read.py, exploratory) ──
     # stored layer each probe is read at (researcher, 2026-10-13: "just run them on layer 19 instead and 35
     # respectively"); the probes were fitted at layers 18 (in-house DYL) and 38 (AISI)
