@@ -91,6 +91,8 @@ class FibsRunConfig(ExperimentConfig):
     same_read_layers: dict[str, int] = field(default_factory=lambda: {"dyl": 19, "dyl_thinking": 19, "aisi": 35})
     apollo_read_layers: list[int] = field(default_factory=lambda: [19, 16])  # 19 as instructed; 16 = the layer it was fitted at
     apollo_drop_last: int = 5         # tokens left out at the end of the reply
+    apollo_paper_batch_size: int = 2  # apollo_paper.py: whole turns incl. private thinking, up to ~13k tokens
+    apollo_paper_check_rows: int = 8  # rows per data set on which mean(per-token scores) is checked against the pooled score
     dyl_thinking_probe: str = "probes/qwen3.5-27b_layer18_followup_thinking_logistic_regression.npz"
     # ── alpaca control ──
     alpaca_path: str = "data/qwen3.5-27b_alpaca_rollouts.jsonl"

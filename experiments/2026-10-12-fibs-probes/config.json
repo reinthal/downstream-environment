@@ -126,7 +126,9 @@
   "efc",
   "axial",
   "aisi_same",
+  "aisi",
   "apollo",
+  "apollo_paper",
   "dyl_same"
  ],
  "roc_random_seed": 0,
@@ -148,5 +150,7 @@
   19,
   16
  ],
- "apollo_drop_last": 5
+ "apollo_drop_last": 5,
+ "apollo_paper_batch_size": 2,
+ "apollo_paper_check_rows": 8
 }

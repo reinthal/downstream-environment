@@ -19,8 +19,10 @@ answers) cannot be reused. This follows the model card instead:
 Layer convention. The card says layer 38 of 0..63 without saying whether that
 is the output of block 38 (this repo's "layer 38", HF hidden_states[39]) or
 hidden_states[38] (this repo's layer 37). Both are collected; ``score`` picks
-the one whose alpaca activations match the checkpoint's stored mean/std best
-(alpaca only, before any game score is looked at) and reports both.
+the one whose alpaca false-positive rate at the card's threshold is closest
+to the 1% the card says it was calibrated to, and reports both. (The rule
+was changed from "best match to the checkpoint's mean/std" after provisional
+3p/5p AUROCs for both readings had been seen; treat the choice as post hoc.)
 
   rollouts_aisi_fu_{tag}.jsonl  per announcement: key, prompt, raw completion, finish reason
   acts_aisi/{tag}.pt            keys + (N, n_candidates, d) float32 on the answer token(s)
@@ -176,8 +178,8 @@ def stage_score(cfg):
     if layers != cfg.aisi_layer_candidates:
         raise ValueError(f"collected layers {layers} != config {cfg.aisi_layer_candidates}")
 
-    # layer convention, decided on alpaca only: standardized with the
-    # checkpoint's own mean/std, the right layer is centred with unit scale
+    # layer convention, decided on alpaca only (the standardization statistics are reported but not
+    # used: the checkpoint's mean/std need not come from alpaca)
     fit = {}
     for k, L in enumerate(layers):
         z = (data["alpaca"]["acts"][:, k] - probe.dataset_mean) / probe.dataset_std
@@ -186,7 +188,8 @@ def stage_score(cfg):
                   "z_mean_of_dim_stds": float(z.std(0).mean()),
                   "z_rms": float(z.pow(2).mean().sqrt()),
                   "alpaca_fpr_at_card_threshold": float((s > thr).mean())}
-    chosen = min(layers, key=lambda L: fit[L]["z_rms"])
+    # the card calibrates its threshold to a 1% false-positive rate on alpaca: take the reading closest to that
+    chosen = min(layers, key=lambda L: abs(fit[L]["alpaca_fpr_at_card_threshold"] - (1 - cfg.fpr_quantile)))
 
     res = {"probe": f"{cfg.aisi_repo}@{cfg.aisi_revision}/{cfg.aisi_filename}", "probe_layer_card": probe.layer,
            "card_threshold": thr, "question": cfg.aisi_question, "layer_fit_on_alpaca": fit,

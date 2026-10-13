@@ -51,10 +51,14 @@ PROBES = {
     "axial": ("fibs axial", "scores_{arm}.csv", "axial_contrast", "#eda100"),
     "dyl": ("in-house DYL (layer 18, own question)", "scores_{arm}.csv", "dyl_logodds", "#b0527a"),
     "apollo": ("Apollo LR (read at layer 19, announcement tokens)", "apollo_{arm}.csv", "apollo_l19", "#008300"),
+    # the paper's read (apollo_paper.py): on-policy turn incl. private thinking in context, mean per-token score
+    # over the announcement tokens in the tool call, at the layer the probe was fitted at
+    "apollo_paper": ("Apollo LR (paper read: layer 16, thinking in context)", "apollo_paper_{arm}.csv",
+                     "apollo_paper_ann", "#8a5a2b"),
     # the DYL probes on the fibs probes' stored activations: same token (full stop) and rule (Yes. - No.) as fibs linear
     "dyl_same": ("in-house DYL (read at layer 19, fibs read)", "sameread_{arm}.csv", "dyl_stop_contrast", "#e87ba4"),
     "aisi_same": ("AISI DYL (read at layer 35, fibs read)", "sameread_{arm}.csv", "aisi_stop_contrast", "#6250d6"),
-    "aisi": ("AISI DYL (layer 38, model-card format)", "aisi_dyl_{arm}.csv", aisi_column, "#3a2d8f"),
+    "aisi": ("AISI DYL (model-card format, layer 38, calibration not reproduced)", "aisi_dyl_{arm}.csv", aisi_column, "#3a2d8f"),
 }
 RANDOM_COLOR, CHANCE_COLOR, ZOOM_COLOR = "#52514e", "#8a8983", "#1f1e1c"
 
@@ -136,7 +140,8 @@ def main():
                     title_fontsize=9, frameon=True, framealpha=1.0, edgecolor="#d5d4cf")
     fig.suptitle(SUPTITLE, fontsize=14)
     (OUT / "figures").mkdir(exist_ok=True)
-    fig.savefig(OUT / "figures" / "roc.svg"); plt.close(fig)
+    # tight bbox: the legends hang below the axes and grow with len(cfg.roc_probes); a fixed canvas clips them
+    fig.savefig(OUT / "figures" / "roc.svg", bbox_inches="tight"); plt.close(fig)
     print(f"wrote figures/roc.svg ({', '.join(cfg.roc_probes)} + random seed {seed})")
 
 
