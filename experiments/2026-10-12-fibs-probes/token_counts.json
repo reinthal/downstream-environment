@@ -1,0 +1,2611 @@
+{
+ "cap": 12000,
+ "near_cap_frac": 0.9,
+ "short_announcement_tokens": 10,
+ "n_calls_total": 7028,
+ "n_calls_without_usage": 0,
+ "arms": {
+  "3p": {
+   "disc": {
+    "n_turns": 900,
+    "reasoning_tokens": {
+     "n": 900,
+     "min": 361.0,
+     "median": 766.0,
+     "p95": 4263.899999999998,
+     "max": 9428.0,
+     "mean": 1294.201111111111
+    },
+    "tool_call_tokens": {
+     "n": 900,
+     "min": 41.0,
+     "median": 126.0,
+     "p95": 246.04999999999995,
+     "max": 361.0,
+     "mean": 136.36444444444444
+    },
+    "text_tokens_when_present": {
+     "n": 132,
+     "min": 36.0,
+     "median": 301.0,
+     "p95": 397.9,
+     "max": 459.0,
+     "mean": 300.5151515151515
+    },
+    "n_with_text": 132,
+    "frac_accepted_stop_not_tool_calls": 0.0,
+    "accepted_stop_reasons": {
+     "tool_calls": 900
+    },
+    "n_turns_resampled": 91,
+    "frac_turns_resampled": 0.10111111111111111,
+    "n_calls_per_turn": {
+     "1": 809,
+     "2": 76,
+     "3": 15
+    },
+    "cap_hits": {
+     "accepted": 0,
+     "discarded_valid_games": 79,
+     "excluded_games": 20
+    },
+    "discarded_valid_games": {
+     "max_tokens": 79,
+     "stop": 27
+    },
+    "failed_excluded_games": {
+     "max_tokens": 20,
+     "stop": 6
+    },
+    "accepted_excluded_games": 56,
+    "n_accepted_near_cap": 0,
+    "max_accepted_output_tokens": 9625,
+    "announcement_tokens": {
+     "n": 900,
+     "min": 15.0,
+     "median": 100.0,
+     "p95": 220.04999999999995,
+     "max": 335.0,
+     "mean": 110.36444444444444
+    },
+    "n_announcement_empty": 0,
+    "n_announcement_short": 0,
+    "n_announcement_no_terminal_char": 1,
+    "announcement_no_terminal_char_tails": [
+     "e or a Carrot elimination to win. Let's not give them that chance.\n\nMy vote: Bob"
+    ],
+    "shortest_announcements": [
+     "I believe Alice is the Parsnip. Bob, what's your take?",
+     "I believe Charlie is the Parsnip. Bob, I hope you agree.",
+     "I'm a Carrot. Let's all state our roles to identify the Parsnip."
+    ]
+   },
+   "vote": {
+    "n_turns": 300,
+    "reasoning_tokens": {
+     "n": 300,
+     "min": 297.0,
+     "median": 629.0,
+     "p95": 2303.55,
+     "max": 7237.0,
+     "mean": 891.4533333333334
+    },
+    "tool_call_tokens": {
+     "n": 300,
+     "min": 29.0,
+     "median": 29.0,
+     "p95": 29.0,
+     "max": 29.0,
+     "mean": 29.0
+    },
+    "text_tokens_when_present": {
+     "n": 89,
+     "min": 192.0,
+     "median": 316.0,
+     "p95": 376.6,
+     "max": 582.0,
+     "mean": 318.86516853932585
+    },
+    "n_with_text": 89,
+    "frac_accepted_stop_not_tool_calls": 0.0,
+    "accepted_stop_reasons": {
+     "tool_calls": 300
+    },
+    "n_turns_resampled": 11,
+    "frac_turns_resampled": 0.03666666666666667,
+    "n_calls_per_turn": {
+     "1": 289,
+     "2": 10,
+     "3": 1
+    },
+    "cap_hits": {
+     "accepted": 0,
+     "discarded_valid_games": 12,
+     "excluded_games": 1
+    },
+    "discarded_valid_games": {
+     "max_tokens": 12
+    },
+    "failed_excluded_games": {
+     "max_tokens": 1
+    },
+    "accepted_excluded_games": 21,
+    "n_accepted_near_cap": 0,
+    "max_accepted_output_tokens": 7269
+   },
+   "cap_hits_by_round_position": {
+    "turns": [
+     [
+      107,
+      107,
+      107
+     ],
+     [
+      107,
+      107,
+      107
+     ],
+     [
+      107,
+      107,
+      107
+     ]
+    ],
+    "turns_with_cap_hit": [
+     [
+      36,
+      12,
+      12
+     ],
+     [
+      5,
+      2,
+      4
+     ],
+     [
+      1,
+      1,
+      3
+     ]
+    ],
+    "cap_hit_calls": [
+     [
+      53,
+      15,
+      12
+     ],
+     [
+      5,
+      2,
+      5
+     ],
+     [
+      2,
+      2,
+      3
+     ]
+    ],
+    "share_of_cap_hit_calls_round1_first_speaker": 0.5353535353535354
+   },
+   "breakdown": {
+    "role": {
+     "Carrot": {
+      "reasoning_tokens": {
+       "n": 600,
+       "min": 361.0,
+       "median": 771.5,
+       "p95": 3685.099999999999,
+       "max": 6220.0,
+       "mean": 1179.2283333333332
+      },
+      "tool_call_tokens": {
+       "n": 600,
+       "min": 44.0,
+       "median": 126.0,
+       "p95": 239.0999999999999,
+       "max": 361.0,
+       "mean": 134.84666666666666
+      }
+     },
+     "Parsnip": {
+      "reasoning_tokens": {
+       "n": 300,
+       "min": 373.0,
+       "median": 762.5,
+       "p95": 5547.1,
+       "max": 9428.0,
+       "mean": 1524.1466666666668
+      },
+      "tool_call_tokens": {
+       "n": 300,
+       "min": 41.0,
+       "median": 126.0,
+       "p95": 256.20000000000005,
+       "max": 334.0,
+       "mean": 139.4
+      }
+     }
+    },
+    "round": {
+     "r1": {
+      "reasoning_tokens": {
+       "n": 300,
+       "min": 361.0,
+       "median": 806.5,
+       "p95": 5449.1500000000015,
+       "max": 8243.0,
+       "mean": 1792.6433333333334
+      },
+      "tool_call_tokens": {
+       "n": 300,
+       "min": 41.0,
+       "median": 85.0,
+       "p95": 137.0,
+       "max": 210.0,
+       "mean": 88.82333333333334
+      }
+     },
+     "r2": {
+      "reasoning_tokens": {
+       "n": 300,
+       "min": 468.0,
+       "median": 738.0,
+       "p95": 2832.8000000000034,
+       "max": 9428.0,
+       "mean": 1076.33
+      },
+      "tool_call_tokens": {
+       "n": 300,
+       "min": 65.0,
+       "median": 142.0,
+       "p95": 231.15000000000003,
+       "max": 285.0,
+       "mean": 149.96
+      }
+     },
+     "r3": {
+      "reasoning_tokens": {
+       "n": 300,
+       "min": 416.0,
+       "median": 802.0,
+       "p95": 2096.05,
+       "max": 3998.0,
+       "mean": 1013.63
+      },
+      "tool_call_tokens": {
+       "n": 300,
+       "min": 65.0,
+       "median": 158.5,
+       "p95": 280.05,
+       "max": 361.0,
+       "mean": 170.31
+      }
+     }
+    },
+    "position": {
+     "p1": {
+      "reasoning_tokens": {
+       "n": 300,
+       "min": 361.0,
+       "median": 819.5,
+       "p95": 5051.6,
+       "max": 7521.0,
+       "mean": 1602.7533333333333
+      },
+      "tool_call_tokens": {
+       "n": 300,
+       "min": 41.0,
+       "median": 119.0,
+       "p95": 239.15000000000003,
+       "max": 289.0,
+       "mean": 123.96333333333334
+      }
+     },
+     "p2": {
+      "reasoning_tokens": {
+       "n": 300,
+       "min": 373.0,
+       "median": 713.5,
+       "p95": 4138.450000000002,
+       "max": 8088.0,
+       "mean": 1139.9866666666667
+      },
+      "tool_call_tokens": {
+       "n": 300,
+       "min": 51.0,
+       "median": 121.0,
+       "p95": 253.25000000000006,
+       "max": 315.0,
+       "mean": 135.09666666666666
+      }
+     },
+     "p3": {
+      "reasoning_tokens": {
+       "n": 300,
+       "min": 450.0,
+       "median": 761.5,
+       "p95": 3147.35,
+       "max": 9428.0,
+       "mean": 1139.8633333333332
+      },
+      "tool_call_tokens": {
+       "n": 300,
+       "min": 54.0,
+       "median": 141.0,
+       "p95": 256.0,
+       "max": 361.0,
+       "mean": 150.03333333333333
+      }
+     }
+    },
+    "round_position": {
+     "r1p1": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 361.0,
+       "median": 2563.0,
+       "p95": 5930.199999999999,
+       "max": 7521.0,
+       "mean": 2665.32
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 41.0,
+       "median": 70.0,
+       "p95": 108.0,
+       "max": 126.0,
+       "mean": 72.04
+      }
+     },
+     "r1p2": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 373.0,
+       "median": 566.5,
+       "p95": 4737.199999999998,
+       "max": 8088.0,
+       "mean": 1445.29
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 51.0,
+       "median": 83.5,
+       "p95": 117.05,
+       "max": 168.0,
+       "mean": 84.34
+      }
+     },
+     "r1p3": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 461.0,
+       "median": 680.5,
+       "p95": 4412.499999999999,
+       "max": 8243.0,
+       "mean": 1267.32
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 54.0,
+       "median": 110.5,
+       "p95": 147.05,
+       "max": 210.0,
+       "mean": 110.09
+      }
+     },
+     "r2p1": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 474.0,
+       "median": 673.5,
+       "p95": 3570.0999999999963,
+       "max": 7348.0,
+       "mean": 1083.5
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 65.0,
+       "median": 128.5,
+       "p95": 193.39999999999998,
+       "max": 272.0,
+       "mean": 132.32
+      }
+     },
+     "r2p2": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 468.0,
+       "median": 739.5,
+       "p95": 2389.1499999999955,
+       "max": 4921.0,
+       "mean": 1040.07
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 72.0,
+       "median": 141.0,
+       "p95": 231.59999999999997,
+       "max": 285.0,
+       "mean": 146.99
+      }
+     },
+     "r2p3": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 477.0,
+       "median": 815.0,
+       "p95": 1985.349999999999,
+       "max": 9428.0,
+       "mean": 1105.42
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 72.0,
+       "median": 166.5,
+       "p95": 238.0,
+       "max": 276.0,
+       "mean": 170.57
+      }
+     },
+     "r3p1": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 416.0,
+       "median": 807.5,
+       "p95": 2116.0499999999997,
+       "max": 2915.0,
+       "mean": 1059.44
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 65.0,
+       "median": 158.0,
+       "p95": 251.54999999999995,
+       "max": 289.0,
+       "mean": 167.53
+      }
+     },
+     "r3p2": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 487.0,
+       "median": 784.0,
+       "p95": 1806.8999999999999,
+       "max": 3170.0,
+       "mean": 934.6
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 84.0,
+       "median": 160.0,
+       "p95": 289.45,
+       "max": 315.0,
+       "mean": 173.96
+      }
+     },
+     "r3p3": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 450.0,
+       "median": 812.0,
+       "p95": 2189.0999999999995,
+       "max": 3998.0,
+       "mean": 1046.85
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 83.0,
+       "median": 159.0,
+       "p95": 280.59999999999997,
+       "max": 361.0,
+       "mean": 169.44
+      }
+     }
+    }
+   },
+   "excluded_games": [
+    "g013",
+    "g017",
+    "g026",
+    "g046",
+    "g078",
+    "g090",
+    "g105"
+   ],
+   "excluded_games_failed_turn_kinds": {
+    "disc": 7
+   }
+  },
+  "5p": {
+   "disc": {
+    "n_turns": 1500,
+    "reasoning_tokens": {
+     "n": 1500,
+     "min": 255.0,
+     "median": 759.5,
+     "p95": 2979.0,
+     "max": 10308.0,
+     "mean": 1109.2673333333332
+    },
+    "tool_call_tokens": {
+     "n": 1500,
+     "min": 48.0,
+     "median": 147.0,
+     "p95": 261.04999999999995,
+     "max": 344.0,
+     "mean": 156.568
+    },
+    "text_tokens_when_present": {
+     "n": 70,
+     "min": 36.0,
+     "median": 281.5,
+     "p95": 397.0499999999999,
+     "max": 452.0,
+     "mean": 283.9714285714286
+    },
+    "n_with_text": 70,
+    "frac_accepted_stop_not_tool_calls": 0.0,
+    "accepted_stop_reasons": {
+     "tool_calls": 1500
+    },
+    "n_turns_resampled": 70,
+    "frac_turns_resampled": 0.04666666666666667,
+    "n_calls_per_turn": {
+     "1": 1430,
+     "2": 66,
+     "3": 4
+    },
+    "cap_hits": {
+     "accepted": 0,
+     "discarded_valid_games": 60,
+     "excluded_games": 0
+    },
+    "discarded_valid_games": {
+     "max_tokens": 60,
+     "stop": 14
+    },
+    "failed_excluded_games": {},
+    "accepted_excluded_games": 15,
+    "n_accepted_near_cap": 0,
+    "max_accepted_output_tokens": 10502,
+    "announcement_tokens": {
+     "n": 1500,
+     "min": 22.0,
+     "median": 121.0,
+     "p95": 235.04999999999995,
+     "max": 318.0,
+     "mean": 130.568
+    },
+    "n_announcement_empty": 0,
+    "n_announcement_short": 0,
+    "n_announcement_no_terminal_char": 0,
+    "announcement_no_terminal_char_tails": [],
+    "shortest_announcements": [
+     "I'm a Carrot. Let's all state our roles and reasons. Who else is a Carrot?",
+     "I'm a Carrot. Let's start discussing who the Parsnip might be. Who do you suspect?",
+     "I'm a Carrot. Let's work together to find the Parsnip through open discussion. I'll share my reasoning as we go."
+    ]
+   },
+   "vote": {
+    "n_turns": 500,
+    "reasoning_tokens": {
+     "n": 500,
+     "min": 258.0,
+     "median": 618.0,
+     "p95": 1792.299999999996,
+     "max": 5782.0,
+     "mean": 791.618
+    },
+    "tool_call_tokens": {
+     "n": 500,
+     "min": 29.0,
+     "median": 29.0,
+     "p95": 29.0,
+     "max": 29.0,
+     "mean": 29.0
+    },
+    "text_tokens_when_present": {
+     "n": 115,
+     "min": 182.0,
+     "median": 330.0,
+     "p95": 387.2,
+     "max": 1024.0,
+     "mean": 334.7304347826087
+    },
+    "n_with_text": 115,
+    "frac_accepted_stop_not_tool_calls": 0.0,
+    "accepted_stop_reasons": {
+     "tool_calls": 500
+    },
+    "n_turns_resampled": 9,
+    "frac_turns_resampled": 0.018,
+    "n_calls_per_turn": {
+     "1": 491,
+     "2": 9
+    },
+    "cap_hits": {
+     "accepted": 0,
+     "discarded_valid_games": 9,
+     "excluded_games": 3
+    },
+    "discarded_valid_games": {
+     "max_tokens": 9
+    },
+    "failed_excluded_games": {
+     "max_tokens": 3
+    },
+    "accepted_excluded_games": 4,
+    "n_accepted_near_cap": 0,
+    "max_accepted_output_tokens": 5814
+   },
+   "cap_hits_by_round_position": {
+    "turns": [
+     [
+      101,
+      101,
+      101,
+      101,
+      101
+     ],
+     [
+      101,
+      101,
+      101,
+      101,
+      101
+     ],
+     [
+      101,
+      101,
+      101,
+      101,
+      101
+     ]
+    ],
+    "turns_with_cap_hit": [
+     [
+      16,
+      0,
+      0,
+      2,
+      6
+     ],
+     [
+      4,
+      2,
+      2,
+      4,
+      1
+     ],
+     [
+      6,
+      2,
+      4,
+      4,
+      4
+     ]
+    ],
+    "cap_hit_calls": [
+     [
+      16,
+      0,
+      0,
+      2,
+      6
+     ],
+     [
+      6,
+      2,
+      2,
+      4,
+      1
+     ],
+     [
+      6,
+      2,
+      4,
+      5,
+      4
+     ]
+    ],
+    "share_of_cap_hit_calls_round1_first_speaker": 0.26666666666666666
+   },
+   "breakdown": {
+    "role": {
+     "Carrot": {
+      "reasoning_tokens": {
+       "n": 1200,
+       "min": 255.0,
+       "median": 758.5,
+       "p95": 2594.449999999999,
+       "max": 7619.0,
+       "mean": 1046.8
+      },
+      "tool_call_tokens": {
+       "n": 1200,
+       "min": 48.0,
+       "median": 149.5,
+       "p95": 260.04999999999995,
+       "max": 344.0,
+       "mean": 158.12166666666667
+      }
+     },
+     "Parsnip": {
+      "reasoning_tokens": {
+       "n": 300,
+       "min": 414.0,
+       "median": 773.0,
+       "p95": 3882.050000000002,
+       "max": 10308.0,
+       "mean": 1359.1366666666668
+      },
+      "tool_call_tokens": {
+       "n": 300,
+       "min": 56.0,
+       "median": 137.5,
+       "p95": 262.15000000000003,
+       "max": 337.0,
+       "mean": 150.35333333333332
+      }
+     }
+    },
+    "round": {
+     "r1": {
+      "reasoning_tokens": {
+       "n": 500,
+       "min": 255.0,
+       "median": 973.0,
+       "p95": 3260.25,
+       "max": 7314.0,
+       "mean": 1304.168
+      },
+      "tool_call_tokens": {
+       "n": 500,
+       "min": 48.0,
+       "median": 96.0,
+       "p95": 141.0999999999999,
+       "max": 229.0,
+       "mean": 99.29
+      }
+     },
+     "r2": {
+      "reasoning_tokens": {
+       "n": 500,
+       "min": 457.0,
+       "median": 687.5,
+       "p95": 2979.0,
+       "max": 8023.0,
+       "mean": 991.522
+      },
+      "tool_call_tokens": {
+       "n": 500,
+       "min": 72.0,
+       "median": 163.0,
+       "p95": 252.04999999999995,
+       "max": 344.0,
+       "mean": 169.82
+      }
+     },
+     "r3": {
+      "reasoning_tokens": {
+       "n": 500,
+       "min": 462.0,
+       "median": 793.5,
+       "p95": 2269.2,
+       "max": 10308.0,
+       "mean": 1032.112
+      },
+      "tool_call_tokens": {
+       "n": 500,
+       "min": 74.0,
+       "median": 199.0,
+       "p95": 290.0999999999999,
+       "max": 339.0,
+       "mean": 200.594
+      }
+     }
+    },
+    "position": {
+     "p1": {
+      "reasoning_tokens": {
+       "n": 300,
+       "min": 301.0,
+       "median": 865.5,
+       "p95": 3615.1000000000026,
+       "max": 8023.0,
+       "mean": 1436.9166666666667
+      },
+      "tool_call_tokens": {
+       "n": 300,
+       "min": 48.0,
+       "median": 134.0,
+       "p95": 256.1,
+       "max": 330.0,
+       "mean": 142.68333333333334
+      }
+     },
+     "p2": {
+      "reasoning_tokens": {
+       "n": 300,
+       "min": 392.0,
+       "median": 755.5,
+       "p95": 2324.3000000000015,
+       "max": 5606.0,
+       "mean": 1032.91
+      },
+      "tool_call_tokens": {
+       "n": 300,
+       "min": 58.0,
+       "median": 135.0,
+       "p95": 255.0,
+       "max": 339.0,
+       "mean": 147.84
+      }
+     },
+     "p3": {
+      "reasoning_tokens": {
+       "n": 300,
+       "min": 255.0,
+       "median": 739.5,
+       "p95": 2063.9000000000005,
+       "max": 3180.0,
+       "mean": 926.0066666666667
+      },
+      "tool_call_tokens": {
+       "n": 300,
+       "min": 59.0,
+       "median": 146.5,
+       "p95": 251.35000000000008,
+       "max": 337.0,
+       "mean": 154.65666666666667
+      }
+     },
+     "p4": {
+      "reasoning_tokens": {
+       "n": 300,
+       "min": 319.0,
+       "median": 717.5,
+       "p95": 2409.3500000000013,
+       "max": 10308.0,
+       "mean": 1028.6666666666667
+      },
+      "tool_call_tokens": {
+       "n": 300,
+       "min": 69.0,
+       "median": 161.0,
+       "p95": 258.0,
+       "max": 344.0,
+       "mean": 166.21666666666667
+      }
+     },
+     "p5": {
+      "reasoning_tokens": {
+       "n": 300,
+       "min": 458.0,
+       "median": 771.0,
+       "p95": 2834.4000000000005,
+       "max": 7619.0,
+       "mean": 1121.8366666666666
+      },
+      "tool_call_tokens": {
+       "n": 300,
+       "min": 60.0,
+       "median": 170.0,
+       "p95": 268.15000000000003,
+       "max": 299.0,
+       "mean": 171.44333333333333
+      }
+     }
+    },
+    "round_position": {
+     "r1p1": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 301.0,
+       "median": 2087.0,
+       "p95": 4291.55,
+       "max": 7314.0,
+       "mean": 2150.79
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 48.0,
+       "median": 82.5,
+       "p95": 114.0,
+       "max": 128.0,
+       "mean": 82.53
+      }
+     },
+     "r1p2": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 392.0,
+       "median": 942.5,
+       "p95": 2468.1,
+       "max": 4563.0,
+       "mean": 1133.61
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 58.0,
+       "median": 91.0,
+       "p95": 125.05,
+       "max": 141.0,
+       "mean": 91.2
+      }
+     },
+     "r1p3": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 255.0,
+       "median": 831.5,
+       "p95": 2273.25,
+       "max": 3152.0,
+       "mean": 1020.95
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 59.0,
+       "median": 91.5,
+       "p95": 126.05,
+       "max": 141.0,
+       "mean": 94.15
+      }
+     },
+     "r1p4": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 319.0,
+       "median": 609.0,
+       "p95": 2963.15,
+       "max": 4354.0,
+       "mean": 980.39
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 69.0,
+       "median": 108.0,
+       "p95": 153.39999999999998,
+       "max": 191.0,
+       "mean": 111.4
+      }
+     },
+     "r1p5": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 458.0,
+       "median": 850.0,
+       "p95": 2878.299999999999,
+       "max": 5499.0,
+       "mean": 1235.1
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 60.0,
+       "median": 112.0,
+       "p95": 176.54999999999995,
+       "max": 229.0,
+       "mean": 117.17
+      }
+     },
+     "r2p1": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 459.0,
+       "median": 667.0,
+       "p95": 3549.199999999999,
+       "max": 8023.0,
+       "mean": 1199.67
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 72.0,
+       "median": 139.5,
+       "p95": 212.45,
+       "max": 258.0,
+       "mean": 143.77
+      }
+     },
+     "r2p2": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 479.0,
+       "median": 675.0,
+       "p95": 3344.65,
+       "max": 5606.0,
+       "mean": 1100.85
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 73.0,
+       "median": 141.5,
+       "p95": 221.14999999999998,
+       "max": 261.0,
+       "mean": 148.75
+      }
+     },
+     "r2p3": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 457.0,
+       "median": 662.5,
+       "p95": 1472.4999999999995,
+       "max": 3180.0,
+       "mean": 786.47
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 81.0,
+       "median": 157.5,
+       "p95": 232.05,
+       "max": 268.0,
+       "mean": 167.9
+      }
+     },
+     "r2p4": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 474.0,
+       "median": 710.5,
+       "p95": 1882.949999999999,
+       "max": 6360.0,
+       "mean": 934.96
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 95.0,
+       "median": 199.5,
+       "p95": 257.05,
+       "max": 344.0,
+       "mean": 190.43
+      }
+     },
+     "r2p5": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 483.0,
+       "median": 696.5,
+       "p95": 2102.7999999999993,
+       "max": 5462.0,
+       "mean": 935.66
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 77.0,
+       "median": 201.0,
+       "p95": 268.15,
+       "max": 299.0,
+       "mean": 198.25
+      }
+     },
+     "r3p1": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 477.0,
+       "median": 757.5,
+       "p95": 1958.2,
+       "max": 3394.0,
+       "mean": 960.29
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 93.0,
+       "median": 196.0,
+       "p95": 296.2,
+       "max": 330.0,
+       "mean": 201.75
+      }
+     },
+     "r3p2": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 463.0,
+       "median": 747.5,
+       "p95": 1677.35,
+       "max": 2564.0,
+       "mean": 864.27
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 102.0,
+       "median": 204.0,
+       "p95": 289.05,
+       "max": 339.0,
+       "mean": 203.57
+      }
+     },
+     "r3p3": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 462.0,
+       "median": 804.0,
+       "p95": 2055.35,
+       "max": 2963.0,
+       "mean": 970.6
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 82.0,
+       "median": 198.5,
+       "p95": 277.29999999999995,
+       "max": 337.0,
+       "mean": 201.92
+      }
+     },
+     "r3p4": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 485.0,
+       "median": 801.0,
+       "p95": 2522.2499999999995,
+       "max": 10308.0,
+       "mean": 1170.65
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 82.0,
+       "median": 193.0,
+       "p95": 282.2,
+       "max": 314.0,
+       "mean": 196.82
+      }
+     },
+     "r3p5": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 476.0,
+       "median": 884.5,
+       "p95": 3096.25,
+       "max": 7619.0,
+       "mean": 1194.75
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 74.0,
+       "median": 197.0,
+       "p95": 283.1,
+       "max": 297.0,
+       "mean": 198.91
+      }
+     }
+    }
+   },
+   "excluded_games": [
+    "g028"
+   ],
+   "excluded_games_failed_turn_kinds": {
+    "vote": 1
+   }
+  },
+  "3p_cc": {
+   "disc": {
+    "n_turns": 900,
+    "reasoning_tokens": {
+     "n": 900,
+     "min": 315.0,
+     "median": 795.0,
+     "p95": 3593.449999999999,
+     "max": 7653.0,
+     "mean": 1248.1266666666668
+    },
+    "tool_call_tokens": {
+     "n": 900,
+     "min": 45.0,
+     "median": 130.0,
+     "p95": 243.0,
+     "max": 321.0,
+     "mean": 137.97333333333333
+    },
+    "text_tokens_when_present": {
+     "n": 93,
+     "min": 46.0,
+     "median": 305.0,
+     "p95": 391.0,
+     "max": 499.0,
+     "mean": 303.23655913978496
+    },
+    "n_with_text": 93,
+    "frac_accepted_stop_not_tool_calls": 0.0,
+    "accepted_stop_reasons": {
+     "tool_calls": 900
+    },
+    "n_turns_resampled": 109,
+    "frac_turns_resampled": 0.12111111111111111,
+    "n_calls_per_turn": {
+     "1": 791,
+     "2": 91,
+     "3": 18
+    },
+    "cap_hits": {
+     "accepted": 0,
+     "discarded_valid_games": 96,
+     "excluded_games": 18
+    },
+    "discarded_valid_games": {
+     "max_tokens": 96,
+     "stop": 31
+    },
+    "failed_excluded_games": {
+     "max_tokens": 18,
+     "stop": 4
+    },
+    "accepted_excluded_games": 40,
+    "n_accepted_near_cap": 0,
+    "max_accepted_output_tokens": 7726,
+    "announcement_tokens": {
+     "n": 900,
+     "min": 19.0,
+     "median": 104.0,
+     "p95": 217.0,
+     "max": 295.0,
+     "mean": 111.97333333333333
+    },
+    "n_announcement_empty": 0,
+    "n_announcement_short": 0,
+    "n_announcement_no_terminal_char": 0,
+    "announcement_no_terminal_char_tails": [],
+    "shortest_announcements": [
+     "I'm a Carrot. Let's all state our roles. Alice, Bob, what are you?",
+     "I'm a Carrot. Let's hear what you two have to say about your roles.",
+     "I'm a Carrot. Let's all state our roles so we can identify the Parsnip."
+    ]
+   },
+   "vote": {
+    "n_turns": 300,
+    "reasoning_tokens": {
+     "n": 300,
+     "min": 243.0,
+     "median": 685.5,
+     "p95": 2653.6500000000015,
+     "max": 5118.0,
+     "mean": 961.3433333333334
+    },
+    "tool_call_tokens": {
+     "n": 300,
+     "min": 29.0,
+     "median": 29.0,
+     "p95": 29.0,
+     "max": 29.0,
+     "mean": 29.0
+    },
+    "text_tokens_when_present": {
+     "n": 100,
+     "min": 219.0,
+     "median": 327.5,
+     "p95": 393.05,
+     "max": 471.0,
+     "mean": 329.38
+    },
+    "n_with_text": 100,
+    "frac_accepted_stop_not_tool_calls": 0.0,
+    "accepted_stop_reasons": {
+     "tool_calls": 300
+    },
+    "n_turns_resampled": 10,
+    "frac_turns_resampled": 0.03333333333333333,
+    "n_calls_per_turn": {
+     "1": 290,
+     "2": 10
+    },
+    "cap_hits": {
+     "accepted": 0,
+     "discarded_valid_games": 10,
+     "excluded_games": 0
+    },
+    "discarded_valid_games": {
+     "max_tokens": 10
+    },
+    "failed_excluded_games": {},
+    "accepted_excluded_games": 15,
+    "n_accepted_near_cap": 0,
+    "max_accepted_output_tokens": 5539
+   },
+   "cap_hits_by_round_position": {
+    "turns": [
+     [
+      105,
+      105,
+      105
+     ],
+     [
+      105,
+      105,
+      105
+     ],
+     [
+      105,
+      105,
+      105
+     ]
+    ],
+    "turns_with_cap_hit": [
+     [
+      36,
+      12,
+      13
+     ],
+     [
+      8,
+      2,
+      2
+     ],
+     [
+      7,
+      9,
+      4
+     ]
+    ],
+    "cap_hit_calls": [
+     [
+      53,
+      12,
+      15
+     ],
+     [
+      8,
+      2,
+      3
+     ],
+     [
+      7,
+      10,
+      4
+     ]
+    ],
+    "share_of_cap_hit_calls_round1_first_speaker": 0.4649122807017544
+   },
+   "breakdown": {
+    "role": {
+     "Carrot": {
+      "reasoning_tokens": {
+       "n": 900,
+       "min": 315.0,
+       "median": 795.0,
+       "p95": 3593.449999999999,
+       "max": 7653.0,
+       "mean": 1248.1266666666668
+      },
+      "tool_call_tokens": {
+       "n": 900,
+       "min": 45.0,
+       "median": 130.0,
+       "p95": 243.0,
+       "max": 321.0,
+       "mean": 137.97333333333333
+      }
+     }
+    },
+    "round": {
+     "r1": {
+      "reasoning_tokens": {
+       "n": 300,
+       "min": 315.0,
+       "median": 767.5,
+       "p95": 4318.400000000001,
+       "max": 7207.0,
+       "mean": 1508.38
+      },
+      "tool_call_tokens": {
+       "n": 300,
+       "min": 45.0,
+       "median": 86.0,
+       "p95": 143.0,
+       "max": 179.0,
+       "mean": 90.86
+      }
+     },
+     "r2": {
+      "reasoning_tokens": {
+       "n": 300,
+       "min": 457.0,
+       "median": 723.5,
+       "p95": 3177.100000000002,
+       "max": 7653.0,
+       "mean": 1085.2
+      },
+      "tool_call_tokens": {
+       "n": 300,
+       "min": 68.0,
+       "median": 139.5,
+       "p95": 246.25000000000006,
+       "max": 305.0,
+       "mean": 153.13333333333333
+      }
+     },
+     "r3": {
+      "reasoning_tokens": {
+       "n": 300,
+       "min": 464.0,
+       "median": 902.0,
+       "p95": 2450.7000000000007,
+       "max": 3962.0,
+       "mean": 1150.8
+      },
+      "tool_call_tokens": {
+       "n": 300,
+       "min": 51.0,
+       "median": 162.0,
+       "p95": 249.05,
+       "max": 321.0,
+       "mean": 169.92666666666668
+      }
+     }
+    },
+    "position": {
+     "p1": {
+      "reasoning_tokens": {
+       "n": 300,
+       "min": 315.0,
+       "median": 962.5,
+       "p95": 4366.6,
+       "max": 7653.0,
+       "mean": 1569.69
+      },
+      "tool_call_tokens": {
+       "n": 300,
+       "min": 45.0,
+       "median": 121.0,
+       "p95": 235.10000000000002,
+       "max": 314.0,
+       "mean": 126.38666666666667
+      }
+     },
+     "p2": {
+      "reasoning_tokens": {
+       "n": 300,
+       "min": 408.0,
+       "median": 767.0,
+       "p95": 3269.7000000000007,
+       "max": 6415.0,
+       "mean": 1168.9066666666668
+      },
+      "tool_call_tokens": {
+       "n": 300,
+       "min": 46.0,
+       "median": 124.5,
+       "p95": 243.15000000000003,
+       "max": 300.0,
+       "mean": 134.12333333333333
+      }
+     },
+     "p3": {
+      "reasoning_tokens": {
+       "n": 300,
+       "min": 455.0,
+       "median": 779.0,
+       "p95": 2300.9000000000005,
+       "max": 3958.0,
+       "mean": 1005.7833333333333
+      },
+      "tool_call_tokens": {
+       "n": 300,
+       "min": 54.0,
+       "median": 142.0,
+       "p95": 246.0,
+       "max": 321.0,
+       "mean": 153.41
+      }
+     }
+    },
+    "round_position": {
+     "r1p1": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 315.0,
+       "median": 2199.5,
+       "p95": 4494.549999999999,
+       "max": 7207.0,
+       "mean": 2277.14
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 45.0,
+       "median": 72.0,
+       "p95": 112.05,
+       "max": 132.0,
+       "mean": 76.12
+      }
+     },
+     "r1p2": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 408.0,
+       "median": 606.5,
+       "p95": 4410.249999999999,
+       "max": 6415.0,
+       "mean": 1303.73
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 46.0,
+       "median": 80.5,
+       "p95": 112.69999999999996,
+       "max": 158.0,
+       "mean": 84.18
+      }
+     },
+     "r1p3": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 455.0,
+       "median": 667.5,
+       "p95": 3303.95,
+       "max": 3958.0,
+       "mean": 944.27
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 54.0,
+       "median": 110.0,
+       "p95": 154.05,
+       "max": 179.0,
+       "mean": 112.28
+      }
+     },
+     "r2p1": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 464.0,
+       "median": 713.0,
+       "p95": 5426.899999999998,
+       "max": 7653.0,
+       "mean": 1333.23
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 68.0,
+       "median": 126.0,
+       "p95": 195.29999999999998,
+       "max": 305.0,
+       "mean": 128.71
+      }
+     },
+     "r2p2": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 457.0,
+       "median": 666.0,
+       "p95": 3196.6499999999983,
+       "max": 5970.0,
+       "mean": 999.68
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 78.0,
+       "median": 138.0,
+       "p95": 251.05,
+       "max": 268.0,
+       "mean": 150.32
+      }
+     },
+     "r2p3": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 508.0,
+       "median": 771.5,
+       "p95": 1998.4999999999998,
+       "max": 3369.0,
+       "mean": 922.69
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 100.0,
+       "median": 177.0,
+       "p95": 256.1,
+       "max": 297.0,
+       "mean": 180.37
+      }
+     },
+     "r3p1": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 464.0,
+       "median": 867.0,
+       "p95": 2345.3999999999996,
+       "max": 3962.0,
+       "mean": 1098.7
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 84.0,
+       "median": 163.0,
+       "p95": 250.05,
+       "max": 314.0,
+       "mean": 174.33
+      }
+     },
+     "r3p2": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 478.0,
+       "median": 939.5,
+       "p95": 2753.1,
+       "max": 3705.0,
+       "mean": 1203.31
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 51.0,
+       "median": 164.0,
+       "p95": 247.25,
+       "max": 300.0,
+       "mean": 167.87
+      }
+     },
+     "r3p3": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 504.0,
+       "median": 923.5,
+       "p95": 2272.4,
+       "max": 2912.0,
+       "mean": 1150.39
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 88.0,
+       "median": 160.0,
+       "p95": 246.14999999999998,
+       "max": 321.0,
+       "mean": 167.58
+      }
+     }
+    }
+   },
+   "excluded_games": [
+    "g016",
+    "g034",
+    "g045",
+    "g076",
+    "g087"
+   ],
+   "excluded_games_failed_turn_kinds": {
+    "disc": 5
+   }
+  },
+  "5p_cc": {
+   "disc": {
+    "n_turns": 1500,
+    "reasoning_tokens": {
+     "n": 1500,
+     "min": 271.0,
+     "median": 789.5,
+     "p95": 2860.6999999999994,
+     "max": 9449.0,
+     "mean": 1113.6466666666668
+    },
+    "tool_call_tokens": {
+     "n": 1500,
+     "min": 50.0,
+     "median": 144.0,
+     "p95": 267.0,
+     "max": 355.0,
+     "mean": 155.66866666666667
+    },
+    "text_tokens_when_present": {
+     "n": 60,
+     "min": 36.0,
+     "median": 312.0,
+     "p95": 423.45,
+     "max": 507.0,
+     "mean": 309.8333333333333
+    },
+    "n_with_text": 60,
+    "frac_accepted_stop_not_tool_calls": 0.0,
+    "accepted_stop_reasons": {
+     "tool_calls": 1500
+    },
+    "n_turns_resampled": 60,
+    "frac_turns_resampled": 0.04,
+    "n_calls_per_turn": {
+     "1": 1440,
+     "2": 54,
+     "3": 6
+    },
+    "cap_hits": {
+     "accepted": 0,
+     "discarded_valid_games": 55,
+     "excluded_games": 0
+    },
+    "discarded_valid_games": {
+     "max_tokens": 55,
+     "stop": 11
+    },
+    "failed_excluded_games": {},
+    "accepted_excluded_games": 0,
+    "n_accepted_near_cap": 0,
+    "max_accepted_output_tokens": 9561,
+    "announcement_tokens": {
+     "n": 1500,
+     "min": 24.0,
+     "median": 118.0,
+     "p95": 241.0,
+     "max": 329.0,
+     "mean": 129.66866666666667
+    },
+    "n_announcement_empty": 0,
+    "n_announcement_short": 0,
+    "n_announcement_no_terminal_char": 2,
+    "announcement_no_terminal_char_tails": [
+     "we should coordinate behind Charlie's call to avoid a split vote.\n\nMy vote: Dave",
+     "or Dave based on the group consensus and the suspicious phrasing.\n\nMy vote: Dave"
+    ],
+    "shortest_announcements": [
+     "I'm a Carrot. Let's all state our roles so we can identify the Parsnip. Who's next?",
+     "I agree with Charlie. Let's focus on consistency and avoid hasty accusations. We need all perspectives to find the Parsnip.",
+     "I'm a Carrot. Let's all share our roles and thoughts. The Parsnip will have to lie, so we can find them through inconsistencies."
+    ]
+   },
+   "vote": {
+    "n_turns": 500,
+    "reasoning_tokens": {
+     "n": 500,
+     "min": 270.0,
+     "median": 613.5,
+     "p95": 2036.499999999996,
+     "max": 6380.0,
+     "mean": 849.446
+    },
+    "tool_call_tokens": {
+     "n": 500,
+     "min": 29.0,
+     "median": 29.0,
+     "p95": 29.0,
+     "max": 29.0,
+     "mean": 29.0
+    },
+    "text_tokens_when_present": {
+     "n": 126,
+     "min": 198.0,
+     "median": 333.0,
+     "p95": 391.75,
+     "max": 604.0,
+     "mean": 334.43650793650795
+    },
+    "n_with_text": 126,
+    "frac_accepted_stop_not_tool_calls": 0.0,
+    "accepted_stop_reasons": {
+     "tool_calls": 500
+    },
+    "n_turns_resampled": 18,
+    "frac_turns_resampled": 0.036,
+    "n_calls_per_turn": {
+     "1": 482,
+     "2": 15,
+     "3": 3
+    },
+    "cap_hits": {
+     "accepted": 0,
+     "discarded_valid_games": 21,
+     "excluded_games": 0
+    },
+    "discarded_valid_games": {
+     "max_tokens": 21
+    },
+    "failed_excluded_games": {},
+    "accepted_excluded_games": 0,
+    "n_accepted_near_cap": 0,
+    "max_accepted_output_tokens": 6412
+   },
+   "cap_hits_by_round_position": {
+    "turns": [
+     [
+      100,
+      100,
+      100,
+      100,
+      100
+     ],
+     [
+      100,
+      100,
+      100,
+      100,
+      100
+     ],
+     [
+      100,
+      100,
+      100,
+      100,
+      100
+     ]
+    ],
+    "turns_with_cap_hit": [
+     [
+      12,
+      1,
+      1,
+      2,
+      2
+     ],
+     [
+      5,
+      3,
+      0,
+      1,
+      2
+     ],
+     [
+      5,
+      5,
+      4,
+      2,
+      5
+     ]
+    ],
+    "cap_hit_calls": [
+     [
+      15,
+      1,
+      1,
+      2,
+      2
+     ],
+     [
+      6,
+      3,
+      0,
+      1,
+      2
+     ],
+     [
+      5,
+      5,
+      5,
+      2,
+      5
+     ]
+    ],
+    "share_of_cap_hit_calls_round1_first_speaker": 0.2727272727272727
+   },
+   "breakdown": {
+    "role": {
+     "Carrot": {
+      "reasoning_tokens": {
+       "n": 1500,
+       "min": 271.0,
+       "median": 789.5,
+       "p95": 2860.6999999999994,
+       "max": 9449.0,
+       "mean": 1113.6466666666668
+      },
+      "tool_call_tokens": {
+       "n": 1500,
+       "min": 50.0,
+       "median": 144.0,
+       "p95": 267.0,
+       "max": 355.0,
+       "mean": 155.66866666666667
+      }
+     }
+    },
+    "round": {
+     "r1": {
+      "reasoning_tokens": {
+       "n": 500,
+       "min": 271.0,
+       "median": 959.5,
+       "p95": 2805.8499999999976,
+       "max": 4611.0,
+       "mean": 1167.006
+      },
+      "tool_call_tokens": {
+       "n": 500,
+       "min": 50.0,
+       "median": 95.0,
+       "p95": 140.0,
+       "max": 242.0,
+       "mean": 98.154
+      }
+     },
+     "r2": {
+      "reasoning_tokens": {
+       "n": 500,
+       "min": 426.0,
+       "median": 693.0,
+       "p95": 3612.4999999999995,
+       "max": 9449.0,
+       "mean": 1114.772
+      },
+      "tool_call_tokens": {
+       "n": 500,
+       "min": 63.0,
+       "median": 160.0,
+       "p95": 253.0,
+       "max": 319.0,
+       "mean": 167.892
+      }
+     },
+     "r3": {
+      "reasoning_tokens": {
+       "n": 500,
+       "min": 398.0,
+       "median": 821.0,
+       "p95": 2306.3499999999995,
+       "max": 6784.0,
+       "mean": 1059.162
+      },
+      "tool_call_tokens": {
+       "n": 500,
+       "min": 71.0,
+       "median": 202.5,
+       "p95": 283.14999999999986,
+       "max": 355.0,
+       "mean": 200.96
+      }
+     }
+    },
+    "position": {
+     "p1": {
+      "reasoning_tokens": {
+       "n": 300,
+       "min": 271.0,
+       "median": 897.5,
+       "p95": 3694.800000000001,
+       "max": 9449.0,
+       "mean": 1382.39
+      },
+      "tool_call_tokens": {
+       "n": 300,
+       "min": 50.0,
+       "median": 132.0,
+       "p95": 255.10000000000002,
+       "max": 355.0,
+       "mean": 143.72666666666666
+      }
+     },
+     "p2": {
+      "reasoning_tokens": {
+       "n": 300,
+       "min": 338.0,
+       "median": 834.0,
+       "p95": 2627.9000000000005,
+       "max": 4945.0,
+       "mean": 1080.7566666666667
+      },
+      "tool_call_tokens": {
+       "n": 300,
+       "min": 52.0,
+       "median": 138.0,
+       "p95": 254.05,
+       "max": 317.0,
+       "mean": 148.28333333333333
+      }
+     },
+     "p3": {
+      "reasoning_tokens": {
+       "n": 300,
+       "min": 339.0,
+       "median": 733.0,
+       "p95": 2030.6000000000001,
+       "max": 6221.0,
+       "mean": 951.9133333333333
+      },
+      "tool_call_tokens": {
+       "n": 300,
+       "min": 64.0,
+       "median": 143.0,
+       "p95": 266.05,
+       "max": 334.0,
+       "mean": 152.72666666666666
+      }
+     },
+     "p4": {
+      "reasoning_tokens": {
+       "n": 300,
+       "min": 417.0,
+       "median": 738.5,
+       "p95": 2312.6500000000015,
+       "max": 5818.0,
+       "mean": 1002.7133333333334
+      },
+      "tool_call_tokens": {
+       "n": 300,
+       "min": 72.0,
+       "median": 151.5,
+       "p95": 273.1,
+       "max": 339.0,
+       "mean": 163.33333333333334
+      }
+     },
+     "p5": {
+      "reasoning_tokens": {
+       "n": 300,
+       "min": 460.0,
+       "median": 787.0,
+       "p95": 2826.7500000000005,
+       "max": 6784.0,
+       "mean": 1150.46
+      },
+      "tool_call_tokens": {
+       "n": 300,
+       "min": 69.0,
+       "median": 162.5,
+       "p95": 272.20000000000005,
+       "max": 330.0,
+       "mean": 170.27333333333334
+      }
+     }
+    },
+    "round_position": {
+     "r1p1": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 271.0,
+       "median": 1603.0,
+       "p95": 3571.15,
+       "max": 4611.0,
+       "mean": 1712.56
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 50.0,
+       "median": 80.0,
+       "p95": 112.1,
+       "max": 144.0,
+       "mean": 83.27
+      }
+     },
+     "r1p2": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 338.0,
+       "median": 931.5,
+       "p95": 2231.2999999999997,
+       "max": 4047.0,
+       "mean": 1061.49
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 52.0,
+       "median": 85.5,
+       "p95": 111.14999999999999,
+       "max": 140.0,
+       "mean": 88.02
+      }
+     },
+     "r1p3": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 339.0,
+       "median": 721.5,
+       "p95": 1616.7499999999998,
+       "max": 3414.0,
+       "mean": 852.33
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 64.0,
+       "median": 96.5,
+       "p95": 126.1,
+       "max": 193.0,
+       "mean": 98.09
+      }
+     },
+     "r1p4": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 417.0,
+       "median": 807.5,
+       "p95": 2488.35,
+       "max": 2954.0,
+       "mean": 1038.16
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 72.0,
+       "median": 100.5,
+       "p95": 139.05,
+       "max": 172.0,
+       "mean": 103.25
+      }
+     },
+     "r1p5": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 460.0,
+       "median": 793.0,
+       "p95": 2898.9999999999995,
+       "max": 4298.0,
+       "mean": 1170.49
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 69.0,
+       "median": 112.5,
+       "p95": 192.14999999999998,
+       "max": 242.0,
+       "mean": 118.14
+      }
+     },
+     "r2p1": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 476.0,
+       "median": 684.0,
+       "p95": 4914.1,
+       "max": 9449.0,
+       "mean": 1416.78
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 63.0,
+       "median": 139.0,
+       "p95": 211.1,
+       "max": 249.0,
+       "mean": 144.37
+      }
+     },
+     "r2p2": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 426.0,
+       "median": 722.5,
+       "p95": 3669.6499999999987,
+       "max": 4945.0,
+       "mean": 1158.97
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 86.0,
+       "median": 146.5,
+       "p95": 235.29999999999998,
+       "max": 269.0,
+       "mean": 157.29
+      }
+     },
+     "r2p3": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 466.0,
+       "median": 675.0,
+       "p95": 2357.4999999999977,
+       "max": 6221.0,
+       "mean": 1006.95
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 88.0,
+       "median": 159.0,
+       "p95": 240.2,
+       "max": 279.0,
+       "mean": 161.97
+      }
+     },
+     "r2p4": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 475.0,
+       "median": 653.5,
+       "p95": 2439.55,
+       "max": 5818.0,
+       "mean": 955.32
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 90.0,
+       "median": 179.5,
+       "p95": 276.05,
+       "max": 319.0,
+       "mean": 182.58
+      }
+     },
+     "r2p5": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 462.0,
+       "median": 720.0,
+       "p95": 2369.849999999999,
+       "max": 6277.0,
+       "mean": 1035.84
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 97.0,
+       "median": 193.0,
+       "p95": 270.0,
+       "max": 303.0,
+       "mean": 193.25
+      }
+     },
+     "r3p1": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 398.0,
+       "median": 793.0,
+       "p95": 2587.6,
+       "max": 3869.0,
+       "mean": 1017.83
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 104.0,
+       "median": 206.0,
+       "p95": 282.25,
+       "max": 355.0,
+       "mean": 203.54
+      }
+     },
+     "r3p2": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 499.0,
+       "median": 845.5,
+       "p95": 2224.8999999999996,
+       "max": 3250.0,
+       "mean": 1021.81
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 97.0,
+       "median": 197.0,
+       "p95": 274.29999999999995,
+       "max": 317.0,
+       "mean": 199.54
+      }
+     },
+     "r3p3": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 493.0,
+       "median": 795.0,
+       "p95": 1849.1999999999998,
+       "max": 3666.0,
+       "mean": 996.46
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 101.0,
+       "median": 198.5,
+       "p95": 280.1,
+       "max": 334.0,
+       "mean": 198.12
+      }
+     },
+     "r3p4": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 472.0,
+       "median": 812.0,
+       "p95": 2016.7999999999993,
+       "max": 4626.0,
+       "mean": 1014.66
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 82.0,
+       "median": 207.5,
+       "p95": 286.34999999999997,
+       "max": 339.0,
+       "mean": 204.17
+      }
+     },
+     "r3p5": {
+      "reasoning_tokens": {
+       "n": 100,
+       "min": 497.0,
+       "median": 879.5,
+       "p95": 2826.75,
+       "max": 6784.0,
+       "mean": 1245.05
+      },
+      "tool_call_tokens": {
+       "n": 100,
+       "min": 71.0,
+       "median": 196.5,
+       "p95": 287.25,
+       "max": 330.0,
+       "mean": 199.43
+      }
+     }
+    }
+   },
+   "excluded_games": [],
+   "excluded_games_failed_turn_kinds": {}
+  }
+ },
+ "crosscheck": {
+  "n": 6551,
+  "residual_minus_toolcall_minus_text": {
+   "3": 5738,
+   "4": 812,
+   "5": 1
+  },
+  "overhead_by_has_text": {
+   "no_text": {
+    "3": 5737
+   },
+   "text": {
+    "3": 1,
+    "4": 812,
+    "5": 1
+   }
+  },
+  "pearson_residual_vs_toolcall_plus_text": 0.9999982394717896,
+  "pearson_residual_vs_toolcall_only": 0.41641741939862786,
+  "reasoning_provider_minus_tokenizer": {
+   "-2": 1,
+   "-1": 3,
+   "0": 6530,
+   "1": 16,
+   "2": 1
+  },
+  "frac_reasoning_exact": 0.9967943825370172
+ },
+ "role_effects": {
+  "3p": {
+   "n_parsnip": 300,
+   "n_carrot": 600,
+   "reasoning_tokens": {
+    "parsnip": {
+     "n": 300,
+     "min": 373.0,
+     "median": 762.5,
+     "p95": 5547.1,
+     "max": 9428.0,
+     "mean": 1524.1466666666668
+    },
+    "carrot": {
+     "n": 600,
+     "min": 361.0,
+     "median": 771.5,
+     "p95": 3685.099999999999,
+     "max": 6220.0,
+     "mean": 1179.2283333333332
+    },
+    "cohen_d": 0.26908202628947403,
+    "cohen_d_log10": 0.14278699707754125,
+    "auroc": 0.5041305555555555,
+    "auroc_ci95_game": [
+     0.46205,
+     0.5466145833333332
+    ]
+   },
+   "announcement_tokens": {
+    "parsnip": {
+     "n": 300,
+     "min": 15.0,
+     "median": 100.0,
+     "p95": 230.20000000000005,
+     "max": 308.0,
+     "mean": 113.4
+    },
+    "carrot": {
+     "n": 600,
+     "min": 18.0,
+     "median": 100.0,
+     "p95": 213.0999999999999,
+     "max": 335.0,
+     "mean": 108.84666666666666
+    },
+    "cohen_d": 0.08167952881863404,
+    "cohen_d_log10": 0.0006068259071137295,
+    "auroc": 0.508475,
+    "auroc_ci95_game": [
+     0.48329083333333334,
+     0.5349847222222222
+    ]
+   },
+   "text_tokens": {
+    "parsnip": {
+     "n": 300,
+     "min": 0.0,
+     "median": 0.0,
+     "p95": 359.1,
+     "max": 434.0,
+     "mean": 56.01
+    },
+    "carrot": {
+     "n": 600,
+     "min": 0.0,
+     "median": 0.0,
+     "p95": 317.0999999999999,
+     "max": 459.0,
+     "mean": 38.108333333333334
+    },
+    "cohen_d": 0.1629694108740097,
+    "cohen_d_log10": null,
+    "auroc": 0.5243916666666667,
+    "auroc_ci95_game": [
+     0.4988916666666666,
+     0.5501890277777777
+    ]
+   },
+   "frac_with_text": {
+    "parsnip": 0.17666666666666667,
+    "carrot": 0.13166666666666665,
+    "n_parsnip": 53,
+    "n_carrot": 79
+   },
+   "frac_turns_resampled": {
+    "parsnip": 0.14333333333333334,
+    "carrot": 0.08,
+    "n_parsnip": 43,
+    "n_carrot": 48
+   }
+  },
+  "5p": {
+   "n_parsnip": 300,
+   "n_carrot": 1200,
+   "reasoning_tokens": {
+    "parsnip": {
+     "n": 300,
+     "min": 414.0,
+     "median": 773.0,
+     "p95": 3882.050000000002,
+     "max": 10308.0,
+     "mean": 1359.1366666666668
+    },
+    "carrot": {
+     "n": 1200,
+     "min": 255.0,
+     "median": 758.5,
+     "p95": 2594.449999999999,
+     "max": 7619.0,
+     "mean": 1046.8
+    },
+    "cohen_d": 0.3486592935089028,
+    "cohen_d_log10": 0.24233827494017668,
+    "auroc": 0.5297069444444444,
+    "auroc_ci95_game": [
+     0.48979079861111113,
+     0.5697166666666666
+    ]
+   },
+   "announcement_tokens": {
+    "parsnip": {
+     "n": 300,
+     "min": 30.0,
+     "median": 111.5,
+     "p95": 236.15000000000003,
+     "max": 311.0,
+     "mean": 124.35333333333334
+    },
+    "carrot": {
+     "n": 1200,
+     "min": 22.0,
+     "median": 123.5,
+     "p95": 234.04999999999995,
+     "max": 318.0,
+     "mean": 132.12166666666667
+    },
+    "cohen_d": -0.12879966219626807,
+    "cohen_d_log10": -0.15134823953492318,
+    "auroc": 0.4584708333333334,
+    "auroc_ci95_game": [
+     0.43589579861111116,
+     0.4807916666666667
+    ]
+   },
+   "text_tokens": {
+    "parsnip": {
+     "n": 300,
+     "min": 0.0,
+     "median": 0.0,
+     "p95": 222.10000000000025,
+     "max": 372.0,
+     "mean": 17.046666666666667
+    },
+    "carrot": {
+     "n": 1200,
+     "min": 0.0,
+     "median": 0.0,
+     "p95": 0.0,
+     "max": 452.0,
+     "mean": 12.303333333333333
+    },
+    "cohen_d": 0.07598821330467903,
+    "cohen_d_log10": null,
+    "auroc": 0.5082527777777778,
+    "auroc_ci95_game": [
+     0.4931983333333333,
+     0.5250558333333334
+    ]
+   },
+   "frac_with_text": {
+    "parsnip": 0.06,
+    "carrot": 0.043333333333333335,
+    "n_parsnip": 18,
+    "n_carrot": 52
+   },
+   "frac_turns_resampled": {
+    "parsnip": 0.08666666666666667,
+    "carrot": 0.03666666666666667,
+    "n_parsnip": 26,
+    "n_carrot": 44
+   }
+  },
+  "pooled": {
+   "n_parsnip": 600,
+   "n_carrot": 1800,
+   "reasoning_tokens": {
+    "parsnip": {
+     "n": 600,
+     "min": 373.0,
+     "median": 764.5,
+     "p95": 4711.45,
+     "max": 10308.0,
+     "mean": 1441.6416666666667
+    },
+    "carrot": {
+     "n": 1800,
+     "min": 255.0,
+     "median": 761.0,
+     "p95": 2963.1499999999996,
+     "max": 7619.0,
+     "mean": 1090.9427777777778
+    },
+    "cohen_d": 0.3311955651657032,
+    "cohen_d_log10": 0.20847507434381446,
+    "auroc": 0.5187481481481482,
+    "auroc_ci95_game": [
+     0.4897926970547932,
+     0.5472926525708242
+    ]
+   },
+   "announcement_tokens": {
+    "parsnip": {
+     "n": 600,
+     "min": 15.0,
+     "median": 104.5,
+     "p95": 235.04999999999995,
+     "max": 311.0,
+     "mean": 118.87666666666667
+    },
+    "carrot": {
+     "n": 1800,
+     "min": 18.0,
+     "median": 115.0,
+     "p95": 230.0,
+     "max": 335.0,
+     "mean": 124.36333333333333
+    },
+    "cohen_d": -0.09229388215902659,
+    "cohen_d_log10": -0.13597319606107267,
+    "auroc": 0.4670759259259259,
+    "auroc_ci95_game": [
+     0.45034735316572566,
+     0.48431837865163146
+    ]
+   },
+   "text_tokens": {
+    "parsnip": {
+     "n": 600,
+     "min": 0.0,
+     "median": 0.0,
+     "p95": 310.0999999999999,
+     "max": 434.0,
+     "mean": 36.528333333333336
+    },
+    "carrot": {
+     "n": 1800,
+     "min": 0.0,
+     "median": 0.0,
+     "p95": 265.04999999999995,
+     "max": 459.0,
+     "mean": 20.905
+    },
+    "cohen_d": 0.18465294649494857,
+    "cohen_d_log10": null,
+    "auroc": 0.52325,
+    "auroc_ci95_game": [
+     0.5090949182019905,
+     0.5379005549836212
+    ]
+   },
+   "frac_with_text": {
+    "parsnip": 0.11833333333333333,
+    "carrot": 0.07277777777777777,
+    "n_parsnip": 71,
+    "n_carrot": 131
+   },
+   "frac_turns_resampled": {
+    "parsnip": 0.115,
+    "carrot": 0.051111111111111114,
+    "n_parsnip": 69,
+    "n_carrot": 92
+   }
+  }
+ }
+}

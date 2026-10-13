@@ -1,0 +1,58 @@
+{
+ "g001": [
+  {
+   "round": 1,
+   "position": 1,
+   "player": "Alice",
+   "score": -0.5702
+  },
+  {
+   "round": 1,
+   "position": 2,
+   "player": "Bob",
+   "score": -0.2783
+  },
+  {
+   "round": 1,
+   "position": 3,
+   "player": "Charlie",
+   "score": -0.5506
+  },
+  {
+   "round": 2,
+   "position": 1,
+   "player": "Alice",
+   "score": -0.5045
+  },
+  {
+   "round": 2,
+   "position": 2,
+   "player": "Charlie",
+   "score": -0.5458
+  },
+  {
+   "round": 2,
+   "position": 3,
+   "player": "Bob",
+   "score": -0.2311
+  },
+  {
+   "round": 3,
+   "position": 1,
+   "player": "Alice",
+   "score": -0.2534
+  },
+  {
+   "round": 3,
+   "position": 2,
+   "player": "Charlie",
+   "score": -0.3333
+  },
+  {
+   "round": 3,
+   "position": 3,
+   "player": "Bob",
+   "score": -0.1349
+  }
+ ]
+}

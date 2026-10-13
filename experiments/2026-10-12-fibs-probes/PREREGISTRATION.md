@@ -294,3 +294,71 @@ researcher's §1 next-step answers, used as the report's conclusion.
 
 <!-- Append only. Each entry: date, what changed, why, decided before or
      after seeing data. -->
+
+- 2026-10-12 — Positive control rows: `AlignmentResearch/fibs-v1` carries
+  no column marking the paper's 5,000 validation rows (the card: "This
+  release carries no per-row column"; the hold-out is by prompt group, not
+  published). The positive control therefore scores 500 rows drawn at random
+  (seed 0, 250 per label, balanced across the four quadrants) from the
+  released dataset, most of which are training rows; the pass criterion
+  stays AUROC within 0.02 of 0.972. Decided by Claude before any activation
+  was collected.
+
+- 2026-10-12 — Turn structure and probe read changed before any main game
+  was played (decided by the researcher after the pilot, before any score
+  existed). The engine's two-call turn (an explicit reasoning reply, then an
+  acting call) is unusable with a natively thinking player: the pilot's
+  reasoning calls spent their whole 4000-token budget inside the hidden
+  think block and returned empty text, so the acting call saw no reasoning.
+  New engine flag `turn_mode: single_call` (upstream submodule change): one
+  call per turn with the tools attached; the model thinks in its own
+  reasoning channel and calls MakeAnnouncementTool in the same response; a
+  response without an exposed reasoning block raises. The reasoning prompt
+  gains one appended sentence ("Reason privately first. Then, in this same
+  response, either use the MakeAnnouncementTool ... or ... stay silent.");
+  per-turn `max_tokens` 12000 instead of 4000 per call. The probe now reads
+  the step as the model saw it, which is the paper's SHADE-Arena read: tool
+  schemas in the system prompt, the assistant turn rendered as the tool
+  call with its thinking in `reasoning_content` (dropped by the template
+  once the follow-up is appended), the tool result, then the follow-up and
+  prefill. The §6 limitation "the players' reasoning turn is in the probe's
+  context" no longer applies; the DYL baseline keeps its plain-reply
+  rendering (the format it was trained on). The main games' prompts
+  therefore differ from 2026-10-09 by the appended sentence and the turn
+  structure.
+- 2026-10-12 — Positive control passed before any game was scored: linear
+  ensemble AUROC 0.986 on 500 fibs rows (target 0.972 ± 0.02; MLP 0.998,
+  EFC 1.000, axial 1.000). Window-only and full-sequence scoring agree to
+  within 0.3% (bf16 batch noise).
+- 2026-10-13 — Silent turns are re-sampled (engine flag
+  `single_call_resample_silent: true`, submodule commit `8584adb`). In the
+  single-call pilots 3 of 8 games were excluded as "silent in a round":
+  the model wrote its deliberation as visible text and stopped without
+  calling the tool. A discussion turn that returns no tool call is now
+  sampled again with the same prompt (within the engine's existing 3
+  attempts); the player is recorded silent only if all attempts are. The
+  prompt text is unchanged (it still offers silence) and the exclusion
+  rule of §4 is unchanged. Consequence: announcements are conditioned on
+  the model choosing to speak within 3 samples. Decided before any
+  non-pilot data. The researcher was asked to choose between this and
+  relaxing the exclusion to last-round silence; they said "run on modal
+  now" without choosing, so Claude applied its own recommendation — the
+  researcher has NOT confirmed this choice.
+- 2026-10-13 — Games are generated on Modal instead of the local GPUs
+  (researcher: "run on modal now"). `serving/modal_qwen_27b.py`: the same
+  bf16 checkpoint and revision, the same vLLM build
+  (`requirements/venv-serve.lock.txt`) and flags as the local server, on
+  one H200 per replica (tensor parallel 1 instead of 2), up to 4 replicas.
+  `max_concurrent_games` 25 -> 100 and `max_connections: 128` (throughput
+  only). Activations, scoring and judging stay local. Decided before any
+  non-pilot data.
+- 2026-10-13 — The oracle judge (Qwen3.8-27B, same revision and vLLM
+  flags as the local server) runs on Modal (`serving/modal_qwen_27b.py`,
+  class `Judge`) instead of the local GPUs, which the activation
+  collection occupies; `judge_workers` 32 -> 96, `judge_max_tokens`
+  4000 -> 16000 (the pilot truncated at 4000). Claude's decision for
+  wall-clock, not confirmed by the researcher; decided before any judge
+  label of the main run existed.
+- 2026-10-13 — `acts_max_batch: 128` added: the alpaca collection ran out
+  of GPU memory at ~160 short rows per forward. Batch composition only;
+  game activations are unaffected (their batches are under 12 rows).

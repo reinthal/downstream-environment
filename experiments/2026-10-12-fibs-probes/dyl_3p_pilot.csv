@@ -1,0 +1,10 @@
+game_id,round,position,speaker,role,dyl_p,dyl_logodds
+g001,0,0,Alice,Carrot,0.689428,0.7974
+g001,0,1,Bob,Parsnip,0.045339,-3.0472
+g001,0,2,Charlie,Carrot,0.034808,-3.3225
+g001,1,0,Alice,Carrot,0.286971,-0.9101
+g001,1,1,Charlie,Carrot,0.062362,-2.7104
+g001,1,2,Bob,Parsnip,0.027665,-3.5595
+g001,2,0,Alice,Carrot,0.008039,-4.8154
+g001,2,1,Charlie,Carrot,0.000174,-8.6551
+g001,2,2,Bob,Parsnip,0.000028,-10.4923
