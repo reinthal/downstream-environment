@@ -156,3 +156,19 @@ curl https://api.runpod.ai/v2/jd42hxujb3bagp/openai/v1/chat/completions \
   delete-before-replace for that reason.
 - Endpoint updates PATCH in place, so the endpoint id (and base URL) survives
   parameter changes; template changes replace the template.
+
+## Modal resources (2026-10-13)
+
+`modal_res.py` adds dynamic providers over the Modal SDK (no official Pulumi
+provider exists) for Volumes and Secrets; `__main__.py` declares the three
+volumes and the HF secret used by `experiments/2026-10-13-fibs-basharena/`
+in the `cadenza` workspace. Apply with
+
+```sh
+MODAL_PROFILE=cadenza HF_TOKEN=... pulumi up   # provider refuses any other MODAL_PROFILE
+```
+
+The token comes from `~/.modal.toml` (profile `cadenza`); the secret's
+value is read from `HF_TOKEN` at operation time and never stored in state.
+Volume creation is idempotent (a hand-made volume of the same name is
+adopted); deleting a Volume resource deletes its data.
