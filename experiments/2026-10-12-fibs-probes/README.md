@@ -356,10 +356,10 @@ Does not show, or shows a problem:
   no per-round role breakdown; no re-scoring of probes with length, re-sample
   status or post-thinking text as covariates.
 
-## Comparison probes: random direction and Apollo (exploratory, not preregistered)
+## Comparison probes: random direction, Apollo, DYL (exploratory, not preregistered)
 
 Added 2026-10-13 after the main run. Scripts: `random_probe.py`,
-`apollo_probe.py`, `roc.py`; parameters in `config.json` (`random_seeds`,
+`apollo_probe.py`, `same_read.py`, `roc.py`; parameters in `config.json` (`random_seeds`,
 `apollo_*`, `roc_probes`, `roc_random_seed`).
 
 ### Random direction, matched to the fibs linear ensemble
@@ -409,49 +409,94 @@ random seed reaches the trained ensemble (0.989 pooled; best seed 0.837).
 Why the contrast is this separable along arbitrary directions was not
 investigated.
 
-### Apollo probe (layer 16) — written and CPU-checked, GPU pass NOT run
+### Apollo probe on the announcement tokens (no follow-up)
 
-`apollo_probe.py` scores every announcement with the in-repo replication of
-Goldowsky-Dill et al. 2025's main probe
+`apollo_probe.py`, read as the researcher specified on 2026-10-13: the
+in-repo replication of Goldowsky-Dill et al. 2025's main probe
 (`probes/qwen3.5-27b_layer16_logistic_regression.npz`, instructed-pairs
-logistic regression) through `linear_probes.LMProbe`, as
-`experiments/2026-09-22/score_messages.py` did: layer-16 residual stream,
-mean-pooled over a span of the speaker's turn rendered as a plain reply
-(`collect_acts.dialogue`; no tool call, no follow-up question). Three reads:
-`plain_pub` (primary; no private reasoning in the context, span = the public
-announcement), `reasoning_pub` (the private reasoning in the think block as
-in 2026-09-22, span = the announcement) and `reasoning_full` (span =
-reasoning + announcement). Its matched random control replaces the probe's
-weight vector by the same seeded random directions (layer 16) at the probe's
-norm, in the probe's standardized space, on the same pooled activations.
+logistic regression) on the dialogue the speaker saw plus the announcement
+as a plain reply (`collect_acts.dialogue`; no private reasoning, no tool
+call, no follow-up turn), mean over the reply's tokens except the last
+5. The reply's offset is the token count of the chat template rendered
+up to the generation prompt; the sequence ends at `<|im_end|>`, so the
+dropped tokens are that token and the last 4 tokens of the announcement.
+Read at layer 19 as instructed (off-layer: the probe's standardization and
+weights are from layer 16) and at layer 16. This needed a forward pass: the
+stored `acts_{arm}/` hold the follow-up window only, not the announcement.
+Random control: the weight vector replaced by a seeded random direction of
+the same norm, same pooled activations. `apollo_{arm}.csv`,
+`results_apollo.json`.
 
-Checked on CPU (`--stage check`, tokenizer only): all 900 + 1,500 inputs
-render in both variants, the public span decodes to exactly
-"\n\n" + announcement + "<|im_end|>\n" on every row, and the longest input
-is 12,662 tokens (under `apollo_max_len` 16,384, so nothing is trimmed).
-Not checked: anything that needs the model — the forward pass, the scores.
-There are no Apollo numbers yet. To run (17 of 64 blocks, two free GPUs):
+| probe and read | pooled AUROC [95% game CI] | 3p | 5p | its random directions, pooled (min / median / max of 10) |
+|---|---|---|---|---|
+| Apollo LR read at layer 19 (as instructed) | 0.562 [0.543, 0.582] | 0.586 | 0.500 | 0.433 / 0.520 / 0.609 |
+| Apollo LR read at layer 16 (fitted there) | 0.522 [0.503, 0.542] | 0.544 | 0.473 | 0.455 / 0.529 / 0.581 |
 
-```sh
-for a in 3p 5p; do
-  CUDA_VISIBLE_DEVICES=6,7 HF_HUB_OFFLINE=1 uv run --no-sync python experiments/2026-10-12-fibs-probes/apollo_probe.py --arm $a --stage acts
-  uv run --no-sync python experiments/2026-10-12-fibs-probes/apollo_probe.py --arm $a --stage score
-done   # -> activations_apollo_{arm}.npz (gitignored), apollo_{arm}.csv, results_apollo.json
-```
+The Apollo probe is at or near chance on role at both layers and inside the
+spread of its own random directions.
+
+### "Did you lie" probes on the fibs probes' stored activations
+
+`same_read.py` (CPU, no model): the DYL probes applied to `acts_{arm}/`,
+i.e. exactly the context, follow-up ("Did you respond truthfully just
+now?"), prefills and tokens the fibs probes were scored on. The stored
+layers are 19/27/35/43/51/58, so each probe is applied off-layer with its
+own standardization and weights, as the researcher chose ("just run them on
+layer 19 instead and 35 respectively. I acknowledge this limitation"): the
+in-house DYL probes (fitted at layer 18; the preregistered baseline's
+thinking-off probe and its thinking-on variant) at 19, and the UK AISI probe
+`ai-safety-institute/dyl-qwen-qwen3.5-27b` (default checkpoint, logistic
+regression fitted at layer 38, loaded with `lie_detectors.get_probe`) at 35.
+None of them was fitted on this question or on prefilled answers. Reads: the
+answer word (the token the DYL probes are fitted on) and the full stop (the
+fibs linear probe's token); rules: the fibs contrast and the score under
+"No." alone. `sameread_{arm}.csv`, `results_sameread.json`.
+
+| probe and read | pooled AUROC [95% game CI] | 3p | 5p | its random directions, pooled (min / median / max of 10) |
+|---|---|---|---|---|
+| in-house DYL, thinking-off, layer 19; answer word; Yes. − No. | 0.531 [0.513, 0.548] | 0.491 | 0.520 | 0.373 / 0.457 / 0.546 |
+| in-house DYL, thinking-off, layer 19; answer word; No. alone | 0.436 [0.413, 0.460] | 0.451 | 0.464 | 0.443 / 0.532 / 0.658 |
+| in-house DYL, thinking-off, layer 19; full stop; Yes. − No. | 0.520 [0.498, 0.542] | 0.467 | 0.521 | 0.371 / 0.469 / 0.554 |
+| in-house DYL, thinking-off, layer 19; full stop; No. alone | 0.456 [0.433, 0.479] | 0.440 | 0.480 | 0.461 / 0.517 / 0.643 |
+| in-house DYL, thinking-on, layer 19; answer word; Yes. − No. | 0.432 [0.411, 0.450] | 0.386 | 0.477 | 0.374 / 0.457 / 0.545 |
+| in-house DYL, thinking-on, layer 19; answer word; No. alone | 0.603 [0.582, 0.625] | 0.638 | 0.591 | 0.442 / 0.531 / 0.654 |
+| in-house DYL, thinking-on, layer 19; full stop; Yes. − No. | 0.377 [0.354, 0.398] | 0.306 | 0.465 | 0.371 / 0.469 / 0.548 |
+| in-house DYL, thinking-on, layer 19; full stop; No. alone | 0.627 [0.608, 0.647] | 0.667 | 0.598 | 0.458 / 0.520 / 0.643 |
+| AISI DYL, layer 35; answer word; Yes. − No. | 0.590 [0.563, 0.616] | 0.596 | 0.556 | 0.017 / 0.492 / 0.931 |
+| AISI DYL, layer 35; answer word; No. alone | 0.867 [0.851, 0.884] | 0.822 | 0.911 | 0.068 / 0.417 / 0.940 |
+| AISI DYL, layer 35; full stop; Yes. − No. | 0.862 [0.843, 0.880] | 0.895 | 0.842 | 0.116 / 0.459 / 0.767 |
+| AISI DYL, layer 35; full stop; No. alone | 0.862 [0.839, 0.884] | 0.717 | 0.940 | 0.140 / 0.477 / 0.931 |
+
+- In-house DYL: near chance on every read, thinking-off and thinking-on
+  alike (best: thinking-on, "No." alone, 0.60-0.63), so the thinking-off
+  mismatch noted under Results does not by itself explain the chance-level
+  baseline.
+- AISI DYL: about 0.86 on three of its four reads, below every fibs probe,
+  and unstable across arms on "No." alone at the full stop (3p
+  0.717, 5p 0.940). Its random directions at layer 35 span
+  0.017-0.931 (answer word, contrast): single random directions carry as
+  much role information as the probe, with either sign. At layer 19 random
+  directions stay within about 0.37-0.66.
+- The AISI probe in its own format (its question, the model's generated
+  answer with reasoning, layer 38) is run separately by `aisi_dyl.py`; see
+  below once it has finished.
 
 ### ROC curves
 
 ![ROC curves per probe, 3p and 5p](figures/roc.svg)
 
 `figures/roc.svg` (`roc.py`): announcement-level ROC, Parsnip positive, 3p
-left and 5p right on identical axes. Solid: the probes in `roc_probes`
-(currently the four fibs probes and the in-house DYL baseline). Dashed: the
-matched random direction of seed 0 — the highest of the ten seeds
-pooled, not a typical one; per-arm AUROC over the ten seeds ranges
-0.047-0.844 (3p, median 0.346) and 0.066-0.845 (5p, median 0.450). Dotted:
-chance. Legends give each probe's AUROC in that panel. The Apollo and AISI
-lines are added by setting
-`"roc_probes": ["linear", "mlp", "efc", "axial", "dyl", "apollo", "aisi"]`
-in `config.json` once `apollo_{arm}.csv` and `aisi_dyl_{arm}.csv` +
-`results_aisi_dyl.json` exist (`roc.py` fails if a listed probe's file is
-missing or does not cover the same announcements).
+left and 5p right; top row the full ROC, bottom row a zoom on FPR 0-0.2,
+TPR 0.8-1 (marked by a rectangle above); identical axes within a row; one
+legend per column under the zoom. Solid: the probes in `roc_probes` — the
+four fibs probes; the AISI DYL and in-house DYL probes on the fibs read
+(full stop, "Yes." − "No.", layers 35 and 19); the Apollo probe at layer 19
+on the announcement tokens. Dashed: the fibs-linear-matched random direction
+of seed 0 — the highest of the ten seeds pooled (in 3p alone seed 5 is
+slightly higher, 0.844), not a typical one; per-arm
+AUROC over the ten seeds ranges 0.047-0.844 (3p, median 0.346) and
+0.066-0.845 (5p, median 0.450). Dotted: chance. Legends give each probe's
+AUROC in that panel. Other lines available by name in `roc_probes`: `dyl`
+(the preregistered baseline, own question, layer 18) and `aisi` (model-card
+format, once `aisi_dyl_{arm}.csv` exists). `roc.py` fails if a listed
+probe's file is missing or does not cover the same announcements.

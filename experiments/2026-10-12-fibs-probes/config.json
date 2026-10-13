@@ -125,9 +125,19 @@
   "mlp",
   "efc",
   "axial",
-  "dyl"
+  "aisi_same",
+  "apollo",
+  "dyl_same"
  ],
  "roc_random_seed": 0,
+ "roc_zoom_fpr": [
+  0.0,
+  0.2
+ ],
+ "roc_zoom_tpr": [
+  0.8,
+  1.0
+ ],
  "same_read_layers": {
   "dyl": 19,
   "dyl_thinking": 19,
