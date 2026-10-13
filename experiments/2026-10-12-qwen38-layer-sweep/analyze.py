@@ -39,7 +39,7 @@ ADMITS = re.compile(r"\bI(?:'m| am)\s+(?:the\s+|a\s+)?parsnip\b", re.IGNORECASE)
 
 def load(name: str):
     z = np.load(OUT / f"activations_{name}.npz")
-    return z["X"], list(z["layers"]), list(z["rows"])
+    return z["X"], [int(L) for L in z["layers"]], [int(i) for i in z["rows"]]
 
 
 def auroc_ci(scores: np.ndarray, labels: np.ndarray, groups: np.ndarray, n_boot: int) -> dict:
@@ -53,7 +53,7 @@ def auroc_ci(scores: np.ndarray, labels: np.ndarray, groups: np.ndarray, n_boot:
         if len(set(labels[take])) == 2:
             boots.append(roc_auc_score(labels[take], scores[take]))
     lo, hi = np.percentile(boots, [2.5, 97.5])
-    return {"auroc": round(float(roc_auc_score(labels, scores)), 4), "ci95": [round(lo, 4), round(hi, 4)]}
+    return {"auroc": round(float(roc_auc_score(labels, scores)), 4), "ci95": [round(float(lo), 4), round(float(hi), 4)]}
 
 
 def main():

@@ -1700,3 +1700,92 @@ from the uniform rate rising from 1/5 to 1/3.
 - `experiments/2026-10-09-3p-game/audit_5p/auditor_base.jsonl`
 - `experiments/2026-10-09-3p-game/position_share_first.svg`,
   `position_share_last.svg`, `plot_position_share.py`
+
+## 2026-10-12: Follow-up probe layer sweep on Qwen3.8-27B (exploratory)
+
+### Context
+
+The researcher recalls a lost layer sweep (`experiments/2026-10-06/`, cited
+in the 2026-10-01 README as "no layer sweep here (see 2026-10-06)" but never
+committed) in which a late-layer follow-up probe was near perfect, while every
+game result since 2026-09-22 used layer 16 or 18 (~28% depth). Replicated on
+the newest Qwen under 36B parameters, Qwen3.8-27B, with fresh games. Not
+preregistered beyond the design: the researcher asked to run without a
+hypothesis, prediction or primary metric, so everything below is exploratory.
+
+### Experiment
+
+Follow-up ("Was your last response deceptive? (Yes/No)" → "No") LR probe at
+layers 0, 8, …, 56 and 63 (raw last-block output), trained per layer with the
+2026-10-01 recipe on Qwen3.8's own graded replies to the 371 Apollo
+roleplaying scenarios. Evaluated on 100 new 3-player games (the 2026-10-09
+game, players Qwen3.8 on a local vLLM server, thinking off) as message AUROC
+Parsnip vs Carrot, and on in-game conceal-vs-admit pairs (every Parsnip turn
+replayed with and without "openly tell the group that you are the Parsnip"),
+which a role read-out cannot separate. 100 random directions per layer as the
+null.
+
+### Expected Outcome
+
+Preregistered (`experiments/2026-10-12-qwen38-layer-sweep/PREREGISTRATION.md`):
+NOT PREREGISTERED.
+
+### Actual Outcome
+
+<!-- researcher fills in -->
+
+### Results
+
+88 valid games of 100 (12 dropped: a player silent in round 3 — Qwen3.8
+sometimes writes its announcement as plain text instead of calling the tool,
+which the engine treats as silence); 779 announcements (258 Parsnip).
+Roleplaying grades: 212 deceptive, 65 honest, 94 ambiguous; validation 45 /
+13. Conceal/admit: 193 clean pairs of 260 (admit variant says "I am the
+Parsnip" 97.4%, conceal 1.7%).
+
+| layer | roleplay val | games: Parsnip vs Carrot [95% CI] | games: top-1 | conceal vs admit | random dirs, games (2.5-97.5%) |
+|---|---|---|---|---|---|
+| 0 | 0.49 | 0.46 [0.42, 0.49] | 0.26 | 0.52 | 0.39-0.63 |
+| 8 | 0.61 | 0.56 [0.52, 0.60] | 0.43 | 0.63 | 0.38-0.63 |
+| 16 | 0.71 | 0.54 [0.50, 0.58] | 0.44 | 0.65 | 0.37-0.61 |
+| 24 | 0.86 | 0.53 [0.48, 0.57] | 0.40 | 0.84 | 0.34-0.66 |
+| 32 | 0.98 | 0.72 [0.69, 0.74] | 0.82 | 1.00 | 0.18-0.85 |
+| 40 | 0.97 | 0.97 [0.95, 0.98] | 0.99 | 1.00 | 0.05-0.94 |
+| 48 | 0.99 | 1.00 [0.99, 1.00] | 1.00 | 1.00 | 0.04-0.93 |
+| 56 | 0.98 | 0.99 [0.99, 1.00] | 0.99 | 1.00 | 0.10-0.86 |
+| 63 | 0.98 | 0.99 [0.99, 1.00] | 1.00 | 1.00 | 0.18-0.80 |
+
+(games top-1: share of games where the player with the highest mean score is
+the Parsnip; chance 1/3.)
+
+- The near-perfect late-layer result replicates: from layer 40 on, game
+  message AUROC is 0.97-1.00 and the Parsnip has the highest mean score in
+  99-100% of games. Layers 16-24 (the depth used so far) are near chance on
+  the games (0.53-0.54), as the Qwen3.5 layer-18 probe was on 2026-10-09
+  (0.54).
+- Conceal vs admit is ~1.00 from layer 32 on, so the late-layer probe is not
+  only reading the role line (both variants are the Parsnip).
+- Random directions spread very widely at late layers (2.5-97.5% from about
+  0.05 to 0.94 at layers 40-48): the classes differ along a large shift that
+  many directions pick up, not one narrow direction. The admit variant also
+  differs from the conceal variant in its text ("I am the Parsnip").
+- Not tested (not chosen): whether the late-layer probe adds anything over the
+  model's own answer to the follow-up question (black-box P(Yes)), and
+  all-Carrot games.
+
+### Parameters/Configurations
+
+- `experiments/2026-10-12-qwen38-layer-sweep/config.json` (`SweepConfig`),
+  `game.yaml`; Qwen/Qwen3.8-27B revision 1d4bf0f; server
+  `serving/serve_qwen38.py --gpus 0,3 --data_parallel_size 1 --port 8003`,
+  thinking off by default; activations on GPUs 4,5.
+- `linear_probes.dyl_probe.encode_no_span` gained `enable_thinking`: Qwen3.8's
+  chat template prepends a "Reasoning effort is set to xhigh" system preamble
+  unless thinking is off.
+- Repro: `bash experiments/2026-10-12-qwen38-layer-sweep/run_all.sh` (server up).
+
+### Artifacts
+
+- `experiments/2026-10-12-qwen38-layer-sweep/` — PREREGISTRATION, README,
+  scripts, `results.json`, `figure_auroc_by_layer.png`
+- `probes/qwen3.8-27b_layer{0,8,…,63}_followup_logistic_regression.npz`
