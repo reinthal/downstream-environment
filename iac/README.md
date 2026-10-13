@@ -2,7 +2,7 @@
 
 Pulumi program managing the Modal **Volumes** and **Secret** that
 `experiments/2026-10-13-fibs-basharena/modal_app.py` mounts, in the
-`cadenza` workspace. (Until 2026-10-13 this program managed RunPod
+`reinthal` workspace (and, as a record, `cadenza`). (Until 2026-10-13 this program managed RunPod
 serverless endpoints; that was torn down on 2026-10-11 and removed from the
 program on 2026-10-13 — the recipe is in git history, commit `93b0359`.)
 
@@ -22,13 +22,20 @@ program on 2026-10-13 — the recipe is in git history, commit `93b0359`.)
 
 ## Usage
 
+One stack per Modal workspace (`cadenza`, `reinthal`); the stack config
+`modal-iac:profile` names the Modal profile and `MODAL_PROFILE` must match
+at apply time (the provider refuses otherwise). The experiment moved from
+`cadenza` to `reinthal` on 2026-10-13 when cadenza's credits ran out; the
+cadenza stack is kept as a record of what exists there.
+
 ```sh
 export PULUMI_CONFIG_PASSPHRASE=""        # local file backend, no secrets in config
-export MODAL_PROFILE=cadenza              # the workspace; the provider refuses any other
 set -a; source ../.env; set +a            # HF_TOKEN
 cd iac
-nix shell nixpkgs#pulumi nixpkgs#pulumiPackages.pulumi-python nixpkgs#uv --command pulumi preview
-nix shell nixpkgs#pulumi nixpkgs#pulumiPackages.pulumi-python nixpkgs#uv --command pulumi up
+P="nix shell nixpkgs#pulumi nixpkgs#pulumiPackages.pulumi-python nixpkgs#uv --command pulumi"
+$P stack select reinthal
+MODAL_PROFILE=reinthal $P preview
+MODAL_PROFILE=reinthal $P up
 ```
 
 Auth: the Modal token of profile `cadenza` in `~/.modal.toml`
@@ -36,7 +43,7 @@ Auth: the Modal token of profile `cadenza` in `~/.modal.toml`
 
 State: **repo-local file backend, git-tracked** — `Pulumi.yaml` pins
 `backend: url: file://./state`, so the state JSON lives at
-`iac/state/.pulumi/stacks/modal-iac/dev.json` and travels with the repo (no
+`iac/state/.pulumi/stacks/modal-iac/<stack>.json` and travels with the repo (no
 `pulumi login` needed). Single-operator stack; the state holds resource
 names and volume ids only. Discipline: **commit after every `pulumi up`**,
 and never apply from a second clone without pulling first (git is the

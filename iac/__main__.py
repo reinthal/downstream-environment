@@ -1,9 +1,9 @@
 """Modal resources of the fibs-on-BashArena experiment
 (experiments/2026-10-13-fibs-basharena): the Volumes and the HF Secret that
-its ``modal_app.py`` mounts, in the ``cadenza`` workspace.
+its ``modal_app.py`` mounts, one stack per workspace (``reinthal``, ``cadenza``).
 
-Apply:  MODAL_PROFILE=cadenza HF_TOKEN=... pulumi up
-The provider refuses any other MODAL_PROFILE. Names must match
+Apply:  pulumi stack select <cadenza|reinthal>; MODAL_PROFILE=<same> HF_TOKEN=... pulumi up
+The provider refuses a MODAL_PROFILE that differs from the stack's `modal-iac:profile`. Names must match
 ``experiments/2026-10-13-fibs-basharena/common.py`` (modal_weights_volume,
 modal_data_volume, modal_triton_cache_volume; secret fibs-basharena-hf).
 Deleting a Volume resource deletes its data.
@@ -13,7 +13,9 @@ import pulumi
 
 import modal_res
 
-MODAL_PROFILE = "cadenza"
+# One stack per workspace: `pulumi stack select cadenza|reinthal`; the stack config
+# `modal-iac:profile` names the Modal profile, and MODAL_PROFILE must match at apply time.
+MODAL_PROFILE = pulumi.Config().require("profile")
 
 modal_volumes = {
     name: modal_res.Volume(f"modal-volume-{name}", name, MODAL_PROFILE)
