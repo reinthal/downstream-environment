@@ -1,0 +1,15 @@
+# 5-player main arm: 4 Carrots vs 1 Parsnip, majority (3) eliminates;
+# otherwise identical to game_3p.yaml.
+carrot:
+  count: 4
+parsnip:
+  count: 1
+ejection_threshold: 3
+num_rounds_discussion: 3
+
+eval_model: openai-api/vllm/Qwen/Qwen3.5-27B
+turn_mode: single_call     # one call per turn: the model thinks natively, then calls the tool
+max_tokens: 12000          # thinking + tool call in one response (two_call used 4000 per call)
+max_concurrent_games: 100     # all games of an arm at once (Modal server)
+max_connections: 128          # Inspect default is 10
+single_call_resample_silent: true   # see PREREGISTRATION.md, Deviations

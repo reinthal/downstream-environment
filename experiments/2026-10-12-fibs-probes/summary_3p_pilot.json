@@ -1,0 +1,221 @@
+[
+ {
+  "total_games": 6,
+  "completed_games": 6,
+  "failed_games": 0,
+  "failures": [],
+  "carrot_wins": 3,
+  "parsnip_wins": 3,
+  "parsnip_wins_other_eliminated": 2,
+  "parsnip_wins_nobody_eliminated": 1,
+  "draws": 0,
+  "draws_enabled": false,
+  "include_parsnip": true,
+  "carrot_win_rate": 0.5,
+  "parsnip_win_rate": 0.5,
+  "cost": 0.0,
+  "games": [
+   {
+    "votes": [
+     {
+      "name": "Alice",
+      "role": "Carrot",
+      "model": "openai-api/vllm/Qwen/Qwen3.5-27B",
+      "target": "Bob",
+      "target_role": "Parsnip",
+      "correct": true
+     },
+     {
+      "name": "Bob",
+      "role": "Parsnip",
+      "model": "openai-api/vllm/Qwen/Qwen3.5-27B",
+      "target": "Alice",
+      "target_role": "Carrot",
+      "correct": null
+     },
+     {
+      "name": "Charlie",
+      "role": "Carrot",
+      "model": "openai-api/vllm/Qwen/Qwen3.5-27B",
+      "target": "Bob",
+      "target_role": "Parsnip",
+      "correct": true
+     }
+    ],
+    "parsnip_player": "Bob",
+    "parsnip_eliminated": true,
+    "winner": "Carrot",
+    "outcome": "carrot_win",
+    "game_id": 0
+   },
+   {
+    "votes": [
+     {
+      "name": "Alice",
+      "role": "Carrot",
+      "model": "openai-api/vllm/Qwen/Qwen3.5-27B",
+      "target": "Charlie",
+      "target_role": "Carrot",
+      "correct": false
+     },
+     {
+      "name": "Bob",
+      "role": "Parsnip",
+      "model": "openai-api/vllm/Qwen/Qwen3.5-27B",
+      "target": "Charlie",
+      "target_role": "Carrot",
+      "correct": null
+     },
+     {
+      "name": "Charlie",
+      "role": "Carrot",
+      "model": "openai-api/vllm/Qwen/Qwen3.5-27B",
+      "target": "Alice",
+      "target_role": "Carrot",
+      "correct": false
+     }
+    ],
+    "parsnip_player": "Bob",
+    "parsnip_eliminated": false,
+    "winner": "Parsnip",
+    "outcome": "parsnip_win_other_eliminated",
+    "game_id": 1
+   },
+   {
+    "votes": [
+     {
+      "name": "Alice",
+      "role": "Carrot",
+      "model": "openai-api/vllm/Qwen/Qwen3.5-27B",
+      "target": "Bob",
+      "target_role": "Parsnip",
+      "correct": true
+     },
+     {
+      "name": "Bob",
+      "role": "Parsnip",
+      "model": "openai-api/vllm/Qwen/Qwen3.5-27B",
+      "target": "Alice",
+      "target_role": "Carrot",
+      "correct": null
+     },
+     {
+      "name": "Charlie",
+      "role": "Carrot",
+      "model": "openai-api/vllm/Qwen/Qwen3.5-27B",
+      "target": "Bob",
+      "target_role": "Parsnip",
+      "correct": true
+     }
+    ],
+    "parsnip_player": "Bob",
+    "parsnip_eliminated": true,
+    "winner": "Carrot",
+    "outcome": "carrot_win",
+    "game_id": 2
+   },
+   {
+    "votes": [
+     {
+      "name": "Alice",
+      "role": "Carrot",
+      "model": "openai-api/vllm/Qwen/Qwen3.5-27B",
+      "target": "Charlie",
+      "target_role": "Carrot",
+      "correct": false
+     },
+     {
+      "name": "Bob",
+      "role": "Parsnip",
+      "model": "openai-api/vllm/Qwen/Qwen3.5-27B",
+      "target": "Alice",
+      "target_role": "Carrot",
+      "correct": null
+     },
+     {
+      "name": "Charlie",
+      "role": "Carrot",
+      "model": "openai-api/vllm/Qwen/Qwen3.5-27B",
+      "target": "Bob",
+      "target_role": "Parsnip",
+      "correct": true
+     }
+    ],
+    "parsnip_player": "Bob",
+    "parsnip_eliminated": false,
+    "winner": "Parsnip",
+    "outcome": "parsnip_win_nobody_eliminated",
+    "game_id": 3
+   },
+   {
+    "votes": [
+     {
+      "name": "Alice",
+      "role": "Parsnip",
+      "model": "openai-api/vllm/Qwen/Qwen3.5-27B",
+      "target": "Charlie",
+      "target_role": "Carrot",
+      "correct": null
+     },
+     {
+      "name": "Bob",
+      "role": "Carrot",
+      "model": "openai-api/vllm/Qwen/Qwen3.5-27B",
+      "target": "Charlie",
+      "target_role": "Carrot",
+      "correct": false
+     },
+     {
+      "name": "Charlie",
+      "role": "Carrot",
+      "model": "openai-api/vllm/Qwen/Qwen3.5-27B",
+      "target": "Bob",
+      "target_role": "Carrot",
+      "correct": false
+     }
+    ],
+    "parsnip_player": "Alice",
+    "parsnip_eliminated": false,
+    "winner": "Parsnip",
+    "outcome": "parsnip_win_other_eliminated",
+    "game_id": 4
+   },
+   {
+    "votes": [
+     {
+      "name": "Alice",
+      "role": "Carrot",
+      "model": "openai-api/vllm/Qwen/Qwen3.5-27B",
+      "target": "Charlie",
+      "target_role": "Parsnip",
+      "correct": true
+     },
+     {
+      "name": "Bob",
+      "role": "Carrot",
+      "model": "openai-api/vllm/Qwen/Qwen3.5-27B",
+      "target": "Charlie",
+      "target_role": "Parsnip",
+      "correct": true
+     },
+     {
+      "name": "Charlie",
+      "role": "Parsnip",
+      "model": "openai-api/vllm/Qwen/Qwen3.5-27B",
+      "target": "Bob",
+      "target_role": "Carrot",
+      "correct": null
+     }
+    ],
+    "parsnip_player": "Charlie",
+    "parsnip_eliminated": true,
+    "winner": "Carrot",
+    "outcome": "carrot_win",
+    "game_id": 5
+   }
+  ],
+  "base_seed": 0,
+  "first_index": 0,
+  "n": 6
+ }
+]

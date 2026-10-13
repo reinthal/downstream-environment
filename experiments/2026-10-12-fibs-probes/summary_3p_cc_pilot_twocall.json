@@ -1,0 +1,89 @@
+[
+ {
+  "total_games": 2,
+  "completed_games": 2,
+  "failed_games": 0,
+  "failures": [],
+  "carrot_wins": 0,
+  "carrot_losses": 2,
+  "carrot_losses_minority": 0,
+  "carrot_losses_majority": 2,
+  "include_parsnip": false,
+  "carrot_win_rate": 0.0,
+  "carrot_loss_rate": 1.0,
+  "cost": null,
+  "games": [
+   {
+    "votes": [
+     {
+      "name": "Alice",
+      "role": "Carrot",
+      "model": "openai-api/vllm/Qwen/Qwen3.5-27B",
+      "target": "Bob",
+      "target_role": "Carrot",
+      "correct": null
+     },
+     {
+      "name": "Bob",
+      "role": "Carrot",
+      "model": "openai-api/vllm/Qwen/Qwen3.5-27B",
+      "target": "Charlie",
+      "target_role": "Carrot",
+      "correct": null
+     },
+     {
+      "name": "Charlie",
+      "role": "Carrot",
+      "model": "openai-api/vllm/Qwen/Qwen3.5-27B",
+      "target": "Bob",
+      "target_role": "Carrot",
+      "correct": null
+     }
+    ],
+    "parsnip_player": "None",
+    "parsnip_eliminated": false,
+    "eliminated_model": "majority",
+    "winner": "Loss",
+    "outcome": "carrot_loss_majority",
+    "game_id": 0
+   },
+   {
+    "votes": [
+     {
+      "name": "Alice",
+      "role": "Carrot",
+      "model": "openai-api/vllm/Qwen/Qwen3.5-27B",
+      "target": "Charlie",
+      "target_role": "Carrot",
+      "correct": null
+     },
+     {
+      "name": "Bob",
+      "role": "Carrot",
+      "model": "openai-api/vllm/Qwen/Qwen3.5-27B",
+      "target": "Alice",
+      "target_role": "Carrot",
+      "correct": null
+     },
+     {
+      "name": "Charlie",
+      "role": "Carrot",
+      "model": "openai-api/vllm/Qwen/Qwen3.5-27B",
+      "target": "Alice",
+      "target_role": "Carrot",
+      "correct": null
+     }
+    ],
+    "parsnip_player": "None",
+    "parsnip_eliminated": false,
+    "eliminated_model": "majority",
+    "winner": "Loss",
+    "outcome": "carrot_loss_majority",
+    "game_id": 1
+   }
+  ],
+  "base_seed": 0,
+  "first_index": 0,
+  "n": 2
+ }
+]
