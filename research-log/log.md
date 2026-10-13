@@ -1769,6 +1769,14 @@ the Parsnip; chance 1/3.)
   0.05 to 0.94 at layers 40-48): the classes differ along a large shift that
   many directions pick up, not one narrow direction. The admit variant also
   differs from the conceal variant in its text ("I am the Parsnip").
+- Exploratory, after the run (`why_late.py` → `why_late.json`): a probe
+  trained on the games themselves (whole games held out) reaches 0.99 already
+  at layer 16 (0.81 at layer 0 — most likely the role line in the prompt), so
+  the information is present early; what fails there is transfer. The
+  roleplay deceptive-honest mean difference is nearly orthogonal to the game
+  Parsnip-Carrot one at layers 0-24 (cosine 0.01-0.16) and aligns from layer
+  32 (0.54-0.72), where the class shift grows from ~1.5% to 15-32% of the
+  games' variance at the "No" token.
 - Not tested (not chosen): whether the late-layer probe adds anything over the
   model's own answer to the follow-up question (black-box P(Yes)), and
   all-Carrot games.

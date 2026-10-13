@@ -1,0 +1,65 @@
+{
+ "0": {
+  "in_domain_games": 0.8119,
+  "transfer_games": 0.457,
+  "cos_meandiff": 0.056,
+  "dprime_games": 0.64,
+  "shift_share": 0.0154
+ },
+ "8": {
+  "in_domain_games": 0.9576,
+  "transfer_games": 0.5627,
+  "cos_meandiff": 0.11,
+  "dprime_games": 0.92,
+  "shift_share": 0.014
+ },
+ "16": {
+  "in_domain_games": 0.9876,
+  "transfer_games": 0.5384,
+  "cos_meandiff": 0.158,
+  "dprime_games": 1.34,
+  "shift_share": 0.0153
+ },
+ "24": {
+  "in_domain_games": 0.9933,
+  "transfer_games": 0.5259,
+  "cos_meandiff": 0.014,
+  "dprime_games": 1.59,
+  "shift_share": 0.0156
+ },
+ "32": {
+  "in_domain_games": 0.9984,
+  "transfer_games": 0.7151,
+  "cos_meandiff": 0.539,
+  "dprime_games": 2.97,
+  "shift_share": 0.1562
+ },
+ "40": {
+  "in_domain_games": 0.9998,
+  "transfer_games": 0.9653,
+  "cos_meandiff": 0.718,
+  "dprime_games": 3.69,
+  "shift_share": 0.3219
+ },
+ "48": {
+  "in_domain_games": 0.9998,
+  "transfer_games": 0.997,
+  "cos_meandiff": 0.695,
+  "dprime_games": 4.13,
+  "shift_share": 0.2989
+ },
+ "56": {
+  "in_domain_games": 0.9998,
+  "transfer_games": 0.9916,
+  "cos_meandiff": 0.561,
+  "dprime_games": 4.05,
+  "shift_share": 0.1704
+ },
+ "63": {
+  "in_domain_games": 0.9998,
+  "transfer_games": 0.9925,
+  "cos_meandiff": 0.401,
+  "dprime_games": 3.74,
+  "shift_share": 0.1467
+ }
+}
