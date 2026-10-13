@@ -61,8 +61,9 @@ if LOCAL:
     )
 weights = modal.Volume.from_name(CFG.modal_weights_volume)
 data = modal.Volume.from_name(CFG.modal_data_volume, create_if_missing=True)
-VOLUMES = {HF_CACHE: weights, DATA: data}
-hf_secret = modal.Secret.from_name("fibs-basharena-hf")
+triton_cache = modal.Volume.from_name(CFG.modal_triton_cache_volume, create_if_missing=True)
+VOLUMES = {HF_CACHE: weights, DATA: data, "/root/.triton": triton_cache}   # TRITON_CACHE_DIR defaults to ~/.triton/cache
+hf_secret = modal.Secret.from_name(CFG.modal_hf_secret)
 
 app = modal.App("fibs-basharena")
 
@@ -267,6 +268,67 @@ class Collector:
         return info
 
     @modal.method()
+    def fla_bench(self, T: int = 16384) -> dict:
+        """fla's chunk_gated_delta_rule alone at the model's GDN shapes, plus
+        the model's first GDN layer alone, with kernel-launch counts."""
+        import os
+        import time
+        import torch
+        from torch.profiler import ProfilerActivity, profile
+        from acts import _decoder
+        inner = _decoder(self.model)
+        gdn_layer = next(l for l in inner.layers if hasattr(l, "linear_attn"))
+        gdn = gdn_layer.linear_attn
+        cfg = inner.config
+        H, HV = cfg.linear_num_key_heads, cfg.linear_num_value_heads
+        K, V = cfg.linear_key_head_dim, cfg.linear_value_head_dim
+        info = {"T": T, "H": H, "HV": HV, "K": K, "V": V, "env": {k: os.environ.get(k) for k in
+                ("FLA_CACHE_RESULTS", "FLA_DISABLE_TENSOR_CACHE", "TRITON_INTERPRET", "FLA_USE_TMA", "TRITON_CACHE_DIR")}}
+        try:
+            import triton
+            info["triton_target"] = str(triton.runtime.driver.active.get_current_target())
+        except Exception as e:                      # noqa: BLE001
+            info["triton_target"] = repr(e)
+        from fla.ops.gated_delta_rule import chunk_gated_delta_rule
+        dev = self.model.device
+        q = torch.randn(1, T, H, K, device=dev, dtype=torch.bfloat16)
+        k = torch.randn(1, T, H, K, device=dev, dtype=torch.bfloat16)
+        v = torch.randn(1, T, HV, V, device=dev, dtype=torch.bfloat16)
+        g = torch.rand(1, T, HV, device=dev, dtype=torch.float32).log()
+        beta = torch.rand(1, T, HV, device=dev, dtype=torch.bfloat16)
+
+        def run(tag, fn, *a, **kw):
+            fn(*a, **kw)
+            torch.cuda.synchronize()
+            t = time.time()
+            fn(*a, **kw)
+            torch.cuda.synchronize()
+            info[tag] = round(time.time() - t, 3)
+
+        with torch.no_grad():
+            run("fla_op_s", chunk_gated_delta_rule, q, k, v, g, beta, use_qk_l2norm_in_kernel=True)
+            q2 = q.clone()                          # different tensor identity: defeats a result cache
+            t = time.time()
+            chunk_gated_delta_rule(q2, k.clone(), v.clone(), g.clone(), beta.clone(), use_qk_l2norm_in_kernel=True)
+            torch.cuda.synchronize()
+            info["fla_op_fresh_tensors_s"] = round(time.time() - t, 3)
+            with profile(activities=[ProfilerActivity.CUDA, ProfilerActivity.CPU]) as prof:
+                chunk_gated_delta_rule(q.clone(), k.clone(), v.clone(), g.clone(), beta.clone(),
+                                       use_qk_l2norm_in_kernel=True)
+                torch.cuda.synchronize()
+            info["fla_op_profile"] = prof.key_averages().table(sort_by="cuda_time_total", row_limit=10)
+            # the model's GDN layer alone on hidden states
+            x = torch.randn(1, T, cfg.hidden_size, device=dev, dtype=torch.bfloat16)
+            pos = torch.arange(T, device=dev)[None]
+            try:
+                run("gdn_layer_s", gdn, x, cache_params=None, cache_position=pos, attention_mask=None)
+            except TypeError as e:
+                info["gdn_layer_s"] = repr(e)
+        print(json.dumps({k: v for k, v in info.items() if k != "fla_op_profile"}), flush=True)
+        print(info["fla_op_profile"], flush=True)
+        return info
+
+    @modal.method()
     def fibs_shard(self, tag: str, k: int) -> dict:
         import time
         import torch
@@ -277,22 +339,24 @@ class Collector:
         rendered = [Rendered(j["ids"], j["followup_start"], j["completion_start"], j["n_tokens"]) for j in jobs]
         from probe_inference.score import LAST_ANSWER_TOKEN, build_read_mask
         acts = collect_windows(self.model, self.tok, rendered, CFG.probe_layers,
-                               CFG.acts_batch_tokens, CFG.acts_max_batch, log=lambda s: None, pad_to=CFG.acts_pad_to)
+                               CFG.acts_batch_tokens, CFG.acts_max_batch, log=lambda s: None, pad_to=CFG.acts_pad_to,
+                               batch_sizes=CFG.acts_fibs_batches)
         tokens, windows, pms, cms, n_capped = [], [], [], [], 0
         for r, a in zip(rendered, acts):
             pm, cm = window_masks(r)
             (pos,) = build_read_mask(LAST_ANSWER_TOKEN, pm, cm, torch.tensor(0)).nonzero().flatten().tolist()
             tokens.append(a[:, pos, :].clone())                 # (L, d): the linear/mlp read token
-            if a.shape[1] > CFG.window_cap:                    # keep the END of the window for efc/axial
-                n_capped += 1
-                a, pm, cm = a[:, -CFG.window_cap:], pm[-CFG.window_cap:], cm[-CFG.window_cap:]
-            windows.append(a.clone())
-            pms.append(pm)
-            cms.append(cm)
+            if CFG.store_windows:
+                if a.shape[1] > CFG.window_cap:                # keep the END of the window for efc/axial
+                    n_capped += 1
+                    a, pm, cm = a[:, -CFG.window_cap:], pm[-CFG.window_cap:], cm[-CFG.window_cap:]
+                windows.append(a.clone())
+                pms.append(pm)
+                cms.append(cm)
         del acts
         torch.save({"i": [j["i"] for j in jobs], "token": torch.stack(tokens), "acts": windows,
-                    "prompt_mask": pms, "completion_mask": cms, "window_cap": CFG.window_cap},
-                   out / f"acts_{k}.pt")
+                    "prompt_mask": pms, "completion_mask": cms,
+                    "window_cap": CFG.window_cap if CFG.store_windows else 0}, out / f"acts_{k}.pt")
         data.commit()
         n_tok = sum(r.n_tokens for r in rendered)
         summary = {"shard": k, "rows": len(jobs), "tokens": n_tok, "seconds": round(time.time() - t0, 1),
@@ -347,9 +411,10 @@ class Collector:
         elif CFG.step_collector == "windows":
             flat = [(s["step"], prefill, rd) for s in todo for prefill, rd in s["rendered"].items()]
             got = collect_windows(self.model, self.tok, [rd for _, _, rd in flat], CFG.probe_layers,
-                                  CFG.acts_batch_tokens, CFG.acts_max_batch, log=lambda s: None, pad_to=CFG.acts_pad_to)
+                                  CFG.acts_batch_tokens, CFG.acts_max_batch, log=lambda s: None, pad_to=CFG.acts_pad_to,
+                                  batch_sizes=[CFG.acts_fixed_batch])
             acts = {(step, prefill): a for (step, prefill, _), a in zip(flat, got)}
-            timing = {"collector": "windows"}
+            timing = {"collector": "windows", "forwards": collect_windows.last_timings}
         else:
             raise ValueError(f"unknown step_collector {CFG.step_collector!r}")
         per_step: dict = {}
@@ -489,14 +554,85 @@ def collect_fibs(tag: str = "pilot", shards: str = "", model_id: str = CFG.model
         print(r)
 
 
+@app.function(image=image, volumes=VOLUMES, secrets=[hf_secret], cpu=4, timeout=2 * 60 * MINUTES)
+def download_weights() -> dict:
+    """Both Qwen checkpoints into the weights Volume's HF cache (a new
+    workspace starts empty; serving/modal_qwen_27b.py::download does the
+    same with the serving image)."""
+    from huggingface_hub import snapshot_download
+    out = {m: snapshot_download(m, revision=r) for m, r in REVISIONS.items()}
+    weights.commit()
+    print(json.dumps(out), flush=True)
+    return out
+
+
+@app.local_entrypoint()
+def fetch_weights():
+    print(download_weights.remote())
+
+
+@app.function(image=image, cpu=2, timeout=10 * MINUTES)
+def gdn_source() -> str:
+    """The loops and kernel calls in transformers' Qwen3.5 GDN layer forward."""
+    import inspect
+    import re
+    from transformers.models.qwen3_5 import modeling_qwen3_5 as m
+    cls = next(v for k, v in vars(m).items() if k.endswith("GatedDeltaNet"))
+    src = inspect.getsource(cls.forward)
+    lines = src.splitlines()
+    keep = [f"{i:4d} {l}" for i, l in enumerate(lines)
+            if re.search(r"\bfor\b|\bwhile\b|chunk|recurrent|causal_conv1d|cu_seqlens|attention_mask|is_fast_path|"
+                         r"use_cache|cache_params|split|range\(", l)]
+    wrap = getattr(m, "torch_chunk_gated_delta_rule", None)
+    extra = {k: str(getattr(wrap, k, None))[:200] for k in ("__wrapped__", "kernel", "_kernel", "func", "__module__")}
+    hub = inspect.getsource(m.use_kernel_func_from_hub_with_fallback) if hasattr(m, "use_kernel_func_from_hub_with_fallback") else "n/a"
+    return "\n".join(keep) + "\n---WRAP---\n" + json.dumps(extra) + "\n---HUB---\n" + hub[:3000]
+
+
+@app.local_entrypoint()
+def gdn_src():
+    print(gdn_source.remote())
+
+
+@app.function(image=image, cpu=2, timeout=10 * MINUTES)
+def fla_diag() -> str:
+    """Autotune keys and env switches of the installed flash-linear-attention."""
+    import subprocess
+    import fla
+    root = Path(fla.__file__).parent
+    cmd = (f"grep -rn -A8 'triton.autotune' {root}/ops/gated_delta_rule/*.py {root}/ops/common/chunk_h.py "
+           f"{root}/ops/common/chunk_o.py {root}/ops/utils/solve_tril.py {root}/ops/utils/cumsum.py 2>/dev/null "
+           f"| grep 'key=' | head -40; echo ---ENV---; grep -rn 'environ\\|getenv' {root}/ops/utils/cache.py "
+           f"{root}/utils/*.py 2>/dev/null | head -40; echo ---TRITON---; python -c 'import triton,os; "
+           f"print(triton.__version__); print(os.environ.get(\"TRITON_CACHE_DIR\"))'")
+    return subprocess.run(cmd, shell=True, capture_output=True, text=True).stdout
+
+
+@app.local_entrypoint()
+def diag():
+    print(fla_diag.remote())
+
+
 @app.local_entrypoint()
 def bench(n_tokens: int = 16384, batch: int = 1):
     print(Collector().bench.remote(n_tokens, batch))
 
 
 @app.local_entrypoint()
+def fla_bench(t: int = 16384):
+    Collector().fla_bench.remote(t)
+
+
+@app.local_entrypoint()
 def collect_steps(tag: str = "pilot", mode: str = "attack", uids: str = ""):
     ids = [s for s in uids.split(",") if s]
+    try:
+        done = {Path(n).stem for n in _vol_names(f"steps/{tag}/{mode}")}
+    except Exception:                               # noqa: BLE001  (folder does not exist yet)
+        done = set()
+    skipped = [u for u in ids if u in done]
+    ids = [u for u in ids if u not in done]
+    print(f"{len(ids)} trajectories to collect ({len(skipped)} already on the volume)")
     for r in Collector().steps.map([tag] * len(ids), [mode] * len(ids), ids):
         print(r)
 

@@ -52,6 +52,28 @@ def load_rows(fibs_dir: Path) -> list[dict]:
         return [json.loads(line) for line in f if line.strip()]
 
 
+def balance_within_family(rows: list[dict], seed: int, log=print) -> list[dict]:
+    """Paper A.6: the training rows are class-balanced within each family
+    (``source``); the majority class of each family is subsampled (seeded).
+    Validation rows are untouched."""
+    rng = random.Random(seed)
+    by_fam: dict[str, dict[int, list[dict]]] = {}
+    for r in rows:
+        if r["split"] == "train":
+            by_fam.setdefault(r["source"], {}).setdefault(r["label"], []).append(r)
+    kept, dropped = [], 0
+    for fam, by_label in sorted(by_fam.items()):
+        n = min(len(by_label.get(0, [])), len(by_label.get(1, [])))
+        for lab in (0, 1):
+            items = by_label.get(lab, [])
+            rng.shuffle(items)
+            kept.extend(items[:n])
+            dropped += len(items) - n
+    log(f"  class balance within family: kept {len(kept)} training rows, dropped {dropped}")
+    keep_ids = {r["i"] for r in kept}
+    return [r for r in rows if r["split"] == "val" or r["i"] in keep_ids]
+
+
 def load_acts(fibs_dir: Path, rows: list[dict], arch: str, layers: list[int], log=print):
     """Per split: for linear/mlp an (N, L, d) tensor of the read token; for
     efc/axial a list of (L, W, d) window tensors. Labels alongside."""
@@ -64,7 +86,9 @@ def load_acts(fibs_dir: Path, rows: list[dict], arch: str, layers: list[int], lo
     for k, path in enumerate(shards):
         blob = torch.load(path, weights_only=True)
         for n, i in enumerate(blob["i"]):
-            r = by_i[i]
+            r = by_i.get(i)
+            if r is None:                             # dropped by the per-family class balance
+                continue
             if arch in PER_LAYER:
                 x = blob["token"][n]                  # (L, d): the token before the answer's end-of-turn token
             else:
@@ -284,6 +308,7 @@ def train_arch(arch: str, fibs_dir: Path, out_dir: Path, cfg: dict, log=print) -
     hp = cfg["train_hparams"][arch]
     rows = load_rows(fibs_dir)
     rows = [r for r in rows if not r["dropped"]]
+    rows = balance_within_family(rows, cfg["train_seed"], log)
     data, labels = load_acts(fibs_dir, rows, arch, layers, log)
     n_train, n_val = len(labels["train"]), len(labels["val"])
     d_model = (data["train"].shape[-1] if arch in PER_LAYER else data["train"][0].shape[-1])

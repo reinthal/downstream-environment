@@ -67,11 +67,14 @@ def render_completion(tok, messages: list[dict], answer: str,
                          "template_kwargs must disable thinking")
     if not full.startswith(gen):
         raise ValueError("chat template does not render the follow-up as the probes expect")
-    for m in conv[:-1]:      # no earlier turn's reasoning may be in the input (the paper's read)
-        rc = (m.get("reasoning_content") or "").strip() if m.get("role") == "assistant" else ""
-        if rc and rc in full:
-            raise ValueError("an earlier turn's reasoning is in the rendered input; "
-                             "template_kwargs must set preserve_thinking=False")
+    # no earlier turn's reasoning may be in the input (the paper's read): render once more with every
+    # earlier reasoning block replaced by a sentinel and require the sentinel to be absent
+    sentinel = "<<REASONING-MUST-NOT-RENDER>>"
+    probe_conv = [({**m, "reasoning_content": sentinel} if m.get("role") == "assistant"
+                   and (m.get("reasoning_content") or "").strip() else m) for m in conv[:-1]] + [conv[-1]]
+    if sentinel in tok.apply_chat_template(probe_conv, tokenize=False, **kw):
+        raise ValueError("an earlier turn's reasoning is in the rendered input; "
+                         "template_kwargs must set preserve_thinking=False")
     ids = tok(full, add_special_tokens=False)["input_ids"]
     cs = len(tok(gen, add_special_tokens=False)["input_ids"])
     # the window starts at the last user-rendered turn before the answer (the last <|im_start|> opens the answer)
@@ -208,29 +211,51 @@ def collect_trajectory(model, tok, steps: list[dict], layers: list[int], chunk: 
     return out
 
 
+def padded_width(w: int, pad_to: int) -> int:
+    """Smallest bucket >= ``w`` from {2^k, 1.5 * 2^k} (pad_to == 0; at most
+    33% padding, two tunings per octave) or the next multiple of ``pad_to``."""
+    if pad_to:
+        return -(-w // pad_to) * pad_to
+    p = 1 << max(0, (w - 1).bit_length() - 1)      # largest power of two below w (or w itself)
+    for cand in (p, p + p // 2, 2 * p):
+        if cand >= w:
+            return cand
+    raise AssertionError(w)
+
+
 def collect_windows(model, tok, rendered: list[Rendered], layers: list[int],
-                    batch_tokens: int, max_batch: int, log=print, pad_to: int = 4096) -> list:
+                    batch_tokens: int, max_batch: int, log=print, pad_to: int = 0,
+                    batch_sizes: list[int] | None = None) -> list:
     """For each rendered input, a bf16 tensor (len(layers), window, d_model)
     holding the residual stream at ``layers`` over the read window.
-    Right-padded batches under a token budget, longest first; the padded
-    width is a multiple of ``pad_to`` so the Triton kernels' per-shape
-    autotuning happens once per bucket (right padding leaves the real
-    tokens' activations unchanged in a causal model)."""
+    Right-padded batches under a token budget, longest first. Shapes are
+    bucketed — width to the next power of two (``pad_to`` == 0) or multiple
+    of ``pad_to``, batch size to the largest allowed value under the token
+    budget — because the GDN Triton kernels compile and tune per shape
+    (~10 s each). Right padding leaves the real tokens' activations
+    unchanged in a causal model."""
+    import time
     import torch
     inner = _decoder(model)
     cap = _Capture(inner, layers)
     pad = tok.pad_token_id if tok.pad_token_id is not None else tok.eos_token_id
     order = sorted(range(len(rendered)), key=lambda i: -rendered[i].n_tokens)
     out: list = [None] * len(rendered)
+    sizes = sorted(batch_sizes or [1])
+    timings: list = []
+    collect_windows.last_timings = timings      # (batch, padded width, seconds) per forward, for diagnostics
     i = 0
     try:
         with torch.no_grad():
             while i < len(order):
                 w = rendered[order[i]].n_tokens
-                bs = min(max_batch, max(1, batch_tokens // w))
+                wp = padded_width(w, pad_to)
+                fit = min(max_batch, max(1, batch_tokens // wp))
+                bs = max([b for b in sizes if b <= fit] or [1])
                 batch = order[i:i + bs]
                 i += bs
-                wp = -(-w // pad_to) * pad_to
+                if len(batch) < bs:                     # keep the batch dimension in its bucket
+                    batch = batch + [batch[-1]] * (bs - len(batch))
                 input_ids = torch.full((len(batch), wp), pad, dtype=torch.long)
                 attn = torch.zeros((len(batch), wp), dtype=torch.long)
                 for r, j in enumerate(batch):
@@ -238,14 +263,19 @@ def collect_windows(model, tok, rendered: list[Rendered], layers: list[int],
                     input_ids[r, :len(ids)] = torch.tensor(ids, dtype=torch.long)
                     attn[r, :len(ids)] = 1
                 cap.on = True
-                res = inner(input_ids=input_ids.to(model.device), attention_mask=attn.to(model.device),
-                            use_cache=False)
+                # no attention mask: with one, the GDN path packs sequences by their REAL lengths (varlen) and
+                # the kernels retune per distinct length; without one, right padding is inert for a causal model
+                t_fwd = time.time()
+                res = inner(input_ids=input_ids.to(model.device), use_cache=False)
                 cap.on = False
                 got = cap.take()
+                torch.cuda.synchronize()
+                timings.append((len(batch), wp, round(time.time() - t_fwd, 2)))
                 for r, j in enumerate(batch):
                     rj = rendered[j]
-                    out[j] = torch.stack([got[L][r, rj.followup_start:rj.n_tokens].to(torch.bfloat16).cpu()
-                                          for L in layers])
+                    if out[j] is None:                  # duplicated rows at the tail are written once
+                        out[j] = torch.stack([got[L][r, rj.followup_start:rj.n_tokens].to(torch.bfloat16).cpu()
+                                              for L in layers])
                 del res, got
                 log(f"  collected {min(i, len(order))}/{len(order)} (batch {len(batch)} x {w} tokens, padded {wp})")
     finally:

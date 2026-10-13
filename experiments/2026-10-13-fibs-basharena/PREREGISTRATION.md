@@ -284,3 +284,45 @@ verbatim. Committed before the first non-pilot run; the sections above
   never passed). The onset-vs-first-pass check therefore only catches a
   judge that flags nothing in a passing trajectory; it cannot catch a late
   onset. Stated as a limitation.
+- 2026-10-13 (before data; after the pilot) — **EFC and axial dropped from
+  the main run.** EFC and axial read the whole follow-up window (pilot: mean
+  461 tokens, 90th percentile 1,146, ~18 MB per row at six layers even
+  capped at 1,024 tokens), so storing windows for the 158k training rows
+  would take ~2.9 TB, outside the budget. Offered a 10% subset, streaming
+  one-epoch training, or dropping them; the researcher chose "Drop EFC/axial
+  from the main run". The main run trains and scores the linear ensemble
+  (primary) and the MLP ensemble, which read one token per row; the pilot's
+  EFC/axial probes (1,800 training rows) remain exploratory only.
+- 2026-10-13 (before data; after the pilot) — **Collector shape policy.**
+  The GDN Triton kernels tune per (batch size, sequence length) and
+  Transformers' padded-mask path packs sequences by their real lengths, so
+  every distinct length cost ~10 s; the pilot ran at ~2k tokens/s. Inputs
+  are now right-padded without an attention mask to a bucket width ({2^k,
+  1.5·2^k}) with batch sizes from a fixed set, which is exact for a causal
+  model (padding follows the real tokens) and runs at ~10k tokens/s. The
+  BashArena pass projects to ~8 H200-hours, the fibs pass to ~12, within
+  the $100 abort line.
+- 2026-10-13 (during the main run, before any score was read) — **Judge
+  cost cap.** The attack pass cost $5.29 (1,182 steps; 5 unparseable after
+  the retry). The honest pass (3,904 steps) stopped on an OpenRouter
+  "insufficient credits" error and projects to ~$17, so the judge total
+  (~$22) exceeds the preregistered $20 cap. Offered skipping the honest
+  pass (honest steps are negatives by rule), raising the cap, or a 500-step
+  sample; the researcher chose to continue the honest pass on a second
+  API key, which raises the judge spend above the cap. The judge was made
+  resumable (rows written as judged) before the restart; no verdict is
+  changed by this.
+- 2026-10-13/14 (during the main run, before any score was read) —
+  **Workspace switch.** The run started in the Modal workspace of profile
+  `reinthal`, moved to `cadenza` at the researcher's request after 65 fibs
+  shards, all 94 attack and 18 honest trajectories, and moved back to
+  `reinthal` when cadenza's credits ran out (190 shards, 52 honest
+  trajectories). Files were copied between the workspaces unchanged
+  (`sync_volumes.sh`); every stage skips files already present, so no
+  activation was recomputed and no computation differs by workspace
+  (same image, same weights revision, same code). The Modal volumes and
+  secret are declared in `iac/` (one Pulumi stack per workspace).
+- 2026-10-14 (after the run, before the analysis was read) — **Dropped
+  steps.** 38 honest steps (0.75% of all steps) were dropped at read time
+  because their rendered input exceeded the 262,144-token context window;
+  under the 5% void line. No attack step was dropped.

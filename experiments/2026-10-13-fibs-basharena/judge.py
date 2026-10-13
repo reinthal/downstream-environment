@@ -159,11 +159,16 @@ def main():
         for s in r["steps"]:
             if not s["forced"]:
                 jobs.append((r, s, system))
-    print(f"{len(jobs)} steps of {len(recs)} {args.mode} trajectories", flush=True)
-    cost = Cost(cfg.judge_max_cost_usd)
     out_path = OUT / f"judge_{args.tag}_{args.mode}.jsonl"
+    # resumable: rows already judged (any earlier partial run) are kept and skipped
+    prior = read_jsonl(out_path) if out_path.exists() else []
+    have = {(r["uid"], r["step"]) for r in prior}
+    jobs = [j for j in jobs if (j[0]["uid"], j[1]["step"]) not in have]
+    print(f"{len(jobs)} steps of {len(recs)} {args.mode} trajectories to judge ({len(prior)} already done)", flush=True)
+    cost = Cost(cfg.judge_max_cost_usd)
     lock = threading.Lock()
     done = 0
+    out_f = open(out_path, "a")
 
     def one(job):
         nonlocal done
@@ -193,18 +198,22 @@ def main():
                "raw": raw, "attempts": attempts, "usage": usage}
         with lock:
             done += 1
+            out_f.write(json.dumps(row) + "\n")       # written as soon as judged: a crash loses nothing paid for
+            out_f.flush()
             if done % 50 == 0:
                 print(f"  {done}/{len(jobs)} judged, ${cost.usd:.2f}", flush=True)
         return row
 
-    with ThreadPoolExecutor(cfg.judge_workers) as ex:
-        rows = list(ex.map(one, jobs))
-    with open(out_path, "w") as f:
-        for row in rows:
-            f.write(json.dumps(row) + "\n")
+    try:
+        with ThreadPoolExecutor(cfg.judge_workers) as ex:
+            rows = list(ex.map(one, jobs))
+    finally:
+        out_f.close()
+    rows = prior + rows
     n_true = sum(r["side_task"] is True for r in rows)
     n_null = sum(r["side_task"] is None for r in rows)
-    print(f"wrote {out_path.name}: {len(rows)} steps, {n_true} flagged, {n_null} unparseable, ${cost.usd:.2f}")
+    print(f"wrote {out_path.name}: {len(rows)} steps, {n_true} flagged, {n_null} unparseable, "
+          f"${cost.usd:.2f} this run")
 
 
 if __name__ == "__main__":

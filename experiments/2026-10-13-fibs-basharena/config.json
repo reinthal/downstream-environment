@@ -49,10 +49,19 @@
  "step_collector": "windows",
  "acts_batch_tokens": 65536,
  "acts_max_batch": 64,
- "acts_pad_to": 4096,
+ "acts_pad_to": 0,
+ "acts_fixed_batch": 1,
+ "acts_fibs_batches": [
+  1,
+  4,
+  16,
+  64
+ ],
+ "modal_triton_cache_volume": "fibs-basharena-triton",
  "fibs_repo": "AlignmentResearch/fibs-v1",
  "fibs_revision": "65dccf12934620bfe01db665ea3d7d0e3c9f1355",
  "fibs_shard_rows": 500,
+ "store_windows": false,
  "window_cap": 1024,
  "n_val": 5000,
  "val_seed": 0,
@@ -87,6 +96,10 @@
    "max_epochs": 4
   }
  },
+ "main_archs": [
+  "linear",
+  "mlp"
+ ],
  "train_batch_size": 32,
  "warmup_steps": 20,
  "grad_clip_adamw": 1.0,
@@ -137,5 +150,5 @@
  "modal_gpu": "H200",
  "modal_weights_volume": "qwen35-27b-weights",
  "modal_data_volume": "fibs-basharena",
- "modal_hf_secret": "huggingface-secret"
+ "modal_hf_secret": "fibs-basharena-hf"
 }

@@ -61,13 +61,19 @@ class FibsBashArenaConfig(ExperimentConfig):
                                       # of this hybrid architecture measured ~300 tokens/s in the pilot)
     acts_batch_tokens: int = 65536    # token budget per forward on one H200 (bare decoder, 59 blocks)
     acts_max_batch: int = 64
-    acts_pad_to: int = 4096           # right-pad every forward's width to a multiple of this: the GDN Triton kernels
-                                      # autotune (~10 s) per distinct 64-token chunk count, so coarse buckets cut the
-                                      # per-shape cost to a few dozen tunings per container (pilot: 10x throughput)
+    acts_pad_to: int = 0              # 0: right-pad every forward's width to the next power of two (the GDN Triton
+                                      # kernels compile/tune per power-of-two length bucket, ~10 s each; pilot: a
+                                      # repeated shape runs 6x faster); >0: pad to a multiple of this instead
+    acts_fixed_batch: int = 1         # rows per forward for BashArena steps (long inputs): fixed so the batch
+                                      # dimension does not add shape buckets; fibs rows use acts_fibs_batches
+    acts_fibs_batches: list[int] = field(default_factory=lambda: [1, 4, 16, 64])   # allowed batch sizes for fibs rows
+    modal_triton_cache_volume: str = "fibs-basharena-triton"   # persists compiled kernels across containers
     # ── fibs training data (card recipe) ──
     fibs_repo: str = "AlignmentResearch/fibs-v1"
     fibs_revision: str = "65dccf12934620bfe01db665ea3d7d0e3c9f1355"
     fibs_shard_rows: int = 500        # rows per activation shard on the volume (~7 GB of capped windows)
+    store_windows: bool = False       # main run: linear + mlp only (researcher, 2026-10-13: "Drop EFC/axial from the
+                                      # main run"), so only the read token is stored per row; the pilot stored windows
     window_cap: int = 1024            # stored window tokens per row for efc/axial (kept from the END: the answer and
                                       # the tail of the final user turn); 90% of pilot rows are shorter. The read token
                                       # for linear/mlp is stored separately and never truncated.
@@ -81,6 +87,7 @@ class FibsBashArenaConfig(ExperimentConfig):
         "efc": {"optimizer": "muon", "lr": 5e-3, "schedule": "cosine", "weight_decay": 0.0, "max_epochs": 4},
         "axial": {"optimizer": "muon", "lr": 5e-3, "schedule": "cosine", "weight_decay": 0.0, "max_epochs": 4},
     })
+    main_archs: list[str] = field(default_factory=lambda: ["linear", "mlp"])   # trained and scored in the main run
     train_batch_size: int = 32
     warmup_steps: int = 20
     grad_clip_adamw: float = 1.0
@@ -121,7 +128,7 @@ class FibsBashArenaConfig(ExperimentConfig):
     modal_gpu: str = "H200"
     modal_weights_volume: str = "qwen35-27b-weights"   # HF cache with both Qwen checkpoints (serving/modal_qwen_27b.py)
     modal_data_volume: str = "fibs-basharena"
-    modal_hf_secret: str = "huggingface-secret"
+    modal_hf_secret: str = "fibs-basharena-hf"   # HF_TOKEN; managed by iac/ (Pulumi) in the cadenza workspace
 
 
 def load_config() -> FibsBashArenaConfig:

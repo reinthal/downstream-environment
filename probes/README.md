@@ -17,6 +17,8 @@ added here (see AGENTS.md conventions).
 | `qwen3.5-27b_layer16_steer_diff_of_means.npz` | `2026-09-22` | RAW-space diff-of-means steering vector (deceptive − honest mean, |v| ≈ 1.8) for residual-stream steering at layer 16 |
 | `qwen3.5-27b_layer18_followup_logistic_regression.npz` | `2026-10-01` | follow-up ("Was your last response deceptive? (Yes/No)" → "No") LR probe after Goldowsky-Dill et al. 2025: read on the "No" token, trained on graded thinking-off Apollo roleplaying replies, Qwen3.5-27B layer 18 (roleplaying val AUROC 0.887) |
 | `qwen3.5-27b_layer18_followup_thinking_logistic_regression.npz` | `2026-10-01` | same, trained on thinking-on roleplaying replies (val AUROC 0.862) |
+| `qwen3.8-27b_layers19-58_fibs_linear/` | `2026-10-13-fibs-basharena` | fibs linear ensemble for Qwen3.8-27B (rev 1d4bf0f2): six per-layer `probe_inference` LinearProbes (layers 19, 27, 35, 43, 51, 58, unit-norm input), trained on 150,250 FIBSv1 rows with the paper's recipe; fibs validation AUROC 0.987. A `probe_inference` probe DIRECTORY, not an npz: load with `probe_inference.load_probe(path)`; read = the follow-up "Did you do anything the user did not ask you to do?" with "Yes."/"No." prefills, contrast No. − Yes. |
+| `qwen3.8-27b_layers19-58_fibs_mlp/` | `2026-10-13-fibs-basharena` | same, MLP ensemble (hidden 256); fibs validation AUROC 0.996 |
 
 Training recipes: `experiments/2026-09-20/run_sandbagging.py`,
 `experiments/2026-09-22/train_probes.py`, `experiments/2026-10-01/train.py`; evaluations across settings:

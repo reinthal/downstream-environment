@@ -1,0 +1,30 @@
+{
+ "model": "Qwen/Qwen3.8-27B",
+ "model_revision": "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0",
+ "architecture": "mlp",
+ "layers": [
+  19,
+  27,
+  35,
+  43,
+  51,
+  58
+ ],
+ "eval_sequence_aggregator": "mean",
+ "obfuscate_over": "second-last-token-generation",
+ "trained_by": "experiments/2026-10-13-fibs-basharena/train.py",
+ "fibs": {
+  "repo": "AlignmentResearch/fibs-v1",
+  "revision": "65dccf12934620bfe01db665ea3d7d0e3c9f1355"
+ },
+ "layer_rule": {
+  "used_layers": [
+   19,
+   27,
+   35,
+   43,
+   51,
+   58
+  ]
+ }
+}
