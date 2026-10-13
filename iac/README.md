@@ -38,8 +38,8 @@ MODAL_PROFILE=reinthal $P preview
 MODAL_PROFILE=reinthal $P up
 ```
 
-Auth: the Modal token of profile `cadenza` in `~/.modal.toml`
-(`modal token new --profile cadenza`).
+Auth: the Modal token of the stack's profile (`reinthal` or `cadenza`) in `~/.modal.toml`
+(`modal token new --profile <name>`).
 
 State: **repo-local file backend, git-tracked** — `Pulumi.yaml` pins
 `backend: url: file://./state`, so the state JSON lives at
