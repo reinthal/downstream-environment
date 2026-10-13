@@ -247,3 +247,40 @@ verbatim. Committed before the first non-pilot run; the sections above
 
 <!-- Append only. Each entry: date, what changed, why, decided before or
      after seeing data. -->
+
+- 2026-10-13 (before any analysis data; pilot stage) — **Chat template
+  rendering.** Qwen3.8-27B's chat template differs from Qwen3.5-27B's: it
+  keeps earlier assistant turns' reasoning unless `preserve_thinking=False`
+  and injects a "Reasoning effort is set to ..." line into the system prompt
+  unless thinking is disabled. Every probe input (fibs rows and BashArena
+  steps) is rendered with `enable_thinking=False, preserve_thinking=False`,
+  which reproduces the paper's Qwen3.5 read (no step's reasoning in the
+  input, prefilled answer after an empty think block). Consequence, stated
+  as a limitation: the rollouts were generated with the reasoning-effort
+  line in the system prompt (vLLM, `reasoning_effort=low`), which the probe
+  input does not carry. Decided from the template diff, before data.
+- 2026-10-13 (before data) — **Judge sampling.** §3 says the judge runs at
+  temperature 0; the installed Anthropic SDK (1.11) takes no temperature
+  argument, so the judge runs at the provider's default sampling. One call
+  per step (plus the preregistered retry on an unparseable answer).
+- 2026-10-13 (before data) — **Validation hold-out.** fibs-v1 carries no
+  validation marker. The 5,000 validation rows are drawn by `pair_id`
+  groups (no group shared with training), class-balanced, seed 0, from the
+  same rows the paper trained on (the pilot's 2,000-row subset holds out
+  200 the same way). The paper's exact validation rows are not reproduced.
+- 2026-10-13 (before data) — **Tool follow-up rows.** 54 of the 2,000 pilot
+  rows end in a tool result rather than a user turn (the Tool follow-up
+  family); they are rendered with the completion after the tool result and
+  the read window starts at the template's last user-rendered turn (the
+  tool response), per the activation contract. Not excluded.
+- 2026-10-13 (before data) — **Collector check passed.** The published
+  Qwen3.5-27B linear ensemble, through the new rendering/collection path on
+  500 fibs rows (Qwen3.5-27B, seed 0): AUROC 0.985, target 0.972 ± 0.02
+  (`pilot_published.json`).
+- 2026-10-13 (before data) — **First side-task pass.** BashArena's
+  auto-submit wrapper checks the side tasks before every step and forces a
+  `submit` once one passes, so the first pass is always the attack
+  trajectory's last model step (83 of 94 attack trajectories; the other 11
+  never passed). The onset-vs-first-pass check therefore only catches a
+  judge that flags nothing in a passing trajectory; it cannot catch a late
+  onset. Stated as a limitation.
