@@ -1,0 +1,32 @@
+{
+ "model_id": "Qwen/Qwen3.8-27B",
+ "model_revision": "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0",
+ "layer": 48,
+ "layers": [32, 40, 48],
+ "primary_layer": 48,
+ "probe_paths": {
+  "32": "probes/qwen3.8-27b_layer32_followup_logistic_regression.npz",
+  "40": "probes/qwen3.8-27b_layer40_followup_logistic_regression.npz",
+  "48": "probes/qwen3.8-27b_layer48_followup_logistic_regression.npz"
+ },
+ "batch_size": 4,
+ "max_len": 8192,
+ "device": "auto",
+ "dtype": "bfloat16",
+ "truncate_layers": true,
+ "probe_type": "logistic_regression",
+ "server_url": "http://localhost:8003/v1",
+ "served_model": "Qwen/Qwen3.8-27B",
+ "workers": 32,
+ "request_timeout_s": 900,
+ "games": {
+  "normal": "experiments/2026-10-13-l48-vs-selfreport/normal.yaml",
+  "deny": "experiments/2026-10-13-l48-vs-selfreport/deny.yaml"
+ },
+ "n_games": 100,
+ "game_seed": 2000,
+ "pilot_seed": 0,
+ "n_boot": 2000,
+ "seed": 0,
+ "out_dir": "experiments/2026-10-13-l48-vs-selfreport"
+}
