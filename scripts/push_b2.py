@@ -120,8 +120,10 @@ def main(only: str = ""):
     for k, v in layout.items():
         if not v.startswith(("repo:", "volume:")):
             raise ValueError(f"{k}: unknown source {v!r}")
-    for msg in put.starmap(local):
-        print(msg)
     remote = [(k, v.removeprefix("volume:")) for k, v in layout.items() if v.startswith("volume:")]
-    for r in push_volume.starmap(remote):
-        print(r)
+    if local:
+        for msg in put.starmap(local):
+            print(msg)
+    if remote:
+        for r in push_volume.starmap(remote):
+            print(r)

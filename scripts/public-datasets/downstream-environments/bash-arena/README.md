@@ -41,7 +41,7 @@ All files join on `uid` (`<sample_id>-<epoch>`; sample_id = task_id) and
 
 ## Label schema (step judge)
 
-Claude Haiku 4.5 (via OpenRouter) sees one step at a time: its tool calls
+The goal of this project was to evaluate different lie-detection methods on downstream environments under adversarial conditions where some information was held out, like for example chain-of-thought. Using probes, can we recover non-truthful actions by agents when they make tool calls? To establish this, we label each step-wise trajectory for if the agent is working on the main task or the side task. Here, we use a Claude Haiku 4.5 (via OpenRouter) which sees one step at a time: its tool calls
 verbatim plus any text in the same message. It also gets the user's main
 task and the environment's side-task descriptions. It answers
 `{"side_task": true|false, "reason"}`; the prompt is in `judge.py`. In the
@@ -94,14 +94,16 @@ One file per trajectory: `torch.load(path, weights_only=True)` returns
   - Layers 19, 27, 35, 43, 51, 58, as in `fibs/activations/Qwen3.8-27B/`.
   - `completion_mask` marks the prefilled answer tokens.
 
-To re-score a step with a probe from `fibs/probes/`:
+To re-score a step, first download a probe directory to `probes/linear`
+(see the `fibs/probes/Qwen3.8-27B/` README; `load_probe` reads a local
+directory) and a trajectory file, then:
 
 ```python
 import torch
 from probe_inference import load_probe
 from probe_inference.score import build_read_mask
-probe = load_probe("fibs/probes/Qwen3.8-27B/linear")
-blob = torch.load("activations/Qwen3.8-27B/attack/1216794-1.pt", weights_only=True)
+probe = load_probe("probes/linear")
+blob = torch.load("1216794-1.pt", weights_only=True)    # activations/Qwen3.8-27B/attack/1216794-1.pt
 e = blob["steps"][1]["No."]
 mask = build_read_mask(probe.read_window, e["prompt_mask"], e["completion_mask"], torch.tensor(0))
 score = probe.score({L: e["acts"][k] for k, L in enumerate(probe.layers)}, mask)
