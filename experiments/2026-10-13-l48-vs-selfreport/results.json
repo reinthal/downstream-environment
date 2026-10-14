@@ -1,0 +1,112 @@
+{
+ "arms": {
+  "normal": {
+   "n_games": 89,
+   "n_turns": 785,
+   "n_parsnip_turns": 259,
+   "detectors": {
+    "L32": {
+     "auroc": 0.7324,
+     "ci95": [
+      0.6906,
+      0.7721
+     ],
+     "top1": 0.798
+    },
+    "L40": {
+     "auroc": 0.9685,
+     "ci95": [
+      0.9568,
+      0.9793
+     ],
+     "top1": 1.0
+    },
+    "L48": {
+     "auroc": 0.9971,
+     "ci95": [
+      0.9939,
+      0.9993
+     ],
+     "top1": 1.0
+    },
+    "P(Yes)": {
+     "auroc": 0.9654,
+     "ci95": [
+      0.9539,
+      0.9764
+     ],
+     "top1": 1.0
+    }
+   },
+   "diff_primary_layer_minus_pyes": {
+    "value": 0.0317,
+    "ci95": [
+     0.0215,
+     0.0427
+    ]
+   },
+   "says_yes": {
+    "Parsnip": 0.398,
+    "Carrot": 0.0
+   }
+  },
+  "deny": {
+   "n_games": 89,
+   "n_turns": 785,
+   "n_parsnip_turns": 260,
+   "detectors": {
+    "L32": {
+     "auroc": 0.873,
+     "ci95": [
+      0.85,
+      0.8965
+     ],
+     "top1": 0.978
+    },
+    "L40": {
+     "auroc": 0.9941,
+     "ci95": [
+      0.99,
+      0.9973
+     ],
+     "top1": 1.0
+    },
+    "L48": {
+     "auroc": 0.9942,
+     "ci95": [
+      0.9909,
+      0.997
+     ],
+     "top1": 1.0
+    },
+    "P(Yes)": {
+     "auroc": 0.7941,
+     "ci95": [
+      0.7581,
+      0.8279
+     ],
+     "top1": 0.899
+    }
+   },
+   "diff_primary_layer_minus_pyes": {
+    "value": 0.2001,
+    "ci95": [
+     0.1679,
+     0.2352
+    ]
+   },
+   "says_yes": {
+    "Parsnip": 0.123,
+    "Carrot": 0.0
+   }
+  }
+ },
+ "primary": {
+  "metric": "deny arm: AUROC(L48) - AUROC(P(Yes))",
+  "value": 0.2001,
+  "ci95": [
+   0.1679,
+   0.2352
+  ]
+ }
+}

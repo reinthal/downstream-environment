@@ -1,0 +1,79 @@
+[
+ {
+  "game_id": "g006",
+  "seed_group": 0,
+  "game_idx": 6,
+  "game_seed": 2006,
+  "reason": "silent in the last round: Charlie"
+ },
+ {
+  "game_id": "g015",
+  "seed_group": 0,
+  "game_idx": 15,
+  "game_seed": 2015,
+  "reason": "silent in the last round: Bob"
+ },
+ {
+  "game_id": "g027",
+  "seed_group": 0,
+  "game_idx": 27,
+  "game_seed": 2027,
+  "reason": "silent in the last round: Alice, Bob"
+ },
+ {
+  "game_id": "g058",
+  "seed_group": 0,
+  "game_idx": 58,
+  "game_seed": 2058,
+  "reason": "silent in the last round: Charlie"
+ },
+ {
+  "game_id": "g061",
+  "seed_group": 0,
+  "game_idx": 61,
+  "game_seed": 2061,
+  "reason": "silent in the last round: Charlie"
+ },
+ {
+  "game_id": "g063",
+  "seed_group": 0,
+  "game_idx": 63,
+  "game_seed": 2063,
+  "reason": "silent in the last round: Charlie"
+ },
+ {
+  "game_id": "g064",
+  "seed_group": 0,
+  "game_idx": 64,
+  "game_seed": 2064,
+  "reason": "silent in the last round: Charlie"
+ },
+ {
+  "game_id": "g072",
+  "seed_group": 0,
+  "game_idx": 72,
+  "game_seed": 2072,
+  "reason": "silent in the last round: Alice"
+ },
+ {
+  "game_id": "g082",
+  "seed_group": 0,
+  "game_idx": 82,
+  "game_seed": 2082,
+  "reason": "silent in the last round: Bob"
+ },
+ {
+  "game_id": "g092",
+  "seed_group": 0,
+  "game_idx": 92,
+  "game_seed": 2092,
+  "reason": "silent in the last round: Alice"
+ },
+ {
+  "game_id": "g095",
+  "seed_group": 0,
+  "game_idx": 95,
+  "game_seed": 2095,
+  "reason": "silent in the last round: Bob"
+ }
+]

@@ -1,0 +1,3376 @@
+{
+ "arm": "normal",
+ "game_config": "experiments/2026-10-13-l48-vs-selfreport/normal.yaml",
+ "games": [
+  {
+   "game_id": "g000",
+   "seed_group": 0,
+   "game_idx": 0,
+   "game_seed": 2000,
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Carrot",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Alice",
+   "orders": [
+    [
+     1,
+     2,
+     0
+    ],
+    [
+     1,
+     2,
+     0
+    ],
+    [
+     1,
+     2,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Charlie",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g001",
+   "seed_group": 0,
+   "game_idx": 1,
+   "game_seed": 2001,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Parsnip"
+   },
+   "parsnip": "Charlie",
+   "orders": [
+    [
+     0,
+     2,
+     1
+    ],
+    [
+     2,
+     0,
+     1
+    ],
+    [
+     2,
+     0,
+     1
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Alice",
+    "Charlie": "Alice"
+   },
+   "eliminated": [
+    "Alice"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g002",
+   "seed_group": 0,
+   "game_idx": 2,
+   "game_seed": 2002,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Parsnip"
+   },
+   "parsnip": "Charlie",
+   "orders": [
+    [
+     1,
+     2,
+     0
+    ],
+    [
+     1,
+     2,
+     0
+    ],
+    [
+     2,
+     0,
+     1
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Alice",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g004",
+   "seed_group": 0,
+   "game_idx": 4,
+   "game_seed": 2004,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Parsnip"
+   },
+   "parsnip": "Charlie",
+   "orders": [
+    [
+     1,
+     0,
+     2
+    ],
+    [
+     0,
+     2,
+     1
+    ],
+    [
+     0,
+     2,
+     1
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Alice",
+    "Charlie": "Alice"
+   },
+   "eliminated": [
+    "Alice"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g006",
+   "seed_group": 0,
+   "game_idx": 6,
+   "game_seed": 2006,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Parsnip"
+   },
+   "parsnip": "Charlie",
+   "orders": [
+    [
+     1,
+     0,
+     2
+    ],
+    [
+     0,
+     2,
+     1
+    ],
+    [
+     0,
+     1,
+     2
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Charlie",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Charlie"
+   ],
+   "winner": "Carrot"
+  },
+  {
+   "game_id": "g007",
+   "seed_group": 0,
+   "game_idx": 7,
+   "game_seed": 2007,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Parsnip",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Bob",
+   "orders": [
+    [
+     1,
+     2,
+     0
+    ],
+    [
+     1,
+     0,
+     2
+    ],
+    [
+     0,
+     2,
+     1
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Alice",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Carrot"
+  },
+  {
+   "game_id": "g008",
+   "seed_group": 0,
+   "game_idx": 8,
+   "game_seed": 2008,
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Carrot",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Alice",
+   "orders": [
+    [
+     2,
+     0,
+     1
+    ],
+    [
+     2,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     2
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Alice",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g009",
+   "seed_group": 0,
+   "game_idx": 9,
+   "game_seed": 2009,
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Carrot",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Alice",
+   "orders": [
+    [
+     2,
+     1,
+     0
+    ],
+    [
+     2,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     2
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Charlie",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Charlie"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g010",
+   "seed_group": 0,
+   "game_idx": 10,
+   "game_seed": 2010,
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Carrot",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Alice",
+   "orders": [
+    [
+     1,
+     2,
+     0
+    ],
+    [
+     2,
+     0,
+     1
+    ],
+    [
+     2,
+     1,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Alice",
+    "Charlie": "Alice"
+   },
+   "eliminated": [
+    "Alice"
+   ],
+   "winner": "Carrot"
+  },
+  {
+   "game_id": "g012",
+   "seed_group": 0,
+   "game_idx": 12,
+   "game_seed": 2012,
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Carrot",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Alice",
+   "orders": [
+    [
+     1,
+     0,
+     2
+    ],
+    [
+     1,
+     0,
+     2
+    ],
+    [
+     1,
+     0,
+     2
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Alice",
+    "Charlie": "Alice"
+   },
+   "eliminated": [
+    "Alice"
+   ],
+   "winner": "Carrot"
+  },
+  {
+   "game_id": "g013",
+   "seed_group": 0,
+   "game_idx": 13,
+   "game_seed": 2013,
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Carrot",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Alice",
+   "orders": [
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     1,
+     0,
+     2
+    ],
+    [
+     0,
+     1,
+     2
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Charlie",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g014",
+   "seed_group": 0,
+   "game_idx": 14,
+   "game_seed": 2014,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Parsnip",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Bob",
+   "orders": [
+    [
+     2,
+     1,
+     0
+    ],
+    [
+     1,
+     2,
+     0
+    ],
+    [
+     2,
+     1,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Alice",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Carrot"
+  },
+  {
+   "game_id": "g015",
+   "seed_group": 0,
+   "game_idx": 15,
+   "game_seed": 2015,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Parsnip"
+   },
+   "parsnip": "Charlie",
+   "orders": [
+    [
+     2,
+     1,
+     0
+    ],
+    [
+     1,
+     0,
+     2
+    ],
+    [
+     0,
+     1,
+     2
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Alice",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g016",
+   "seed_group": 0,
+   "game_idx": 16,
+   "game_seed": 2016,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Parsnip"
+   },
+   "parsnip": "Charlie",
+   "orders": [
+    [
+     0,
+     2,
+     1
+    ],
+    [
+     0,
+     2,
+     1
+    ],
+    [
+     0,
+     1,
+     2
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Charlie",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g017",
+   "seed_group": 0,
+   "game_idx": 17,
+   "game_seed": 2017,
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Carrot",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Alice",
+   "orders": [
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     1,
+     2,
+     0
+    ],
+    [
+     1,
+     2,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Charlie",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g018",
+   "seed_group": 0,
+   "game_idx": 18,
+   "game_seed": 2018,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Parsnip"
+   },
+   "parsnip": "Charlie",
+   "orders": [
+    [
+     2,
+     1,
+     0
+    ],
+    [
+     1,
+     2,
+     0
+    ],
+    [
+     2,
+     0,
+     1
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Charlie",
+    "Charlie": "Alice"
+   },
+   "eliminated": [
+    "Charlie"
+   ],
+   "winner": "Carrot"
+  },
+  {
+   "game_id": "g019",
+   "seed_group": 0,
+   "game_idx": 19,
+   "game_seed": 2019,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Parsnip",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Bob",
+   "orders": [
+    [
+     1,
+     2,
+     0
+    ],
+    [
+     1,
+     2,
+     0
+    ],
+    [
+     1,
+     2,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Alice",
+    "Charlie": "Alice"
+   },
+   "eliminated": [
+    "Alice"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g020",
+   "seed_group": 0,
+   "game_idx": 20,
+   "game_seed": 2020,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Parsnip"
+   },
+   "parsnip": "Charlie",
+   "orders": [
+    [
+     1,
+     0,
+     2
+    ],
+    [
+     1,
+     2,
+     0
+    ],
+    [
+     1,
+     2,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Charlie",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Charlie"
+   ],
+   "winner": "Carrot"
+  },
+  {
+   "game_id": "g021",
+   "seed_group": 0,
+   "game_idx": 21,
+   "game_seed": 2021,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Parsnip",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Bob",
+   "orders": [
+    [
+     0,
+     2,
+     1
+    ],
+    [
+     0,
+     2,
+     1
+    ],
+    [
+     2,
+     1,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Charlie",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Charlie"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g022",
+   "seed_group": 0,
+   "game_idx": 22,
+   "game_seed": 2022,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Parsnip"
+   },
+   "parsnip": "Charlie",
+   "orders": [
+    [
+     2,
+     1,
+     0
+    ],
+    [
+     1,
+     2,
+     0
+    ],
+    [
+     2,
+     0,
+     1
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Charlie",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Charlie"
+   ],
+   "winner": "Carrot"
+  },
+  {
+   "game_id": "g023",
+   "seed_group": 0,
+   "game_idx": 23,
+   "game_seed": 2023,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Parsnip",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Bob",
+   "orders": [
+    [
+     1,
+     2,
+     0
+    ],
+    [
+     2,
+     0,
+     1
+    ],
+    [
+     2,
+     0,
+     1
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Charlie",
+    "Charlie": "Alice"
+   },
+   "eliminated": [],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g024",
+   "seed_group": 0,
+   "game_idx": 24,
+   "game_seed": 2024,
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Carrot",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Alice",
+   "orders": [
+    [
+     1,
+     0,
+     2
+    ],
+    [
+     1,
+     2,
+     0
+    ],
+    [
+     2,
+     1,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Charlie",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g025",
+   "seed_group": 0,
+   "game_idx": 25,
+   "game_seed": 2025,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Parsnip"
+   },
+   "parsnip": "Charlie",
+   "orders": [
+    [
+     1,
+     0,
+     2
+    ],
+    [
+     1,
+     2,
+     0
+    ],
+    [
+     2,
+     0,
+     1
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Charlie",
+    "Charlie": "Alice"
+   },
+   "eliminated": [
+    "Charlie"
+   ],
+   "winner": "Carrot"
+  },
+  {
+   "game_id": "g026",
+   "seed_group": 0,
+   "game_idx": 26,
+   "game_seed": 2026,
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Carrot",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Alice",
+   "orders": [
+    [
+     2,
+     1,
+     0
+    ],
+    [
+     2,
+     1,
+     0
+    ],
+    [
+     2,
+     0,
+     1
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Charlie",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Charlie"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g027",
+   "seed_group": 0,
+   "game_idx": 27,
+   "game_seed": 2027,
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Carrot",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Alice",
+   "orders": [
+    [
+     2,
+     1,
+     0
+    ],
+    [
+     1,
+     0,
+     2
+    ],
+    [
+     1,
+     0,
+     2
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Charlie",
+    "Charlie": "Alice"
+   },
+   "eliminated": [
+    "Charlie"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g028",
+   "seed_group": 0,
+   "game_idx": 28,
+   "game_seed": 2028,
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Carrot",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Alice",
+   "orders": [
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     1,
+     0,
+     2
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Alice",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g029",
+   "seed_group": 0,
+   "game_idx": 29,
+   "game_seed": 2029,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Parsnip"
+   },
+   "parsnip": "Charlie",
+   "orders": [
+    [
+     1,
+     2,
+     0
+    ],
+    [
+     1,
+     0,
+     2
+    ],
+    [
+     1,
+     2,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Alice",
+    "Charlie": "Alice"
+   },
+   "eliminated": [
+    "Alice"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g031",
+   "seed_group": 0,
+   "game_idx": 31,
+   "game_seed": 2031,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Parsnip"
+   },
+   "parsnip": "Charlie",
+   "orders": [
+    [
+     1,
+     2,
+     0
+    ],
+    [
+     2,
+     1,
+     0
+    ],
+    [
+     1,
+     2,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Alice",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g033",
+   "seed_group": 0,
+   "game_idx": 33,
+   "game_seed": 2033,
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Carrot",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Alice",
+   "orders": [
+    [
+     2,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     1,
+     0,
+     2
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Charlie",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g034",
+   "seed_group": 0,
+   "game_idx": 34,
+   "game_seed": 2034,
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Carrot",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Alice",
+   "orders": [
+    [
+     0,
+     2,
+     1
+    ],
+    [
+     0,
+     2,
+     1
+    ],
+    [
+     2,
+     1,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Charlie",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g035",
+   "seed_group": 0,
+   "game_idx": 35,
+   "game_seed": 2035,
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Carrot",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Alice",
+   "orders": [
+    [
+     1,
+     0,
+     2
+    ],
+    [
+     0,
+     2,
+     1
+    ],
+    [
+     0,
+     1,
+     2
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Charlie",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Charlie"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g036",
+   "seed_group": 0,
+   "game_idx": 36,
+   "game_seed": 2036,
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Carrot",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Alice",
+   "orders": [
+    [
+     2,
+     1,
+     0
+    ],
+    [
+     1,
+     2,
+     0
+    ],
+    [
+     2,
+     0,
+     1
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Alice",
+    "Charlie": "Alice"
+   },
+   "eliminated": [
+    "Alice"
+   ],
+   "winner": "Carrot"
+  },
+  {
+   "game_id": "g037",
+   "seed_group": 0,
+   "game_idx": 37,
+   "game_seed": 2037,
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Carrot",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Alice",
+   "orders": [
+    [
+     0,
+     2,
+     1
+    ],
+    [
+     2,
+     1,
+     0
+    ],
+    [
+     1,
+     2,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Alice",
+    "Charlie": "Alice"
+   },
+   "eliminated": [
+    "Alice"
+   ],
+   "winner": "Carrot"
+  },
+  {
+   "game_id": "g038",
+   "seed_group": 0,
+   "game_idx": 38,
+   "game_seed": 2038,
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Carrot",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Alice",
+   "orders": [
+    [
+     2,
+     0,
+     1
+    ],
+    [
+     0,
+     2,
+     1
+    ],
+    [
+     2,
+     0,
+     1
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Alice",
+    "Charlie": "Alice"
+   },
+   "eliminated": [
+    "Alice"
+   ],
+   "winner": "Carrot"
+  },
+  {
+   "game_id": "g039",
+   "seed_group": 0,
+   "game_idx": 39,
+   "game_seed": 2039,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Parsnip"
+   },
+   "parsnip": "Charlie",
+   "orders": [
+    [
+     0,
+     2,
+     1
+    ],
+    [
+     2,
+     1,
+     0
+    ],
+    [
+     2,
+     1,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Alice",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g040",
+   "seed_group": 0,
+   "game_idx": 40,
+   "game_seed": 2040,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Parsnip",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Bob",
+   "orders": [
+    [
+     2,
+     0,
+     1
+    ],
+    [
+     2,
+     1,
+     0
+    ],
+    [
+     1,
+     0,
+     2
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Alice",
+    "Charlie": "Alice"
+   },
+   "eliminated": [
+    "Alice"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g041",
+   "seed_group": 0,
+   "game_idx": 41,
+   "game_seed": 2041,
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Carrot",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Alice",
+   "orders": [
+    [
+     2,
+     0,
+     1
+    ],
+    [
+     0,
+     2,
+     1
+    ],
+    [
+     0,
+     1,
+     2
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Charlie",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g042",
+   "seed_group": 0,
+   "game_idx": 42,
+   "game_seed": 2042,
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Carrot",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Alice",
+   "orders": [
+    [
+     1,
+     0,
+     2
+    ],
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     1,
+     2,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Alice",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g043",
+   "seed_group": 0,
+   "game_idx": 43,
+   "game_seed": 2043,
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Carrot",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Alice",
+   "orders": [
+    [
+     0,
+     2,
+     1
+    ],
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     1,
+     0,
+     2
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Alice",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g044",
+   "seed_group": 0,
+   "game_idx": 44,
+   "game_seed": 2044,
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Carrot",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Alice",
+   "orders": [
+    [
+     1,
+     0,
+     2
+    ],
+    [
+     1,
+     2,
+     0
+    ],
+    [
+     2,
+     1,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Alice",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g046",
+   "seed_group": 0,
+   "game_idx": 46,
+   "game_seed": 2046,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Parsnip"
+   },
+   "parsnip": "Charlie",
+   "orders": [
+    [
+     1,
+     2,
+     0
+    ],
+    [
+     1,
+     0,
+     2
+    ],
+    [
+     1,
+     2,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Alice",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g047",
+   "seed_group": 0,
+   "game_idx": 47,
+   "game_seed": 2047,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Parsnip"
+   },
+   "parsnip": "Charlie",
+   "orders": [
+    [
+     1,
+     2,
+     0
+    ],
+    [
+     1,
+     2,
+     0
+    ],
+    [
+     2,
+     0,
+     1
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Charlie",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Charlie"
+   ],
+   "winner": "Carrot"
+  },
+  {
+   "game_id": "g048",
+   "seed_group": 0,
+   "game_idx": 48,
+   "game_seed": 2048,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Parsnip",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Bob",
+   "orders": [
+    [
+     1,
+     2,
+     0
+    ],
+    [
+     2,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     2
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Alice",
+    "Charlie": "Bob"
+   },
+   "eliminated": [],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g049",
+   "seed_group": 0,
+   "game_idx": 49,
+   "game_seed": 2049,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Parsnip"
+   },
+   "parsnip": "Charlie",
+   "orders": [
+    [
+     2,
+     1,
+     0
+    ],
+    [
+     2,
+     1,
+     0
+    ],
+    [
+     2,
+     1,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Charlie",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g050",
+   "seed_group": 0,
+   "game_idx": 50,
+   "game_seed": 2050,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Parsnip"
+   },
+   "parsnip": "Charlie",
+   "orders": [
+    [
+     1,
+     0,
+     2
+    ],
+    [
+     1,
+     0,
+     2
+    ],
+    [
+     0,
+     1,
+     2
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Charlie",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g051",
+   "seed_group": 0,
+   "game_idx": 51,
+   "game_seed": 2051,
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Carrot",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Alice",
+   "orders": [
+    [
+     1,
+     0,
+     2
+    ],
+    [
+     0,
+     2,
+     1
+    ],
+    [
+     2,
+     1,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Charlie",
+    "Charlie": "Alice"
+   },
+   "eliminated": [],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g052",
+   "seed_group": 0,
+   "game_idx": 52,
+   "game_seed": 2052,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Parsnip"
+   },
+   "parsnip": "Charlie",
+   "orders": [
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     1,
+     2,
+     0
+    ],
+    [
+     2,
+     0,
+     1
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Charlie",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g053",
+   "seed_group": 0,
+   "game_idx": 53,
+   "game_seed": 2053,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Parsnip",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Bob",
+   "orders": [
+    [
+     0,
+     2,
+     1
+    ],
+    [
+     2,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     2
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Bob",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Carrot"
+  },
+  {
+   "game_id": "g054",
+   "seed_group": 0,
+   "game_idx": 54,
+   "game_seed": 2054,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Parsnip",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Bob",
+   "orders": [
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     0,
+     2,
+     1
+    ],
+    [
+     2,
+     1,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Alice",
+    "Charlie": "Alice"
+   },
+   "eliminated": [
+    "Alice"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g055",
+   "seed_group": 0,
+   "game_idx": 55,
+   "game_seed": 2055,
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Carrot",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Alice",
+   "orders": [
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     1,
+     2,
+     0
+    ],
+    [
+     1,
+     0,
+     2
+    ]
+   ],
+   "votes": {
+    "Alice": "Alice",
+    "Bob": "Alice",
+    "Charlie": "Alice"
+   },
+   "eliminated": [
+    "Alice"
+   ],
+   "winner": "Carrot"
+  },
+  {
+   "game_id": "g056",
+   "seed_group": 0,
+   "game_idx": 56,
+   "game_seed": 2056,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Parsnip"
+   },
+   "parsnip": "Charlie",
+   "orders": [
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     0,
+     1,
+     2
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Charlie",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g057",
+   "seed_group": 0,
+   "game_idx": 57,
+   "game_seed": 2057,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Parsnip"
+   },
+   "parsnip": "Charlie",
+   "orders": [
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     1,
+     0,
+     2
+    ],
+    [
+     0,
+     1,
+     2
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Charlie",
+    "Charlie": "Alice"
+   },
+   "eliminated": [
+    "Charlie"
+   ],
+   "winner": "Carrot"
+  },
+  {
+   "game_id": "g058",
+   "seed_group": 0,
+   "game_idx": 58,
+   "game_seed": 2058,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Parsnip",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Bob",
+   "orders": [
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     1,
+     2,
+     0
+    ],
+    [
+     1,
+     2,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Charlie",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Charlie"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g059",
+   "seed_group": 0,
+   "game_idx": 59,
+   "game_seed": 2059,
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Carrot",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Alice",
+   "orders": [
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     1,
+     2,
+     0
+    ],
+    [
+     1,
+     0,
+     2
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Alice",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g060",
+   "seed_group": 0,
+   "game_idx": 60,
+   "game_seed": 2060,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Parsnip"
+   },
+   "parsnip": "Charlie",
+   "orders": [
+    [
+     2,
+     1,
+     0
+    ],
+    [
+     2,
+     0,
+     1
+    ],
+    [
+     0,
+     2,
+     1
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Charlie",
+    "Charlie": "Alice"
+   },
+   "eliminated": [
+    "Charlie"
+   ],
+   "winner": "Carrot"
+  },
+  {
+   "game_id": "g061",
+   "seed_group": 0,
+   "game_idx": 61,
+   "game_seed": 2061,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Parsnip",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Bob",
+   "orders": [
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     1,
+     0,
+     2
+    ],
+    [
+     1,
+     0,
+     2
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Alice",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Carrot"
+  },
+  {
+   "game_id": "g062",
+   "seed_group": 0,
+   "game_idx": 62,
+   "game_seed": 2062,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Parsnip",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Bob",
+   "orders": [
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     0,
+     2,
+     1
+    ],
+    [
+     0,
+     1,
+     2
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Alice",
+    "Charlie": "Alice"
+   },
+   "eliminated": [
+    "Alice"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g063",
+   "seed_group": 0,
+   "game_idx": 63,
+   "game_seed": 2063,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Parsnip",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Bob",
+   "orders": [
+    [
+     1,
+     2,
+     0
+    ],
+    [
+     1,
+     0,
+     2
+    ],
+    [
+     0,
+     1,
+     2
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Charlie",
+    "Charlie": "Alice"
+   },
+   "eliminated": [
+    "Charlie"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g064",
+   "seed_group": 0,
+   "game_idx": 64,
+   "game_seed": 2064,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Parsnip"
+   },
+   "parsnip": "Charlie",
+   "orders": [
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     1,
+     0,
+     2
+    ],
+    [
+     0,
+     2,
+     1
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Charlie",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g066",
+   "seed_group": 0,
+   "game_idx": 66,
+   "game_seed": 2066,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Parsnip"
+   },
+   "parsnip": "Charlie",
+   "orders": [
+    [
+     1,
+     2,
+     0
+    ],
+    [
+     2,
+     1,
+     0
+    ],
+    [
+     1,
+     2,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Charlie",
+    "Charlie": "Alice"
+   },
+   "eliminated": [
+    "Charlie"
+   ],
+   "winner": "Carrot"
+  },
+  {
+   "game_id": "g067",
+   "seed_group": 0,
+   "game_idx": 67,
+   "game_seed": 2067,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Parsnip",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Bob",
+   "orders": [
+    [
+     2,
+     1,
+     0
+    ],
+    [
+     1,
+     0,
+     2
+    ],
+    [
+     1,
+     2,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Alice",
+    "Charlie": "Alice"
+   },
+   "eliminated": [
+    "Alice"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g069",
+   "seed_group": 0,
+   "game_idx": 69,
+   "game_seed": 2069,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Parsnip",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Bob",
+   "orders": [
+    [
+     0,
+     2,
+     1
+    ],
+    [
+     2,
+     1,
+     0
+    ],
+    [
+     2,
+     1,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Charlie",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Carrot"
+  },
+  {
+   "game_id": "g070",
+   "seed_group": 0,
+   "game_idx": 70,
+   "game_seed": 2070,
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Carrot",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Alice",
+   "orders": [
+    [
+     2,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     1,
+     2,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Charlie",
+    "Charlie": "Alice"
+   },
+   "eliminated": [
+    "Charlie"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g071",
+   "seed_group": 0,
+   "game_idx": 71,
+   "game_seed": 2071,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Parsnip",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Bob",
+   "orders": [
+    [
+     2,
+     1,
+     0
+    ],
+    [
+     2,
+     1,
+     0
+    ],
+    [
+     1,
+     2,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Charlie",
+    "Charlie": "Alice"
+   },
+   "eliminated": [
+    "Charlie"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g072",
+   "seed_group": 0,
+   "game_idx": 72,
+   "game_seed": 2072,
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Carrot",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Alice",
+   "orders": [
+    [
+     1,
+     0,
+     2
+    ],
+    [
+     1,
+     2,
+     0
+    ],
+    [
+     2,
+     0,
+     1
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Charlie",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g073",
+   "seed_group": 0,
+   "game_idx": 73,
+   "game_seed": 2073,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Parsnip",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Bob",
+   "orders": [
+    [
+     1,
+     2,
+     0
+    ],
+    [
+     2,
+     1,
+     0
+    ],
+    [
+     1,
+     2,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Charlie",
+    "Charlie": "Alice"
+   },
+   "eliminated": [
+    "Charlie"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g074",
+   "seed_group": 0,
+   "game_idx": 74,
+   "game_seed": 2074,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Parsnip"
+   },
+   "parsnip": "Charlie",
+   "orders": [
+    [
+     1,
+     0,
+     2
+    ],
+    [
+     1,
+     2,
+     0
+    ],
+    [
+     1,
+     0,
+     2
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Charlie",
+    "Charlie": "Alice"
+   },
+   "eliminated": [
+    "Charlie"
+   ],
+   "winner": "Carrot"
+  },
+  {
+   "game_id": "g075",
+   "seed_group": 0,
+   "game_idx": 75,
+   "game_seed": 2075,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Parsnip"
+   },
+   "parsnip": "Charlie",
+   "orders": [
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     0,
+     2,
+     1
+    ],
+    [
+     2,
+     1,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Alice",
+    "Charlie": "Alice"
+   },
+   "eliminated": [
+    "Alice"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g076",
+   "seed_group": 0,
+   "game_idx": 76,
+   "game_seed": 2076,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Parsnip",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Bob",
+   "orders": [
+    [
+     1,
+     0,
+     2
+    ],
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     1,
+     2,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Alice",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Carrot"
+  },
+  {
+   "game_id": "g077",
+   "seed_group": 0,
+   "game_idx": 77,
+   "game_seed": 2077,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Parsnip",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Bob",
+   "orders": [
+    [
+     1,
+     0,
+     2
+    ],
+    [
+     0,
+     2,
+     1
+    ],
+    [
+     2,
+     1,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Bob",
+    "Charlie": "Alice"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Carrot"
+  },
+  {
+   "game_id": "g079",
+   "seed_group": 0,
+   "game_idx": 79,
+   "game_seed": 2079,
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Carrot",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Alice",
+   "orders": [
+    [
+     2,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     1,
+     2,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Alice",
+    "Bob": "Alice",
+    "Charlie": "Alice"
+   },
+   "eliminated": [
+    "Alice"
+   ],
+   "winner": "Carrot"
+  },
+  {
+   "game_id": "g080",
+   "seed_group": 0,
+   "game_idx": 80,
+   "game_seed": 2080,
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Carrot",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Alice",
+   "orders": [
+    [
+     0,
+     2,
+     1
+    ],
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     1,
+     2,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Alice",
+    "Charlie": "Alice"
+   },
+   "eliminated": [
+    "Alice"
+   ],
+   "winner": "Carrot"
+  },
+  {
+   "game_id": "g081",
+   "seed_group": 0,
+   "game_idx": 81,
+   "game_seed": 2081,
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Carrot",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Alice",
+   "orders": [
+    [
+     2,
+     1,
+     0
+    ],
+    [
+     2,
+     0,
+     1
+    ],
+    [
+     2,
+     1,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Alice",
+    "Bob": "Charlie",
+    "Charlie": "Bob"
+   },
+   "eliminated": [],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g082",
+   "seed_group": 0,
+   "game_idx": 82,
+   "game_seed": 2082,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Parsnip"
+   },
+   "parsnip": "Charlie",
+   "orders": [
+    [
+     2,
+     1,
+     0
+    ],
+    [
+     2,
+     0,
+     1
+    ],
+    [
+     0,
+     2,
+     1
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Charlie",
+    "Charlie": "Alice"
+   },
+   "eliminated": [
+    "Charlie"
+   ],
+   "winner": "Carrot"
+  },
+  {
+   "game_id": "g083",
+   "seed_group": 0,
+   "game_idx": 83,
+   "game_seed": 2083,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Parsnip",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Bob",
+   "orders": [
+    [
+     0,
+     2,
+     1
+    ],
+    [
+     0,
+     2,
+     1
+    ],
+    [
+     0,
+     2,
+     1
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Alice",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Carrot"
+  },
+  {
+   "game_id": "g084",
+   "seed_group": 0,
+   "game_idx": 84,
+   "game_seed": 2084,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Parsnip",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Bob",
+   "orders": [
+    [
+     1,
+     2,
+     0
+    ],
+    [
+     1,
+     0,
+     2
+    ],
+    [
+     0,
+     2,
+     1
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Alice",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Carrot"
+  },
+  {
+   "game_id": "g085",
+   "seed_group": 0,
+   "game_idx": 85,
+   "game_seed": 2085,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Parsnip",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Bob",
+   "orders": [
+    [
+     1,
+     0,
+     2
+    ],
+    [
+     1,
+     0,
+     2
+    ],
+    [
+     1,
+     2,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Alice",
+    "Charlie": "Alice"
+   },
+   "eliminated": [
+    "Alice"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g086",
+   "seed_group": 0,
+   "game_idx": 86,
+   "game_seed": 2086,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Parsnip"
+   },
+   "parsnip": "Charlie",
+   "orders": [
+    [
+     2,
+     1,
+     0
+    ],
+    [
+     2,
+     1,
+     0
+    ],
+    [
+     2,
+     1,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Charlie",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g088",
+   "seed_group": 0,
+   "game_idx": 88,
+   "game_seed": 2088,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Parsnip"
+   },
+   "parsnip": "Charlie",
+   "orders": [
+    [
+     0,
+     2,
+     1
+    ],
+    [
+     2,
+     0,
+     1
+    ],
+    [
+     0,
+     2,
+     1
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Alice",
+    "Charlie": "Bob"
+   },
+   "eliminated": [],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g089",
+   "seed_group": 0,
+   "game_idx": 89,
+   "game_seed": 2089,
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Carrot",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Alice",
+   "orders": [
+    [
+     1,
+     2,
+     0
+    ],
+    [
+     1,
+     0,
+     2
+    ],
+    [
+     1,
+     0,
+     2
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Charlie",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g090",
+   "seed_group": 0,
+   "game_idx": 90,
+   "game_seed": 2090,
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Carrot",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Alice",
+   "orders": [
+    [
+     2,
+     0,
+     1
+    ],
+    [
+     2,
+     0,
+     1
+    ],
+    [
+     2,
+     1,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Alice",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g091",
+   "seed_group": 0,
+   "game_idx": 91,
+   "game_seed": 2091,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Parsnip",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Bob",
+   "orders": [
+    [
+     2,
+     1,
+     0
+    ],
+    [
+     1,
+     0,
+     2
+    ],
+    [
+     0,
+     1,
+     2
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Charlie",
+    "Charlie": "Alice"
+   },
+   "eliminated": [],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g092",
+   "seed_group": 0,
+   "game_idx": 92,
+   "game_seed": 2092,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Parsnip"
+   },
+   "parsnip": "Charlie",
+   "orders": [
+    [
+     1,
+     0,
+     2
+    ],
+    [
+     0,
+     2,
+     1
+    ],
+    [
+     2,
+     0,
+     1
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Charlie",
+    "Charlie": "Alice"
+   },
+   "eliminated": [
+    "Charlie"
+   ],
+   "winner": "Carrot"
+  },
+  {
+   "game_id": "g093",
+   "seed_group": 0,
+   "game_idx": 93,
+   "game_seed": 2093,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Parsnip",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Bob",
+   "orders": [
+    [
+     2,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     1,
+     0,
+     2
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Alice",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Carrot"
+  },
+  {
+   "game_id": "g094",
+   "seed_group": 0,
+   "game_idx": 94,
+   "game_seed": 2094,
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Carrot",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Alice",
+   "orders": [
+    [
+     0,
+     2,
+     1
+    ],
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     0,
+     1,
+     2
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Alice",
+    "Charlie": "Alice"
+   },
+   "eliminated": [
+    "Alice"
+   ],
+   "winner": "Carrot"
+  },
+  {
+   "game_id": "g095",
+   "seed_group": 0,
+   "game_idx": 95,
+   "game_seed": 2095,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Parsnip"
+   },
+   "parsnip": "Charlie",
+   "orders": [
+    [
+     2,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     1,
+     2,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Alice",
+    "Charlie": "Alice"
+   },
+   "eliminated": [
+    "Alice"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g097",
+   "seed_group": 0,
+   "game_idx": 97,
+   "game_seed": 2097,
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Carrot",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Alice",
+   "orders": [
+    [
+     2,
+     1,
+     0
+    ],
+    [
+     2,
+     1,
+     0
+    ],
+    [
+     2,
+     0,
+     1
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Charlie",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Charlie"
+   ],
+   "winner": "Parsnip"
+  },
+  {
+   "game_id": "g098",
+   "seed_group": 0,
+   "game_idx": 98,
+   "game_seed": 2098,
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Parsnip",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Bob",
+   "orders": [
+    [
+     2,
+     1,
+     0
+    ],
+    [
+     1,
+     2,
+     0
+    ],
+    [
+     1,
+     0,
+     2
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Bob",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Carrot"
+  },
+  {
+   "game_id": "g099",
+   "seed_group": 0,
+   "game_idx": 99,
+   "game_seed": 2099,
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Carrot",
+    "Charlie": "Carrot"
+   },
+   "parsnip": "Alice",
+   "orders": [
+    [
+     1,
+     0,
+     2
+    ],
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     0,
+     2,
+     1
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Alice",
+    "Charlie": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Parsnip"
+  }
+ ]
+}
