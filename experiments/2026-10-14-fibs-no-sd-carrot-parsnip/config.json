@@ -1,0 +1,111 @@
+{
+ "model_id": "Qwen/Qwen3.5-27B",
+ "layer": 58,
+ "lora_id": null,
+ "batch_size": 4,
+ "max_len": 32768,
+ "device": "auto",
+ "dtype": "bfloat16",
+ "truncate_layers": true,
+ "probe_type": "logistic_regression",
+ "reg_coeff": 10.0,
+ "normalize": true,
+ "probe_paths": {},
+ "steer_path": null,
+ "steer_coef": 0.0,
+ "gen_backend": "vllm",
+ "temperature": 0.7,
+ "top_p": 0.95,
+ "max_new_tokens": 1800,
+ "force_close_tokens": 220,
+ "tensor_parallel_size": null,
+ "max_model_len": 8192,
+ "gen_chunk": 25,
+ "seed": 0,
+ "seed_groups": 1,
+ "dataset_sizes": {},
+ "out_dir": "experiments/2026-10-14-fibs-no-sd-carrot-parsnip",
+ "model_revision": "fc05daec18b0a78c049392ed2e771dde82bdf654",
+ "acts_dir": "experiments/2026-10-13-fibs-acts/acts_fibs/read-token",
+ "probe_layers": [
+  19,
+  27,
+  35,
+  43,
+  51,
+  58
+ ],
+ "exclude_sources": [
+  "among_us",
+  "werewolf",
+  "negotiation"
+ ],
+ "n_drop": 20110,
+ "conditions": [
+  "no_sd",
+  "random_drop"
+ ],
+ "train_seeds": [
+  0,
+  1,
+  2,
+  3,
+  4
+ ],
+ "archs": [
+  "linear",
+  "mlp"
+ ],
+ "primary_arch": "linear",
+ "n_val": 5000,
+ "val_seed": 0,
+ "train_hparams": {
+  "linear": {
+   "optimizer": "adamw",
+   "lr": 0.005,
+   "schedule": "constant",
+   "weight_decay": 0.0,
+   "max_epochs": 6
+  },
+  "mlp": {
+   "optimizer": "adamw",
+   "lr": 0.005,
+   "schedule": "cosine",
+   "weight_decay": 0.0,
+   "max_epochs": 6
+  }
+ },
+ "train_batch_size": 32,
+ "warmup_steps": 20,
+ "grad_clip_adamw": 1.0,
+ "scale_rows": 512,
+ "layer_loss_cut": 0.6,
+ "fibs_repo": "AlignmentResearch/fibs-v1",
+ "fibs_revision": "65dccf12934620bfe01db665ea3d7d0e3c9f1355",
+ "pc_min_val_auroc": 0.95,
+ "cp_dir": "experiments/2026-10-12-fibs-probes",
+ "main_arms": [
+  "3p",
+  "5p"
+ ],
+ "cc_arms": [
+  "3p_cc",
+  "5p_cc"
+ ],
+ "pilot_arms": [
+  "5p_pilot"
+ ],
+ "prefills": [
+  "Yes.",
+  "No."
+ ],
+ "lie_prefill": "Yes.",
+ "published_archs": [
+  "linear",
+  "mlp"
+ ],
+ "delta": 0.1,
+ "n_boot": 2000,
+ "boot_seed": 0,
+ "fpr_quantile": 0.99
+}

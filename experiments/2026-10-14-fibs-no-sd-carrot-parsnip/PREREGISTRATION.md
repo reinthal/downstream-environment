@@ -151,3 +151,9 @@ implementation choices, not the researcher's answers.
 
 <!-- Append only. Each entry: date, what changed, why, decided before or
      after seeing data. -->
+
+- 2026-10-14, before seeing any main-run data: the pilot is scored on the
+  2026-10-12 **5p** pilot games (`acts_5p_pilot`, 2 games, 30
+  announcements) instead of the 3p pilot: `acts_3p_pilot` holds only an
+  older pilot's g001 and no longer matches `transcripts_3p_pilot.jsonl`.
+  The pilot ran end to end; its data stays out of the analysis.
