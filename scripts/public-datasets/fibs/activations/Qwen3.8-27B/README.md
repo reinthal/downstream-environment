@@ -10,6 +10,18 @@ follow-up read of Hollinsworth et al. 2026
 or evaluate probes on any slice of FIBSv1 (by family, quadrant or label)
 without running the model.
 
+[`fibs/activations/Qwen3.5-27B/read-token/`](../Qwen3.5-27B/README.md) holds
+the same read for Qwen3.5-27B in the same layout, with the same row ids and
+the same `split`.
+
+## What these activations support
+
+| probe | `read-token/` (all rows) | `windows-pilot/` (2,000 rows) |
+|---|---|---|
+| linear, MLP (per-layer, read token) | **yes** | yes |
+| EFC, axial (whole read window) | **no**: `acts` and the masks are empty | **yes**, windows capped at 1,024 tokens; a pilot-sized set |
+| other layers | no: only 19, 27, 35, 43, 51, 58 | no |
+
 ## How the activations were taken
 
 The code is in `experiments/2026-10-13-fibs-basharena/` (`modal_app.py`,
@@ -100,9 +112,13 @@ for shard in sorted(root.glob("acts_*.pt"), key=lambda p: int(p.stem.split("_")[
 X = torch.stack(X)                               # (N, 6, 5120) bf16; layer axis = 19, 27, 35, 43, 51, 58
 ```
 
+With the repository, `fibs_probes.load_rows` / `fibs_probes.load_read_token`
+read this store and the Qwen3.5-27B one (see that README).
+
 The paper's training recipe uses per-family class balance, per-layer RMS
 input scaling, AdamW and early stopping on `val`. Its implementation is
-`experiments/2026-10-13-fibs-basharena/train.py`.
+`experiments/2026-10-13-fibs-basharena/train.py` (all four architectures, on
+Modal) and, for linear and MLP on a read-token store, `fibs_probes.train`.
 
 ## Trained probes
 

@@ -4,8 +4,9 @@ function (nothing large touches local disk).
 
 The bucket layout is ``LAYOUT`` below: bucket prefix <- source, where a
 source is ``volume:<path>`` (a file or directory on the Volume, streamed by
-the Modal function) or ``repo:<path>`` (a repo file, read locally and passed
-to the function). The README files under ``scripts/public-datasets/`` are
+the Modal function) or ``repo:<path>`` (a file or directory in the local
+checkout, gitignored data included, read here and passed to the function one
+file at a time). The README files under ``scripts/public-datasets/`` are
 uploaded to the same key below the bucket root, so that tree mirrors the
 bucket's documentation. An object that already exists with the same size is
 skipped (idempotent, resumable); multipart uploads (boto3's transfer
@@ -30,12 +31,15 @@ REPO = Path(__file__).resolve().parents[1]
 DOCS = Path(__file__).resolve().parent / "public-datasets"
 EXP = "experiments/2026-10-13-fibs-basharena"
 QWEN38 = "Qwen3.8-27B"
+QWEN35 = "Qwen3.5-27B"
 BASH = "downstream-environments/bash-arena"
 
 LAYOUT = {
     # fibs-v1 activations of Qwen3.8-27B (revision 1d4bf0f2), follow-up read, layers 19/27/35/43/51/58
     f"fibs/activations/{QWEN38}/read-token": "volume:fibs/main",
     f"fibs/activations/{QWEN38}/windows-pilot": "volume:fibs/pilot",
+    # fibs-v1 activations of Qwen3.5-27B (revision fc05daec), same read and layout, read token only (local, gitignored)
+    f"fibs/activations/{QWEN35}/read-token": "repo:experiments/2026-10-13-fibs-acts/acts_fibs/read-token",
     # BashArena rollouts of Qwen3.8-27B (2026-10-10), their step labels, probe scores and step activations
     f"{BASH}/transcripts/{QWEN38}/transcripts_honest.jsonl": f"repo:{EXP}/transcripts_honest.jsonl",
     f"{BASH}/transcripts/{QWEN38}/transcripts_attack.jsonl": f"repo:{EXP}/transcripts_attack.jsonl",
@@ -113,14 +117,21 @@ def main(only: str = ""):
     layout = {k: v for k, v in LAYOUT.items() if k.startswith(only)}
     docs = {str(p.relative_to(DOCS)): p for p in sorted(DOCS.rglob("*.md"))}
     docs = {k: p for k, p in docs.items() if k.startswith(only) or k == "README.md"}
-    local = [(k, (REPO / v.removeprefix("repo:")).read_bytes()) for k, v in layout.items() if v.startswith("repo:")]
-    local += [(k, p.read_bytes()) for k, p in docs.items()]
     for k, v in layout.items():
         if not v.startswith(("repo:", "volume:")):
             raise ValueError(f"{k}: unknown source {v!r}")
+    files = []      # (bucket key, local path); a directory maps file by file below it
+    for k, v in layout.items():
+        if v.startswith("repo:"):
+            src = REPO / v.removeprefix("repo:")
+            if not src.exists():
+                raise FileNotFoundError(f"{k}: {src} does not exist")
+            files += [(k, src)] if src.is_file() else [(f"{k}/{p.relative_to(src)}", p)
+                                                       for p in sorted(src.rglob("*")) if p.is_file()]
+    files += [(k, p) for k, p in docs.items()]
     remote = [(k, v.removeprefix("volume:")) for k, v in layout.items() if v.startswith("volume:")]
-    if local:
-        for msg in put.starmap(local):
+    if files:   # read lazily: a local directory can be GBs
+        for msg in put.starmap((k, p.read_bytes()) for k, p in files):
             print(msg)
     if remote:
         for r in push_volume.starmap(remote):
