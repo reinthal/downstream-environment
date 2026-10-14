@@ -88,6 +88,13 @@ needed, propose it and let the researcher decide.
   (`encode_with_spans`, `collect_activations`, `load_truncated_decoder`;
   `experiments/2026-09-22/common.py` re-exports them) — note it runs the bare
   decoder because full-model forwards CUDA-launch-fail at long sequences.
+- **fibs probes** (Hollinsworth et al. 2026): `fibs_probes/` trains the
+  paper's per-layer linear / MLP ensembles on stored FIBSv1 read-token
+  activations (`experiments/2026-10-13-fibs-acts/acts_fibs/`, Qwen3.5-27B)
+  and saves them in the vendored `probe_inference` format
+  (`vendor/caught-in-the-act-probes`, on `sys.path` after `import
+  fibs_probes`). Row selection, validation hold-out, family balance:
+  `fibs_probes.data`. Example: `experiments/2026-10-14-fibs-linear-no-sd/`.
 - **Experiment primitives** — build experiments from these; see
   `experiments/_template/` for the canonical skeleton:
   - `ExperimentConfig` (`linear_probes/config.py`) — dataclass inheriting

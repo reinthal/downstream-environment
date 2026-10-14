@@ -1,0 +1,196 @@
+{
+ "linear": {
+  "used_layers": [
+   19,
+   27,
+   35,
+   43,
+   51,
+   58
+  ],
+  "val": {
+   "n": 5000,
+   "auroc": 0.99256448,
+   "by_source": {
+    "anti_sycophancy_dpo": {
+     "n": 264,
+     "auroc": 1.0
+    },
+    "b1-bare": {
+     "n": 136,
+     "auroc": 0.9852654387865656
+    },
+    "b1-followup": {
+     "n": 151,
+     "auroc": 0.9970070422535211
+    },
+    "caving": {
+     "n": 18,
+     "auroc": 0.9506172839506173
+    },
+    "caving_followup": {
+     "n": 33,
+     "auroc": 0.7461538461538462
+    },
+    "doluschat": {
+     "n": 298,
+     "auroc": 0.9961697909156453
+    },
+    "fabricated_statistics": {
+     "n": 72,
+     "auroc": 0.9992283950617284
+    },
+    "fever": {
+     "n": 259,
+     "auroc": 0.9997611940298508
+    },
+    "harm_pressure": {
+     "n": 85,
+     "auroc": 1.0
+    },
+    "harm_pressure_knowledge": {
+     "n": 209,
+     "auroc": 0.9976186114673017
+    },
+    "instructed_lie_double_down": {
+     "n": 35,
+     "auroc": 0.9755244755244755
+    },
+    "instructed_lie_neutral": {
+     "n": 29,
+     "auroc": 1.0
+    },
+    "instructed_lie_recant": {
+     "n": 40,
+     "auroc": 0.9974747474747475
+    },
+    "instructed_truth_neutral": {
+     "n": 39,
+     "auroc": 1.0
+    },
+    "instructed_truth_stay_honest": {
+     "n": 64,
+     "auroc": 1.0
+    },
+    "instructed_truth_turn_deceptive": {
+     "n": 59,
+     "auroc": 0.9953917050691244
+    },
+    "liarsbench": {
+     "n": 125,
+     "auroc": 0.99768875192604
+    },
+    "liarsbench_instructed_deception": {
+     "n": 52,
+     "auroc": 1.0
+    },
+    "liarsbench_softtrigger_raw": {
+     "n": 100,
+     "auroc": 1.0
+    },
+    "lies_v2": {
+     "n": 211,
+     "auroc": 0.9920110192837466
+    },
+    "longcontext_v5a_onpolicy": {
+     "n": 2,
+     "auroc": 1.0
+    },
+    "longcontext_v5b_onpolicy": {
+     "n": 13,
+     "auroc": 1.0
+    },
+    "mask_doubling_down_known_facts": {
+     "n": 51,
+     "auroc": 0.9968944099378882
+    },
+    "mask_known_facts": {
+     "n": 61,
+     "auroc": 0.9946236559139785
+    },
+    "mask_provided_facts": {
+     "n": 57,
+     "auroc": 0.9457671957671958
+    },
+    "mask_statistics": {
+     "n": 78,
+     "auroc": 0.9958333333333333
+    },
+    "medqa": {
+     "n": 145,
+     "auroc": 0.9951209992193599
+    },
+    "model_self_knowledge": {
+     "n": 104,
+     "auroc": 0.9988700564971752
+    },
+    "multi_turn_interleaved": {
+     "n": 61,
+     "auroc": 1.0
+    },
+    "negotiation": {
+     "n": 230,
+     "auroc": 0.9091596702216171
+    },
+    "original": {
+     "n": 151,
+     "auroc": 0.9987719298245614
+    },
+    "persona_prefill_b4t1_verdanic_ipc620_audit_boast_honest": {
+     "n": 2,
+     "auroc": 1.0
+    },
+    "persona_prefill_bare": {
+     "n": 51,
+     "auroc": 0.9676923076923077
+    },
+    "persona_prefill_followup": {
+     "n": 12,
+     "auroc": 1.0
+    },
+    "sandbagging": {
+     "n": 243,
+     "auroc": 0.99817023583627
+    },
+    "sycophancy": {
+     "n": 232,
+     "auroc": 0.9973831775700934
+    },
+    "synthetic_deceptive": {
+     "n": 266,
+     "auroc": 0.9940935938209905
+    },
+    "truthfulqa": {
+     "n": 154,
+     "auroc": 0.9935374149659864
+    },
+    "ultrachat": {
+     "n": 274,
+     "auroc": 0.9989798657718121
+    },
+    "wikihow_instructions": {
+     "n": 59,
+     "auroc": 0.8620689655172413
+    },
+    "wikihownest": {
+     "n": 282,
+     "auroc": 0.9983502603495386
+    }
+   }
+  },
+  "excluded": {
+   "n": 13156,
+   "auroc": 0.889219212054222,
+   "by_source": {
+    "among_us": {
+     "n": 6464,
+     "auroc": 0.9097990737734045
+    },
+    "werewolf": {
+     "n": 6692,
+     "auroc": 0.8710447817718849
+    }
+   }
+  }
+ }
+}

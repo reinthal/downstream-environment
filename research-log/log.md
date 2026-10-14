@@ -2239,3 +2239,107 @@ and `modal_app.py` docstring.
 `probes/qwen3.8-27b_layers19-58_fibs_{linear,mlp}` link there), pilot
 outputs (`pilot_*`, `scores_pilot_*`, `judge_pilot_*`). Activations stay on
 the Modal volume `fibs-basharena` (reinthal workspace).
+
+## 2026-10-13: FIBSv1 activations of Qwen3.5-27B for training new probes (data preparation)
+
+### Context
+
+The fibs probes of "Caught in the Act" separated Parsnip from Carrot
+announcements at AUROC 0.989 (entry above). To train our own probes on the same
+data, we need the model's activations on FIBSv1 (`AlignmentResearch/fibs-v1`,
+163,016 rows of finished transcripts with a judged-honest or judged-deceptive
+follow-up answer).
+
+### Experiment
+
+Teacher-forced forward passes of `Qwen/Qwen3.5-27B` over every FIBSv1 row
+(no generation), storing the residual stream at the token before the final
+`<|im_end|>` at decoder blocks 19, 27, 35, 43, 51, 58, which is what the
+paper's linear and MLP probes read. Rows over 32,768 rendered tokens are
+dropped (1,152 rows; 161,864 kept, 167M tokens). A 401-row pilot checked the
+hook against `hidden_states` and reproduced the published linear ensemble
+(AUROC 0.989). No probe is trained here; that is a separate experiment to
+preregister.
+
+### Expected Outcome
+
+<researcher to fill>
+
+### Actual Outcome
+
+<researcher to fill>
+
+### Results
+
+All 161,864 kept rows collected: `acts_fibs/layer_{L}.pt`, six `(161864, 5120)`
+bf16 tensors, 9.3 GB. The published linear ensemble on the stored activations:
+AUROC 0.987 (follow-up deceptive vs honest; mostly in-sample, the probes were
+trained on these rows). Four 2-GPU workers ran at about 1,800 tokens/s each
+(~6.5 h). All four ran out of memory at ~200-token rows once batches grew past
+79 rows (cap 128); the cap was lowered to 64 and the last ~5,600 rows per shard
+were resumed from the saved chunks (GPUs 2-7; another user had taken 0-1). The
+Qwen3.8 server was not restarted afterwards (researcher's instruction).
+
+### Parameters/Configurations
+
+`experiments/2026-10-13-fibs-acts/config.json`: model revision `fc05daec`,
+fibs revision `65dccf12`, layers 19/27/35/43/51/58, `acts_max_len` 32,768,
+16,384 padded tokens per forward, at most 128 rows per forward, 4 shards. The
+researcher chose the stored content ("Read token, six fibs layers") and
+approved all eight GPUs with the Qwen3.8 server stopped.
+
+### Artifacts
+
+- `experiments/2026-10-13-fibs-acts/README.md` — what is stored and the limitations
+- `experiments/2026-10-13-fibs-acts/collect.py`, `common.py`, `config.json`
+- `experiments/2026-10-13-fibs-acts/acts_fibs/rows.parquet`, `layer_{L}.pt`, `check.json` (gitignored)
+
+## 2026-10-14: fibs linear ensemble for Qwen3.5-27B without social-deduction data
+
+### Context
+
+Our downstream task is a social-deduction game, and FIBSv1 contains two
+social-deduction families (`among_us`, `werewolf`) that every fibs probe so
+far was trained on. A probe that never saw the genre gives a cleaner transfer
+test. The training code from 2026-10-13-fibs-basharena was moved into a root
+package, `fibs_probes`, for reuse.
+
+### Experiment
+
+The paper's linear ensemble trained on the stored Qwen3.5-27B read-token
+activations (2026-10-13-fibs-acts) with `among_us` and `werewolf` removed
+from training and validation; the removed rows are scored afterwards as a
+held-out set.
+
+### Expected Outcome
+
+<researcher to fill>
+
+### Actual Outcome
+
+<researcher to fill>
+
+### Results
+
+| AUROC | this probe | published linear (trained on all families, in-sample) |
+|---|---|---|
+| fibs validation (5,000 held-out rows) | 0.993 | — |
+| among_us (6,464, held out) | 0.910 | 0.966 |
+| werewolf (6,692, held out) | 0.871 | 0.948 |
+
+All six layers pass the layer rule; checkpoint at the end of epoch 6. ~2 min
+on one A40 (GPU 1).
+
+### Parameters/Configurations
+
+`experiments/2026-10-14-fibs-linear-no-sd/config.json`: layers
+19/27/35/43/51/58, `exclude_sources` among_us + werewolf, 5,000-row
+validation hold-out (seed 0, no shared `pair_id`), per-family class balance →
+136,030 training rows; AdamW 5e-3 constant, batch 32, 20 warm-up, clip 1.0,
+≤ 6 epochs. Single seed. Not preregistered (probe training, no hypothesis).
+
+### Artifacts
+
+- `fibs_probes/` — reusable training package (README lists differences from the original)
+- `experiments/2026-10-14-fibs-linear-no-sd/README.md`, `run.py`, `config.json`, `results.json`, `linear_train.json`, `split.parquet`
+- `probes/qwen3.5-27b_layers19-58_fibs_linear_no-social-deduction/` → `experiments/2026-10-14-fibs-linear-no-sd/probes/linear`

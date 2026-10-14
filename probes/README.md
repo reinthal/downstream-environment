@@ -23,3 +23,4 @@ added here (see AGENTS.md conventions).
 Training recipes: `experiments/2026-09-20/run_sandbagging.py`,
 `experiments/2026-09-22/train_probes.py`, `experiments/2026-10-01/train.py`; evaluations across settings:
 `research-log/log.md`.
+| `qwen3.5-27b_layers19-58_fibs_linear_no-social-deduction/` | `2026-10-14-fibs-linear-no-sd` | fibs linear ensemble for Qwen3.5-27B (rev fc05daec), trained in-house with `fibs_probes` on FIBSv1 WITHOUT the social-deduction families (`among_us`, `werewolf`): six per-layer `probe_inference` LinearProbes (layers 19, 27, 35, 43, 51, 58, unit-norm input, all six used), 136,030 training rows; fibs validation AUROC 0.993, held-out among_us 0.910 / werewolf 0.871. A `probe_inference` probe DIRECTORY: load with `probe_inference.load_probe(path)`; read token = the `.` of the prefilled follow-up answer |
