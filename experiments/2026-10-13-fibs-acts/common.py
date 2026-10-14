@@ -29,6 +29,9 @@ class FibsActsConfig(ExperimentConfig):
     n_shards: int = 4                 # one worker (two GPUs) per shard; rows are dealt out by length rank
     save_rows: int = 2000             # a chunk file is written once this many rows are collected
     save_tokens: int = 2_000_000      # ... or this many tokens, whichever comes first (long rows come first)
+    shard_rows: int = 500             # merge: rows per read-token/acts_{k}.pt (the 3.8 store's shard size)
+    n_val: int = 5000                 # merge: validation hold-out over all rows (paper A.6; the 3.8 store's rule)
+    val_seed: int = 0
     render_workers: int = 32          # CPU processes of the render stage
     pilot_rows: int = 400             # seeded random rows, plus the longest kept row
     pilot_seed: int = 0

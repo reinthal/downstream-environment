@@ -48,5 +48,8 @@
  "probe_repo": "AlignmentResearch/probe-inference-weights",
  "probe_revision": "05def1c13a70237cda3b717d785813918b8a22fa",
  "probe_path": "qwen3.5-27b/linear",
- "save_tokens": 2000000
+ "save_tokens": 2000000,
+ "shard_rows": 500,
+ "n_val": 5000,
+ "val_seed": 0
 }

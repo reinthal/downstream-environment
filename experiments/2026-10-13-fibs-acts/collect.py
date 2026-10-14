@@ -17,8 +17,15 @@ Stages:
            dealt out to the shards; chunks land in
            acts_fibs/shard{i}/chunk_{k}.pt. Re-running continues after the
            chunks already written.
-  merge    acts_fibs/layer_{L}.pt, (n_kept, d_model) bf16, row order =
-           rows.parquet kept rows (column ``act_index``).
+  merge    acts_fibs/read-token/, the layout of the Qwen3.8-27B FIBSv1
+           activations in the public-datasets bucket (fibs_probes.data):
+           rows.jsonl (one line per row: i = row, label, quadrant, source,
+           pair_id, _v32_source_content_md5, split, n_tokens, window,
+           dropped) and acts_{k}.pt, cfg.shard_rows kept rows each in row
+           order, {"i", "token": (n, layers, d) bf16, "acts": [],
+           "prompt_mask": [], "completion_mask": [], "window_cap": 0}.
+           split: the paper's A.6 hold-out (cfg.n_val rows, seed
+           cfg.val_seed) over all rows, the rule and seed of the 3.8 store.
   check    The published linear ensemble on the merged activations:
            AUROC of follow-up deceptive vs honest, written to check.json.
 
@@ -40,7 +47,6 @@ from multiprocessing import Pool
 
 import numpy as np
 import pyarrow as pa
-import pyarrow.compute as pc
 import pyarrow.parquet as pq
 
 from common import OUT, QUADRANTS, acts_dir, fibs_root, load_config, model_path
@@ -70,12 +76,28 @@ def render(tok, messages_json: str, completion: str, tools_json: str | None) -> 
     return ids
 
 
-def _count(job: tuple[str, str, int, int]) -> list[int]:
+def window_of(tok, ids: list[int]) -> int:
+    """Tokens from the last user-rendered turn before the answer (the
+    follow-up, or a tool result) through the end-of-turn token: the read
+    window of experiments/2026-10-13-fibs-basharena/acts.py."""
+    im_start = tok.convert_tokens_to_ids("<|im_start|>")
+    starts = [i for i, t_ in enumerate(ids) if t_ == im_start]
+    user_starts = [i for i in starts[:-1] if tok.decode(ids[i:i + 2]) == "<|im_start|>user"]
+    if not user_starts:
+        raise ValueError("no user turn before the answer")
+    return len(ids) - user_starts[-1]
+
+
+def _count(job: tuple[str, str, int, int]) -> list[tuple[int, int]]:
     path, model, lo, hi = job
     from transformers import AutoTokenizer
     tok = AutoTokenizer.from_pretrained(model)
     t = pq.read_table(path, columns=["messages_json", "completion", "tools"]).slice(lo, hi - lo).to_pylist()
-    return [len(render(tok, r["messages_json"], r["completion"], r["tools"])) for r in t]
+    out = []
+    for r in t:
+        ids = render(tok, r["messages_json"], r["completion"], r["tools"])
+        out.append((len(ids), window_of(tok, ids)))
+    return out
 
 
 def stage_render(cfg, pilot: bool):
@@ -88,7 +110,8 @@ def stage_render(cfg, pilot: bool):
                        .append_column("quadrant_index", pa.array(range(t.num_rows))))
         jobs += [(str(path), model, i, min(t.num_rows, i + RENDER_CHUNK)) for i in range(0, t.num_rows, RENDER_CHUNK)]
     with Pool(cfg.render_workers) as pool:
-        n_tokens = np.array([n for chunk in pool.map(_count, jobs) for n in chunk])
+        counted = np.array([n for chunk in pool.map(_count, jobs) for n in chunk])
+    n_tokens, window = counted[:, 0], counted[:, 1]
     rows = pa.concat_tables(tables)
     dropped = n_tokens > cfg.acts_max_len
     if pilot:
@@ -101,6 +124,7 @@ def stage_render(cfg, pilot: bool):
                 .append_column("base_deceptive", pa.array([q.startswith("deceptive_") for q in rows["quadrant"].to_pylist()]))
                 .append_column("followup_deceptive", pa.array([q.endswith("_deceptive") for q in rows["quadrant"].to_pylist()]))
                 .append_column("n_tokens", pa.array(n_tokens))
+                .append_column("window", pa.array(window))
                 .append_column("dropped", pa.array(dropped))
                 .append_column("act_index", pa.array(act_index)))
     acts_dir(pilot).mkdir(exist_ok=True)
@@ -215,42 +239,51 @@ def stage_collect(cfg, pilot: bool, shard: int):
 
 def stage_merge(cfg, pilot: bool):
     import torch
+    from fibs_probes import split_validation
     d = acts_dir(pilot)
-    rows = pq.read_table(d / "rows.parquet", columns=["row", "act_index", "dropped"])
-    index = {r: a for r, a, dr in zip(rows["row"].to_pylist(), rows["act_index"].to_pylist(), rows["dropped"].to_pylist()) if not dr}
+    rows = pq.read_table(d / "rows.parquet").to_pylist()
+    if [r["row"] for r in rows] != list(range(len(rows))):
+        raise ValueError("rows.parquet is not in row order")
+    kept = [r["row"] for r in rows if not r["dropped"]]
     chunks = [torch.load(p) for p in sorted(d.glob("shard*/chunk_*.pt"))]
-    got = torch.cat([c["row"] for c in chunks]).tolist()
-    if sorted(got) != sorted(index):
-        raise ValueError(f"chunks hold {len(got)} rows ({len(set(got))} distinct), rows.parquet keeps {len(index)}")
-    order = torch.argsort(torch.tensor([index[r] for r in got]))
-    acts = torch.cat([c["acts"] for c in chunks])[order]             # (n_kept, layers, d)
+    got = torch.cat([c["row"] for c in chunks])
+    if sorted(got.tolist()) != kept:
+        raise ValueError(f"chunks hold {len(got)} rows ({len(set(got.tolist()))} distinct), rows.parquet keeps {len(kept)}")
+    acts = torch.cat([c["acts"] for c in chunks])[torch.argsort(got)]      # (n_kept, layers, d), row order
     if not bool(torch.isfinite(acts.float()).all()):
         raise ValueError("non-finite activations")
-    for j, L in enumerate(cfg.layers):
-        torch.save(acts[:, j].clone(), d / f"layer_{L}.pt")
-    print(f"wrote {len(cfg.layers)} files of shape {tuple(acts[:, 0].shape)} to {d}")
 
-
-def auroc(s: np.ndarray, y: np.ndarray) -> float:
-    from scipy.stats import rankdata
-    rank, n1 = rankdata(s), y.sum()
-    return float((rank[y == 1].sum() - n1 * (n1 + 1) / 2) / (n1 * (len(y) - n1)))
+    out = d / "read-token"
+    out.mkdir(exist_ok=True)
+    meta = [{"i": r["row"], "label": int(r["followup_deceptive"]), "quadrant": r["quadrant"], "source": r["source"],
+             "pair_id": r["pair_id"], "_v32_source_content_md5": r["_v32_source_content_md5"],
+             "n_tokens": r["n_tokens"], "window": r["window"], "dropped": r["dropped"]} for r in rows]
+    split_validation(meta, cfg.n_val, cfg.val_seed)
+    with open(out / "rows.jsonl", "w") as f:
+        for m in meta:
+            f.write(json.dumps({k: m[k] for k in ("label", "quadrant", "source", "pair_id", "_v32_source_content_md5",
+                                                 "split", "i", "n_tokens", "window", "dropped")}) + "\n")
+    for k, s in enumerate(range(0, len(kept), cfg.shard_rows)):
+        torch.save({"i": kept[s:s + cfg.shard_rows], "token": acts[s:s + cfg.shard_rows].clone(), "acts": [],
+                    "prompt_mask": [], "completion_mask": [], "window_cap": 0}, out / f"acts_{k}.pt")
+    print(f"wrote {out}: rows.jsonl ({len(rows)} rows, {len(kept)} kept) and {k + 1} shards of {tuple(acts.shape[1:])}")
 
 
 def stage_check(cfg, pilot: bool):
     import torch
+    from fibs_probes import auroc, load_read_token, load_rows
     from probe_inference import load_probe_from_hub
     d = acts_dir(pilot)
-    rows = pq.read_table(d / "rows.parquet")
-    rows = rows.filter(pc.invert(rows["dropped"]))
+    rows = load_rows(d / "read-token")
     probe = load_probe_from_hub(cfg.probe_path, repo_id=cfg.probe_repo, revision=cfg.probe_revision)
-    acts = {L: torch.load(d / f"layer_{L}.pt")[:, None] for L in probe.used_layers}       # (n, 1, d)
-    n = rows.num_rows
-    scores = torch.cat([probe.score_batch({L: a[i:i + 4096] for L, a in acts.items()},
-                                          torch.ones(min(4096, n - i), 1, dtype=torch.bool))
+    if list(probe.layers) != cfg.layers:
+        raise ValueError(f"probe layers {probe.layers} != stored layers {cfg.layers}")
+    x = load_read_token(d / "read-token", rows)                                  # (n, layers, d)
+    n = len(rows)
+    scores = torch.cat([probe.score_batch(x[i:i + 4096, :, None], torch.ones(len(x[i:i + 4096]), 1, dtype=torch.bool))
                         for i in range(0, n, 4096)]).numpy()
-    y = np.array(rows["followup_deceptive"].to_pylist()).astype(int)
-    src = np.array(rows["source"].to_pylist())
+    y = np.array([r["label"] for r in rows])
+    src = np.array([r["source"] for r in rows])
     res = {"n": n, "probe": cfg.probe_path, "auroc": auroc(scores, y),
            "auroc_by_source": {s: auroc(scores[src == s], y[src == s]) for s in sorted(set(src))
                                if 0 < y[src == s].sum() < (src == s).sum()}}

@@ -2293,6 +2293,12 @@ approved all eight GPUs with the Qwen3.8 server stopped.
 - `experiments/2026-10-13-fibs-acts/README.md` — what is stored and the limitations
 - `experiments/2026-10-13-fibs-acts/collect.py`, `common.py`, `config.json`
 - `experiments/2026-10-13-fibs-acts/acts_fibs/rows.parquet`, `layer_{L}.pt`, `check.json` (gitignored)
+- 2026-10-14: the per-layer files were replaced by `acts_fibs/read-token/`
+  (`rows.jsonl` + 500-row `acts_{k}.pt`), the layout of the Qwen3.8-27B store
+  in the public-datasets bucket, read by `fibs_probes.load_rows` /
+  `load_read_token`. Same activations bit for bit; `rows.jsonl` adds `window`
+  and the 3.8 store's `split` (reproduced exactly: same rule, seed, row ids);
+  `check.json` unchanged.
 
 ## 2026-10-14: fibs linear ensemble for Qwen3.5-27B without social-deduction data
 

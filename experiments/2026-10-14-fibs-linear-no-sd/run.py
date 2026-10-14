@@ -1,13 +1,14 @@
 """Train the fibs linear ensemble for Qwen3.5-27B on FIBSv1 without the
 social-deduction families (``cfg.exclude_sources``), from the read-token
-activations of experiments/2026-10-13-fibs-acts (``cfg.acts_dir``).
+activations of experiments/2026-10-13-fibs-acts (``cfg.acts_dir``, the
+read-token store layout of ``fibs_probes.data``).
 
   probes/{arch}/          probe_inference directory (load_probe reads it back)
   {arch}_train.json       training record (checkpoint, used layers, curve)
   results.json            AUROC of the saved probe, through load_probe: the
                           validation hold-out (overall, per source) and the
                           held-out social-deduction rows (overall, per source)
-  split.parquet           act_index -> split (train / val / balanced_out / excluded)
+  split.parquet           i -> split (train / val / balanced_out / excluded)
 
 Run:  CUDA_VISIBLE_DEVICES=1 uv run --no-sync python experiments/2026-10-14-fibs-linear-no-sd/run.py
 """
@@ -22,7 +23,7 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 import torch
 
-from fibs_probes import (auroc, balance_within_family, load_layer_acts, load_rows, save_probe, split_validation,
+from fibs_probes import (auroc, balance_within_family, load_read_token, load_rows, save_probe, split_validation,
                          train_layer_ensemble)
 from linear_probes.config import ExperimentConfig
 from probe_inference import load_probe
@@ -34,7 +35,7 @@ REPO = OUT.parents[1]
 @dataclass
 class FibsTrainConfig(ExperimentConfig):
     model_revision: str = ""
-    acts_dir: str = ""                      # rows.parquet + layer_{L}.pt
+    acts_dir: str = ""                      # a read-token store (rows.jsonl + acts_{k}.pt)
     probe_layers: list[int] = field(default_factory=list)
     exclude_sources: list[str] = field(default_factory=list)   # FIBSv1 families left out of train and val
     archs: list[str] = field(default_factory=list)
@@ -74,17 +75,17 @@ def main():
     excluded = [r for r in rows if r["source"] in cfg.exclude_sources]
     rows = [r for r in rows if r["source"] not in cfg.exclude_sources]
     print(f"{len(rows)} rows kept, {len(excluded)} excluded ({', '.join(cfg.exclude_sources)})")
-    split_validation(rows, cfg.n_val, cfg.val_seed)
+    split_validation(rows, cfg.n_val, cfg.val_seed)      # over the kept rows, not the store's split
     used_rows = balance_within_family(rows, cfg.train_seed)
 
-    split = {r["act_index"]: "balanced_out" for r in rows}
-    split.update({r["act_index"]: r["split"] for r in used_rows})
-    split.update({r["act_index"]: "excluded" for r in excluded})
-    pq.write_table(pa.table({"act_index": list(split), "split": list(split.values())}), OUT / "split.parquet")
+    split = {r["i"]: "balanced_out" for r in rows}
+    split.update({r["i"]: r["split"] for r in used_rows})
+    split.update({r["i"]: "excluded" for r in excluded})
+    pq.write_table(pa.table({"i": list(split), "split": list(split.values())}), OUT / "split.parquet")
 
     tr = [r for r in used_rows if r["split"] == "train"]
     va = [r for r in used_rows if r["split"] == "val"]
-    x = {k: load_layer_acts(acts_dir, rs, layers) for k, rs in (("train", tr), ("val", va), ("excluded", excluded))}
+    x = {k: load_read_token(acts_dir, rs) for k, rs in (("train", tr), ("val", va), ("excluded", excluded))}
     y = {k: torch.tensor([r["label"] for r in rs], dtype=torch.float32)
          for k, rs in (("train", tr), ("val", va), ("excluded", excluded))}
 

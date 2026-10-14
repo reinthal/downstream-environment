@@ -26,7 +26,7 @@
  "dataset_sizes": {},
  "out_dir": "experiments/2026-10-14-fibs-linear-no-sd",
  "model_revision": "fc05daec18b0a78c049392ed2e771dde82bdf654",
- "acts_dir": "experiments/2026-10-13-fibs-acts/acts_fibs",
+ "acts_dir": "experiments/2026-10-13-fibs-acts/acts_fibs/read-token",
  "probe_layers": [
   19,
   27,

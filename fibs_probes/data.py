@@ -1,41 +1,49 @@
-"""FIBSv1 rows and their stored read-token activations.
+"""FIBSv1 rows and their stored read-token activations, one layout for every
+model:
 
-Layout (written by experiments/2026-10-13-fibs-acts/collect.py):
-  rows.parquet    one line per FIBSv1 row: source (family), pair_id,
-                  followup_deceptive (the label), dropped, act_index, ...
-  layer_{L}.pt    (n_kept, d_model) bf16, row ``act_index`` of the kept rows
+  <root>/rows.jsonl   one line per FIBSv1 row: i (position in the
+                      concatenation of the quadrant parquets honest_honest,
+                      honest_deceptive, deceptive_honest, deceptive_deceptive),
+                      label (1 = falsehood completion), quadrant, source
+                      (family), pair_id, _v32_source_content_md5, split
+                      (train / val, the paper's A.6 hold-out), n_tokens,
+                      window, dropped (over the length cap, not collected)
+  <root>/acts_{k}.pt  {"i": list[int], "token": (n, layers, d) bf16, ...}:
+                      the read token (before the answer's <|im_end|>)
+
+Stores: the Qwen3.8-27B activations in the public-datasets bucket
+(fibs/activations/Qwen3.8-27B/read-token/, written by
+experiments/2026-10-13-fibs-basharena) and the Qwen3.5-27B ones in
+experiments/2026-10-13-fibs-acts/acts_fibs/read-token/. Both hold layers 19,
+27, 35, 43, 51, 58 in that order; ``i`` is the same row in both.
 
 The hold-out and the class balance are copied from
 experiments/2026-10-13-fibs-basharena (modal_app.py::prepare_fibs and
-train.py::balance_within_family), the paper's A.6.
+train.py::balance_within_family).
 """
 from __future__ import annotations
 
+import json
 import random
 from pathlib import Path
 
-import pyarrow.parquet as pq
 import torch
 
 
-def load_rows(acts_dir: Path) -> list[dict]:
-    """The kept rows (not over the length cap) in ``act_index`` order, with
-    ``label`` = 1 on falsehood completions (follow-up deceptive)."""
-    tbl = pq.read_table(acts_dir / "rows.parquet", columns=["row", "source", "pair_id", "quadrant",
-                                                            "followup_deceptive", "dropped", "act_index"])
-    rows = [r for r in tbl.to_pylist() if not r["dropped"]]
-    rows.sort(key=lambda r: r["act_index"])
-    if [r["act_index"] for r in rows] != list(range(len(rows))):
-        raise ValueError("act_index of the kept rows is not 0..n-1")
-    for r in rows:
-        r["label"] = int(r["followup_deceptive"])
+def load_rows(root: Path) -> list[dict]:
+    """The collected rows (``dropped`` false) of ``root/rows.jsonl``, in ``i`` order."""
+    with open(root / "rows.jsonl") as f:
+        rows = [r for r in map(json.loads, f) if not r["dropped"]]
+    rows.sort(key=lambda r: r["i"])
     return rows
 
 
 def split_validation(rows: list[dict], n_val: int, seed: int, log=print) -> None:
     """Set ``split`` on every row: a class-balanced validation hold-out of
     ``n_val`` rows sharing no ``pair_id`` with training (paper A.6); pair
-    groups are visited in seeded order and taken while they fit."""
+    groups are visited in seeded order and taken while they fit. Over all
+    FIBSv1 rows in ``i`` order with seed 0 this reproduces the stores'
+    ``split``; call it only to draw a hold-out over a subset."""
     rng = random.Random(seed)
     groups: dict[str, list[int]] = {}
     for j, r in enumerate(rows):
@@ -78,15 +86,30 @@ def balance_within_family(rows: list[dict], seed: int, log=print) -> list[dict]:
             kept.extend(items[:n])
             dropped += len(items) - n
     log(f"class balance within family: kept {len(kept)} training rows, dropped {dropped}")
-    keep_ids = {r["act_index"] for r in kept}
-    return [r for r in rows if r["split"] == "val" or r["act_index"] in keep_ids]
+    keep_ids = {r["i"] for r in kept}
+    return [r for r in rows if r["split"] == "val" or r["i"] in keep_ids]
 
 
-def load_layer_acts(acts_dir: Path, rows: list[dict], layers: list[int], log=print) -> torch.Tensor:
-    """(len(rows), len(layers), d_model) bf16, in ``rows`` order."""
-    idx = torch.tensor([r["act_index"] for r in rows])
-    out = []
-    for L in layers:
-        out.append(torch.load(acts_dir / f"layer_{L}.pt", weights_only=True)[idx])
-        log(f"  loaded layer {L}")
-    return torch.stack(out, dim=1)
+def load_read_token(root: Path, rows: list[dict], log=print) -> torch.Tensor:
+    """(len(rows), layers, d) bf16, in ``rows`` order. Every row must be in
+    a shard (a dropped row is an error)."""
+    want = {r["i"]: j for j, r in enumerate(rows)}
+    out, filled = None, 0
+    shards = sorted(root.glob("acts_*.pt"), key=lambda p: int(p.stem.split("_")[1]))
+    if not shards:
+        raise FileNotFoundError(f"no acts_*.pt in {root}")
+    for k, path in enumerate(shards):
+        blob = torch.load(path, weights_only=True)
+        sel = [(n, want[i]) for n, i in enumerate(blob["i"]) if i in want]
+        if not sel:
+            continue
+        if out is None:
+            out = torch.empty((len(rows), *blob["token"].shape[1:]), dtype=blob["token"].dtype)
+        src, dst = zip(*sel)
+        out[list(dst)] = blob["token"][list(src)]
+        filled += len(sel)
+        if (k + 1) % 50 == 0:
+            log(f"  read {k + 1}/{len(shards)} shards")
+    if filled != len(rows):
+        raise ValueError(f"{len(rows) - filled} of {len(rows)} rows are in no shard of {root}")
+    return out

@@ -90,7 +90,9 @@ needed, propose it and let the researcher decide.
   decoder because full-model forwards CUDA-launch-fail at long sequences.
 - **fibs probes** (Hollinsworth et al. 2026): `fibs_probes/` trains the
   paper's per-layer linear / MLP ensembles on stored FIBSv1 read-token
-  activations (`experiments/2026-10-13-fibs-acts/acts_fibs/`, Qwen3.5-27B)
+  activations — one store layout for every model (Qwen3.5-27B:
+  `experiments/2026-10-13-fibs-acts/acts_fibs/read-token/`; Qwen3.8-27B: the
+  public-datasets bucket), loaded with `fibs_probes.load_rows` / `load_read_token`
   and saves them in the vendored `probe_inference` format
   (`vendor/caught-in-the-act-probes`, on `sys.path` after `import
   fibs_probes`). Row selection, validation hold-out, family balance:

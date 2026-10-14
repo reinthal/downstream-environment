@@ -22,12 +22,22 @@ new experiment and starts with `/preregister`.
   `second-last-token-generation` of the paper's linear and MLP probes).
 - **Layers**: decoder blocks 19, 27, 35, 43, 51, 58 (block output = HF
   `hidden_states[k + 1]`), bf16, model revision `fc05daec`.
-- **Files**: `acts_fibs/layer_{L}.pt`, a `(161864, 5120)` bf16 tensor per
-  layer; row `i` is the `rows.parquet` row with `act_index == i`.
-  `rows.parquet` also carries `quadrant`, `base_deceptive`,
-  `followup_deceptive`, `source`, `deception_type`, `follow_up_category`,
-  `language`, `pair_id`, `pair_type`, the content md5 and `n_tokens`.
-  `acts_fibs/` is gitignored (about 10 GB, regenerable).
+- **Files**: `acts_fibs/read-token/`, the same layout as the Qwen3.8-27B
+  store in the public-datasets bucket (`fibs/activations/Qwen3.8-27B/read-token/`),
+  so `fibs_probes.load_rows` / `load_read_token` read either:
+  `rows.jsonl` (one line per row: `i`, `label`, `quadrant`, `source`,
+  `pair_id`, the content md5, `split`, `n_tokens`, `window`, `dropped`) and
+  `acts_{k}.pt` (500 kept rows each, in `i` order: `{"i", "token": (n, 6,
+  5120) bf16, ...}`). `i` is the same row in both stores. There are no
+  `jobs_{k}.pt` (token ids are not kept; `render` in `collect.py` rebuilds
+  them). `acts_fibs/rows.parquet` (render stage) keeps the extra FIBSv1
+  columns (`deception_type`, `follow_up_category`, `language`, `pair_type`,
+  ...), joinable on `row == i`. `acts_fibs/` is gitignored (about 10 GB,
+  regenerable).
+- **Split**: `split` in `rows.jsonl` is the paper's A.6 hold-out drawn over
+  all 163,016 rows with the 3.8 store's rule and seed, so the two stores
+  share one split (5,000 validation rows; 33 of them are over this store's
+  length cap and not collected).
 
 ## Checks
 
@@ -48,10 +58,14 @@ new experiment and starts with `/preregister`.
   (2026-10-13). EFC- and axial-style probes need the whole read window (final
   user turn through end of turn: 76M tokens, about 4.7 TB at six layers), which
   is not stored. Other layers are not stored either.
-- **No train/validation split.** FIBSv1 carries no marker for the paper's
-  152,980 / 5,000 split; choosing one is part of the probe-training
-  experiment. The published probes were trained on most of these rows, so the
-  `check` AUROC is mostly in-sample.
+- **Not the paper's split.** FIBSv1 carries no marker for the paper's own
+  152,980 / 5,000 split; `split` is our redraw by its rule (shared with the
+  3.8 store). The published probes were trained on most of these rows, so
+  the `check` AUROC is mostly in-sample.
+- **Length cap differs from the 3.8 store** (32,768 here, 262,144 there):
+  1,152 rows exist only in the 3.8 store. The Qwen3.5 template also renders
+  an empty system turn that the 3.8 template omits, so 1,642 LiarsBench rows
+  are 5 tokens longer here; the read token and `window` are unaffected.
 - **Reasoning is not in context.** `completion_reasoning` (8,937 rows) is not
   rendered (`reasoning_in_context` is false on every row); `reasoning_content`
   on earlier assistant turns (73 caving rows) is left to the chat template,
