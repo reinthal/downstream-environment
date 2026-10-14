@@ -1,6 +1,6 @@
 """Modal resources of the fibs-on-BashArena experiment
 (experiments/2026-10-13-fibs-basharena): the Volumes and the HF Secret that
-its ``modal_app.py`` mounts, one stack per workspace (``reinthal``, ``cadenza``).
+its ``modal_app.py`` mounts, plus the B2 secret of ``scripts/push_b2.py``, one stack per workspace (``reinthal``, ``cadenza``).
 
 Apply:  pulumi stack select <cadenza|reinthal>; MODAL_PROFILE=<same> HF_TOKEN=... pulumi up
 The provider refuses a MODAL_PROFILE that differs from the stack's `modal-iac:profile`. Names must match
@@ -27,7 +27,12 @@ modal_volumes = {
 }
 modal_hf_secret = modal_res.Secret(
     "modal-secret-fibs-basharena-hf", "fibs-basharena-hf", MODAL_PROFILE,
-    key="HF_TOKEN", value_env="HF_TOKEN",   # value read from the environment at `pulumi up`, never stored
+    values={"HF_TOKEN": "HF_TOKEN"},   # values read from the environment at `pulumi up`, never stored
+)
+# Backblaze B2 (bucket public-datasets) for scripts/push_b2.py; the application key is short-lived
+modal_b2_secret = modal_res.Secret(
+    "modal-secret-fibs-basharena-b2", "fibs-basharena-b2", MODAL_PROFILE,
+    values={k: k for k in ("B2_KEY_ID", "B2_APPLICATION_KEY", "B2_BUCKET", "B2_ENDPOINT")},
 )
 for name, vol in modal_volumes.items():
     pulumi.export(f"modal_volume_{name.replace('-', '_')}", vol.volumeId)

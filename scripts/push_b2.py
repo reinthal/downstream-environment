@@ -15,8 +15,8 @@ Secret ``fibs-basharena-b2`` (B2_KEY_ID, B2_APPLICATION_KEY, B2_BUCKET,
 B2_ENDPOINT; the same keys as the repo-root .env, see env.example). The key
 is short-lived: when it fails, ask for a new one and update both.
 
-  MODAL_PROFILE=reinthal uvx modal run scripts/push_b2.py                 # everything in LAYOUT + READMEs
-  MODAL_PROFILE=reinthal uvx modal run scripts/push_b2.py --only fibs/    # bucket prefixes starting with fibs/
+  MODAL_PROFILE=cadenza uvx modal run scripts/push_b2.py                 # everything in LAYOUT + READMEs
+  MODAL_PROFILE=cadenza uvx modal run scripts/push_b2.py --only fibs/    # bucket prefixes starting with fibs/
 """
 import json
 import os

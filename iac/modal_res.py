@@ -14,10 +14,10 @@ by hand with the same name is adopted rather than duplicated; ``delete``
 removes the volume AND ITS DATA (Modal's ``Volume.delete``). A rename
 replaces the resource.
 
-Secrets: ``create`` reads the secret's value from the environment variable
-named by ``value_env`` at operation time and never stores it in state;
-``update`` re-creates the secret with the current value when the inputs
-change (the stored inputs are only the names).
+Secrets: ``values`` maps each secret key to the environment variable its
+value is read from; ``create`` reads them at operation time and never stores
+a value in state; ``update`` re-creates the secret with the current values
+when the inputs change (the stored inputs are only the names).
 """
 
 import os
@@ -59,8 +59,8 @@ class _SecretProvider(dyn.ResourceProvider):
         import modal
 
         _check_profile(props["profile"])
-        value = os.environ[props["value_env"]]          # KeyError if unset — intentional
-        modal.Secret.objects.create(props["name"], {props["key"]: value}, allow_existing=True)
+        env = {k: os.environ[v] for k, v in props["values"].items()}   # KeyError if unset — intentional
+        modal.Secret.objects.create(props["name"], env, allow_existing=True)
 
     def create(self, props):
         self._put(props)
@@ -68,7 +68,7 @@ class _SecretProvider(dyn.ResourceProvider):
 
     def diff(self, id_, olds, news):
         replaces = [k for k in ("name", "profile") if olds.get(k) != news.get(k)]
-        changed = any(olds.get(k) != news.get(k) for k in ("name", "profile", "key", "value_env"))
+        changed = any(olds.get(k) != news.get(k) for k in ("name", "profile", "values"))
         return dyn.DiffResult(changes=changed, replaces=replaces, delete_before_replace=True)
 
     def update(self, id_, olds, news):
@@ -91,9 +91,9 @@ class Volume(dyn.Resource):
 
 
 class Secret(dyn.Resource):
-    """A Modal Secret ``name`` holding one key whose value is read from the
-    environment variable ``value_env`` at ``pulumi up`` time."""
+    """A Modal Secret ``name`` whose keys are read at ``pulumi up`` time from
+    environment variables: ``values`` maps secret key -> environment variable."""
 
-    def __init__(self, resource_name, name, profile, key, value_env, opts=None):
+    def __init__(self, resource_name, name, profile, values, opts=None):
         super().__init__(_SecretProvider(), resource_name,
-                         {"name": name, "profile": profile, "key": key, "value_env": value_env}, opts)
+                         {"name": name, "profile": profile, "values": values}, opts)
