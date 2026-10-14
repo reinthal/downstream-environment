@@ -1851,6 +1851,19 @@ scored turns per arm (259 / 260 Parsnip).
   the probes' signal in the deny arm may be the extra Parsnip-only
   instruction rather than the suppressed admission; a deny arm in which every
   player gets the line would separate the two.
+- Exploratory, after the run (`why_l48.py` → `why_l48.json`):
+  - Lies the model will not admit — Parsnip turns where log P(Yes) < log P(No)
+    (151/259 normal, 226/260 deny) against all Carrot turns: L48 0.995 / 0.993,
+    P(Yes) 0.94 / 0.76.
+  - Game-grouped CV, P(Yes) alone → P(Yes) + L48: 0.965 → 0.997 (normal),
+    0.793 → 0.999 (deny).
+  - L48 tracks the model's own answer within role (Spearman with P(Yes):
+    Parsnip 0.83 / 0.86, Carrot 0.76 / 0.77), yet its direction is not the
+    Yes-minus-No output direction (cosine −0.005; random 95% |cos| 0.027).
+  - Arm shift (AUROC deny vs normal, within role): Carrot 0.44-0.47 at all
+    layers; Parsnip L32 0.67, L40 0.63 (higher in deny — the Parsnip-only
+    line, or its effect, lifts them), L48 0.33 (lower in deny). The caveat
+    above therefore applies to L32 / L40, not to L48.
 
 ### Parameters/Configurations
 

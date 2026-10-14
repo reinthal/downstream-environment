@@ -1,0 +1,84 @@
+{
+ "unembed_cos": {
+  "random_95pct_abs": 0.0267,
+  "L32": -0.0215,
+  "L40": -0.0177,
+  "L48": -0.0047
+ },
+ "arms": {
+  "normal": {
+   "n_parsnip": 259,
+   "n_parsnip_denies": 151,
+   "hidden_lies": {
+    "P(Yes)": 0.9407,
+    "L32": 0.7531,
+    "L40": 0.9551,
+    "L48": 0.9951
+   },
+   "incremental": {
+    "P(Yes)": 0.9649,
+    "P(Yes)+L32": 0.9693,
+    "P(Yes)+L40": 0.985,
+    "P(Yes)+L48": 0.9968
+   },
+   "spearman": {
+    "L32": {
+     "Parsnip": -0.138,
+     "Carrot": 0.192
+    },
+    "L40": {
+     "Parsnip": 0.307,
+     "Carrot": 0.629
+    },
+    "L48": {
+     "Parsnip": 0.829,
+     "Carrot": 0.76
+    }
+   }
+  },
+  "deny": {
+   "n_parsnip": 260,
+   "n_parsnip_denies": 226,
+   "hidden_lies": {
+    "P(Yes)": 0.7631,
+    "L32": 0.8877,
+    "L40": 0.9932,
+    "L48": 0.9934
+   },
+   "incremental": {
+    "P(Yes)": 0.7933,
+    "P(Yes)+L32": 0.9332,
+    "P(Yes)+L40": 0.9941,
+    "P(Yes)+L48": 0.9988
+   },
+   "spearman": {
+    "L32": {
+     "Parsnip": -0.404,
+     "Carrot": 0.189
+    },
+    "L40": {
+     "Parsnip": 0.367,
+     "Carrot": 0.633
+    },
+    "L48": {
+     "Parsnip": 0.858,
+     "Carrot": 0.765
+    }
+   }
+  }
+ },
+ "arm_shift": {
+  "L32": {
+   "Parsnip": 0.6738,
+   "Carrot": 0.4736
+  },
+  "L40": {
+   "Parsnip": 0.6311,
+   "Carrot": 0.4513
+  },
+  "L48": {
+   "Parsnip": 0.3342,
+   "Carrot": 0.4434
+  }
+ }
+}
