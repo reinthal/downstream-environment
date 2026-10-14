@@ -1,0 +1,13 @@
+# 5-player Carrot-Parsnip (4 Carrots vs 1 Parsnip), majority threshold 3,
+# three discussion rounds, default prompts — the engine's
+# configs/five_player.yaml. The players are driven by this experiment's
+# wrapper (game.py) on the local Qwen3.8 server, not by the engine's
+# orchestrator, so eval_model / max_concurrent_games are unused here.
+carrot:
+  count: 4
+parsnip:
+  count: 1
+ejection_threshold: 3
+num_rounds_discussion: 3
+
+max_tokens: 4000
