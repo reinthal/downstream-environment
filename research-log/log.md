@@ -2349,3 +2349,64 @@ validation hold-out (seed 0, no shared `pair_id`), per-family class balance →
 - `fibs_probes/` — reusable training package (README lists differences from the original)
 - `experiments/2026-10-14-fibs-linear-no-sd/README.md`, `run.py`, `config.json`, `results.json`, `linear_train.json`, `split.parquet`
 - `probes/qwen3.5-27b_layers19-58_fibs_linear_no-social-deduction/` → `experiments/2026-10-14-fibs-linear-no-sd/probes/linear`
+
+## 2026-10-14: fibs probes without social-deduction / negotiation data on Carrot-Parsnip (preregistered)
+
+### Context
+
+The published fibs probes score 0.989 (linear) on Carrot-Parsnip announcements
+(2026-10-12), but FIBSv1 contains Among Us and Werewolf, so the result may be
+partly in-distribution. Follow-up from that experiment: "retrain w o social
+deduction game still good?" Preregistered: `PREREGISTRATION.md` (7859aa9).
+
+### Experiment
+
+Qwen3.5-27B fibs linear and MLP ensembles trained in-house (`fibs_probes`) on
+FIBSv1 without `among_us`, `werewolf`, `negotiation` (20,110 rows), against
+a control that drops 20,110 random non-validation rows; 5 seeds each, one shared
+validation hold-out. All 20 probes were scored on the stored 2026-10-12
+announcement activations (no new games). Primary: gap = mean AUROC(random_drop)
+− mean AUROC(no_sd), linear, 3p+5p pooled, game bootstrap. Test 1: gap < 0.10;
+Test 2: gap > 0.
+
+### Expected Outcome
+
+"Dropping roleplaying AUROC 0.96 +/- 0.01 95% CI, dropping 13K random rows 0.98
++/- 0.01 95% CI." (researcher; "roleplaying" = among_us + werewolf + negotiation)
+
+### Actual Outcome
+
+<researcher to fill>
+
+### Results
+
+| linear, pooled (2,400 announcements) | AUROC [95% game CI] |
+|---|---|
+| no_sd (5 seeds) | 0.983 [0.979, 0.987] |
+| random_drop (5 seeds) | 0.978 [0.972, 0.982] |
+| published (reference) | 0.989 [0.985, 0.992] |
+| gap random_drop − no_sd | −0.006 [−0.007, −0.005] |
+
+Test 1 (gap < 0.10): **supported**. Test 2 (gap > 0): **refuted**. Removing
+the social-deduction and negotiation families costs less Carrot-Parsnip AUROC
+than removing as many random rows. Predicted gap +0.02, measured −0.006. The
+pre-agreed conclusion sentences were not given (NOT PREREGISTERED). MLP gap
+−0.012 [−0.016, −0.008] (no_sd 0.944, random_drop 0.932, published 0.968).
+Mean-max detector 1.00 in 3p and 5p for every linear probe. On FIBS's own held-out
+families the no_sd linear drops to 0.846 (random_drop 0.957), but that loss
+does not carry over to Carrot-Parsnip. Seed spread (linear): no_sd 0.980-0.987,
+random_drop 0.975-0.981; the interval does not include seed noise. All 20
+probes pass the positive control (fibs val ≥ 0.95). Details:
+`experiments/2026-10-14-fibs-no-sd-carrot-parsnip/README.md`.
+
+### Parameters/Configurations
+
+`experiments/2026-10-14-fibs-no-sd-carrot-parsnip/config.json`: layers
+19/27/35/43/51/58; recipe of 2026-10-14-fibs-linear-no-sd (AdamW 5e-3, batch
+32, ≤ 6 epochs; MLP cosine); seeds 0-4; n_drop 20,110; 2,000 game-bootstrap
+draws (within arm); δ 0.10. One A40 (GPU 6), ~35 min of training; scoring on CPU.
+
+### Artifacts
+
+- `experiments/2026-10-14-fibs-no-sd-carrot-parsnip/` — `PREREGISTRATION.md`, `README.md`, `train.py`, `score.py`, `analyze.py`, `figures.py`, `results.json`, `train_results.json`, `scores_*.csv`, `figures/auroc.svg`, `train/`, `probes_main/` (20 probes)
+- `probes/qwen3.5-27b_layers19-58_fibs_{linear,mlp}_no-sd-negotiation/` → `probes_main/no_sd_s0/{linear,mlp}`

@@ -1,0 +1,38 @@
+{
+ "model": "Qwen/Qwen3.5-27B",
+ "model_revision": "fc05daec18b0a78c049392ed2e771dde82bdf654",
+ "trained_by": "experiments/2026-10-14-fibs-no-sd-carrot-parsnip/train.py (fibs_probes)",
+ "fibs": {
+  "repo": "AlignmentResearch/fibs-v1",
+  "revision": "65dccf12934620bfe01db665ea3d7d0e3c9f1355"
+ },
+ "condition": "random_drop",
+ "seed": 1,
+ "exclude_sources": [
+  "among_us",
+  "werewolf",
+  "negotiation"
+ ],
+ "n_drop": 20110,
+ "architecture": "linear",
+ "layers": [
+  19,
+  27,
+  35,
+  43,
+  51,
+  58
+ ],
+ "eval_sequence_aggregator": "mean",
+ "obfuscate_over": "second-last-token-generation",
+ "layer_rule": {
+  "used_layers": [
+   19,
+   27,
+   35,
+   43,
+   51,
+   58
+  ]
+ }
+}
