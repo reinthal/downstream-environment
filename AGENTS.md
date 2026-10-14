@@ -201,6 +201,25 @@ reason.
   git-lfs-tracked via `.gitattributes`; regenerable activation `.npz` stays
   untracked (gitignored). Keep new data files to these name patterns so LFS
   picks them up.
+- **Published datasets live in Backblaze B2**: the public bucket
+  `public-datasets` (S3 endpoint `https://s3.eu-central-003.backblazeb2.com`;
+  objects at `https://public-datasets.s3.eu-central-003.backblazeb2.com/<key>`).
+  Use it for data too large for git (activations, Modal-volume outputs).
+  `scripts/push_b2.py` uploads it inside a Modal function, so nothing
+  large touches local disk. Its `LAYOUT` maps bucket prefixes to Volume or
+  repo paths; uploads are idempotent and skip same-size objects.
+  - Layout: `fibs/activations/<model>/`, `fibs/probes/<model>/` and
+    `downstream-environments/<env>/{transcripts,labels,scores,activations}/<model>/`.
+  - Every prefix has a README.md with its schema and provenance. The
+    READMEs are edited in `scripts/public-datasets/`, which mirrors the
+    bucket keys. The root `README.md` indexes our prefixes and MUST be
+    updated with each addition.
+  - The bucket holds other people's objects too: never touch keys outside
+    our prefixes.
+  - Credentials: `B2_*` in `.env` (see `env.example`) and the Modal secret
+    `fibs-basharena-b2`. Keys are short-lived; if a request is refused,
+    ask the researcher for a new key rather than working around it. The
+    bucket is public, so never upload secrets or unreleased private data.
 - **Figures: panels meant to be compared share identical axis ranges** (same
   x and y limits across datasets/arms/conditions showing the same quantity) —
   per-panel autoscaling makes visually identical shapes look different.
