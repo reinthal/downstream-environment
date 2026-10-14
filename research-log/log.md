@@ -2376,7 +2376,7 @@ Test 2: gap > 0.
 
 ### Actual Outcome
 
-<researcher to fill>
+"My conclusion from reading the figures is that this result shows that droping this data did not meaningfully reduce the performance on carrot/parsnip beyond what randomly removing a similar chunk of data did." (researcher)
 
 ### Results
 
