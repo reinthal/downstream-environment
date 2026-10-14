@@ -208,14 +208,15 @@ reason.
   `scripts/push_b2.py` uploads it inside a Modal function, so nothing
   large touches local disk. Its `LAYOUT` maps bucket prefixes to Volume or
   repo paths; uploads are idempotent and skip same-size objects.
-  - Layout: `fibs/activations/<model>/`, `fibs/probes/<model>/` and
+  - Layout: `fibs/activations/<model>/` and
     `downstream-environments/<env>/{transcripts,labels,scores,activations}/<model>/`.
   - Every prefix has a README.md with its schema and provenance. The
     READMEs are edited in `scripts/public-datasets/`, which mirrors the
     bucket keys. The root `README.md` indexes our prefixes and MUST be
     updated with each addition.
   - The bucket holds other people's objects too: never touch keys outside
-    our prefixes.
+    our prefixes. Probes are not published there: they stay in `probes/`,
+    and the READMEs tell users to load them from the repo.
   - Credentials: `B2_*` in `.env` (see `env.example`) and the Modal secret
     `fibs-basharena-b2`. Keys are short-lived; if a request is refused,
     ask the researcher for a new key rather than working around it. The

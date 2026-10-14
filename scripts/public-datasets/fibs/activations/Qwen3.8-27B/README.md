@@ -38,7 +38,7 @@ The code is in `experiments/2026-10-13-fibs-basharena/` (`modal_app.py`,
 
 163,016 rows: all four quadrant parquets, none dropped for length (longest
 window 23,215 tokens; median 180). This is the training set of the probes
-in `fibs/probes/Qwen3.8-27B/`.
+`probes/qwen3.8-27b_layers19-58_fibs_{linear,mlp}` in the repository.
 
 | file | contents |
 |---|---|
@@ -102,5 +102,28 @@ X = torch.stack(X)                               # (N, 6, 5120) bf16; layer axis
 
 The paper's training recipe uses per-family class balance, per-layer RMS
 input scaling, AdamW and early stopping on `val`. Its implementation is
-`experiments/2026-10-13-fibs-basharena/train.py`. To score with the
-trained probes, see `fibs/probes/Qwen3.8-27B/`.
+`experiments/2026-10-13-fibs-basharena/train.py`.
+
+## Trained probes
+
+The trained probes live in the repository
+([Cadenza-Labs/downstream-environment](https://github.com/Cadenza-Labs/downstream-environment)), not in this bucket:
+
+```bash
+git clone https://github.com/Cadenza-Labs/downstream-environment && cd downstream-environment
+git lfs pull --include "experiments/2026-10-13-fibs-basharena/probes_main/**"
+git submodule update --init vendor/caught-in-the-act-probes      # the probe_inference loader
+pip install ./vendor/caught-in-the-act-probes
+```
+
+```python
+from probe_inference import load_probe
+probe = load_probe("probes/qwen3.8-27b_layers19-58_fibs_linear")    # or ..._fibs_mlp
+```
+
+`probes/` holds the repo's probe symlinks. Its README indexes them:
+`qwen3.8-27b_layers19-58_fibs_{linear,mlp}` are the linear and MLP
+ensembles trained on `read-token/` with the paper's recipe (fibs validation
+AUROC 0.987 / 0.996). `load_probe` takes the local directory. `score()`
+returns the mean of the per-layer sigmoids, read at the token before the
+answer's `<|im_end|>`.

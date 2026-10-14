@@ -36,8 +36,6 @@ LAYOUT = {
     # fibs-v1 activations of Qwen3.8-27B (revision 1d4bf0f2), follow-up read, layers 19/27/35/43/51/58
     f"fibs/activations/{QWEN38}/read-token": "volume:fibs/main",
     f"fibs/activations/{QWEN38}/windows-pilot": "volume:fibs/pilot",
-    # the probes trained on read-token (linear, mlp ensembles; probe_inference format)
-    f"fibs/probes/{QWEN38}": "volume:probes/main",
     # BashArena rollouts of Qwen3.8-27B (2026-10-10), their step labels, probe scores and step activations
     f"{BASH}/transcripts/{QWEN38}/transcripts_honest.jsonl": f"repo:{EXP}/transcripts_honest.jsonl",
     f"{BASH}/transcripts/{QWEN38}/transcripts_attack.jsonl": f"repo:{EXP}/transcripts_attack.jsonl",
