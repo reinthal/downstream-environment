@@ -93,3 +93,9 @@ the Parsnip (chance 0.20), 95% game bootstrap. `results.json`,
   recommendation is right, and the Carrots win 0.76 against 0.14-0.18
   without public auditor input.
 - Text-only verdicts are spread over all five names (no fixed-name bias).
+- Found 2026-10-15: the scorer left-trims dialogues to 8192 tokens, cutting
+  the system prompt and role knowledge from the probe's input. 90/6235
+  probe-scored dialogues (1.4%; max 10.9k tokens) were trimmed: S2 54/620
+  announcements and 30/750 answers, S3 4, S4 2, none elsewhere. With the
+  probe at the ceiling this does not change the results above.
+  2026-10-15-auditor-l32-5rounds uses 16384.
