@@ -1,0 +1,6 @@
+# regenerable window activations (65 GB; re-collect with collect.py --save-acts)
+acts/
+# intermediate ctrl_evil uid-halves, already merged into scores_main_ctrl_evil.jsonl
+scores_evilA_ctrl_evil.jsonl
+scores_evilB_ctrl_evil.jsonl
+__pycache__/
