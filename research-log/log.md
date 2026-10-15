@@ -1876,3 +1876,68 @@ scored turns per arm (259 / 260 Parsnip).
 
 - `experiments/2026-10-13-l48-vs-selfreport/` — PREREGISTRATION, README,
   scripts, `results.json`, `figure_detectors.png`
+
+## 2026-10-14: The auditor inside the 5-player game — six interaction scenarios, with and without the layer-48 probe (exploratory)
+
+### Context
+
+So far the auditor only read finished games. This run puts it inside the
+game, to find the setup that gets it "the best reults possible"
+(researcher). It uses the layer-48 follow-up probe from 2026-10-12/13.
+
+### Experiment
+
+A wrapper orchestrator (`game.py`) reuses the engine's state, prompts and
+vote, and adds an auditor (Qwen3.8-27B, thinking on, effort medium). The game
+is the 5-player one (4 Carrots, 1 Parsnip). Scenarios: S0 passive, S1 final
+questions, S2 per-round questions, S3 question budget (5), S4 private
+interviews, S5 role claims, S6 public recommendation. Each runs text-only and
+with live layer-48 probe scores on every player message (`scorer.py`). 50
+games per set, 10 sets.
+
+### Expected Outcome
+
+Preregistered (`experiments/2026-10-14-auditor-in-game/PREREGISTRATION.md`,
+commit 1248298): NOT PREREGISTERED (exploratory).
+
+### Actual Outcome
+
+<!-- researcher fills in -->
+
+### Results
+
+0 failed audits in every cell; chance 0.20.
+
+| scenario | text only | with L48 probe | Carrot win (text / probe) |
+|---|---|---|---|
+| S0 passive | 0.20 [0.10, 0.32] | 1.00 | 0.14 (shared) |
+| S1 final questions | 0.24 [0.14, 0.36] | 1.00 | 0.14 (shared) |
+| S2 per-round questions | 0.22 [0.12, 0.34] | 1.00 | 0.24 / 0.52 |
+| S3 question budget | 0.24 [0.12, 0.36] | 0.98 [0.94, 1.00] | 0.18 / 0.46 |
+| S4 private interviews | 0.48 [0.34, 0.62] | 0.96 [0.90, 1.00] | 0.14 / 0.18 |
+| S5 role claims | 0.16 [0.06, 0.28] | 0.96 [0.90, 1.00] | 0.18 (shared) |
+| S6 public recommendation | 0.12 [0.04, 0.22] | 1.00 | 0.18 / 0.76 |
+
+- Text only: every scenario except S4 is at chance; more questions do not help.
+- S4: the Parsnip names its own role in a private answer in 16/50 games
+  (auditor 16/16 right there, 8/34 = 0.24 elsewhere). The gain is confession.
+- With the probe all scenarios are at or near the ceiling, so the probe
+  condition cannot rank them.
+- S6: players eliminate the recommended player in ~80% of games. With the
+  probe that takes the Carrot win rate from 0.14-0.18 to 0.76.
+- Deviation: `S3_probe` crashed on start (concurrent `config.json` writes)
+  and was rerun alone, unchanged (see PREREGISTRATION "Deviations").
+
+### Parameters/Configurations
+
+- `experiments/2026-10-14-auditor-in-game/config.json`, `five.yaml`; probe
+  `probes/qwen3.8-27b_layer48_followup_logistic_regression.npz`.
+- Server: two replicas on GPUs 1,2 and 0,3, port 8003. Scorer: GPUs 6,7,
+  port 8010. Run 2026-10-14 14:22 → 2026-10-15 01:45 UTC (`S3_probe`
+  01:46-03:12).
+
+### Artifacts
+
+- `experiments/2026-10-14-auditor-in-game/` — PREREGISTRATION, README,
+  `game.py`, `scorer.py`, `analyze.py`, `games_*.json`, `transcripts_*.jsonl`,
+  `auditor_*.jsonl` (LFS), `results.json`, `figure_accuracy.png`

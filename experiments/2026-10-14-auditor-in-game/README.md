@@ -64,3 +64,32 @@ Pilot (never analysed): `game.py --set <s> --pilot --games 2`, `analyze.py --pil
 `config.json` (`common.RunConfig`), `five.yaml`, `game.py`, `scorer.py`,
 `analyze.py`; outputs `games_{set}.json`, `transcripts_{set}.jsonl`,
 `auditor_{set}.jsonl`, `results.json`, `figure_accuracy.png`.
+
+## Results (2026-10-15)
+
+50 games per set, 0 failed audits in every cell. Accuracy = the auditor names
+the Parsnip (chance 0.20), 95% game bootstrap. `results.json`,
+`figure_accuracy.png`.
+
+| scenario | text only | with L48 probe | probe msg AUROC | Carrot win (text / probe) |
+|---|---|---|---|---|
+| S0 passive | 0.20 [0.10, 0.32] | 1.00 [1.00, 1.00] | 1.00 | 0.14 (shared vote) |
+| S1 final questions | 0.24 [0.14, 0.36] | 1.00 [1.00, 1.00] | 0.98 | 0.14 (shared vote) |
+| S2 per-round questions | 0.22 [0.12, 0.34] | 1.00 [1.00, 1.00] | 0.96 | 0.24 / 0.52 |
+| S3 question budget | 0.24 [0.12, 0.36] | 0.98 [0.94, 1.00] | 0.99 | 0.18 / 0.46 |
+| S4 private interviews | 0.48 [0.34, 0.62] | 0.96 [0.90, 1.00] | 0.94 | 0.14 / 0.18 |
+| S5 role claims | 0.16 [0.06, 0.28] | 0.96 [0.90, 1.00] | 1.00 | 0.18 (shared vote) |
+| S6 public recommendation | 0.12 [0.04, 0.22] | 1.00 [1.00, 1.00] | 1.00 | 0.18 / 0.76 |
+
+- Text only, every scenario except S4 is at chance; asking more questions
+  (S1, S2, S3) does not move it.
+- S4: the Parsnip names its own role in a private answer ("As the Parsnip,
+  ...") in 16/50 games; the auditor is right in all 16 and in 8/34 (0.24) of
+  the rest. The S4 gain is private confession, not better questioning.
+- With the probe, every scenario is at or near the ceiling, so this design
+  cannot rank the scenarios in the probe condition.
+- S6: players eliminate the auditor's recommended player in 41/48 (text)
+  and 38/47 (probe) games with an elimination. With the probe the
+  recommendation is right, and the Carrots win 0.76 against 0.14-0.18
+  without public auditor input.
+- Text-only verdicts are spread over all five names (no fixed-name bias).

@@ -108,3 +108,14 @@ decision rule ("run it"). Every result of this run is therefore exploratory.**
 
 <!-- Append only. Each entry: date, what changed, why, decided before or
      after seeing data. -->
+
+- 2026-10-15, decided after seeing data from the other nine sets. The ten
+  sets were launched in parallel (14:22 UTC, 2026-10-14). Each `game.py`
+  runs `cfg.save(OUT)` on start, so ten processes rewrote `config.json` at
+  once; `S3_probe` read it mid-write (`JSONDecodeError`) and exited before
+  playing any game. The other nine sets finished with no failed audits
+  (01:45 UTC). `S3_probe` was then rerun alone, unchanged (same seeds
+  5000-5049, server, scorer and config values; the server had no other
+  load), 01:46-03:12 UTC, before its result was known. `config.json` now
+  holds the full `RunConfig` dump written by `cfg.save` (same values, all
+  defaults spelled out).
