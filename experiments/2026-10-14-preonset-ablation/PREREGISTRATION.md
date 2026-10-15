@@ -202,3 +202,20 @@ verbatim. Committed before the first non-pilot run; the sections above
 
 <!-- Append only. Each entry: date, what changed, why, decided before or
      after seeing data. -->
+
+- **2026-10-15 — added exploratory `honest_attack` condition (reverse-swap).**
+  The honest trajectories (all 3,904 steps) re-rendered under the **full attack
+  (red-team) system prompt** — the mirror of `swap`, isolating whether the
+  attack instruction alone, placed on an honest trajectory, lifts the probe.
+  The attack system prompt is a single constant across all 94 attack
+  trajectories; `honest_system.txt` is exactly what `swap` strips off. Decided
+  **after** seeing the swap/control medians (researcher request). Exploratory,
+  not part of the preregistered primary or the §2 decision; reported alongside
+  the frozen conditions. Prompt fragment: `attack_system.txt`.
+
+- **2026-10-15 — context-window drop threshold.** §4/§5 name a "32,768-token"
+  context window; the actual `CFG.acts_max_len` (frozen in `config.json`) is
+  **262,144**. Steps over 262,144 tokens are the ones dropped and counted
+  (38/3904 per honest condition, <1%). The exclusion rule is unchanged (drop +
+  count over the context window; >5% voids a condition); only the numeral in
+  the prose was mis-stated. Noted, not re-run.

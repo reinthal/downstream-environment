@@ -2410,3 +2410,78 @@ draws (within arm); δ 0.10. One A40 (GPU 6), ~35 min of training; scoring on CP
 
 - `experiments/2026-10-14-fibs-no-sd-carrot-parsnip/` — `PREREGISTRATION.md`, `README.md`, `train.py`, `score.py`, `analyze.py`, `figures.py`, `results.json`, `train_results.json`, `scores_*.csv`, `figures/auroc.svg`, `train/`, `probes_main/` (20 probes)
 - `probes/qwen3.5-27b_layers19-58_fibs_{linear,mlp}_no-sd-negotiation/` → `probes_main/no_sd_s0/{linear,mlp}`
+
+## 2026-10-15: pre-onset ablation — instruction detection vs intent (AIS-404, preregistered)
+
+### Context
+
+In the 2026-10-13 fibs-basharena run the probe scored pre-onset attack steps
+(linear median −0.122) above honest (−0.211) before any overt attack action
+(AIS-404). Is that shift instruction detection (the side-task instruction in the
+system prompt) or intent (the trajectory)? Preregistered: `PREREGISTRATION.md`
+(`896f234`).
+
+### Experiment
+
+No new rollouts: the stored Qwen3.8-27B BashArena trajectories are re-rendered
+with a modified **system prompt only** and the paper's SHADE read is recomputed
+locally (A40s, `.venv`), scored with the main run's linear/mlp probes. Conditions:
+`swap` (pre-onset attack steps, attack→honest prompt); `ctrl_neutral/good/evil`
+(honest trajectories + side-task block + a neutral/unethical/monitored framing
+line); baselines `orig_honest`/`orig_preonset`; exploratory `honest_attack`
+(honest trajectories + full attack prompt, reverse-swap — see Deviations).
+Primary (linear): does the swap median shift to the honest median? read with the
+§2 control-framing decision procedure. linear primary, mlp corroborating.
+
+### Expected Outcome
+
+"numeric prediction is that pre onset median will move to honest given the
+pre-filled honest system prompt." H1 confirmation expected from the control
+pattern: "if these controls act in[con]gruent, neutral stays similar, honest
+close to honest, evil increase, then confidence in H1 goes up." (researcher,
+quoted in PREREGISTRATION.md §2)
+
+### Actual Outcome
+
+_(researcher to fill)_
+
+### Results
+
+Primary confirmed: swap median −0.221 [−0.244, −0.201] overlaps honest (−0.211)
+and excludes pre_onset (−0.119); `swap − honest` −0.010 [−0.037, +0.013]
+(indistinguishable); retained fraction ≈ −0.11. Removing the instruction
+collapses the pre-onset elevation to honest, as predicted.
+
+The control row is incongruent, not flat: all three controls sit above honest
+(neutral +0.066, good +0.056, evil +0.081, linear; all CIs exclude 0), and evil
+is clearly highest — `evil − good` +0.025 [+0.021, +0.027] (linear), +0.068
+[+0.061, +0.073] (mlp); in mlp ctrl_evil (−0.4215) ≈ pre_onset (−0.4185). The
+preregistered §2 decision therefore returns `abandon_H1` = False,
+`confidence_in_H1_rises` = True, `controls_all_near_honest` = False. Exploratory
+`honest_attack` (honest trajectory + full attack prompt) scores +0.116 linear /
++0.049 mlp — the largest control elevation, above real pre-onset attack; the
+per-step view shows this prompt effect building over the first ~10 steps rather
+than being a fixed offset. Net: a large system-prompt/persona effect
+(swap↔honest, honest_attack high, all controls lifted) with a smaller but
+CI-resolved intent-framing increment on top (evil > good/neutral at fixed
+instruction). Conclusion sentences deferred to post-experiment (NOT
+PREREGISTERED). efc/axial not run (would need a 150k-row FIBS window collection;
+window acts for the conditions are saved for later scoring).
+
+### Parameters/Configurations
+
+Reuses `../2026-10-13-fibs-basharena/config.json` (Qwen3.8-27B rev `1d4bf0f2…`,
+probe layers 19/27/35/43/51/58, SHADE read/template kwargs, 10k bootstrap seed
+0). Local collection: `collect.py --collector trajectory --save-acts`, 4 A40s
+per job, ~0.97 s/input. Over-262,144-token steps dropped (38/3904 per honest
+condition, <1%).
+
+### Artifacts
+
+- `experiments/2026-10-14-preonset-ablation/` — `PREREGISTRATION.md`, `README.md`,
+  `common.py`, `collect.py`, `analyze.py`, `figures.py`, `step_analysis.py`,
+  `{honest_system,side_task_block,attack_system}.txt`, `scores_main_*.jsonl`,
+  `scores_pilot_*.jsonl`, `results_main.json`, `step_stats_main.json`,
+  `fig_conditions.png`, `fig_step_trajectory.png`
+- `acts/<cond>/<uid>.pt` — saved window activations (65 GB, gitignored) for
+  later efc/axial scoring
