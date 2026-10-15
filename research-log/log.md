@@ -2410,3 +2410,54 @@ draws (within arm); δ 0.10. One A40 (GPU 6), ~35 min of training; scoring on CP
 
 - `experiments/2026-10-14-fibs-no-sd-carrot-parsnip/` — `PREREGISTRATION.md`, `README.md`, `train.py`, `score.py`, `analyze.py`, `figures.py`, `results.json`, `train_results.json`, `scores_*.csv`, `figures/auroc.svg`, `train/`, `probes_main/` (20 probes)
 - `probes/qwen3.5-27b_layers19-58_fibs_{linear,mlp}_no-sd-negotiation/` → `probes_main/no_sd_s0/{linear,mlp}`
+
+## 2026-10-15: Turnip — in-game auditor with interrogation ± a live probe, 3p Carrot-Parsnip (preregistered; paused after pilots)
+
+### Context
+
+The researcher wants dynamics in Carrot-Parsnip: a new role, the Turnip, a
+good player with a public identity who audits the others by interrogation or
+probes. Question: "Can the suspect fool the Auditor (Turnip) and the Carrots
+...? What is the P(win) in this state? And what is p(win | probe) for the
+auditor?" Preregistered in
+`experiments/2026-10-15-turnip/PREREGISTRATION.md` (commit 418d972) as
+exploratory: no prediction.
+
+### Experiment
+
+3 players (1 Carrot, 1 Parsnip, 1 Turnip), threshold 2, 3 discussion rounds,
+each followed by a 3-question public interrogation by the Turnip. Suspects
+Qwen3.8-27B, Turnip DeepSeek-V4.1-Flash (Modal endpoints). Arms: `interrog`
+(answers scored silently by the Qwen3.8 fibs linear probe, live on Modal) and
+`probe` (the Turnip privately sees a flag at the 99th percentile of the
+interrog arm's Carrot answers). Primary: Carrot-team win rate, probe −
+interrog, 100 valid games per arm. Engine: submodule branch `turnip-role`.
+
+### Expected Outcome
+
+<!-- researcher fills in (preregistration: "exploratory") -->
+
+### Actual Outcome
+
+<!-- researcher fills in -->
+
+### Results
+
+No main-run data. Pilots only (seeds 0-2, never analysed): the answer
+thinking budget went 1K → 4K → 12K, then answer turns at reasoning effort
+low and the Turnip's cap to 32K (Deviations 1-4); the last configuration has
+not completed a pilot. Paused on 2026-10-15 by the researcher to move the
+games and the live probe from Modal GPUs to the A40s; see
+`experiments/2026-10-15-turnip/HANDOFF.md`. Modal spend so far ≈ $20
+(Qwen endpoint $12.74, probe app ≈ $5.35, DeepSeek tokens $1.17).
+
+### Parameters/Configurations
+
+`experiments/2026-10-15-turnip/config.json`, `game_interrog.yaml`,
+`game_probe.yaml`; probe `probes/qwen3.8-27b_layers19-58_fibs_linear`, read
+"Did you respond truthfully just now?" (Yes./No.), contrast Yes. − No.
+
+### Artifacts
+
+- `experiments/2026-10-15-turnip/` — `PREREGISTRATION.md`, `HANDOFF.md`, `README.md`, scripts, pilot logs and records (`*_pilot_<tag>*`)
+- `environments/carrot_parsnip` branch `turnip-role` (2049e85, 08f92f2)

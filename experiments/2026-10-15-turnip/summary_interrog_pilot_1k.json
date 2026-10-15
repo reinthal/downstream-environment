@@ -1,0 +1,78 @@
+[
+ {
+  "total_games": 3,
+  "completed_games": 0,
+  "failed_games": 3,
+  "failures": [
+   {
+    "game_id": 0,
+    "winner": "Failed",
+    "outcome": "failed",
+    "failure_reason": "error: RuntimeError(\"Alice: no successful AnswerQuestionTool in 3 attempts: ['0 tool calls (max_tokens)', '0 tool calls (max_tokens)', '0 tool calls (max_tokens)']\")",
+    "failed_players": [],
+    "parsnip_player": "Unknown",
+    "parsnip_eliminated": false
+   },
+   {
+    "game_id": 1,
+    "winner": "Failed",
+    "outcome": "failed",
+    "failure_reason": "error: RuntimeError(\"Alice: no successful AnswerQuestionTool in 3 attempts: ['0 tool calls (max_tokens)', '0 tool calls (max_tokens)', '0 tool calls (max_tokens)']\")",
+    "failed_players": [],
+    "parsnip_player": "Unknown",
+    "parsnip_eliminated": false
+   },
+   {
+    "game_id": 2,
+    "winner": "Failed",
+    "outcome": "failed",
+    "failure_reason": "error: RuntimeError(\"Charlie: no successful AnswerQuestionTool in 3 attempts: ['0 tool calls (max_tokens)', '0 tool calls (max_tokens)', '0 tool calls (max_tokens)']\")",
+    "failed_players": [],
+    "parsnip_player": "Unknown",
+    "parsnip_eliminated": false
+   }
+  ],
+  "carrot_wins": 0,
+  "parsnip_wins": 0,
+  "parsnip_wins_other_eliminated": 0,
+  "parsnip_wins_nobody_eliminated": 0,
+  "draws": 0,
+  "draws_enabled": false,
+  "include_parsnip": true,
+  "carrot_win_rate": 0.0,
+  "parsnip_win_rate": 0.0,
+  "cost": 0.0,
+  "games": [
+   {
+    "game_id": 0,
+    "winner": "Failed",
+    "outcome": "failed",
+    "failure_reason": "error: RuntimeError(\"Alice: no successful AnswerQuestionTool in 3 attempts: ['0 tool calls (max_tokens)', '0 tool calls (max_tokens)', '0 tool calls (max_tokens)']\")",
+    "failed_players": [],
+    "parsnip_player": "Unknown",
+    "parsnip_eliminated": false
+   },
+   {
+    "game_id": 1,
+    "winner": "Failed",
+    "outcome": "failed",
+    "failure_reason": "error: RuntimeError(\"Alice: no successful AnswerQuestionTool in 3 attempts: ['0 tool calls (max_tokens)', '0 tool calls (max_tokens)', '0 tool calls (max_tokens)']\")",
+    "failed_players": [],
+    "parsnip_player": "Unknown",
+    "parsnip_eliminated": false
+   },
+   {
+    "game_id": 2,
+    "winner": "Failed",
+    "outcome": "failed",
+    "failure_reason": "error: RuntimeError(\"Charlie: no successful AnswerQuestionTool in 3 attempts: ['0 tool calls (max_tokens)', '0 tool calls (max_tokens)', '0 tool calls (max_tokens)']\")",
+    "failed_players": [],
+    "parsnip_player": "Unknown",
+    "parsnip_eliminated": false
+   }
+  ],
+  "base_seed": 0,
+  "first_index": 0,
+  "n": 3
+ }
+]

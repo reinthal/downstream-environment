@@ -1,0 +1,9 @@
+[
+ {
+  "game_id": "g002",
+  "game_idx": 2,
+  "game_seed": 2,
+  "arm": "interrog_pilot",
+  "reason": "failed: error: RuntimeError(\"Bob: no successful AskQuestionTool in 3 attempts: ['0 tool calls (max_tokens)', '0 tool calls (max_tokens)', '0 tool calls (max_tokens)']\")"
+ }
+]

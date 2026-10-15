@@ -1,0 +1,9 @@
+[
+ {
+  "game_id": "g000",
+  "game_idx": 0,
+  "game_seed": 0,
+  "arm": "probe_pilot",
+  "reason": "failed: error: RuntimeError(\"Charlie: no successful AnswerQuestionTool in 3 attempts: ['0 tool calls (max_tokens)', '0 tool calls (max_tokens)', '0 tool calls (max_tokens)']\")"
+ }
+]

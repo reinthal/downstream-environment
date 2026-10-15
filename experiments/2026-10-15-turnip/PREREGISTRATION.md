@@ -166,3 +166,45 @@ win rates; it cannot confirm or refute H1.
 
 <!-- Append only. Each entry: date, what changed, why, decided before or
      after seeing data. -->
+
+1. **2026-10-15, before any non-pilot data — QA thinking budget 1,000 → 4,000.**
+   The interrog pilot (3 games, seeds 0-2) failed every game at its first
+   answer to the Turnip: all 9 answer attempts by Qwen3.8-27B stopped at the
+   1,200-token cap (1,000 thinking + 200) without a tool call. Its discussion
+   turns in the same pilot used 2,054-11,252 tokens. The researcher had set
+   the budget as "variable (start low 1K tokens)" and chose "Raise to 4K"
+   (answer turn max_tokens = 4,000 + 200). Both arms. Pilot logs kept as
+   `inspect_logs_interrog_pilot_1k/`.
+
+2. **2026-10-15, before any non-pilot data — QA thinking budget 4,000 → 11,800.**
+   Two 4K interrog pilots (seeds 0-2 each; the first also failed on a Modal
+   client login clash, since fixed): 9 of 20 answer attempts finished
+   (713-3,397 output tokens), 11 hit the 4,200 cap; with 3 attempts per
+   answer and 9 answers per game about 19% of games would complete, and
+   the excluded games would not be random. The researcher chose "12K, like
+   discussion": answer turn max_tokens = 11,800 + 200 = 12,000, the budget
+   of the discussion and vote turns. Both arms. Pilot logs kept as
+   `inspect_logs_interrog_pilot_{authfail,4k}/`.
+
+3. **2026-10-15, before any non-pilot data — answer turns at reasoning effort "low".**
+   At 12K, 1 of 3 games per arm still failed (interrog and probe pilots,
+   seeds 0-2): a suspect's answer deliberated past 12,000 tokens on all three
+   attempts (~50k characters of reasoning, not a loop), so exclusions would
+   be frequent and non-random. Offered: raise the replacement stop, keep
+   it, or raise the budget again; the researcher answered "pilot 3 games
+   with reasoning effort low option". New engine field
+   `interrogation.answer_reasoning_effort: low` (answer turns only; discussion
+   and vote turns unchanged); the 12K cap stays. On the endpoint, effort low
+   cut reasoning on a test question from 742-1,958 to 100-170 tokens. The
+   probe read renders with thinking disabled, so the effort setting is not in
+   the probe's input. Pilot logs kept as `*_pilot_12k*`.
+
+4. **2026-10-15, before any non-pilot data — Turnip token cap 12,000 → 32,000.**
+   The effort-low interrog pilot (seeds 0-2): every answer succeeded at the
+   first attempt (489-5,667 output tokens), but 1 of 3 games failed on the
+   Turnip: DeepSeek-V4.1-Flash (effort low) hit 12,000 tokens on a question
+   turn three times. Over all 12K pilots its question turns ran 679-12,000
+   tokens (6 of 69 at the cap) and its discussion/vote turns 14 of 41 at the
+   cap (re-sampled). The researcher chose "Turnip max_tokens 32K": new
+   engine field `turnip.max_tokens: 32000` for all Turnip turns; suspects
+   unchanged. Pilot logs kept as `*_pilot_lowans*`.

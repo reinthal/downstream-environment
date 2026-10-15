@@ -1,0 +1,98 @@
+{
+ "arm": "probe_pilot",
+ "game_config": "experiments/2026-10-15-turnip/game_probe.yaml",
+ "games": [
+  {
+   "game_id": "g001",
+   "game_idx": 1,
+   "game_seed": 1,
+   "arm": "probe_pilot",
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Turnip",
+    "Charlie": "Carrot"
+   },
+   "turnip": "Bob",
+   "carrot": "Charlie",
+   "parsnip": "Alice",
+   "orders": [
+    [
+     "Alice",
+     "Bob",
+     "Charlie"
+    ],
+    [
+     "Alice",
+     "Charlie",
+     "Bob"
+    ],
+    [
+     "Alice",
+     "Charlie",
+     "Bob"
+    ]
+   ],
+   "qa_targets": [
+    "Alice",
+    "Charlie",
+    "Alice"
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Alice",
+    "Charlie": "Alice"
+   },
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "carrot_team_win": true,
+   "silent_turns": 0,
+   "qa_attempts_max": 1
+  },
+  {
+   "game_id": "g002",
+   "game_idx": 2,
+   "game_seed": 2,
+   "arm": "probe_pilot",
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Turnip",
+    "Charlie": "Carrot"
+   },
+   "turnip": "Bob",
+   "carrot": "Charlie",
+   "parsnip": "Alice",
+   "orders": [
+    [
+     "Charlie",
+     "Alice",
+     "Bob"
+    ],
+    [
+     "Alice",
+     "Bob",
+     "Charlie"
+    ],
+    [
+     "Alice",
+     "Charlie",
+     "Bob"
+    ]
+   ],
+   "qa_targets": [
+    "Charlie",
+    "Alice",
+    "Alice"
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Alice",
+    "Charlie": "Alice"
+   },
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "carrot_team_win": true,
+   "silent_turns": 2,
+   "qa_attempts_max": 2
+  }
+ ]
+}

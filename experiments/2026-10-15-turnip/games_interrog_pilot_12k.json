@@ -1,0 +1,98 @@
+{
+ "arm": "interrog_pilot",
+ "game_config": "experiments/2026-10-15-turnip/game_interrog.yaml",
+ "games": [
+  {
+   "game_id": "g000",
+   "game_idx": 0,
+   "game_seed": 0,
+   "arm": "interrog_pilot",
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Turnip",
+    "Charlie": "Parsnip"
+   },
+   "turnip": "Bob",
+   "carrot": "Alice",
+   "parsnip": "Charlie",
+   "orders": [
+    [
+     "Alice",
+     "Bob",
+     "Charlie"
+    ],
+    [
+     "Bob",
+     "Alice",
+     "Charlie"
+    ],
+    [
+     "Alice",
+     "Charlie",
+     "Bob"
+    ]
+   ],
+   "qa_targets": [
+    "Alice",
+    "Charlie",
+    "Charlie"
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Charlie",
+    "Charlie": "Alice"
+   },
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "carrot_team_win": true,
+   "silent_turns": 0,
+   "qa_attempts_max": 1
+  },
+  {
+   "game_id": "g001",
+   "game_idx": 1,
+   "game_seed": 1,
+   "arm": "interrog_pilot",
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Turnip",
+    "Charlie": "Carrot"
+   },
+   "turnip": "Bob",
+   "carrot": "Charlie",
+   "parsnip": "Alice",
+   "orders": [
+    [
+     "Charlie",
+     "Bob",
+     "Alice"
+    ],
+    [
+     "Bob",
+     "Alice",
+     "Charlie"
+    ],
+    [
+     "Alice",
+     "Charlie",
+     "Bob"
+    ]
+   ],
+   "qa_targets": [
+    "Charlie",
+    "Alice",
+    "Charlie"
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Alice",
+    "Charlie": "Alice"
+   },
+   "winner": "Carrot",
+   "outcome": "carrot_win",
+   "carrot_team_win": true,
+   "silent_turns": 0,
+   "qa_attempts_max": 1
+  }
+ ]
+}

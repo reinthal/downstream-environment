@@ -1,0 +1,10 @@
+{
+ "cutpoint": -0.47700031019736844,
+ "quantile": 0.99,
+ "source": "qa_interrog_pilot.jsonl",
+ "n_carrot_answers": 9,
+ "n_carrot_above": 1,
+ "n_parsnip_answers": 9,
+ "parsnip_flag_rate": 1.0,
+ "n_games": 2
+}
