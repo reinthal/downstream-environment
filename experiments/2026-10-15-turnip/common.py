@@ -23,7 +23,7 @@ for p in (REPO, ENGINE):
 
 from linear_probes.config import ExperimentConfig  # noqa: E402
 
-ARMS = ("interrog", "probe")
+ARMS = ("interrog", "probe", "or_interrog")
 _E = "experiments/2026-10-15-turnip"
 
 

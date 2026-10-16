@@ -27,11 +27,13 @@
  "out_dir": "experiments/2026-10-15-turnip",
  "game_configs": {
   "interrog": "experiments/2026-10-15-turnip/game_interrog.yaml",
-  "probe": "experiments/2026-10-15-turnip/game_probe.yaml"
+  "probe": "experiments/2026-10-15-turnip/game_probe.yaml",
+  "or_interrog": "experiments/2026-10-15-turnip/game_or_interrog.yaml"
  },
  "arm_seeds": {
   "interrog": 1000,
-  "probe": 1000
+  "probe": 1000,
+  "or_interrog": 1000
  },
  "pilot_seed": 0,
  "n_valid_games": 100,

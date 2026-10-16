@@ -1,0 +1,31 @@
+# Turnip game, interrogation only, NO probe, on OpenRouter.
+# Carrot + Parsnip = DeepSeek-V4.1-Flash; Turnip = GLM-5.3-Flash.
+# 1 Carrot, 1 Parsnip, 1 Turnip (public, votes), threshold 2, 3 discussion
+# rounds, each followed by a 3-question public interrogation. No detector:
+# interrogation.detector is "off" and play_openrouter passes detector=None.
+carrot:
+  count: 1
+  model: openrouter/deepseek/deepseek-v4.1-flash
+parsnip:
+  count: 1
+  model: openrouter/deepseek/deepseek-v4.1-flash
+turnip:
+  count: 1
+  model: openrouter/z-ai/glm-5.3-flash
+  reasoning_effort: low      # OpenRouter returns reasoning only when an effort is set; single_call needs it
+  max_tokens: 32000
+interrogation:
+  exchanges: 3
+  answer_max_tokens: 200
+  thinking_budget: 11800      # + 200 = 12000, the discussion budget
+  answer_reasoning_effort: low
+  detector: "off"
+ejection_threshold: 2
+num_rounds_discussion: 3
+
+eval_model: openrouter/deepseek/deepseek-v4.1-flash
+turn_mode: single_call
+max_tokens: 12000            # discussion / vote turns: thinking + tool call
+single_call_resample_silent: true
+max_concurrent_games: 100
+max_connections: 128
