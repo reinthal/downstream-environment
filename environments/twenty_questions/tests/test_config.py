@@ -43,9 +43,10 @@ def test_prompts_dump_as_blocks(tmp_path):
     assert GameConfig.from_yaml(tmp_path / "full.yaml").prompts == PromptConfig()
 
 
-def test_pilot_config_carries_every_prompt():
+@pytest.mark.parametrize("path", ["configs/openrouter_smoke.yaml", "configs/default.yaml"])
+def test_config_carries_every_prompt(path):
     import yaml
     from dataclasses import fields
     from twenty_questions.config import PromptConfig
-    raw = yaml.safe_load(open("configs/openrouter_smoke.yaml"))["prompts"]
+    raw = yaml.safe_load(open(path))["prompts"]
     assert set(raw) == {f.name for f in fields(PromptConfig)}
