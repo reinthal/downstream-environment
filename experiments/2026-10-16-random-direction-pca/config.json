@@ -1,0 +1,54 @@
+{
+ "model_id": "Qwen/Qwen3.5-27B",
+ "layer": 58,
+ "lora_id": null,
+ "batch_size": 8,
+ "max_len": 256,
+ "device": "auto",
+ "dtype": "bfloat16",
+ "truncate_layers": true,
+ "probe_type": "logistic_regression",
+ "reg_coeff": 10.0,
+ "normalize": true,
+ "probe_paths": {},
+ "steer_path": null,
+ "steer_coef": 0.0,
+ "gen_backend": "vllm",
+ "temperature": 0.7,
+ "top_p": 0.95,
+ "max_new_tokens": 1800,
+ "force_close_tokens": 220,
+ "tensor_parallel_size": null,
+ "max_model_len": 8192,
+ "gen_chunk": 25,
+ "seed": 0,
+ "seed_groups": 1,
+ "dataset_sizes": {},
+ "out_dir": "experiments/2026-10-16-random-direction-pca",
+ "src_dir": "experiments/2026-10-12-fibs-probes",
+ "main_arms": [
+  "3p",
+  "5p"
+ ],
+ "cc_arms": [
+  "3p_cc",
+  "5p_cc"
+ ],
+ "alpaca": true,
+ "features": [
+  "contrast",
+  "Yes.",
+  "No."
+ ],
+ "n_pcs": 20,
+ "n_random": 2000,
+ "random_seed": 0,
+ "ablate_k": [
+  1,
+  5,
+  10
+ ],
+ "extreme_auroc": 0.8,
+ "scatter_feature": "contrast",
+ "fibs_acts_dir": "experiments/2026-10-13-fibs-acts/acts_fibs/read-token"
+}
