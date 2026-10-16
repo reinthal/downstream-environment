@@ -1,0 +1,27 @@
+# Default Twenty Questions game: honest suspect, secret drawn uniformly from
+# the 512-concept THINGS subsample (injected commit), clue policy "either"
+# stated in the public rules. Lists the commonly-changed fields at their
+# defaults; dump everything (all prompt templates) with
+#   python -c "from twenty_questions.config import GameConfig; GameConfig().to_yaml('full.yaml')"
+
+secret_mode: bounded_random        # free_form | bounded_free_form | bounded_random
+concept_set: concepts/things_n512_s0.json   # bounded modes; null for free_form
+clue_policy: either                # helpful | misleading | either (public rule)
+max_questions: 20
+final_answer_mode: end             # end | continue (wrong final answer: game over, or play on)
+
+suspects:
+  - name: Suspect
+    objective: honest              # honest | adversarial (hidden: system prompt)
+    model: null                    # null -> default_model
+    logprobs: false
+auditor:
+  name: Auditor
+  model: null
+  show_concepts: false             # bounded modes: auditor sees the concept list (the judge always does)
+judge:
+  model: null                      # null -> the auditor's model
+
+default_model: openai-api/vllm/Qwen/Qwen3.8-27B   # local server (VLLM_BASE_URL)
+max_attempts: 3
+max_concurrent_games: 32

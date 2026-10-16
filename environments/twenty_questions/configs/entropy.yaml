@@ -1,0 +1,12 @@
+# Posterior-entropy calculator (twenty_questions.entropy) on the local
+# Qwen3.8-27B server. The oracle answers each played question for every
+# concept; the posterior over the set gives bits per question.
+base_url: http://localhost:8001/v1
+model: Qwen/Qwen3.8-27B
+api_key_env: VLLM_API_KEY
+concept_set: concepts/things_n512_s0.json
+prior: uniform
+answer_prefix: "Answer:"
+chat_template_kwargs: {enable_thinking: false}
+batch_size: 128
+concurrency: 8

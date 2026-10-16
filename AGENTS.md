@@ -176,7 +176,9 @@ reason.
 
 - `environments/` holds runnable eval environments — self-contained uv projects,
   each with its own `pyproject.toml`/`uv.lock` and `CLAUDE.md` (first one:
-  `environments/bash_arena/`, BashArena on Docker). Exception:
+  `environments/bash_arena/`, BashArena on Docker; also
+  `environments/twenty_questions/`, suspect-vs-auditor Twenty Questions on
+  Inspect with a YAML `GameConfig`). Exception:
   `environments/carrot_parsnip/` is a git submodule (the Carrot-Parsnip game
   engine) with only an upstream `requirements.txt` — no uv project yet. Run an env's own scripts with
   `uv run --directory environments/<name> <cmd>`. Experiments still go in

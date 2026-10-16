@@ -1,0 +1,1032 @@
+{
+ "source": "THINGS concepts-metadata_things.tsv (https://osf.io/download/um6a9/), homonyms dropped",
+ "sha256": "3f05b6b748d1e1b685e15130d2487bff63f86e1f4da94a2a5d9e7dec073a48eb",
+ "n": 256,
+ "seed": 0,
+ "concepts": [
+  {
+   "word": "accordion",
+   "definition": "a portable box-shaped free-reed instrument; the reeds are made to vibrate by air from the bellows controlled by the player"
+  },
+  {
+   "word": "antenna",
+   "definition": "an electrical device that sends or receives radio or television signals"
+  },
+  {
+   "word": "anvil",
+   "definition": "a heavy block of iron or steel on which hot metals are shaped by hammering"
+  },
+  {
+   "word": "apron",
+   "definition": "a garment of cloth or leather or plastic that is tied about the waist and worn to protect your clothing"
+  },
+  {
+   "word": "awning",
+   "definition": "a canopy made of canvas to shelter people or things from rain or sun"
+  },
+  {
+   "word": "baby",
+   "definition": "a very young child (birth to 1 year) who has not yet begun to walk or talk"
+  },
+  {
+   "word": "bag",
+   "definition": "a flexible container with a single opening"
+  },
+  {
+   "word": "bandanna",
+   "definition": "large and brightly colored handkerchief; often used as a neckerchief"
+  },
+  {
+   "word": "bark",
+   "definition": "tough protective covering of the woody stems and roots of trees and other woody plants"
+  },
+  {
+   "word": "baseball bat",
+   "definition": "an implement used in baseball by the batter"
+  },
+  {
+   "word": "baseball glove",
+   "definition": "the handwear used by fielders in playing baseball"
+  },
+  {
+   "word": "basket",
+   "definition": "a container that is usually woven and has handles"
+  },
+  {
+   "word": "bazooka",
+   "definition": "a portable rocket launcher used by infantrymen as an antitank weapon"
+  },
+  {
+   "word": "bikini",
+   "definition": "a woman's very brief bathing suit"
+  },
+  {
+   "word": "birdhouse",
+   "definition": "a shelter for birds"
+  },
+  {
+   "word": "biscuit",
+   "definition": "small round bread leavened with baking-powder or soda"
+  },
+  {
+   "word": "bison",
+   "definition": "any of several large humped bovids having shaggy manes and large heads and short horns"
+  },
+  {
+   "word": "blowgun",
+   "definition": "a tube through which darts can be shot by blowing"
+  },
+  {
+   "word": "blueberry",
+   "definition": "sweet edible dark-blue berries of either low-growing or high-growing blueberry plants"
+  },
+  {
+   "word": "board game",
+   "definition": "a game played on a specially designed board"
+  },
+  {
+   "word": "bolo tie",
+   "definition": "a cord fastened around the neck with an ornamental clasp and worn as a necktie"
+  },
+  {
+   "word": "bottle",
+   "definition": "a glass or plastic vessel used for storing drinks or other liquids; typically cylindrical without handles and with a narrow neck that can be plugged or capped"
+  },
+  {
+   "word": "bowl",
+   "definition": "a round vessel that is open at the top; used chiefly for holding food or liquids;"
+  },
+  {
+   "word": "bread",
+   "definition": "food made from dough of flour or meal and usually raised with yeast or baking powder and then baked"
+  },
+  {
+   "word": "breakfast",
+   "definition": "the first meal of the day (usually in the morning)"
+  },
+  {
+   "word": "breathalyzer",
+   "definition": "a device that measures chemicals (especially the alcohol content) in a person's expired breath"
+  },
+  {
+   "word": "brooch",
+   "definition": "a decorative pin worn by women"
+  },
+  {
+   "word": "brush",
+   "definition": "an implement that has hairs or bristles firmly set into a handle"
+  },
+  {
+   "word": "buggy",
+   "definition": "a small motor vehicle, typically one with an open top"
+  },
+  {
+   "word": "bulletin board",
+   "definition": "a board that hangs on a wall; displays announcements"
+  },
+  {
+   "word": "bulletproof vest",
+   "definition": "a vest capable of resisting the impact of a bullet"
+  },
+  {
+   "word": "cage",
+   "definition": "an enclosure made or wire or metal bars in which birds or animals can be kept"
+  },
+  {
+   "word": "candle",
+   "definition": "stick of wax with a wick in the middle"
+  },
+  {
+   "word": "candlestick",
+   "definition": "a holder with sockets for candles"
+  },
+  {
+   "word": "candy bar",
+   "definition": "a candy shaped as a bar"
+  },
+  {
+   "word": "candy cane",
+   "definition": "a hard candy in the shape of a rod (usually with stripes)"
+  },
+  {
+   "word": "canoe",
+   "definition": "small and light boat; pointed at both ends; propelled with a paddle"
+  },
+  {
+   "word": "caramel",
+   "definition": "firm chewy candy made from caramelized sugar and butter and milk"
+  },
+  {
+   "word": "card",
+   "definition": "one of a set of small pieces of stiff paper marked in various ways and used for playing games or for telling fortunes"
+  },
+  {
+   "word": "cardboard",
+   "definition": "a stiff moderately thick paper"
+  },
+  {
+   "word": "cassette",
+   "definition": "a container that holds a magnetic tape used for recording or playing sound or video"
+  },
+  {
+   "word": "chalk",
+   "definition": "a piece of calcite or a similar substance, usually in the shape of a crayon, that is used to write or draw on blackboards or other flat surfaces"
+  },
+  {
+   "word": "chalkboard",
+   "definition": "sheet of slate; for writing with chalk"
+  },
+  {
+   "word": "charger",
+   "definition": "a device for charging or recharging batteries"
+  },
+  {
+   "word": "cherry",
+   "definition": "a red fruit with a single hard stone"
+  },
+  {
+   "word": "chess piece",
+   "definition": "any of 16 white and 16 black pieces used in playing the game of chess"
+  },
+  {
+   "word": "chili",
+   "definition": "ground beef and chili peppers or chili powder often with tomatoes and kidney beans"
+  },
+  {
+   "word": "cigarette butt",
+   "definition": "small part of a cigarette that is left after smoking"
+  },
+  {
+   "word": "clay",
+   "definition": "a very fine-grained soil that is plastic when moist but hard when fired"
+  },
+  {
+   "word": "coat",
+   "definition": "an outer garment that has sleeves and covers the body from shoulder down; worn outdoors"
+  },
+  {
+   "word": "cockatoo",
+   "definition": "white or light-colored crested parrot of the Australian region; often kept as cage birds"
+  },
+  {
+   "word": "coffee table",
+   "definition": "low table where magazines can be placed and coffee or cocktails are served"
+  },
+  {
+   "word": "compass",
+   "definition": "navigational instrument for finding directions"
+  },
+  {
+   "word": "cooker",
+   "definition": "a utensil for cooking"
+  },
+  {
+   "word": "cookie cutter",
+   "definition": "a kitchen utensil used to cut a sheet of cookie dough into desired shapes before baking"
+  },
+  {
+   "word": "copier",
+   "definition": "apparatus that makes copies of typed, written or drawn material"
+  },
+  {
+   "word": "cork",
+   "definition": "the plug in the mouth of a bottle (especially a wine bottle)"
+  },
+  {
+   "word": "corkboard",
+   "definition": "a heat-insulating building material consisting of cork granules that are made into sheets by compressing and baking"
+  },
+  {
+   "word": "corn",
+   "definition": "tall annual cereal grass bearing kernels on large ears: widely cultivated in America in many varieties; the principal cereal in Mexico and Central and South America since pre-Columbian times"
+  },
+  {
+   "word": "cornhusk",
+   "definition": "the husk of an ear of corn"
+  },
+  {
+   "word": "cotton candy",
+   "definition": "a candy made by spinning sugar that has been boiled to a high temperature"
+  },
+  {
+   "word": "crane",
+   "definition": "lifts and moves heavy objects; lifting tackle is suspended from a pivoted boom that rotates around a vertical axis"
+  },
+  {
+   "word": "creme brulee",
+   "definition": "custard sprinkled with sugar and broiled"
+  },
+  {
+   "word": "crib",
+   "definition": "baby bed with high sides made of slats"
+  },
+  {
+   "word": "cuckoo clock",
+   "definition": "clock that announces the hours with a sound like the call of the cuckoo"
+  },
+  {
+   "word": "curtain",
+   "definition": "hanging cloth used as a blind (especially for a window)"
+  },
+  {
+   "word": "dandelion",
+   "definition": "any of several herbs of the genus Taraxacum having long tap roots and deeply notched leaves and bright yellow flowers followed by fluffy seed balls"
+  },
+  {
+   "word": "dart",
+   "definition": "a small narrow pointed missile that is thrown or shot"
+  },
+  {
+   "word": "deer",
+   "definition": "distinguished from Bovidae by the male's having solid deciduous antlers"
+  },
+  {
+   "word": "defibrillator",
+   "definition": "an electronic device that administers an electric shock of preset voltage to the heart through the chest wall in an attempt to restore the normal rhythm of the heart during ventricular fibrillation"
+  },
+  {
+   "word": "deodorant",
+   "definition": "a toiletry applied to the skin in order to mask unpleasant odors"
+  },
+  {
+   "word": "doorbell",
+   "definition": "a push button at an outer door that gives a ringing or buzzing signal when pushed"
+  },
+  {
+   "word": "dough",
+   "definition": "a flour mixture stiff enough to knead or roll"
+  },
+  {
+   "word": "drill",
+   "definition": "a tool with a sharp point and cutting edges for making holes in hard materials (usually rotating rapidly or by repeated blows)"
+  },
+  {
+   "word": "drum",
+   "definition": "a musical percussion instrument; usually consists of a hollow cylinder with a membrane stretched across each end"
+  },
+  {
+   "word": "dryer",
+   "definition": "an appliance that removes moisture"
+  },
+  {
+   "word": "ear",
+   "definition": "the sense organ for hearing and equilibrium"
+  },
+  {
+   "word": "emerald",
+   "definition": "a green transparent form of beryl; highly valued as a gemstone"
+  },
+  {
+   "word": "engine",
+   "definition": "motor that converts thermal energy to mechanical work"
+  },
+  {
+   "word": "envelope",
+   "definition": "a flat (usually rectangular) container for a letter, thin package, etc."
+  },
+  {
+   "word": "ferry",
+   "definition": "a boat that transports people or vehicles across a body of water and operates on a regular schedule"
+  },
+  {
+   "word": "fire",
+   "definition": "a fireplace in which a relatively small fire is burning"
+  },
+  {
+   "word": "fire alarm",
+   "definition": "a device that makes a loud sound to warn people when there is a fire"
+  },
+  {
+   "word": "fishnet stockings",
+   "definition": "hosiery with an open, diamond-shaped knit"
+  },
+  {
+   "word": "float",
+   "definition": "something that floats on the surface of water"
+  },
+  {
+   "word": "fly",
+   "definition": "two-winged insects characterized by active flight"
+  },
+  {
+   "word": "flyswatter",
+   "definition": "an implement with a flat part (of mesh or plastic) and a long handle; used to kill insects"
+  },
+  {
+   "word": "frisbee",
+   "definition": "a light, plastic disk about 10 inches in diameter; propelled with a flip of the wrist for recreation or competition"
+  },
+  {
+   "word": "frog",
+   "definition": "any of various tailless stout-bodied amphibians with long hind limbs for leaping; semiaquatic and terrestrial species"
+  },
+  {
+   "word": "fungus",
+   "definition": "an organism of the kingdom Fungi lacking chlorophyll and feeding on organic matter; ranging from unicellular or multicellular organisms to spore-bearing syncytia"
+  },
+  {
+   "word": "gate",
+   "definition": "a movable barrier in a fence or wall"
+  },
+  {
+   "word": "gingerbread man",
+   "definition": "gingerbread cut in the shape of a person"
+  },
+  {
+   "word": "girl",
+   "definition": "a youthful female person"
+  },
+  {
+   "word": "go-kart",
+   "definition": "a small low motor vehicle with four wheels and an open framework; used for racing"
+  },
+  {
+   "word": "gondola",
+   "definition": "long narrow flat-bottomed boat propelled by sculling; traditionally used on canals of Venice"
+  },
+  {
+   "word": "goose",
+   "definition": "web-footed long-necked typically gregarious migratory aquatic birds usually larger and less aquatic than ducks"
+  },
+  {
+   "word": "grapefruit",
+   "definition": "large yellow fruit with somewhat acid juicy pulp; usual serving consists of a half"
+  },
+  {
+   "word": "grater",
+   "definition": "utensil with sharp perforations for shredding foods (as vegetables or cheese)"
+  },
+  {
+   "word": "gravel",
+   "definition": "rock fragments and pebbles"
+  },
+  {
+   "word": "grenade",
+   "definition": "a small explosive bomb thrown by hand or fired from a missile"
+  },
+  {
+   "word": "gurney",
+   "definition": "a metal stretcher with wheels"
+  },
+  {
+   "word": "hand",
+   "definition": "the (prehensile) extremity of the superior limb"
+  },
+  {
+   "word": "hanger",
+   "definition": "anything from which something can be hung"
+  },
+  {
+   "word": "hatbox",
+   "definition": "a round piece of luggage for carrying hats"
+  },
+  {
+   "word": "hawk",
+   "definition": "diurnal bird of prey typically having short rounded wings and a long tail"
+  },
+  {
+   "word": "hay",
+   "definition": "grass mowed and cured for use as fodder"
+  },
+  {
+   "word": "hole",
+   "definition": "an opening into or through something"
+  },
+  {
+   "word": "honey",
+   "definition": "a sweet yellow liquid produced by bees"
+  },
+  {
+   "word": "ice cream",
+   "definition": "frozen dessert containing cream and sugar and flavoring"
+  },
+  {
+   "word": "inkwell",
+   "definition": "a small well holding writing ink into which a pen can be dipped"
+  },
+  {
+   "word": "jellyfish",
+   "definition": "any of numerous usually marine and free-swimming coelenterates that constitute the sexually reproductive forms of hydrozoans and scyphozoans"
+  },
+  {
+   "word": "kale",
+   "definition": "a hardy cabbage with coarse curly leaves that do not form a head"
+  },
+  {
+   "word": "keyboard",
+   "definition": "device consisting of a set of keys on a piano or organ or typewriter or typesetting machine or computer or the like"
+  },
+  {
+   "word": "lamb",
+   "definition": "young sheep"
+  },
+  {
+   "word": "lamppost",
+   "definition": "a metal post supporting an outdoor lamp (such as a streetlight)"
+  },
+  {
+   "word": "laundry basket",
+   "definition": "a hamper that holds dirty clothes to be washed or wet clothes to be dried"
+  },
+  {
+   "word": "lava",
+   "definition": "rock that in its molten form (as magma) issues from volcanos; lava is what magma is called when it reaches the surface"
+  },
+  {
+   "word": "lettuce",
+   "definition": "leaves of any of various plants of Lactuca sativa"
+  },
+  {
+   "word": "life jacket",
+   "definition": "life preserver consisting of a sleeveless jacket of buoyant or inflatable design"
+  },
+  {
+   "word": "lipstick",
+   "definition": "makeup that is used to color the lips"
+  },
+  {
+   "word": "lizard",
+   "definition": "relatively long-bodied reptile with usually two pairs of legs and a tapering tail"
+  },
+  {
+   "word": "locket",
+   "definition": "a small ornamental case; usually contains a picture or a lock of hair and is worn on a necklace"
+  },
+  {
+   "word": "luggage",
+   "definition": "cases used to carry belongings when traveling"
+  },
+  {
+   "word": "machete",
+   "definition": "a large heavy knife used in Central and South America as a weapon or for cutting vegetation"
+  },
+  {
+   "word": "meat",
+   "definition": "the flesh of animals (including fishes and birds and snails) used as food"
+  },
+  {
+   "word": "melon",
+   "definition": "any of numerous fruits of the gourd family having a hard rind and sweet juicy flesh"
+  },
+  {
+   "word": "metal detector",
+   "definition": "detector that gives a signal when it detects the presence of metal; used to detect the presence of stray bits of metal in food products or to find buried metal"
+  },
+  {
+   "word": "metronome",
+   "definition": "clicking pendulum indicates the exact tempo of a piece of music"
+  },
+  {
+   "word": "missile",
+   "definition": "a rocket carrying a warhead of conventional or nuclear explosives; may be ballistic or directed by remote control"
+  },
+  {
+   "word": "mistletoe",
+   "definition": "Old World parasitic shrub having branching greenish stems with leathery leaves and waxy white glutinous berries; the traditional mistletoe of Christmas"
+  },
+  {
+   "word": "mole",
+   "definition": "small velvety-furred burrowing mammal having small eyes and fossorial forefeet"
+  },
+  {
+   "word": "mousse",
+   "definition": "a rich, frothy, creamy dessert made with whipped egg whites and heavy cream"
+  },
+  {
+   "word": "mouth",
+   "definition": "the externally visible part of the oral cavity on the face and the system of organs surrounding the opening"
+  },
+  {
+   "word": "mulberry",
+   "definition": "sweet usually dark purple blackberry-like fruit of any of several mulberry trees of the genus Morus"
+  },
+  {
+   "word": "mustache",
+   "definition": "an unshaved growth of hair on the upper lip"
+  },
+  {
+   "word": "nacho",
+   "definition": "a tortilla chip topped with cheese and chili-pepper and broiled"
+  },
+  {
+   "word": "nut",
+   "definition": "usually large hard-shelled seed"
+  },
+  {
+   "word": "oar",
+   "definition": "an implement used to propel or steer a boat"
+  },
+  {
+   "word": "olive",
+   "definition": "small ovoid fruit of the European olive tree; important food and source of oil"
+  },
+  {
+   "word": "organ",
+   "definition": "wind instrument whose sound is produced by means of pipes arranged in sets supplied with air from a bellows and controlled from a large complex musical keyboard"
+  },
+  {
+   "word": "palm tree",
+   "definition": "any plant of the family Palmae having an unbranched trunk crowned by large pinnate or palmate leaves"
+  },
+  {
+   "word": "pan",
+   "definition": "cooking utensil consisting of a wide metal vessel"
+  },
+  {
+   "word": "pantsuit",
+   "definition": "a pair of pants and a matching jacket worn by women"
+  },
+  {
+   "word": "parfait",
+   "definition": "layers of ice cream and syrup and whipped cream"
+  },
+  {
+   "word": "patch",
+   "definition": "a piece of cloth used as decoration or to mend or cover a hole"
+  },
+  {
+   "word": "peach",
+   "definition": "downy juicy fruit with sweet yellowish or whitish flesh"
+  },
+  {
+   "word": "pen",
+   "definition": "a writing implement with a point from which ink flows"
+  },
+  {
+   "word": "pencil",
+   "definition": "a thin cylindrical pointed writing implement; a rod of marking substance encased in wood"
+  },
+  {
+   "word": "penlight",
+   "definition": "a small flashlight resembling a fountain pen"
+  },
+  {
+   "word": "pepper mill",
+   "definition": "a mill for grinding pepper"
+  },
+  {
+   "word": "pet food",
+   "definition": "food prepared for animal pets"
+  },
+  {
+   "word": "petal",
+   "definition": "part of the perianth that is usually brightly colored"
+  },
+  {
+   "word": "pheasant",
+   "definition": "large long-tailed gallinaceous bird native to the Old World but introduced elsewhere"
+  },
+  {
+   "word": "piano",
+   "definition": "a keyboard instrument that is played by depressing keys that cause hammers to strike tuned strings and produce sounds"
+  },
+  {
+   "word": "pie",
+   "definition": "dish baked in pastry-lined pan often with a pastry top"
+  },
+  {
+   "word": "pinecone",
+   "definition": "the seed-producing cone of a pine tree"
+  },
+  {
+   "word": "pliers",
+   "definition": "a gripping hand tool with two hinged arms and (usually) serrated jaws"
+  },
+  {
+   "word": "plunger",
+   "definition": "hand tool consisting of a stick with a rubber suction cup at one end; used to clean clogged drains"
+  },
+  {
+   "word": "pocket",
+   "definition": "a small pouch inside a garment for carrying small articles"
+  },
+  {
+   "word": "police car",
+   "definition": "a car in which policemen cruise the streets; equipped with radiotelephonic communications to headquarters"
+  },
+  {
+   "word": "polygraph",
+   "definition": "a medical instrument that records several physiological processes simultaneously (e.g., pulse rate and blood pressure and respiration and perspiration)"
+  },
+  {
+   "word": "pom-pom",
+   "definition": "decoration consisting of a ball of tufted wool or silk; usually worn on a hat"
+  },
+  {
+   "word": "porcupine",
+   "definition": "relatively large rodents with sharp erectile bristles mingled with the fur"
+  },
+  {
+   "word": "pothole",
+   "definition": "a pit or hole produced by wear or weathering (especially in a road surface)"
+  },
+  {
+   "word": "prism",
+   "definition": "optical device having a triangular shape and made of glass or quartz; used to deviate a beam or invert an image"
+  },
+  {
+   "word": "projector",
+   "definition": "an optical instrument that projects an enlarged image onto a screen"
+  },
+  {
+   "word": "pudding",
+   "definition": "any of various soft sweet desserts thickened usually with flour and baked or boiled or steamed"
+  },
+  {
+   "word": "quiche",
+   "definition": "a tart filled with rich unsweetened custard; often contains other ingredients (as cheese or ham or seafood or vegetables)"
+  },
+  {
+   "word": "quill",
+   "definition": "pen made from a bird's feather"
+  },
+  {
+   "word": "raft",
+   "definition": "a flat float (usually made of logs or planks) that can be used for transport or as a platform for swimmers"
+  },
+  {
+   "word": "rag",
+   "definition": "a small piece of cloth or paper"
+  },
+  {
+   "word": "rain gauge",
+   "definition": "gauge consisting of an instrument to measure the quantity of precipitation"
+  },
+  {
+   "word": "ramp",
+   "definition": "an inclined surface connecting two levels"
+  },
+  {
+   "word": "raspberry",
+   "definition": "red or black edible aggregate berries usually smaller than the related blackberries"
+  },
+  {
+   "word": "recliner",
+   "definition": "an armchair whose back can be lowered and foot can be raised to allow the sitter to recline in it"
+  },
+  {
+   "word": "record player",
+   "definition": "machine in which rotating records cause a stylus to vibrate and the vibrations are amplified acoustically or electronically"
+  },
+  {
+   "word": "recorder",
+   "definition": "a tubular wind instrument with 8 finger holes and a fipple mouthpiece"
+  },
+  {
+   "word": "rice",
+   "definition": "grains used as food either unpolished or more often polished"
+  },
+  {
+   "word": "ring",
+   "definition": "jewelry consisting of a circlet of precious metal (often set with jewels) worn on the finger"
+  },
+  {
+   "word": "roll",
+   "definition": "small rounded bread either plain or sweet"
+  },
+  {
+   "word": "rosary",
+   "definition": "a string of beads used in counting prayers (especially by Catholics)"
+  },
+  {
+   "word": "ruler",
+   "definition": "measuring stick consisting of a strip of wood or metal or plastic with a straight edge that is used for drawing straight lines and measuring lengths"
+  },
+  {
+   "word": "saddle",
+   "definition": "a seat for the rider of a horse or camel"
+  },
+  {
+   "word": "sandbox",
+   "definition": "a plaything consisting of a pile of sand or a box filled with sand for children to play in"
+  },
+  {
+   "word": "sandpaper",
+   "definition": "stiff paper coated with powdered emery or sand"
+  },
+  {
+   "word": "sawhorse",
+   "definition": "a framework for holding wood that is being sawed"
+  },
+  {
+   "word": "scraper",
+   "definition": "any of various hand tools for scraping"
+  },
+  {
+   "word": "seal",
+   "definition": "any of numerous marine mammals that come on shore to breed; chiefly of cold regions"
+  },
+  {
+   "word": "shaker",
+   "definition": "a container in which something can be shaken"
+  },
+  {
+   "word": "sheath",
+   "definition": "a protective covering (as for a knife or sword)"
+  },
+  {
+   "word": "shoehorn",
+   "definition": "a device used for easing the foot into a shoe"
+  },
+  {
+   "word": "shovel",
+   "definition": "a hand tool for lifting loose material; consists of a curved container or scoop and a handle"
+  },
+  {
+   "word": "shrimp",
+   "definition": "any of various edible decapod crustaceans"
+  },
+  {
+   "word": "shuffleboard",
+   "definition": "a game in which players use long sticks to shove wooden disks onto the scoring area marked on a smooth surface"
+  },
+  {
+   "word": "sickle",
+   "definition": "an edge tool for cutting grass or crops; has a curved blade and a short handle"
+  },
+  {
+   "word": "sifter",
+   "definition": "a household sieve (as for flour)"
+  },
+  {
+   "word": "sink",
+   "definition": "plumbing fixture consisting of a water basin fixed to a wall or floor and having a drainpipe"
+  },
+  {
+   "word": "siren",
+   "definition": "an acoustic device producing a loud often wailing sound as a signal or warning"
+  },
+  {
+   "word": "snail",
+   "definition": "freshwater or marine or terrestrial gastropod mollusk usually having an external enclosing spiral shell"
+  },
+  {
+   "word": "snowball",
+   "definition": "snow pressed into a ball for throwing (playfully)"
+  },
+  {
+   "word": "snowman",
+   "definition": "a figure of a person made of packed snow"
+  },
+  {
+   "word": "sock",
+   "definition": "hosiery consisting of a cloth covering for the foot; worn inside the shoe; reaches to between the ankle and the knee"
+  },
+  {
+   "word": "sofa bed",
+   "definition": "a sofa that can be converted into a bed"
+  },
+  {
+   "word": "sombrero",
+   "definition": "a straw hat with a tall crown and broad brim; worn in American southwest and in Mexico"
+  },
+  {
+   "word": "spacesuit",
+   "definition": "a pressure suit worn by astronauts while in outer space"
+  },
+  {
+   "word": "spool",
+   "definition": "a winder around which thread or tape or film or other flexible materials can be wound"
+  },
+  {
+   "word": "spring roll",
+   "definition": "an Asian snack consisting of rice paper filled with minced vegetables and usually meat, rolled into a cylinder and fried"
+  },
+  {
+   "word": "stapler",
+   "definition": "a machine that inserts staples into sheets of paper in order to fasten them together"
+  },
+  {
+   "word": "steak",
+   "definition": "a slice of meat cut from the fleshy part of an animal or large fish"
+  },
+  {
+   "word": "steamroller",
+   "definition": "vehicle equipped with heavy wide smooth rollers for compacting roads and pavements"
+  },
+  {
+   "word": "step stool",
+   "definition": "a stool that has one or two steps that fold under the seat"
+  },
+  {
+   "word": "swizzle stick",
+   "definition": "a small stick used to stir mixed drinks"
+  },
+  {
+   "word": "syrup",
+   "definition": "a thick sweet sticky liquid"
+  },
+  {
+   "word": "t-shirt",
+   "definition": "a close-fitting pullover shirt"
+  },
+  {
+   "word": "target",
+   "definition": "sports equipment consisting of an object set up for a marksman or archer to aim at"
+  },
+  {
+   "word": "tiger",
+   "definition": "large feline of forests in most of Asia having a tawny coat with black stripes; endangered"
+  },
+  {
+   "word": "timer",
+   "definition": "a timepiece that measures a time interval and signals its end"
+  },
+  {
+   "word": "tiramisu",
+   "definition": "an Italian dessert consisting of layers of sponge cake soaked with coffee and brandy or liqueur layered with mascarpone cheese and topped with grated chocolate"
+  },
+  {
+   "word": "toilet paper",
+   "definition": "a soft thin absorbent paper for use in toilets"
+  },
+  {
+   "word": "toothpaste",
+   "definition": "a dentifrice in the form of a paste"
+  },
+  {
+   "word": "torch",
+   "definition": "a light usually carried in the hand; consists of some flammable substance"
+  },
+  {
+   "word": "toucan",
+   "definition": "brilliantly colored arboreal fruit-eating bird of tropical America having a very large thin-walled beak"
+  },
+  {
+   "word": "towel rack",
+   "definition": "a rack consisting of one or more bars on which towels can be hung"
+  },
+  {
+   "word": "tractor",
+   "definition": "a wheeled vehicle with large wheels; used in farming and other applications"
+  },
+  {
+   "word": "train set",
+   "definition": "a toy consisting of small models of railroad trains and the track for them to run on"
+  },
+  {
+   "word": "trampoline",
+   "definition": "gymnastic apparatus consisting of a strong canvas sheet attached with springs to a metal frame; used for tumbling"
+  },
+  {
+   "word": "trashcan",
+   "definition": "a bin that holds rubbish until it is collected"
+  },
+  {
+   "word": "trolley",
+   "definition": "a wheeled vehicle that runs on rails and is propelled by electricity"
+  },
+  {
+   "word": "trough",
+   "definition": "a container (usually in a barn or stable) from which cattle or horses feed"
+  },
+  {
+   "word": "tube top",
+   "definition": "a tight-fitting strapless top made of stretchy material and worn by women or girls"
+  },
+  {
+   "word": "tulip",
+   "definition": "any of numerous perennial bulbous herbs having linear or broadly lanceolate leaves and usually a single showy flower"
+  },
+  {
+   "word": "tupperware",
+   "definition": "a range of plastic containers used chiefly for storing food"
+  },
+  {
+   "word": "tuxedo",
+   "definition": "semiformal evening dress for men"
+  },
+  {
+   "word": "underwear",
+   "definition": "undergarment worn next to the skin and under the outer garments"
+  },
+  {
+   "word": "unicycle",
+   "definition": "a vehicle with a single wheel that is driven by pedals"
+  },
+  {
+   "word": "valve",
+   "definition": "control consisting of a mechanical device for controlling the flow of a fluid"
+  },
+  {
+   "word": "vegetable",
+   "definition": "edible seeds or roots or stems or leaves or bulbs or tubers or nonsweet fruits of any of numerous herbaceous plant"
+  },
+  {
+   "word": "veil",
+   "definition": "a garment that covers the head and face"
+  },
+  {
+   "word": "velcro",
+   "definition": "nylon fabric used as a fastening"
+  },
+  {
+   "word": "viewfinder",
+   "definition": "optical device that helps a user to find the target of interest"
+  },
+  {
+   "word": "volleyball",
+   "definition": "an inflated ball used in playing volleyball"
+  },
+  {
+   "word": "waffle iron",
+   "definition": "a kitchen appliance for baking waffles; the appliance usually consists of two indented metal pans hinged together so that they create a pattern on the waffle"
+  },
+  {
+   "word": "wagon",
+   "definition": "any of various kinds of wheeled vehicles drawn by an animal or a tractor"
+  },
+  {
+   "word": "walnut",
+   "definition": "nut of any of various walnut trees having a wrinkled two-lobed seed with a hard shell"
+  },
+  {
+   "word": "washcloth",
+   "definition": "bath linen consisting of a piece of cloth used to wash the face and body"
+  },
+  {
+   "word": "water bottle",
+   "definition": "a bottle for holding water"
+  },
+  {
+   "word": "water cooler",
+   "definition": "a device for cooling and dispensing drinking water"
+  },
+  {
+   "word": "water filter",
+   "definition": "a filter to remove impurities from the water supply"
+  },
+  {
+   "word": "weasel",
+   "definition": "small carnivorous mammal with short legs and elongated body and neck"
+  },
+  {
+   "word": "webcam",
+   "definition": "a digital camera designed to take digital photographs and transmit them over the internet"
+  },
+  {
+   "word": "whip",
+   "definition": "an instrument with a handle and a flexible lash that is used for whipping"
+  },
+  {
+   "word": "wok",
+   "definition": "pan with a convex bottom; used for frying in Chinese cooking"
+  },
+  {
+   "word": "wooden leg",
+   "definition": "a prosthesis that replaces a missing leg"
+  },
+  {
+   "word": "wreck",
+   "definition": "a ship that has been destroyed at sea"
+  },
+  {
+   "word": "yolk",
+   "definition": "the yellow spherical part of an egg that is surrounded by the albumen"
+  },
+  {
+   "word": "zucchini",
+   "definition": "small cucumber-shaped vegetable marrow; typically dark green"
+  }
+ ]
+}

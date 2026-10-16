@@ -1,0 +1,4 @@
+# Adversarial suspect: same public rules as the default (clue policy
+# "either"); only the suspect's hidden system prompt differs.
+suspects:
+  - objective: adversarial

@@ -1,0 +1,2 @@
+# The suspect chooses its secret from the 512-concept list itself.
+secret_mode: bounded_free_form
