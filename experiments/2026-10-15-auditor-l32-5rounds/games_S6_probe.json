@@ -1,0 +1,3347 @@
+{
+ "set": "S6_probe",
+ "games": [
+  {
+   "game_id": "g000",
+   "seed": 6000,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Carrot",
+    "Charlie": "Carrot",
+    "Dave": "Carrot",
+    "Eve": "Carrot"
+   },
+   "parsnip": "Alice",
+   "orders": [
+    [
+     4,
+     3,
+     0,
+     2,
+     1
+    ],
+    [
+     4,
+     3,
+     0,
+     1,
+     2
+    ],
+    [
+     0,
+     1,
+     3,
+     4,
+     2
+    ],
+    [
+     0,
+     1,
+     2,
+     4,
+     3
+    ],
+    [
+     1,
+     3,
+     4,
+     0,
+     2
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Charlie",
+    "Charlie": "Bob",
+    "Dave": "Bob",
+    "Eve": "Charlie"
+   },
+   "eliminated": [
+    "Charlie"
+   ],
+   "winner": "Parsnip",
+   "verdict": "Bob",
+   "correct": false,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g001",
+   "seed": 6001,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Carrot",
+    "Charlie": "Carrot",
+    "Dave": "Carrot",
+    "Eve": "Carrot"
+   },
+   "parsnip": "Alice",
+   "orders": [
+    [
+     4,
+     3,
+     0,
+     1,
+     2
+    ],
+    [
+     3,
+     0,
+     4,
+     2,
+     1
+    ],
+    [
+     0,
+     1,
+     2,
+     4,
+     3
+    ],
+    [
+     2,
+     0,
+     3,
+     1,
+     4
+    ],
+    [
+     0,
+     1,
+     3,
+     2,
+     4
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Alice",
+    "Charlie": "Alice",
+    "Dave": "Alice",
+    "Eve": "Alice"
+   },
+   "eliminated": [
+    "Alice"
+   ],
+   "winner": "Carrot",
+   "verdict": "Alice",
+   "correct": true,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g002",
+   "seed": 6002,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Carrot",
+    "Charlie": "Carrot",
+    "Dave": "Carrot",
+    "Eve": "Carrot"
+   },
+   "parsnip": "Alice",
+   "orders": [
+    [
+     4,
+     3,
+     2,
+     0,
+     1
+    ],
+    [
+     3,
+     1,
+     0,
+     4,
+     2
+    ],
+    [
+     1,
+     3,
+     4,
+     0,
+     2
+    ],
+    [
+     0,
+     4,
+     2,
+     1,
+     3
+    ],
+    [
+     2,
+     0,
+     1,
+     3,
+     4
+    ]
+   ],
+   "votes": {
+    "Alice": "Dave",
+    "Bob": "Alice",
+    "Charlie": "Alice",
+    "Dave": "Alice",
+    "Eve": "Alice"
+   },
+   "eliminated": [
+    "Alice"
+   ],
+   "winner": "Carrot",
+   "verdict": "Alice",
+   "correct": true,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g003",
+   "seed": 6003,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Carrot",
+    "Dave": "Parsnip",
+    "Eve": "Carrot"
+   },
+   "parsnip": "Dave",
+   "orders": [
+    [
+     0,
+     1,
+     3,
+     4,
+     2
+    ],
+    [
+     0,
+     2,
+     4,
+     3,
+     1
+    ],
+    [
+     0,
+     2,
+     3,
+     4,
+     1
+    ],
+    [
+     0,
+     2,
+     1,
+     4,
+     3
+    ],
+    [
+     1,
+     3,
+     0,
+     2,
+     4
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Charlie",
+    "Charlie": "Dave",
+    "Dave": "Eve",
+    "Eve": "Charlie"
+   },
+   "eliminated": [
+    "Charlie"
+   ],
+   "winner": "Parsnip",
+   "verdict": "Dave",
+   "correct": true,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g004",
+   "seed": 6004,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Carrot",
+    "Dave": "Carrot",
+    "Eve": "Parsnip"
+   },
+   "parsnip": "Eve",
+   "orders": [
+    [
+     0,
+     3,
+     1,
+     2,
+     4
+    ],
+    [
+     3,
+     0,
+     1,
+     4,
+     2
+    ],
+    [
+     4,
+     1,
+     3,
+     2,
+     0
+    ],
+    [
+     2,
+     4,
+     0,
+     1,
+     3
+    ],
+    [
+     2,
+     1,
+     0,
+     4,
+     3
+    ]
+   ],
+   "votes": {
+    "Alice": "Eve",
+    "Bob": "Eve",
+    "Charlie": "Eve",
+    "Dave": "Bob",
+    "Eve": "Charlie"
+   },
+   "eliminated": [
+    "Eve"
+   ],
+   "winner": "Carrot",
+   "verdict": "Eve",
+   "correct": true,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g005",
+   "seed": 6005,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Parsnip",
+    "Dave": "Carrot",
+    "Eve": "Carrot"
+   },
+   "parsnip": "Charlie",
+   "orders": [
+    [
+     0,
+     3,
+     4,
+     2,
+     1
+    ],
+    [
+     0,
+     3,
+     2,
+     4,
+     1
+    ],
+    [
+     2,
+     1,
+     0,
+     3,
+     4
+    ],
+    [
+     0,
+     4,
+     3,
+     2,
+     1
+    ],
+    [
+     2,
+     4,
+     0,
+     3,
+     1
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Charlie",
+    "Charlie": "Eve",
+    "Dave": "Eve",
+    "Eve": "Charlie"
+   },
+   "eliminated": [
+    "Charlie"
+   ],
+   "winner": "Carrot",
+   "verdict": "Charlie",
+   "correct": true,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g006",
+   "seed": 6006,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Carrot",
+    "Dave": "Parsnip",
+    "Eve": "Carrot"
+   },
+   "parsnip": "Dave",
+   "orders": [
+    [
+     2,
+     3,
+     1,
+     4,
+     0
+    ],
+    [
+     3,
+     2,
+     1,
+     4,
+     0
+    ],
+    [
+     3,
+     2,
+     1,
+     0,
+     4
+    ],
+    [
+     3,
+     4,
+     2,
+     1,
+     0
+    ],
+    [
+     2,
+     4,
+     3,
+     1,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Dave",
+    "Bob": "Dave",
+    "Charlie": "Bob",
+    "Dave": "Alice",
+    "Eve": "Bob"
+   },
+   "eliminated": [],
+   "winner": "Parsnip",
+   "verdict": "Dave",
+   "correct": true,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g007",
+   "seed": 6007,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Carrot",
+    "Dave": "Parsnip",
+    "Eve": "Carrot"
+   },
+   "parsnip": "Dave",
+   "orders": [
+    [
+     0,
+     1,
+     3,
+     4,
+     2
+    ],
+    [
+     0,
+     1,
+     2,
+     4,
+     3
+    ],
+    [
+     4,
+     1,
+     3,
+     0,
+     2
+    ],
+    [
+     1,
+     0,
+     3,
+     4,
+     2
+    ],
+    [
+     4,
+     3,
+     0,
+     2,
+     1
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Dave",
+    "Charlie": "Dave",
+    "Dave": "Eve",
+    "Eve": "Charlie"
+   },
+   "eliminated": [],
+   "winner": "Parsnip",
+   "verdict": "Dave",
+   "correct": true,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g008",
+   "seed": 6008,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Parsnip",
+    "Dave": "Carrot",
+    "Eve": "Carrot"
+   },
+   "parsnip": "Charlie",
+   "orders": [
+    [
+     0,
+     2,
+     4,
+     3,
+     1
+    ],
+    [
+     4,
+     3,
+     0,
+     2,
+     1
+    ],
+    [
+     0,
+     2,
+     4,
+     1,
+     3
+    ],
+    [
+     0,
+     4,
+     1,
+     2,
+     3
+    ],
+    [
+     4,
+     3,
+     2,
+     1,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Charlie",
+    "Charlie": "Alice",
+    "Dave": "Charlie",
+    "Eve": "Charlie"
+   },
+   "eliminated": [
+    "Charlie"
+   ],
+   "winner": "Carrot",
+   "verdict": "Charlie",
+   "correct": true,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g009",
+   "seed": 6009,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Carrot",
+    "Dave": "Carrot",
+    "Eve": "Parsnip"
+   },
+   "parsnip": "Eve",
+   "orders": [
+    [
+     0,
+     3,
+     2,
+     1,
+     4
+    ],
+    [
+     0,
+     3,
+     2,
+     4,
+     1
+    ],
+    [
+     4,
+     3,
+     0,
+     1,
+     2
+    ],
+    [
+     3,
+     4,
+     1,
+     2,
+     0
+    ],
+    [
+     4,
+     1,
+     0,
+     3,
+     2
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Eve",
+    "Charlie": "Eve",
+    "Dave": "Eve",
+    "Eve": "Charlie"
+   },
+   "eliminated": [
+    "Eve"
+   ],
+   "winner": "Carrot",
+   "verdict": "Eve",
+   "correct": true,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g010",
+   "seed": 6010,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Parsnip",
+    "Charlie": "Carrot",
+    "Dave": "Carrot",
+    "Eve": "Carrot"
+   },
+   "parsnip": "Bob",
+   "orders": [
+    [
+     3,
+     4,
+     0,
+     1,
+     2
+    ],
+    [
+     3,
+     0,
+     2,
+     4,
+     1
+    ],
+    [
+     0,
+     3,
+     2,
+     1,
+     4
+    ],
+    [
+     0,
+     4,
+     1,
+     3,
+     2
+    ],
+    [
+     1,
+     0,
+     3,
+     4,
+     2
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Charlie",
+    "Charlie": "Bob",
+    "Dave": "Bob",
+    "Eve": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Carrot",
+   "verdict": "Bob",
+   "correct": true,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g011",
+   "seed": 6011,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Parsnip",
+    "Charlie": "Carrot",
+    "Dave": "Carrot",
+    "Eve": "Carrot"
+   },
+   "parsnip": "Bob",
+   "orders": [
+    [
+     0,
+     4,
+     3,
+     1,
+     2
+    ],
+    [
+     1,
+     0,
+     3,
+     2,
+     4
+    ],
+    [
+     1,
+     2,
+     4,
+     3,
+     0
+    ],
+    [
+     2,
+     3,
+     1,
+     0,
+     4
+    ],
+    [
+     0,
+     1,
+     3,
+     4,
+     2
+    ]
+   ],
+   "votes": {
+    "Alice": "Dave",
+    "Bob": "Dave",
+    "Charlie": "Dave",
+    "Dave": "Alice",
+    "Eve": "Dave"
+   },
+   "eliminated": [
+    "Dave"
+   ],
+   "winner": "Parsnip",
+   "verdict": "Dave",
+   "correct": false,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g012",
+   "seed": 6012,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Carrot",
+    "Dave": "Carrot",
+    "Eve": "Parsnip"
+   },
+   "parsnip": "Eve",
+   "orders": [
+    [
+     3,
+     0,
+     2,
+     1,
+     4
+    ],
+    [
+     2,
+     0,
+     4,
+     1,
+     3
+    ],
+    [
+     2,
+     1,
+     4,
+     0,
+     3
+    ],
+    [
+     4,
+     1,
+     2,
+     3,
+     0
+    ],
+    [
+     1,
+     2,
+     3,
+     4,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Eve",
+    "Bob": "Eve",
+    "Charlie": "Eve",
+    "Dave": "Eve",
+    "Eve": "Dave"
+   },
+   "eliminated": [
+    "Eve"
+   ],
+   "winner": "Carrot",
+   "verdict": "Eve",
+   "correct": true,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g013",
+   "seed": 6013,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Carrot",
+    "Dave": "Carrot",
+    "Eve": "Parsnip"
+   },
+   "parsnip": "Eve",
+   "orders": [
+    [
+     0,
+     3,
+     2,
+     1,
+     4
+    ],
+    [
+     0,
+     4,
+     1,
+     2,
+     3
+    ],
+    [
+     4,
+     1,
+     0,
+     2,
+     3
+    ],
+    [
+     4,
+     2,
+     3,
+     0,
+     1
+    ],
+    [
+     3,
+     4,
+     1,
+     0,
+     2
+    ]
+   ],
+   "votes": {
+    "Alice": "Eve",
+    "Bob": "Eve",
+    "Charlie": "Eve",
+    "Dave": "Eve",
+    "Eve": "Alice"
+   },
+   "eliminated": [
+    "Eve"
+   ],
+   "winner": "Carrot",
+   "verdict": "Eve",
+   "correct": true,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g014",
+   "seed": 6014,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Carrot",
+    "Dave": "Carrot",
+    "Eve": "Parsnip"
+   },
+   "parsnip": "Eve",
+   "orders": [
+    [
+     3,
+     1,
+     2,
+     0,
+     4
+    ],
+    [
+     0,
+     2,
+     3,
+     1,
+     4
+    ],
+    [
+     0,
+     2,
+     4,
+     1,
+     3
+    ],
+    [
+     1,
+     0,
+     4,
+     2,
+     3
+    ],
+    [
+     0,
+     2,
+     1,
+     4,
+     3
+    ]
+   ],
+   "votes": {
+    "Alice": "Eve",
+    "Bob": "Eve",
+    "Charlie": "Eve",
+    "Dave": "Eve",
+    "Eve": "Charlie"
+   },
+   "eliminated": [
+    "Eve"
+   ],
+   "winner": "Carrot",
+   "verdict": "Eve",
+   "correct": true,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g015",
+   "seed": 6015,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Carrot",
+    "Dave": "Carrot",
+    "Eve": "Parsnip"
+   },
+   "parsnip": "Eve",
+   "orders": [
+    [
+     3,
+     2,
+     0,
+     1,
+     4
+    ],
+    [
+     2,
+     1,
+     3,
+     0,
+     4
+    ],
+    [
+     0,
+     1,
+     3,
+     4,
+     2
+    ],
+    [
+     0,
+     1,
+     3,
+     2,
+     4
+    ],
+    [
+     1,
+     2,
+     4,
+     3,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Dave",
+    "Bob": "Eve",
+    "Charlie": "Eve",
+    "Dave": "Eve",
+    "Eve": "Dave"
+   },
+   "eliminated": [
+    "Eve"
+   ],
+   "winner": "Carrot",
+   "verdict": "Eve",
+   "correct": true,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g016",
+   "seed": 6016,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Carrot",
+    "Dave": "Carrot",
+    "Eve": "Parsnip"
+   },
+   "parsnip": "Eve",
+   "orders": [
+    [
+     3,
+     0,
+     2,
+     1,
+     4
+    ],
+    [
+     3,
+     0,
+     1,
+     2,
+     4
+    ],
+    [
+     1,
+     4,
+     3,
+     2,
+     0
+    ],
+    [
+     1,
+     2,
+     3,
+     0,
+     4
+    ],
+    [
+     3,
+     1,
+     2,
+     4,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Dave",
+    "Bob": "Dave",
+    "Charlie": "Dave",
+    "Dave": "Bob",
+    "Eve": "Bob"
+   },
+   "eliminated": [
+    "Dave"
+   ],
+   "winner": "Parsnip",
+   "verdict": "Dave",
+   "correct": false,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g017",
+   "seed": 6017,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Parsnip",
+    "Dave": "Carrot",
+    "Eve": "Carrot"
+   },
+   "parsnip": "Charlie",
+   "orders": [
+    [
+     0,
+     1,
+     4,
+     2,
+     3
+    ],
+    [
+     2,
+     3,
+     0,
+     1,
+     4
+    ],
+    [
+     1,
+     3,
+     4,
+     2,
+     0
+    ],
+    [
+     4,
+     0,
+     3,
+     2,
+     1
+    ],
+    [
+     2,
+     3,
+     0,
+     1,
+     4
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Charlie",
+    "Charlie": "Bob",
+    "Dave": "Charlie",
+    "Eve": "Charlie"
+   },
+   "eliminated": [
+    "Charlie"
+   ],
+   "winner": "Carrot",
+   "verdict": "Charlie",
+   "correct": true,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g018",
+   "seed": 6018,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Carrot",
+    "Charlie": "Carrot",
+    "Dave": "Carrot",
+    "Eve": "Carrot"
+   },
+   "parsnip": "Alice",
+   "orders": [
+    [
+     4,
+     0,
+     1,
+     3,
+     2
+    ],
+    [
+     1,
+     0,
+     3,
+     4,
+     2
+    ],
+    [
+     4,
+     1,
+     0,
+     2,
+     3
+    ],
+    [
+     2,
+     3,
+     4,
+     1,
+     0
+    ],
+    [
+     2,
+     0,
+     1,
+     3,
+     4
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Alice",
+    "Charlie": "Bob",
+    "Dave": "Bob",
+    "Eve": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Parsnip",
+   "verdict": "Bob",
+   "correct": false,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g019",
+   "seed": 6019,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Parsnip",
+    "Charlie": "Carrot",
+    "Dave": "Carrot",
+    "Eve": "Carrot"
+   },
+   "parsnip": "Bob",
+   "orders": [
+    [
+     1,
+     4,
+     3,
+     2,
+     0
+    ],
+    [
+     3,
+     2,
+     0,
+     1,
+     4
+    ],
+    [
+     0,
+     2,
+     3,
+     4,
+     1
+    ],
+    [
+     3,
+     2,
+     4,
+     1,
+     0
+    ],
+    [
+     2,
+     1,
+     0,
+     4,
+     3
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Alice",
+    "Charlie": "Bob",
+    "Dave": "Bob",
+    "Eve": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Carrot",
+   "verdict": "Bob",
+   "correct": true,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g020",
+   "seed": 6020,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Carrot",
+    "Dave": "Parsnip",
+    "Eve": "Carrot"
+   },
+   "parsnip": "Dave",
+   "orders": [
+    [
+     3,
+     0,
+     2,
+     4,
+     1
+    ],
+    [
+     4,
+     1,
+     3,
+     2,
+     0
+    ],
+    [
+     1,
+     3,
+     0,
+     2,
+     4
+    ],
+    [
+     1,
+     4,
+     2,
+     3,
+     0
+    ],
+    [
+     3,
+     0,
+     1,
+     2,
+     4
+    ]
+   ],
+   "votes": {
+    "Alice": "Dave",
+    "Bob": "Dave",
+    "Charlie": "Eve",
+    "Dave": "Alice",
+    "Eve": "Charlie"
+   },
+   "eliminated": [],
+   "winner": "Parsnip",
+   "verdict": "Dave",
+   "correct": true,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g021",
+   "seed": 6021,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Carrot",
+    "Dave": "Carrot",
+    "Eve": "Parsnip"
+   },
+   "parsnip": "Eve",
+   "orders": [
+    [
+     0,
+     3,
+     1,
+     2,
+     4
+    ],
+    [
+     3,
+     1,
+     4,
+     2,
+     0
+    ],
+    [
+     4,
+     0,
+     2,
+     1,
+     3
+    ],
+    [
+     0,
+     4,
+     1,
+     2,
+     3
+    ],
+    [
+     1,
+     2,
+     4,
+     0,
+     3
+    ]
+   ],
+   "votes": {
+    "Alice": "Eve",
+    "Bob": "Eve",
+    "Charlie": "Alice",
+    "Dave": "Eve",
+    "Eve": "Alice"
+   },
+   "eliminated": [
+    "Eve"
+   ],
+   "winner": "Carrot",
+   "verdict": "Eve",
+   "correct": true,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g022",
+   "seed": 6022,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Carrot",
+    "Dave": "Parsnip",
+    "Eve": "Carrot"
+   },
+   "parsnip": "Dave",
+   "orders": [
+    [
+     1,
+     0,
+     2,
+     4,
+     3
+    ],
+    [
+     4,
+     0,
+     2,
+     1,
+     3
+    ],
+    [
+     4,
+     2,
+     3,
+     1,
+     0
+    ],
+    [
+     1,
+     4,
+     0,
+     2,
+     3
+    ],
+    [
+     2,
+     4,
+     3,
+     1,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Dave",
+    "Bob": "Dave",
+    "Charlie": "Dave",
+    "Dave": "Eve",
+    "Eve": "Dave"
+   },
+   "eliminated": [
+    "Dave"
+   ],
+   "winner": "Carrot",
+   "verdict": "Dave",
+   "correct": true,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g023",
+   "seed": 6023,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Parsnip",
+    "Charlie": "Carrot",
+    "Dave": "Carrot",
+    "Eve": "Carrot"
+   },
+   "parsnip": "Bob",
+   "orders": [
+    [
+     1,
+     4,
+     0,
+     2,
+     3
+    ],
+    [
+     1,
+     2,
+     3,
+     4,
+     0
+    ],
+    [
+     1,
+     3,
+     0,
+     2,
+     4
+    ],
+    [
+     1,
+     4,
+     0,
+     3,
+     2
+    ],
+    [
+     4,
+     2,
+     1,
+     3,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Dave",
+    "Bob": "Eve",
+    "Charlie": "Dave",
+    "Dave": "Eve",
+    "Eve": "Dave"
+   },
+   "eliminated": [
+    "Dave"
+   ],
+   "winner": "Parsnip",
+   "verdict": "Dave",
+   "correct": false,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g024",
+   "seed": 6024,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Carrot",
+    "Dave": "Parsnip",
+    "Eve": "Carrot"
+   },
+   "parsnip": "Dave",
+   "orders": [
+    [
+     2,
+     3,
+     0,
+     4,
+     1
+    ],
+    [
+     3,
+     2,
+     4,
+     0,
+     1
+    ],
+    [
+     4,
+     0,
+     2,
+     1,
+     3
+    ],
+    [
+     2,
+     4,
+     1,
+     3,
+     0
+    ],
+    [
+     4,
+     2,
+     1,
+     3,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Charlie",
+    "Charlie": "Bob",
+    "Dave": "Charlie",
+    "Eve": "Charlie"
+   },
+   "eliminated": [
+    "Charlie"
+   ],
+   "winner": "Parsnip",
+   "verdict": "Charlie",
+   "correct": false,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g025",
+   "seed": 6025,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Parsnip",
+    "Charlie": "Carrot",
+    "Dave": "Carrot",
+    "Eve": "Carrot"
+   },
+   "parsnip": "Bob",
+   "orders": [
+    [
+     1,
+     4,
+     2,
+     0,
+     3
+    ],
+    [
+     4,
+     2,
+     0,
+     1,
+     3
+    ],
+    [
+     1,
+     4,
+     0,
+     2,
+     3
+    ],
+    [
+     0,
+     1,
+     2,
+     3,
+     4
+    ],
+    [
+     0,
+     2,
+     3,
+     4,
+     1
+    ]
+   ],
+   "votes": {
+    "Alice": "Eve",
+    "Bob": "Alice",
+    "Charlie": "Bob",
+    "Dave": "Eve",
+    "Eve": "Bob"
+   },
+   "eliminated": [],
+   "winner": "Parsnip",
+   "verdict": "Bob",
+   "correct": true,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g026",
+   "seed": 6026,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Parsnip",
+    "Charlie": "Carrot",
+    "Dave": "Carrot",
+    "Eve": "Carrot"
+   },
+   "parsnip": "Bob",
+   "orders": [
+    [
+     1,
+     4,
+     3,
+     0,
+     2
+    ],
+    [
+     4,
+     1,
+     2,
+     3,
+     0
+    ],
+    [
+     2,
+     3,
+     4,
+     1,
+     0
+    ],
+    [
+     1,
+     4,
+     3,
+     0,
+     2
+    ],
+    [
+     0,
+     4,
+     1,
+     3,
+     2
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Charlie",
+    "Charlie": "Dave",
+    "Dave": "Bob",
+    "Eve": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Carrot",
+   "verdict": "Bob",
+   "correct": true,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g027",
+   "seed": 6027,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Carrot",
+    "Dave": "Carrot",
+    "Eve": "Parsnip"
+   },
+   "parsnip": "Eve",
+   "orders": [
+    [
+     3,
+     2,
+     1,
+     0,
+     4
+    ],
+    [
+     1,
+     3,
+     2,
+     4,
+     0
+    ],
+    [
+     2,
+     3,
+     4,
+     0,
+     1
+    ],
+    [
+     4,
+     0,
+     3,
+     2,
+     1
+    ],
+    [
+     3,
+     4,
+     1,
+     2,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Eve",
+    "Bob": "Alice",
+    "Charlie": "Eve",
+    "Dave": "Eve",
+    "Eve": "Alice"
+   },
+   "eliminated": [
+    "Eve"
+   ],
+   "winner": "Carrot",
+   "verdict": "Eve",
+   "correct": true,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g028",
+   "seed": 6028,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Parsnip",
+    "Charlie": "Carrot",
+    "Dave": "Carrot",
+    "Eve": "Carrot"
+   },
+   "parsnip": "Bob",
+   "orders": [
+    [
+     3,
+     4,
+     0,
+     2,
+     1
+    ],
+    [
+     4,
+     1,
+     0,
+     3,
+     2
+    ],
+    [
+     1,
+     3,
+     4,
+     2,
+     0
+    ],
+    [
+     4,
+     1,
+     3,
+     0,
+     2
+    ],
+    [
+     3,
+     2,
+     1,
+     0,
+     4
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Charlie",
+    "Charlie": "Bob",
+    "Dave": "Charlie",
+    "Eve": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Carrot",
+   "verdict": "Charlie",
+   "correct": false,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g029",
+   "seed": 6029,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Carrot",
+    "Dave": "Parsnip",
+    "Eve": "Carrot"
+   },
+   "parsnip": "Dave",
+   "orders": [
+    [
+     1,
+     3,
+     2,
+     4,
+     0
+    ],
+    [
+     3,
+     1,
+     2,
+     4,
+     0
+    ],
+    [
+     4,
+     0,
+     2,
+     1,
+     3
+    ],
+    [
+     0,
+     2,
+     1,
+     3,
+     4
+    ],
+    [
+     2,
+     3,
+     4,
+     0,
+     1
+    ]
+   ],
+   "votes": {
+    "Alice": "Eve",
+    "Bob": "Charlie",
+    "Charlie": "Eve",
+    "Dave": "Eve",
+    "Eve": "Charlie"
+   },
+   "eliminated": [
+    "Eve"
+   ],
+   "winner": "Parsnip",
+   "verdict": "Dave",
+   "correct": true,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g030",
+   "seed": 6030,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Carrot",
+    "Charlie": "Carrot",
+    "Dave": "Carrot",
+    "Eve": "Carrot"
+   },
+   "parsnip": "Alice",
+   "orders": [
+    [
+     4,
+     3,
+     1,
+     2,
+     0
+    ],
+    [
+     2,
+     1,
+     3,
+     0,
+     4
+    ],
+    [
+     3,
+     1,
+     2,
+     0,
+     4
+    ],
+    [
+     0,
+     4,
+     2,
+     1,
+     3
+    ],
+    [
+     1,
+     0,
+     2,
+     3,
+     4
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Alice",
+    "Charlie": "Alice",
+    "Dave": "Charlie",
+    "Eve": "Charlie"
+   },
+   "eliminated": [
+    "Charlie"
+   ],
+   "winner": "Parsnip",
+   "verdict": "Alice",
+   "correct": true,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g031",
+   "seed": 6031,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Carrot",
+    "Dave": "Parsnip",
+    "Eve": "Carrot"
+   },
+   "parsnip": "Dave",
+   "orders": [
+    [
+     1,
+     0,
+     2,
+     4,
+     3
+    ],
+    [
+     0,
+     3,
+     1,
+     2,
+     4
+    ],
+    [
+     1,
+     3,
+     0,
+     4,
+     2
+    ],
+    [
+     1,
+     3,
+     0,
+     4,
+     2
+    ],
+    [
+     1,
+     4,
+     0,
+     3,
+     2
+    ]
+   ],
+   "votes": {
+    "Alice": "Dave",
+    "Bob": "Dave",
+    "Charlie": "Dave",
+    "Dave": "Bob",
+    "Eve": "Dave"
+   },
+   "eliminated": [
+    "Dave"
+   ],
+   "winner": "Carrot",
+   "verdict": "Dave",
+   "correct": true,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g032",
+   "seed": 6032,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Carrot",
+    "Dave": "Parsnip",
+    "Eve": "Carrot"
+   },
+   "parsnip": "Dave",
+   "orders": [
+    [
+     1,
+     0,
+     3,
+     4,
+     2
+    ],
+    [
+     4,
+     3,
+     0,
+     2,
+     1
+    ],
+    [
+     4,
+     1,
+     2,
+     0,
+     3
+    ],
+    [
+     2,
+     1,
+     4,
+     0,
+     3
+    ],
+    [
+     1,
+     4,
+     3,
+     0,
+     2
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Eve",
+    "Charlie": "Bob",
+    "Dave": "Bob",
+    "Eve": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Parsnip",
+   "verdict": "Eve",
+   "correct": false,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g033",
+   "seed": 6033,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Carrot",
+    "Dave": "Parsnip",
+    "Eve": "Carrot"
+   },
+   "parsnip": "Dave",
+   "orders": [
+    [
+     0,
+     3,
+     1,
+     4,
+     2
+    ],
+    [
+     1,
+     0,
+     2,
+     3,
+     4
+    ],
+    [
+     1,
+     2,
+     4,
+     0,
+     3
+    ],
+    [
+     0,
+     4,
+     1,
+     2,
+     3
+    ],
+    [
+     4,
+     1,
+     0,
+     3,
+     2
+    ]
+   ],
+   "votes": {
+    "Alice": "Eve",
+    "Bob": "Eve",
+    "Charlie": "Alice",
+    "Dave": "Alice",
+    "Eve": "Alice"
+   },
+   "eliminated": [
+    "Alice"
+   ],
+   "winner": "Parsnip",
+   "verdict": "Eve",
+   "correct": false,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g034",
+   "seed": 6034,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Parsnip",
+    "Dave": "Carrot",
+    "Eve": "Carrot"
+   },
+   "parsnip": "Charlie",
+   "orders": [
+    [
+     3,
+     2,
+     4,
+     1,
+     0
+    ],
+    [
+     4,
+     3,
+     1,
+     2,
+     0
+    ],
+    [
+     4,
+     0,
+     1,
+     2,
+     3
+    ],
+    [
+     0,
+     1,
+     3,
+     2,
+     4
+    ],
+    [
+     0,
+     1,
+     2,
+     4,
+     3
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Charlie",
+    "Charlie": "Eve",
+    "Dave": "Charlie",
+    "Eve": "Charlie"
+   },
+   "eliminated": [
+    "Charlie"
+   ],
+   "winner": "Carrot",
+   "verdict": "Charlie",
+   "correct": true,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g035",
+   "seed": 6035,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Parsnip",
+    "Dave": "Carrot",
+    "Eve": "Carrot"
+   },
+   "parsnip": "Charlie",
+   "orders": [
+    [
+     2,
+     1,
+     4,
+     3,
+     0
+    ],
+    [
+     4,
+     3,
+     1,
+     0,
+     2
+    ],
+    [
+     0,
+     3,
+     1,
+     4,
+     2
+    ],
+    [
+     3,
+     2,
+     0,
+     1,
+     4
+    ],
+    [
+     3,
+     1,
+     0,
+     2,
+     4
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Charlie",
+    "Charlie": "Dave",
+    "Dave": "Charlie",
+    "Eve": "Charlie"
+   },
+   "eliminated": [
+    "Charlie"
+   ],
+   "winner": "Carrot",
+   "verdict": "Charlie",
+   "correct": true,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g036",
+   "seed": 6036,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Parsnip",
+    "Dave": "Carrot",
+    "Eve": "Carrot"
+   },
+   "parsnip": "Charlie",
+   "orders": [
+    [
+     2,
+     1,
+     4,
+     0,
+     3
+    ],
+    [
+     2,
+     4,
+     1,
+     0,
+     3
+    ],
+    [
+     2,
+     3,
+     4,
+     0,
+     1
+    ],
+    [
+     2,
+     0,
+     1,
+     3,
+     4
+    ],
+    [
+     3,
+     1,
+     4,
+     2,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Dave",
+    "Bob": "Dave",
+    "Charlie": "Dave",
+    "Dave": "Alice",
+    "Eve": "Dave"
+   },
+   "eliminated": [
+    "Dave"
+   ],
+   "winner": "Parsnip",
+   "verdict": "Dave",
+   "correct": false,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g037",
+   "seed": 6037,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Carrot",
+    "Charlie": "Carrot",
+    "Dave": "Carrot",
+    "Eve": "Carrot"
+   },
+   "parsnip": "Alice",
+   "orders": [
+    [
+     4,
+     1,
+     0,
+     2,
+     3
+    ],
+    [
+     2,
+     0,
+     3,
+     1,
+     4
+    ],
+    [
+     2,
+     1,
+     4,
+     0,
+     3
+    ],
+    [
+     1,
+     2,
+     0,
+     4,
+     3
+    ],
+    [
+     0,
+     1,
+     4,
+     2,
+     3
+    ]
+   ],
+   "votes": {
+    "Alice": "Dave",
+    "Bob": "Eve",
+    "Charlie": "Dave",
+    "Dave": "Alice",
+    "Eve": "Dave"
+   },
+   "eliminated": [
+    "Dave"
+   ],
+   "winner": "Parsnip",
+   "verdict": "Alice",
+   "correct": true,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g038",
+   "seed": 6038,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Parsnip",
+    "Charlie": "Carrot",
+    "Dave": "Carrot",
+    "Eve": "Carrot"
+   },
+   "parsnip": "Bob",
+   "orders": [
+    [
+     2,
+     4,
+     3,
+     0,
+     1
+    ],
+    [
+     2,
+     0,
+     1,
+     3,
+     4
+    ],
+    [
+     0,
+     4,
+     1,
+     3,
+     2
+    ],
+    [
+     3,
+     0,
+     4,
+     1,
+     2
+    ],
+    [
+     4,
+     0,
+     2,
+     1,
+     3
+    ]
+   ],
+   "votes": {
+    "Alice": "Bob",
+    "Bob": "Eve",
+    "Charlie": "Bob",
+    "Dave": "Bob",
+    "Eve": "Bob"
+   },
+   "eliminated": [
+    "Bob"
+   ],
+   "winner": "Carrot",
+   "verdict": "Bob",
+   "correct": true,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g039",
+   "seed": 6039,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Carrot",
+    "Dave": "Carrot",
+    "Eve": "Parsnip"
+   },
+   "parsnip": "Eve",
+   "orders": [
+    [
+     3,
+     1,
+     0,
+     2,
+     4
+    ],
+    [
+     1,
+     0,
+     3,
+     4,
+     2
+    ],
+    [
+     3,
+     4,
+     1,
+     0,
+     2
+    ],
+    [
+     3,
+     1,
+     4,
+     0,
+     2
+    ],
+    [
+     3,
+     2,
+     1,
+     0,
+     4
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Charlie",
+    "Charlie": "Alice",
+    "Dave": "Charlie",
+    "Eve": "Alice"
+   },
+   "eliminated": [
+    "Charlie"
+   ],
+   "winner": "Parsnip",
+   "verdict": "Charlie",
+   "correct": false,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g040",
+   "seed": 6040,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Parsnip",
+    "Dave": "Carrot",
+    "Eve": "Carrot"
+   },
+   "parsnip": "Charlie",
+   "orders": [
+    [
+     0,
+     3,
+     4,
+     1,
+     2
+    ],
+    [
+     0,
+     1,
+     2,
+     3,
+     4
+    ],
+    [
+     2,
+     0,
+     1,
+     4,
+     3
+    ],
+    [
+     1,
+     3,
+     4,
+     0,
+     2
+    ],
+    [
+     1,
+     4,
+     0,
+     2,
+     3
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Charlie",
+    "Charlie": "Bob",
+    "Dave": "Charlie",
+    "Eve": "Charlie"
+   },
+   "eliminated": [
+    "Charlie"
+   ],
+   "winner": "Carrot",
+   "verdict": "Charlie",
+   "correct": true,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g041",
+   "seed": 6041,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Carrot",
+    "Charlie": "Carrot",
+    "Dave": "Carrot",
+    "Eve": "Carrot"
+   },
+   "parsnip": "Alice",
+   "orders": [
+    [
+     4,
+     1,
+     2,
+     3,
+     0
+    ],
+    [
+     2,
+     4,
+     1,
+     0,
+     3
+    ],
+    [
+     4,
+     0,
+     1,
+     3,
+     2
+    ],
+    [
+     4,
+     2,
+     1,
+     3,
+     0
+    ],
+    [
+     4,
+     1,
+     2,
+     0,
+     3
+    ]
+   ],
+   "votes": {
+    "Alice": "Eve",
+    "Bob": "Alice",
+    "Charlie": "Eve",
+    "Dave": "Alice",
+    "Eve": "Alice"
+   },
+   "eliminated": [
+    "Alice"
+   ],
+   "winner": "Carrot",
+   "verdict": "Eve",
+   "correct": false,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g042",
+   "seed": 6042,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Parsnip",
+    "Charlie": "Carrot",
+    "Dave": "Carrot",
+    "Eve": "Carrot"
+   },
+   "parsnip": "Bob",
+   "orders": [
+    [
+     3,
+     4,
+     2,
+     0,
+     1
+    ],
+    [
+     3,
+     4,
+     2,
+     0,
+     1
+    ],
+    [
+     2,
+     4,
+     1,
+     0,
+     3
+    ],
+    [
+     1,
+     4,
+     2,
+     3,
+     0
+    ],
+    [
+     2,
+     3,
+     4,
+     1,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Charlie",
+    "Charlie": "Dave",
+    "Dave": "Bob",
+    "Eve": "Charlie"
+   },
+   "eliminated": [
+    "Charlie"
+   ],
+   "winner": "Parsnip",
+   "verdict": "Dave",
+   "correct": false,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g043",
+   "seed": 6043,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Carrot",
+    "Dave": "Parsnip",
+    "Eve": "Carrot"
+   },
+   "parsnip": "Dave",
+   "orders": [
+    [
+     1,
+     3,
+     2,
+     4,
+     0
+    ],
+    [
+     4,
+     3,
+     2,
+     0,
+     1
+    ],
+    [
+     4,
+     3,
+     2,
+     1,
+     0
+    ],
+    [
+     3,
+     4,
+     2,
+     0,
+     1
+    ],
+    [
+     0,
+     4,
+     2,
+     1,
+     3
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Charlie",
+    "Charlie": "Dave",
+    "Dave": "Charlie",
+    "Eve": "Charlie"
+   },
+   "eliminated": [
+    "Charlie"
+   ],
+   "winner": "Parsnip",
+   "verdict": "Dave",
+   "correct": true,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g044",
+   "seed": 6044,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Carrot",
+    "Dave": "Parsnip",
+    "Eve": "Carrot"
+   },
+   "parsnip": "Dave",
+   "orders": [
+    [
+     1,
+     3,
+     2,
+     4,
+     0
+    ],
+    [
+     3,
+     2,
+     0,
+     1,
+     4
+    ],
+    [
+     0,
+     1,
+     2,
+     3,
+     4
+    ],
+    [
+     3,
+     2,
+     0,
+     4,
+     1
+    ],
+    [
+     0,
+     4,
+     2,
+     1,
+     3
+    ]
+   ],
+   "votes": {
+    "Alice": "Eve",
+    "Bob": "Eve",
+    "Charlie": "Eve",
+    "Dave": "Eve",
+    "Eve": "Dave"
+   },
+   "eliminated": [
+    "Eve"
+   ],
+   "winner": "Parsnip",
+   "verdict": "Eve",
+   "correct": false,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g045",
+   "seed": 6045,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Parsnip",
+    "Bob": "Carrot",
+    "Charlie": "Carrot",
+    "Dave": "Carrot",
+    "Eve": "Carrot"
+   },
+   "parsnip": "Alice",
+   "orders": [
+    [
+     4,
+     1,
+     0,
+     2,
+     3
+    ],
+    [
+     2,
+     4,
+     0,
+     1,
+     3
+    ],
+    [
+     2,
+     1,
+     4,
+     3,
+     0
+    ],
+    [
+     4,
+     3,
+     0,
+     1,
+     2
+    ],
+    [
+     3,
+     2,
+     0,
+     1,
+     4
+    ]
+   ],
+   "votes": {
+    "Alice": "Eve",
+    "Bob": "Alice",
+    "Charlie": "Alice",
+    "Dave": "Alice",
+    "Eve": "Alice"
+   },
+   "eliminated": [
+    "Alice"
+   ],
+   "winner": "Carrot",
+   "verdict": "Alice",
+   "correct": true,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g046",
+   "seed": 6046,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Carrot",
+    "Dave": "Carrot",
+    "Eve": "Parsnip"
+   },
+   "parsnip": "Eve",
+   "orders": [
+    [
+     1,
+     3,
+     0,
+     2,
+     4
+    ],
+    [
+     0,
+     2,
+     3,
+     1,
+     4
+    ],
+    [
+     0,
+     1,
+     3,
+     4,
+     2
+    ],
+    [
+     4,
+     3,
+     0,
+     2,
+     1
+    ],
+    [
+     4,
+     0,
+     2,
+     1,
+     3
+    ]
+   ],
+   "votes": {
+    "Alice": "Eve",
+    "Bob": "Eve",
+    "Charlie": "Eve",
+    "Dave": "Eve",
+    "Eve": "Alice"
+   },
+   "eliminated": [
+    "Eve"
+   ],
+   "winner": "Carrot",
+   "verdict": "Eve",
+   "correct": true,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g047",
+   "seed": 6047,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Parsnip",
+    "Charlie": "Carrot",
+    "Dave": "Carrot",
+    "Eve": "Carrot"
+   },
+   "parsnip": "Bob",
+   "orders": [
+    [
+     2,
+     4,
+     1,
+     0,
+     3
+    ],
+    [
+     2,
+     4,
+     0,
+     1,
+     3
+    ],
+    [
+     4,
+     3,
+     1,
+     0,
+     2
+    ],
+    [
+     4,
+     1,
+     3,
+     2,
+     0
+    ],
+    [
+     3,
+     4,
+     1,
+     2,
+     0
+    ]
+   ],
+   "votes": {
+    "Alice": "Dave",
+    "Bob": "Dave",
+    "Charlie": "Bob",
+    "Dave": "Bob",
+    "Eve": "Dave"
+   },
+   "eliminated": [
+    "Dave"
+   ],
+   "winner": "Parsnip",
+   "verdict": "Bob",
+   "correct": true,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g048",
+   "seed": 6048,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Parsnip",
+    "Dave": "Carrot",
+    "Eve": "Carrot"
+   },
+   "parsnip": "Charlie",
+   "orders": [
+    [
+     3,
+     1,
+     4,
+     0,
+     2
+    ],
+    [
+     1,
+     2,
+     0,
+     3,
+     4
+    ],
+    [
+     0,
+     4,
+     3,
+     2,
+     1
+    ],
+    [
+     4,
+     0,
+     3,
+     2,
+     1
+    ],
+    [
+     4,
+     0,
+     3,
+     2,
+     1
+    ]
+   ],
+   "votes": {
+    "Alice": "Charlie",
+    "Bob": "Charlie",
+    "Charlie": "Bob",
+    "Dave": "Charlie",
+    "Eve": "Charlie"
+   },
+   "eliminated": [
+    "Charlie"
+   ],
+   "winner": "Carrot",
+   "verdict": "Charlie",
+   "correct": true,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  },
+  {
+   "game_id": "g049",
+   "seed": 6049,
+   "scenario": "S6",
+   "detector": "probe",
+   "roles": {
+    "Alice": "Carrot",
+    "Bob": "Carrot",
+    "Charlie": "Parsnip",
+    "Dave": "Carrot",
+    "Eve": "Carrot"
+   },
+   "parsnip": "Charlie",
+   "orders": [
+    [
+     0,
+     3,
+     4,
+     2,
+     1
+    ],
+    [
+     2,
+     1,
+     4,
+     3,
+     0
+    ],
+    [
+     3,
+     0,
+     1,
+     2,
+     4
+    ],
+    [
+     2,
+     0,
+     3,
+     1,
+     4
+    ],
+    [
+     1,
+     3,
+     2,
+     0,
+     4
+    ]
+   ],
+   "votes": {
+    "Alice": "Eve",
+    "Bob": "Alice",
+    "Charlie": "Bob",
+    "Dave": "Alice",
+    "Eve": "Alice"
+   },
+   "eliminated": [
+    "Alice"
+   ],
+   "winner": "Parsnip",
+   "verdict": "Alice",
+   "correct": false,
+   "questions_asked": 0,
+   "failed": null,
+   "vote_failed": null
+  }
+ ]
+}

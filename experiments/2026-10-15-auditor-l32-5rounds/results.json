@@ -1,0 +1,184 @@
+{
+ "S0_none": {
+  "n_games": 50,
+  "failed": 0,
+  "fail_reasons": [],
+  "accuracy": 0.16,
+  "ci95": [
+   0.06,
+   0.28
+  ],
+  "accuracy_all": 0.16,
+  "questions": 0.0,
+  "carrot_win": 0.14
+ },
+ "S0_probe": {
+  "n_games": 50,
+  "failed": 0,
+  "fail_reasons": [],
+  "accuracy": 0.82,
+  "ci95": [
+   0.72,
+   0.92
+  ],
+  "accuracy_all": 0.82,
+  "questions": 0.0,
+  "carrot_win": 0.14,
+  "probe_auroc": 0.763,
+  "probe_auroc_ann": 0.763,
+  "probe_top1": 0.78,
+  "probe_top1_ann": 0.78
+ },
+ "S1_none": {
+  "n_games": 50,
+  "failed": 0,
+  "fail_reasons": [],
+  "accuracy": 0.3,
+  "ci95": [
+   0.18,
+   0.42
+  ],
+  "accuracy_all": 0.3,
+  "questions": 5.0
+ },
+ "S1_probe": {
+  "n_games": 50,
+  "failed": 0,
+  "fail_reasons": [],
+  "accuracy": 0.56,
+  "ci95": [
+   0.44,
+   0.7
+  ],
+  "accuracy_all": 0.56,
+  "questions": 5.0,
+  "probe_auroc": 0.674,
+  "probe_auroc_ann": 0.763,
+  "probe_auroc_ans": 0.505,
+  "probe_top1": 0.68,
+  "probe_top1_ann": 0.78
+ },
+ "S2_none": {
+  "n_games": 50,
+  "failed": 0,
+  "fail_reasons": [],
+  "accuracy": 0.46,
+  "ci95": [
+   0.32,
+   0.6
+  ],
+  "accuracy_all": 0.46,
+  "questions": 25.0,
+  "carrot_win": 0.4
+ },
+ "S2_probe": {
+  "n_games": 50,
+  "failed": 0,
+  "fail_reasons": [],
+  "accuracy": 0.6,
+  "ci95": [
+   0.46,
+   0.74
+  ],
+  "accuracy_all": 0.6,
+  "questions": 25.0,
+  "carrot_win": 0.44,
+  "probe_auroc": 0.546,
+  "probe_auroc_ann": 0.731,
+  "probe_auroc_ans": 0.499,
+  "probe_top1": 0.46,
+  "probe_top1_ann": 0.78
+ },
+ "S3_none": {
+  "n_games": 50,
+  "failed": 0,
+  "fail_reasons": [],
+  "accuracy": 0.22,
+  "ci95": [
+   0.12,
+   0.34
+  ],
+  "accuracy_all": 0.22,
+  "questions": 5.0,
+  "carrot_win": 0.24
+ },
+ "S3_probe": {
+  "n_games": 50,
+  "failed": 0,
+  "fail_reasons": [],
+  "accuracy": 0.64,
+  "ci95": [
+   0.5,
+   0.76
+  ],
+  "accuracy_all": 0.64,
+  "questions": 4.88,
+  "carrot_win": 0.4,
+  "probe_auroc": 0.741,
+  "probe_auroc_ann": 0.766,
+  "probe_auroc_ans": 0.497,
+  "probe_top1": 0.66,
+  "probe_top1_ann": 0.76
+ },
+ "S4_none": {
+  "n_games": 50,
+  "failed": 0,
+  "fail_reasons": [],
+  "accuracy": 0.64,
+  "ci95": [
+   0.52,
+   0.78
+  ],
+  "accuracy_all": 0.64,
+  "questions": 25.0,
+  "carrot_win": 0.22
+ },
+ "S4_probe": {
+  "n_games": 50,
+  "failed": 0,
+  "fail_reasons": [],
+  "accuracy": 0.76,
+  "ci95": [
+   0.64,
+   0.88
+  ],
+  "accuracy_all": 0.76,
+  "questions": 25.0,
+  "carrot_win": 0.38,
+  "probe_auroc": 0.481,
+  "probe_auroc_ann": 0.722,
+  "probe_auroc_ans": 0.357,
+  "probe_top1": 0.14,
+  "probe_top1_ann": 0.64
+ },
+ "S6_none": {
+  "n_games": 50,
+  "failed": 0,
+  "fail_reasons": [],
+  "accuracy": 0.32,
+  "ci95": [
+   0.2,
+   0.44
+  ],
+  "accuracy_all": 0.32,
+  "questions": 0.0,
+  "carrot_win": 0.26
+ },
+ "S6_probe": {
+  "n_games": 50,
+  "failed": 0,
+  "fail_reasons": [],
+  "accuracy": 0.7,
+  "ci95": [
+   0.56,
+   0.82
+  ],
+  "accuracy_all": 0.7,
+  "questions": 0.0,
+  "carrot_win": 0.54,
+  "probe_auroc": 0.762,
+  "probe_auroc_ann": 0.762,
+  "probe_top1": 0.78,
+  "probe_top1_ann": 0.78
+ }
+}

@@ -1941,3 +1941,66 @@ commit 1248298): NOT PREREGISTERED (exploratory).
 - `experiments/2026-10-14-auditor-in-game/` — PREREGISTRATION, README,
   `game.py`, `scorer.py`, `analyze.py`, `games_*.json`, `transcripts_*.jsonl`,
   `auditor_*.jsonl` (LFS), `results.json`, `figure_accuracy.png`
+
+## 2026-10-15: The auditor inside the 5-player game — five rounds, layer-32 probe (exploratory)
+
+### Context
+
+2026-10-14 put every probe condition at the ceiling (layer 48), so the
+scenarios could not be compared. Researcher: "can we run the same thing, but
+with more rounds? and maybe the old probe cause its worse so we can maybe
+differentiate better?" S5 dropped, no new scenario.
+
+### Experiment
+
+The 2026-10-14 wrapper with five discussion rounds and the layer-32
+follow-up probe; S0, S1, S2, S3, S4, S6 x {text only, probe}; 50 games per
+set (seeds 6000-6049). The auditor is told that answers score higher than
+announcements. Scorer window 16384 tokens (pilot: 12% of dialogues exceeded
+8192).
+
+### Expected Outcome
+
+Preregistered (`experiments/2026-10-15-auditor-l32-5rounds/PREREGISTRATION.md`,
+commit ff388ef): NOT PREREGISTERED (exploratory).
+
+### Actual Outcome
+
+<!-- researcher fills in -->
+
+### Results
+
+0 failed audits; chance 0.20.
+
+| scenario | text only | with L32 probe | Carrot win (text / probe) |
+|---|---|---|---|
+| S0 passive | 0.16 [0.06, 0.28] | 0.82 [0.72, 0.92] | 0.14 (shared) |
+| S1 final questions | 0.30 [0.18, 0.42] | 0.56 [0.44, 0.70] | 0.14 (shared) |
+| S2 per-round questions | 0.46 [0.32, 0.60] | 0.60 [0.46, 0.74] | 0.40 / 0.44 |
+| S3 question budget | 0.22 [0.12, 0.34] | 0.64 [0.50, 0.76] | 0.24 / 0.40 |
+| S4 private interviews | 0.64 [0.52, 0.78] | 0.76 [0.64, 0.88] | 0.22 / 0.38 |
+| S6 public recommendation | 0.32 [0.20, 0.44] | 0.70 [0.56, 0.82] | 0.26 / 0.54 |
+
+- Probe alone (top-1, announcements) 0.64-0.78; announcement AUROC
+  0.72-0.77; answer AUROC ~0.50 (S4 private 0.36).
+- With the probe, passive is best; questioning lowers accuracy (S0 vs S1 on
+  the same discussions: 16 vs 3 discordant games, sign test p = 0.004),
+  apparently because uninformative answer scores pull the auditor off the
+  announcement ranking (agreement 0.80 in S0, 0.54-0.70 elsewhere).
+- Text only, S2 (0.46) and S4 (0.64) beat passive; S4 is mostly private
+  confessions (23/50 games), S2 without a confession is 0.41 (p = 0.002 vs
+  chance).
+- S6 with the probe: Carrot win 0.54 vs 0.14 alone.
+
+### Parameters/Configurations
+
+- `experiments/2026-10-15-auditor-l32-5rounds/config.json`, `five.yaml`;
+  probe `probes/qwen3.8-27b_layer32_followup_logistic_regression.npz`.
+- Server: two replicas on GPUs 1,2 and 0,3, port 8003; scorer GPUs 6,7.
+  Run 2026-10-15 15:41 -> 2026-10-16 14:53 UTC.
+
+### Artifacts
+
+- `experiments/2026-10-15-auditor-l32-5rounds/` — PREREGISTRATION, README,
+  code, `games_*.json`, `transcripts_*.jsonl`, `auditor_*.jsonl` (LFS),
+  `results.json`, `figure_accuracy.png`
