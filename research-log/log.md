@@ -2485,3 +2485,110 @@ condition, <1%).
   `fig_conditions.png`, `fig_step_trajectory.png`
 - `acts/<cond>/<uid>.pt` — saved window activations (65 GB, gitignored) for
   later efc/axial scoring
+
+## 2026-10-16: why random directions separate Parsnip from Carrot — PCA (exploratory)
+
+### Context
+
+2026-10-12's `figures/roc.svg` shows a random direction, plugged into the fibs
+linear ensemble, at AUROC 0.84. That is the best of ten seeds; the ten range
+0.06–0.84 pooled. The researcher asked for a PCA to understand how random
+directions can carry this much signal. Exploratory, no preregistration
+(researcher's call).
+
+### Experiment
+
+No new forward passes. The fibs linear probe's read token, at layers
+19/27/35/43/51/58 for both prefills, is taken from 2026-10-12's stored
+activations: 3p + 5p (2,400 announcements), 3p_cc + 5p_cc, alpaca. A PCA is
+fitted per layer on the pooled main arms, on the "Yes." − "No." contrast and
+on each prefill alone. The analysis compares:
+- the variance decomposition with each PC's share of the role mean shift Δ;
+- 2,000 random unit directions per layer, against the Gaussian mean-shift
+  prediction Φ(d′/√2);
+- the same measures after projecting out the top 1/5/10 PCs;
+- where the all-Carrot games and alpaca sit on the role axis;
+- per-layer d′ of 2026-10-12's ten matched seeds.
+
+### Expected Outcome
+
+_(researcher to fill)_
+
+### Actual Outcome
+
+_(researcher to fill)_
+
+### Results
+
+**PC1 is the role axis.** At layers 35–58 (contrast):
+- PC1 holds 43–56% of all variance and 96–99% of |Δ|²;
+- PC1 role AUROC is 0.999–1.000;
+- it is not a confound with arm (5p-vs-3p AUROC 0.36–0.41) or round
+  (|r| ≤ 0.21);
+- the role shift is 32–47% of all variance, |Δ|²/tr Σ_w = 2.6–4.8, and the
+  participation ratio is 3–5.
+
+At layers 19 and 27, role is ≤ 2% of the variance and PC1 tracks the round.
+
+**Random directions follow from that one axis.**
+- A random direction's d′ is about N(0, |Δ|²/tr Σ_w): rms measured 1.6–2.1
+  vs predicted 1.6–2.2.
+- The Gaussian prediction matches each direction's AUROC at r = 0.998–0.999.
+- 49–60% of random directions score above 0.8 or below 0.2.
+- 2026-10-12's seed AUROCs follow the signs of their late-layer d′ (seed 8:
+  negative at 43/51/58; seeds 0 and 5: large positive at 51).
+
+**Projecting out PC1 alone** leaves 1–4% of |Δ|². After it:
+- no random direction scores above 0.8 or below 0.2;
+- the trained fibs linear weight falls from 0.990–0.996 to 0.40–0.47 per layer
+  (its cosine with PC1 is 0.12–0.18, about 10× random).
+
+**All-Carrot announcements and alpaca sit with the Carrots on the axis**
+(0 = Carrot, 1 = Parsnip: cc −0.02 to 0.06, alpaca −0.45 to 0.23). The axis is
+the Parsnip's state, not the game or the follow-up.
+
+The contrast concentrates the axis: on single prefills, role is 16–32% of the
+variance. Details: `experiments/2026-10-16-random-direction-pca/README.md`.
+
+**Follow-up (`fibs_transfer.py`): the role axis on FIBSv1.** Directions
+fitted on Carrot-Parsnip were applied to the FIBS validation read tokens
+(4,967 rows):
+- Carrot-Parsnip PC1 (contrast): 0.46–0.75 AUROC, best at layer 35, about the
+  best of 2,000 random directions (0.68–0.76 folded). It does not track
+  deception in the context (`base_deceptive` 0.41–0.52).
+- Trained fibs weight per layer: 0.94–0.99; trained ensemble: 0.985.
+- On FIBS the label is not a dominant axis: |Δ|²/tr Σ_w = 0.04–0.09, 1–2% of
+  the variance, participation ratio 32–48. FIBS's own PC1 (+ sign) scores
+  0.54–0.60 and its in-sample diff-of-means 0.78–0.89.
+
+Unsupervised PC1 works only where the label is the dominant axis, as on
+Carrot-Parsnip; the trained probe is what generalizes.
+
+**Follow-up (`judge_split.py`): the axis without a lie.** Parsnip
+announcements graded honest by the oracle judge (1–2, n = 14) sit 0.78–0.86
+of the way to the Parsnip mean (0 = Carrot, 1 = Parsnip) and separate from
+Carrots at AUROC 0.997–1.000. Lies (6–7, n = 210) sit at 1.13–1.25 and
+separate from honest and ambiguous Parsnip statements at 0.77–0.88. The axis
+is mostly role, with a smaller lie component along the same direction.
+
+### Parameters/Configurations
+
+`experiments/2026-10-16-random-direction-pca/config.json`:
+- source `experiments/2026-10-12-fibs-probes` (stored `acts_*`; its
+  `random_probe.read_tokens` and `direction`);
+- features contrast / "Yes." / "No.";
+- 20 PCs reported;
+- 2,000 random directions, seeded by (0, layer);
+- ablations of k = 1/5/10 PCs;
+- "extreme" means AUROC > 0.8 or < 0.2.
+
+CPU only.
+
+### Artifacts
+
+- `experiments/2026-10-16-random-direction-pca/`: `README.md`, `pca.py`,
+  `fibs_transfer.py`, `judge_split.py`, `config.json`, `results.json`,
+  `results_fibs.json`, `results_judge.json`,
+  `figures/{spectrum,pc_scatter,random_auroc,random_predicted,fibs_transfer}.svg`
+- `acts_readtok/`: read-token cache (1.6 GB, gitignored, regenerable with
+  `--stage extract`)
