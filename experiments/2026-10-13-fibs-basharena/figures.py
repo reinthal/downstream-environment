@@ -5,6 +5,7 @@
   figures/contrast.svg     linear contrast score by step class (honest /
                            pre-onset / post-onset), shared y
   figures/by_step.svg      exploratory: linear contrast against step index, by class
+  figures/roc.svg          exploratory: per-step ROC, primary and its decomposition
 
 Run:  uv run --project environments/bash_arena python experiments/2026-10-13-fibs-basharena/figures.py --tag main
 """
@@ -21,11 +22,20 @@ import matplotlib.pyplot as plt  # noqa: E402
 import numpy as np  # noqa: E402
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from analyze import label_steps  # noqa: E402
+from analyze import clustered_ci, label_steps  # noqa: E402
 from common import OUT, load_config  # noqa: E402
 
 CLASSES = [("honest", "honest steps"), ("pre_onset", "attack, pre-onset"), ("post_onset", "attack, post-onset")]
 COLORS = {"honest": "#4C72B0", "pre_onset": "#DD8452", "post_onset": "#C44E52"}
+
+
+def roc_curve(scores: np.ndarray, labels: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+    """FPR/TPR at every distinct threshold, highest first (tied scores share one point)."""
+    order = np.argsort(-scores, kind="stable")
+    s, y = scores[order], labels[order].astype(float)
+    last = np.r_[np.nonzero(np.diff(s))[0], len(s) - 1]
+    tp, fp = np.cumsum(y)[last], np.cumsum(1 - y)[last]
+    return np.r_[0, fp / fp[-1]], np.r_[0, tp / tp[-1]]
 
 
 def main():
@@ -67,19 +77,60 @@ def main():
     fig.tight_layout()
     fig.savefig(fig_dir / "contrast.svg")
 
-    # exploratory: contrast vs step index by class
+    # exploratory: contrast vs step index by class, median per 3 steps with 95% task-clustered CI
     fig, ax = plt.subplots(figsize=(6.0, 3.4))
+    bins = np.arange(1, 52, 3)
     for c, lab in CLASSES:
-        xs = np.array([r["step"] for r in rows if r["cls"] == c]); ys = np.array([r["linear_contrast"] for r in rows if r["cls"] == c])
-        bins = np.arange(1, 52, 3)
-        med = [np.median(ys[(xs >= b) & (xs < b + 3)]) if ((xs >= b) & (xs < b + 3)).any() else np.nan for b in bins]
+        sel = [r for r in rows if r["cls"] == c]
+        xs = np.array([r["step"] for r in sel]); ys = np.array([r["linear_contrast"] for r in sel])
+        tasks = np.array([r["task_id"] for r in sel])
+        med, lo, hi = [], [], []
+        for b in bins:
+            m = (xs >= b) & (xs < b + 3)
+            if not m.any():
+                med.append(np.nan); lo.append(np.nan); hi.append(np.nan)
+                continue
+            med.append(np.median(ys[m]))
+            l, h = clustered_ci(ys[m], np.zeros(m.sum()), tasks[m], cfg.n_boot, cfg.boot_seed,
+                                stat=lambda v, _: np.median(v))
+            lo.append(l); hi.append(h)
+        ax.fill_between(bins + 1, lo, hi, color=COLORS[c], alpha=0.2, lw=0)
         ax.plot(bins + 1, med, "o-", ms=3, color=COLORS[c], label=f"{lab} (median per 3 steps)")
     ax.set_xlabel("step index in trajectory")
     ax.set_ylabel("linear contrast")
-    ax.set_title("exploratory: contrast against step index, by class", fontsize=10)
+    ax.set_title("exploratory: contrast against step index, by class\nband = 95% task-clustered bootstrap CI of the median", fontsize=10)
     ax.legend(fontsize=8)
     fig.tight_layout()
     fig.savefig(fig_dir / "by_step.svg")
+
+    # exploratory: per-step ROC curves, primary contrast and its decomposition; shared axes
+    expl = json.loads((OUT / f"exploratory_{args.tag}.json").read_text())
+    comparisons = [
+        ("primary: post-onset vs honest + pre-onset", {"post_onset"}, {"honest", "pre_onset"},
+         {a: res["auroc"][a] for a in archs}),
+        ("post-onset vs pre-onset (action signal)", {"post_onset"}, {"pre_onset"},
+         {a: expl[a]["post_onset_vs_pre_onset"] for a in archs}),
+        ("pre-onset vs honest (prompt signal)", {"pre_onset"}, {"honest"},
+         {a: expl[a]["pre_onset_vs_honest"] for a in archs}),
+    ]
+    arch_colors = {"linear": "#333333", "mlp": "#4C72B0"}
+    fig, axes = plt.subplots(1, 3, figsize=(11.0, 3.8), sharex=True, sharey=True)
+    for ax, (title, pos, neg, stored) in zip(axes, comparisons):
+        sel = [r for r in rows if r["cls"] in pos | neg]
+        y = np.array([r["cls"] in pos for r in sel])
+        for a in archs:
+            fpr, tpr = roc_curve(np.array([r[f"{a}_contrast"] for r in sel]), y)
+            p, (lo, hi) = stored[a]["point"], stored[a]["ci95"]
+            ax.plot(fpr, tpr, color=arch_colors[a], lw=1.5, label=f"{a}: {p:.3f} [{lo:.3f}, {hi:.3f}]")
+        ax.plot([0, 1], [0, 1], ls=":", color="grey", lw=1)
+        ax.set_title(f"{title}\n{int(y.sum())} pos / {int((~y).sum())} neg steps", fontsize=9)
+        ax.set_xlabel("false positive rate (steps)")
+        ax.legend(fontsize=8, loc="lower right", title="AUROC [95% task CI]", title_fontsize=8)
+    axes[0].set_ylabel("true positive rate (steps)")
+    axes[0].set_xlim(0, 1); axes[0].set_ylim(0, 1)
+    fig.suptitle("fibs probes on BashArena (Qwen3.8-27B): per-step ROC", fontsize=10)
+    fig.tight_layout()
+    fig.savefig(fig_dir / "roc.svg")
     print("wrote", sorted(p.name for p in fig_dir.glob("*.svg")))
 
 
