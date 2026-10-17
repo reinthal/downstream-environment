@@ -2485,3 +2485,44 @@ condition, <1%).
   `fig_conditions.png`, `fig_step_trajectory.png`
 - `acts/<cond>/<uid>.pt` — saved window activations (65 GB, gitignored) for
   later efc/axial scoring
+
+## 2026-10-17: Twenty Questions clue ablation across model capability (preregistered)
+
+### Context
+
+The new `environments/twenty_questions/` environment: in pilots with clues,
+games ended early (Qwen3.5-122B-A10B solved 6/6, mean end turn 4.3 at an
+8-turn cap) and the competitive secret holder still gave easy clues. Before a
+large rollout: "what size of model we need to run this env."
+Preregistered: `experiments/2026-10-17-20q-clue-ablation/PREREGISTRATION.md`.
+
+### Experiment
+
+7 OpenRouter models (Qwen3.5 9B / 27B / 35B-A3B / 122B-A10B / 397B-A17B,
+GLM-5.3 Flash, GLM-5.3), each playing both seats and judging, × 2 arms
+(clues vs `clues: false`), 10 games each on the same 10 secrets. Primary:
+mean end turn (unsolved = 12). Analysis qualitative.
+
+### Expected Outcome
+
+"weak models give too easy close for this env to be interesting for
+measuring deception" — too easy = clue-arm "avg turn < 3.9", for "anything
+less than glm flag or equivalent, maybe Qwen 400b strong enough"; no-clue
+"mean end turn [...] should be 7.5 medium confidence" (75%). Abandon if
+"there is less then a turns difference" (weak vs strong, clue arm).
+(researcher)
+
+### Actual Outcome
+
+(researcher)
+
+### Parameters/Configurations
+
+`experiments/2026-10-17-20q-clue-ablation/config.json`: 12 turns,
+`concepts/things_n512_s0.json`, competitive goals, clue policy `either`,
+provider-default reasoning, max_tokens 16,000, seeds 0–9 (pilot: seed 1000,
+1 game per cell), cost cap $50.
+
+### Artifacts
+
+- `experiments/2026-10-17-20q-clue-ablation/` — `PREREGISTRATION.md`, `README.md`, `config.json`, `common.py`, `run.py`, `analyze.py`

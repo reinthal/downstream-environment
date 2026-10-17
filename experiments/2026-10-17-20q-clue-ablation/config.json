@@ -1,0 +1,38 @@
+{
+ "models": [
+  "openrouter/qwen/qwen3.5-9b",
+  "openrouter/qwen/qwen3.5-27b",
+  "openrouter/qwen/qwen3.5-35b-a3b",
+  "openrouter/qwen/qwen3.5-122b-a10b",
+  "openrouter/qwen/qwen3.5-397b-a17b",
+  "openrouter/z-ai/glm-5.3-flash",
+  "openrouter/z-ai/glm-5.3"
+ ],
+ "arms": {
+  "clues": {
+   "clues": true,
+   "clue_requests": true
+  },
+  "no_clues": {
+   "clues": false,
+   "clue_requests": false
+  }
+ },
+ "base_game_config": "environments/twenty_questions/configs/default.yaml",
+ "max_questions": 12,
+ "concept_set": "concepts/things_n512_s0.json",
+ "objective": "competitive",
+ "reasoning_effort": null,
+ "max_tokens": 16000,
+ "n_games": 10,
+ "base_seed": 0,
+ "pilot_seed": 1000,
+ "pilot_games": 1,
+ "max_concurrent_games": 10,
+ "parallel_models": 7,
+ "cost_cap_usd": 50.0,
+ "stop_launching_at": 0.8,
+ "retry_errored_once": true,
+ "void_excluded_fraction": 0.2,
+ "too_easy_threshold": 3.9
+}
