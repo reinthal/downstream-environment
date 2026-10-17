@@ -138,8 +138,10 @@ model and prompt, so a run resumes.
 
 Cost: about 176k input tokens per question asked (measured), roughly $0.007 at $0.042
 per million. `prior:` takes a JSON of counts, e.g. a measured free-choice
-distribution. The calculator reads only the yes/no answers and ignores
-clues.
+distribution. By default it reads only the yes/no answers; with
+`include_clues: true` every clue (on an answer or on request) is a further
+observation, scored with a Noul "is this clue correct if the secret were
+c?", and bits per question and per clue are reported apart.
 
 ## Grading with TypeSafe
 

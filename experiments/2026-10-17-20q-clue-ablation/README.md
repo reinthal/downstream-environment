@@ -149,7 +149,7 @@ and the median number of concepts consistent with every answer (hard count).
 
 ### Actual outcome (researcher)
 
-"size of model seems invariant when paired equally given that the length of games w and wo clues are roughly equally long and entropy for q set is resolved with equal pace for both  clue games and no clue games. moderate confidence."
+"size of model seems invariant when paired equally given that the length of games w and wo clues are roughly equally long [...] moderate confidence." Revised 2026-10-17 at the researcher's instruction ("the entropy lowering conclusion was wrong. they differ between clue/no clue"): the clause "and entropy for q set is resolved with equal pace for both clue games and no clue games" is withdrawn. Entropy falls faster in clue games: pooled over models, a clue-game question removes 0.82–1.04 soft bits (question positions 2–5) against 0.34–0.52 without clues, and the Qwen guessers reach 2–28 consistent concepts by question 3 with clues against 313–1,300 without.
 
 ### Conclusion (researcher; post-hoc — no conclusion sentence was preregistered)
 
@@ -159,9 +159,8 @@ and the median number of concepts consistent with every answer (hard count).
 
 - **Pace of entropy reduction, clue vs no-clue games.** Pooled over models,
   per question position, a clue-game question removes 0.82–1.04 soft bits
-  (positions 2–5) against 0.34–0.52 without clues; the outcome statement
-  above ("resolved with equal pace") is the researcher's reading, these are
-  the measured values. Clue-game questions follow the clues ("Is it a deer?").
+  (positions 2–5) against 0.34–0.52 without clues. Clue-game questions
+  follow the clues ("Is it a deer?").
 - **Clue-game entropy table** (requested). Cohort: games with ≥ 3 questions
   (clue games are short: 35–65 questions per cell vs 93–108 without clues, so
   a longer cohort would be nearly empty). Soft H and median consistent
@@ -191,3 +190,49 @@ and the median number of concepts consistent with every answer (hard count).
 - **Clue requests vs questions.** Player 2 asked for a clue once in 60
   clue-arm games, so this run has almost no data on whether spending a turn
   on a clue beats a question.
+
+### Follow-up: clues scored against the concepts — clue vs question (exploratory)
+
+Requested by the researcher after the conclusion. `entropy_analysis.py --clues`
+scores every clue of the clue arm (198 clues, 195 unique; 30.9M Jev input
+tokens, ~$1.30) against all 1,796 THINGS with a Noul "is this clue correct if
+the secret were c?" and adds it to the posterior (a given clue holds for the
+secret, so the posterior is multiplied by p_clue). Bits of a clue are measured
+at the point it was given (after the question it came with); "hard" bits =
+log2 of the drop in consistent concepts. Outputs: `entropy_clues_summary.json`,
+`entropy_clues_<cell>.json`.
+
+| model (clue arm) | questions | clues | soft bits / question | soft bits / clue | hard bits / question | hard bits / clue | final soft H (with clues) |
+|---|---|---|---|---|---|---|---|
+| qwen3.5-9b | 52 | 51 | 0.92 | 1.02 | 0.52 | 2.78 | 0.81 |
+| qwen3.5-27b | 35 | 24 | 1.31 | 1.70 | 0.97 | 2.77 | 2.14 |
+| qwen3.5-122b-a10b | 41 | 30 | 1.17 | 1.31 | 0.75 | 3.18 | 2.09 |
+| qwen3.5-397b-a17b | 41 | 26 | 1.11 | 1.37 | 0.72 | 3.02 | 2.71 |
+| glm-5.3-flash | 65 | 32 | 0.66 | 0.88 | 0.61 | 1.95 | 3.56 |
+| glm-5.3 | 46 | 34 | 1.04 | 0.97 | 0.88 | 2.04 | 2.76 |
+| **pooled** | 280 | 197 | **0.99** (median 0.48) | **1.16** (median 1.03) | **0.73** (median 0.29) | **2.58** (median 2.02) | |
+
+**Which is better on average: a clue.** Pooled, a clue removes 1.16 soft bits
+against 0.99 for a yes/no question (medians 1.03 vs 0.48), and 2.58 vs 0.73
+bits by hard count (medians 2.02 vs 0.29); the clue is ahead for 5 of 6
+models on soft bits (GLM-5.3: 0.97 vs 1.04) and for all 6 on hard bits. A
+question turn that came with a clue removed 2.05 soft bits in total (median
+1.67), a question turn without one 1.24 (median 0.53).
+
+**Game-theoretic follow-up (clue request vs question).** Asking for a clue
+costs Player 2 a turn, exactly like a question. On these averages a clue is
+worth more than a question (1.16 vs 0.99 soft, 2.58 vs 0.73 hard), so
+requesting clues would pay on average — *if* a requested clue were as
+informative as a volunteered one. That is not established: Player 2 asked for
+a clue once in 60 games (that clue: 1.45 soft bits, n = 1), and every other
+clue was volunteered by Player 1, who chose when to give it; under competitive
+goals a holder answering a request may give vaguer clues. Testing it needs
+games where Player 2 requests clues (e.g. a guesser instructed or incentivised
+to request, or `clue_request_uses_turn: false` vs `true`).
+
+With clues in the measure, the final soft entropy of clue-arm games is
+0.8–3.6 bits (question-only measure: ~6–8 bits), in line with 80–100% of them
+being solved — the researcher's "low entropy should imply high likelihood of
+solving". The true secret is still consistent with every observation at the
+end in 3–9 of 10 games per model: Jev judges some clues incorrect for the
+secret, as it judged 6% of answers.

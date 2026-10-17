@@ -1,0 +1,273 @@
+{
+ "entropy_config": {
+  "model": "jev-1.13.0",
+  "concept_set": "concepts/things_all.json",
+  "prior": "uniform",
+  "noul_instructions": "In a game of Twenty Questions the secret is \"{concept}\" ({definition}). Is the truthful answer to `question` yes?",
+  "noul_criteria": {
+   "true": "For this secret, someone who knows it would truthfully answer the question yes.",
+   "false": "For this secret, someone who knows it would truthfully answer the question no."
+  },
+  "include_clues": true,
+  "clue_noul_instructions": "In a game of Twenty Questions the secret is \"{concept}\" ({definition}). Is `clue` a correct statement about the secret?",
+  "clue_noul_criteria": {
+   "true": "Everything the clue says holds for this secret.",
+   "false": "At least part of the clue does not hold for this secret."
+  },
+  "concepts_per_request": 300,
+  "concurrency": 8
+ },
+ "H0": 10.810571634741146,
+ "input_tokens": 30879183,
+ "cells": [
+  {
+   "model": "openrouter/qwen/qwen3.5-9b",
+   "n_questions": 52,
+   "n_clues": 51,
+   "n_requested_clues": 0,
+   "soft_bits_per_question": 0.923123686258195,
+   "soft_bits_per_clue": 1.0198278612097114,
+   "hard_bits_per_question": 0.5218254019843515,
+   "hard_bits_per_clue": 2.778332472720983,
+   "soft_bits_requested_clues": [],
+   "final_H_with_clues": [
+    0.622,
+    0.02,
+    0.002,
+    0.664,
+    0.011,
+    1.117,
+    0.032,
+    0.353,
+    3.457,
+    1.813
+   ],
+   "final_secret_consistent": [
+    false,
+    false,
+    false,
+    false,
+    true,
+    true,
+    false,
+    false,
+    true,
+    false
+   ]
+  },
+  {
+   "model": "openrouter/qwen/qwen3.5-27b",
+   "n_questions": 35,
+   "n_clues": 24,
+   "n_requested_clues": 0,
+   "soft_bits_per_question": 1.313247646122633,
+   "soft_bits_per_clue": 1.6984570444948512,
+   "hard_bits_per_question": 0.9668430032264795,
+   "hard_bits_per_clue": 2.7748626665818645,
+   "soft_bits_requested_clues": [],
+   "final_H_with_clues": [
+    2.284,
+    1.754,
+    3.67,
+    0.956,
+    0.4,
+    2.618,
+    0.105,
+    2.924,
+    5.637,
+    1.03
+   ],
+   "final_secret_consistent": [
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "model": "openrouter/qwen/qwen3.5-122b-a10b",
+   "n_questions": 41,
+   "n_clues": 30,
+   "n_requested_clues": 0,
+   "soft_bits_per_question": 1.166227723477459,
+   "soft_bits_per_clue": 1.3144360553639451,
+   "hard_bits_per_question": 0.7508607832265572,
+   "hard_bits_per_clue": 3.1843750623374265,
+   "soft_bits_requested_clues": [],
+   "final_H_with_clues": [
+    2.682,
+    2.559,
+    2.911,
+    0.265,
+    0.032,
+    1.419,
+    0.233,
+    2.715,
+    3.593,
+    4.448
+   ],
+   "final_secret_consistent": [
+    true,
+    true,
+    true,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "model": "openrouter/qwen/qwen3.5-397b-a17b",
+   "n_questions": 41,
+   "n_clues": 26,
+   "n_requested_clues": 0,
+   "soft_bits_per_question": 1.1079936389235645,
+   "soft_bits_per_clue": 1.3696584314318017,
+   "hard_bits_per_question": 0.7240301590951679,
+   "hard_bits_per_clue": 3.017610220848032,
+   "soft_bits_requested_clues": [],
+   "final_H_with_clues": [
+    2.304,
+    1.508,
+    2.602,
+    1.169,
+    2.117,
+    4.154,
+    7.817,
+    2.788,
+    2.586,
+    0.024
+   ],
+   "final_secret_consistent": [
+    true,
+    true,
+    true,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "model": "openrouter/z-ai/glm-5.3-flash",
+   "n_questions": 65,
+   "n_clues": 32,
+   "n_requested_clues": 1,
+   "soft_bits_per_question": 0.6613800892258074,
+   "soft_bits_per_clue": 0.8782306142788827,
+   "hard_bits_per_question": 0.6136348322212194,
+   "hard_bits_per_clue": 1.946691231610276,
+   "soft_bits_requested_clues": [
+    1.4507593484412151
+   ],
+   "final_H_with_clues": [
+    3.849,
+    1.591,
+    6.302,
+    4.605,
+    0.008,
+    2.761,
+    4.97,
+    1.122,
+    3.841,
+    6.513
+   ],
+   "final_secret_consistent": [
+    true,
+    false,
+    true,
+    true,
+    false,
+    false,
+    false,
+    true,
+    true,
+    false
+   ]
+  },
+  {
+   "model": "openrouter/z-ai/glm-5.3",
+   "n_questions": 46,
+   "n_clues": 34,
+   "n_requested_clues": 0,
+   "soft_bits_per_question": 1.0361177419886365,
+   "soft_bits_per_clue": 0.9659032834371538,
+   "hard_bits_per_question": 0.8830069488632944,
+   "hard_bits_per_clue": 2.03588819030789,
+   "soft_bits_requested_clues": [],
+   "final_H_with_clues": [
+    3.705,
+    1.57,
+    1.136,
+    1.785,
+    0.049,
+    2.242,
+    1.223,
+    3.435,
+    4.219,
+    8.24
+   ],
+   "final_secret_consistent": [
+    true,
+    true,
+    true,
+    false,
+    true,
+    false,
+    false,
+    true,
+    false,
+    true
+   ]
+  }
+ ],
+ "pooled": {
+  "question": {
+   "n": 280,
+   "mean": 0.9923582038904107,
+   "median": 0.4778340127473544
+  },
+  "clue": {
+   "n": 197,
+   "mean": 1.161230873916266,
+   "median": 1.0286680687406804
+  },
+  "requested_clue": {
+   "n": 1,
+   "mean": 1.4507593484412151,
+   "median": 1.4507593484412151
+  },
+  "question_hard": {
+   "n": 243,
+   "mean": 0.7319644585185331,
+   "median": 0.2937312030567103
+  },
+  "clue_hard": {
+   "n": 157,
+   "mean": 2.5842893104048796,
+   "median": 2.0238467419543675
+  },
+  "turn_with_clue": {
+   "n": 197,
+   "mean": 2.0484861304806032,
+   "median": 1.6684252867496365
+  },
+  "turn_without_clue": {
+   "n": 83,
+   "mean": 1.2418194162185607,
+   "median": 0.525691322347952
+  }
+ }
+}

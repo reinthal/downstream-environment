@@ -74,3 +74,42 @@ def test_definitions_fill_the_noul(tmp_path):
     cs = ConceptSet.load(cfg.concept_path())
     q = JevScorer(cfg, cs, tmp_path / "c.jsonl").questions([cs.words[0]])["c0"]
     assert f'"{cs.words[0]}" ({cs.definitions[0]})' in q.instructions
+
+
+class FakeJevKinds(FakeJev):
+    async def system_one(self, state, questions):
+        (kind, text), = state.items()
+        self.requests.append((kind, len(questions)))
+        answers = {k: NS(noul=self.p_yes(kind, text, q.instructions.split('the secret is "')[1].split('"')[0]))
+                   for k, q in questions.items()}
+        return NS(answers=answers, model="jev-1.13.0", usage=NS(input_tokens=1))
+
+
+def test_clues_are_observations(tmp_path):
+    cfg = EntropyConfig(concept_set="concepts/things_n256_s0.json", concepts_per_request=256, include_clues=True)
+    words = ConceptSet.load(cfg.concept_path()).words
+    secret = words[0]
+
+    def p(kind, text, c):
+        if kind == "question":
+            return 0.5                                    # uninformative question
+        return 0.99 if c < "m" else 0.01                  # the clue fits the first half only
+
+    games = [{"game_id": "g", "objective": "competitive", "secret": secret, "exchanges": [
+        {"turn": 1, "kind": "question", "text": "Q?", "answer": " no", "clue": "Early letter."},
+        {"turn": 2, "kind": "clue_request", "text": "", "answer": None, "clue": "Early letter."},
+        {"turn": 3, "kind": "final_answer", "text": "x", "answer": None, "clue": None}]}]
+    jev = FakeJevKinds(p)
+    res = asyncio.run(analyse(cfg, games, tmp_path / "c.jsonl", client=jev))
+    g = res["games"][0]
+    assert [s["kind"] for s in g["steps"]] == [None, "question", "clue", "clue"]
+    assert g["steps"][1]["bits"] == pytest.approx(0.0, abs=1e-9)          # the question removes nothing
+    assert g["steps"][2]["bits"] > 0.9 and g["steps"][2]["secret_consistent"]
+    assert res["n_questions"] == 1 and res["n_clues"] == 2
+    assert sorted(set(jev.requests)) == [("clue", 256), ("question", 256)]   # repeated clue text scored once
+    rows = [json.loads(x) for x in (tmp_path / "c.jsonl").read_text().splitlines()]
+    assert sum(r.get("kind") == "clue" for r in rows) == 256 and sum("kind" not in r for r in rows) == 256
+    # question-only config reading the same cache: clue rows are ignored, not an error
+    res_q = asyncio.run(analyse(EntropyConfig(concept_set=cfg.concept_set), games, tmp_path / "c.jsonl",
+                                client=FakeJevKinds(lambda *a: pytest.fail("re-requested"))))
+    assert res_q["n_clues"] == 0 and len(res_q["games"][0]["steps"]) == 2

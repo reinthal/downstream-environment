@@ -11,11 +11,19 @@ question, so H is unchanged over it.
 
 Writes: jev_scores.jsonl (cache), entropy_<cell>.json, entropy_summary.json,
 figures/entropy_by_turn.svg. Needs TYPESAFE_API_KEY (repo .env).
+
+--clues: also score every clue (on an answer or on request) against all
+THINGS ("is this clue correct if the secret were c?") and add it to the
+posterior; compares bits per clue with bits per question in the clue arm.
+Writes entropy_clues_<cell>.json, entropy_clues_summary.json.
 """
 from __future__ import annotations
 
+import argparse
 import asyncio
+import dataclasses
 import json
+import math
 import os
 import statistics
 
@@ -36,6 +44,70 @@ def load_key():
 
 def cell_games(cfg, model, arm):
     return json.loads((OUT / f"games_{cell(model, arm, False)}.json").read_text())["games"]
+
+
+def hard_bits(before: int, after: int):
+    return math.log2(before / after) if before and after else None
+
+
+def clues_main():
+    """Clue observations in the clue arm: bits per clue vs bits per question."""
+    load_key()
+    cfg = AblationConfig.load()
+    ecfg = dataclasses.replace(EntropyConfig.from_yaml(ENV / "configs" / "entropy.yaml"), include_clues=True)
+    every = [g for m in cfg.models for g in cell_games(cfg, m, "clues")]
+    first = asyncio.run(analyse(ecfg, every, CACHE))
+    print(f"scored: {first['input_tokens']} new input tokens")
+    summary = {"entropy_config": first["config"], "H0": first["H0"], "input_tokens": first["input_tokens"], "cells": []}
+    pooled = {"question": [], "clue": [], "requested_clue": [], "question_hard": [], "clue_hard": [],
+              "turn_with_clue": [], "turn_without_clue": []}
+    for m in cfg.models:
+        games = cell_games(cfg, m, "clues")
+        res = asyncio.run(analyse(ecfg, games, CACHE))
+        (OUT / f"entropy_clues_{cell(m, 'clues', False)}.json").write_text(json.dumps(res, indent=1) + "\n")
+        q, c, qh, ch, req = [], [], [], [], []
+        for game, gres in zip(games, res["games"]):
+            requested_turns = {e["turn"] for e in game["exchanges"] if e["kind"] == "clue_request"}
+            steps = gres["steps"]
+            for prev, s in zip(steps, steps[1:]):
+                hb = hard_bits(prev["n_consistent"], s["n_consistent"])
+                if s["kind"] == "question":
+                    q.append(s["bits"]); qh.append(hb)
+                elif s["turn"] in requested_turns:
+                    req.append(s["bits"])
+                else:
+                    c.append(s["bits"]); ch.append(hb)
+            # per question turn: question alone vs question + its clue
+            by_turn = {}
+            for s in steps[1:]:
+                by_turn.setdefault(s["turn"], []).append(s)
+            for turn, ss in by_turn.items():
+                if turn in requested_turns or ss[0]["kind"] != "question":
+                    continue
+                (pooled["turn_with_clue"] if len(ss) > 1 else pooled["turn_without_clue"]).append(sum(x["bits"] for x in ss))
+        mean = lambda xs: statistics.mean([x for x in xs if x is not None]) if [x for x in xs if x is not None] else None
+        summary["cells"].append({"model": m, "n_questions": len(q), "n_clues": len(c), "n_requested_clues": len(req),
+                                 "soft_bits_per_question": mean(q), "soft_bits_per_clue": mean(c),
+                                 "hard_bits_per_question": mean(qh), "hard_bits_per_clue": mean(ch),
+                                 "soft_bits_requested_clues": req,
+                                 "final_H_with_clues": [round(g["steps"][-1]["H"], 3) for g in res["games"]],
+                                 "final_secret_consistent": [g["steps"][-1].get("secret_consistent") for g in res["games"]]})
+        pooled["question"] += q; pooled["clue"] += c; pooled["requested_clue"] += req
+        pooled["question_hard"] += qh; pooled["clue_hard"] += ch
+    mean = lambda xs: statistics.mean([x for x in xs if x is not None]) if [x for x in xs if x is not None] else None
+    summary["pooled"] = {k: {"n": len([x for x in v if x is not None]), "mean": mean(v),
+                             "median": statistics.median([x for x in v if x is not None]) if v else None}
+                         for k, v in pooled.items()}
+    (OUT / "entropy_clues_summary.json").write_text(json.dumps(summary, indent=1) + "\n")
+    print(f"{'model':20} {'q':>3} {'clues':>5} {'soft/q':>6} {'soft/clue':>9} {'hard/q':>6} {'hard/clue':>9} {'final H':>7} {'secret ok':>9}")
+    for c_ in summary["cells"]:
+        f = lambda x: f"{x:6.2f}" if x is not None else "     -"
+        print(f"{slug(c_['model']):20} {c_['n_questions']:>3} {c_['n_clues']:>5} {f(c_['soft_bits_per_question'])} "
+              f"{f(c_['soft_bits_per_clue']):>9} {f(c_['hard_bits_per_question'])} {f(c_['hard_bits_per_clue']):>9} "
+              f"{statistics.mean(c_['final_H_with_clues']):7.2f} {sum(bool(x) for x in c_['final_secret_consistent']):>6}/10")
+    for k, v in summary["pooled"].items():
+        print(f"pooled {k:18} n={v['n']:3} mean={v['mean'] if v['mean'] is None else round(v['mean'], 3)} "
+              f"median={v['median'] if v['median'] is None else round(v['median'], 3)}")
 
 
 def main():
@@ -112,4 +184,6 @@ def figure(cfg, summary):
 
 
 if __name__ == "__main__":
-    main()
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--clues", action="store_true")
+    clues_main() if ap.parse_args().clues else main()
