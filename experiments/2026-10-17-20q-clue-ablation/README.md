@@ -134,3 +134,60 @@ and the median number of concepts consistent with every answer (hard count).
   from the hard count (secret still consistent at the end in 3–9 of 10 games
   per cell), so hard counts are a lower bound on remaining uncertainty only
   where Jev and the suspect agree.
+
+## Conclusion
+
+### Predicted vs outcome
+
+| preregistered item | predicted (researcher) | outcome |
+|---|---|---|
+| "Too easy" (clue-arm mean end turn < 3.9) for models "less than glm flag" | Qwen3.5-9B, 27B, 122B too easy ("maybe Qwen 400b strong enough") | only Qwen3.5-27B (3.6); 9B 6.1, 122B 5.0, 397B 5.0 |
+| Strong models not too easy | GLM-5.3 Flash, GLM-5.3 (≥ 3.9) | 7.4, 5.5 — not too easy |
+| No-clue mean end turn | 7.5, 75% confidence (interval NOT PREREGISTERED) | 11.1–11.8 for every model; 70–90% unsolved at the 12-turn cap |
+| Abandon H1 if weak − strong clue-arm difference < 1 turn | — | 1.07–1.55 turns depending on where Qwen3.5-397B is counted: not triggered (within the ±2-turn noise of 10-game cells) |
+| Conclusion sentences | NOT PREREGISTERED | — |
+
+### Actual outcome (researcher)
+
+"size of model seems invariant when paired equally given that the length of games w and wo clues are roughly equally long and entropy for q set is resolved with equal pace for both  clue games and no clue games. moderate confidence."
+
+### Conclusion (researcher; post-hoc — no conclusion sentence was preregistered)
+
+"conclusions: entropy lowering experiment predicted that 512 size secret pool would be barely solvable with 12 questions. the avg solve was just below 12 although confounded by the max 12 questions. needs more experiments and to run for longer. it will be interesting to study how entropy lowering lines up with solving the task low entropy should imply high likelihood of solving. this could be a good metric for studying sanity in the game. still not sure what the difference between hard count and soft entropy is - guess soft entropy captures uncertainty for vagueness of clues maybe? The entropy analysis also is missing a table for clue games - maybe because the number of questions was substantially lower? clues should be included in the entropy analysis as they contribute to lowering it. The question also becomes if it is game theoretically advantageous to use clues if they consume a turn and lowers entropy more than a y/n question. I expect that they do as positive traits lowers more than negative."
+
+### Measurements bearing on the points above (Claude, factual)
+
+- **Pace of entropy reduction, clue vs no-clue games.** Pooled over models,
+  per question position, a clue-game question removes 0.82–1.04 soft bits
+  (positions 2–5) against 0.34–0.52 without clues; the outcome statement
+  above ("resolved with equal pace") is the researcher's reading, these are
+  the measured values. Clue-game questions follow the clues ("Is it a deer?").
+- **Clue-game entropy table** (requested). Cohort: games with ≥ 3 questions
+  (clue games are short: 35–65 questions per cell vs 93–108 without clues, so
+  a longer cohort would be nearly empty). Soft H and median consistent
+  concepts after 1 / 2 / 3 questions, both arms on the same cohort rule:
+
+| model | clues: n | soft H | consistent | no clues: n | soft H | consistent |
+|---|---|---|---|---|---|---|
+| qwen3.5-9b | 9 | 10.40 / 9.38 / 8.58 | 1507 / 91 / 10 | 10 | 10.37 / 9.90 / 9.42 | 1512 / 1328 / 313 |
+| qwen3.5-27b | 10 | 10.39 / 9.45 / 8.18 | 1518 / 91 / 2 | 9 | 10.36 / 9.99 / 9.54 | 1518 / 1485 / 1300 |
+| qwen3.5-122b-a10b | 10 | 10.39 / 9.54 / 8.33 | 1518 / 133 / 28 | 10 | 10.39 / 9.75 / 9.21 | 1518 / 1314 / 581 |
+| qwen3.5-397b-a17b | 9 | 10.36 / 9.82 / 8.73 | 1518 / 1313 / 28 | 10 | 10.39 / 10.05 / 9.42 | 1518 / 1485 / 742 |
+| glm-5.3-flash | 10 | 10.70 / 9.97 / 9.14 | 1753 / 572 / 271 | 10 | 10.52 / 10.25 / 9.82 | 1480 / 1217 / 742 |
+| glm-5.3 | 10 | 10.63 / 9.75 / 8.74 | 1758 / 437 / 128 | 10 | 10.41 / 10.00 / 9.43 | 1479 / 1327 / 594 |
+
+- **Soft entropy vs hard count.** Both use only the yes/no answers; clues are
+  not in either. Soft H weights every concept by Jev's p(answer | concept) and
+  takes the entropy of that posterior: a concept Jev gives p = 0.05 for the
+  observed answer keeps 5% of its weight, so Jev's uncertainty about each
+  (question, concept) pair keeps soft H high. The hard count drops a concept
+  as soon as one answer disagrees with Jev's p > 0.5 call and counts what is
+  left: it reads Jev as certain, so it falls faster — and it also drops the
+  true secret when Jev and the suspect disagree (6% of turns).
+- **Clues in the entropy analysis.** Not included (the calculator reads only
+  the yes/no channel), so clue-game entropy here understates what the
+  guesser knew; including clues needs a per-(clue, concept) Jev judgment
+  ("is this clue correct for c?"), the same scoring applied to clue texts.
+- **Clue requests vs questions.** Player 2 asked for a clue once in 60
+  clue-arm games, so this run has almost no data on whether spending a turn
+  on a clue beats a question.
