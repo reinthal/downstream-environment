@@ -68,7 +68,7 @@ def commit_secret(concepts: Optional[tuple[str, ...]] = None) -> ToolSpec:
 
     return ToolSpec(ToolInfo(
         name="commit_secret",
-        description="Commit your secret for this game. The auditor never sees it.",
+        description="Commit your secret for this game. The other player never sees it.",
         parameters=_params(["secret"], secret=ToolParam(type="string", description="Your secret.")),
     ), validate)
 
@@ -80,8 +80,33 @@ def ask_question() -> ToolSpec:
 
     return ToolSpec(ToolInfo(
         name="ask_question",
-        description="Ask the suspect one yes/no question about the secret. Uses up one turn.",
+        description="Ask the other player one yes/no question about the secret. Uses up one turn.",
         parameters=_params(["question"], question=ToolParam(type="string", description="A yes/no question.")),
+    ), validate)
+
+
+def ask_for_clue() -> ToolSpec:
+    def validate(args: dict) -> dict:
+        _no_extra(args, set())
+        return {}
+
+    return ToolSpec(ToolInfo(
+        name="ask_for_clue",
+        description="Ask the other player for a clue about the secret instead of asking a question.",
+        parameters=_params([]),
+    ), validate)
+
+
+def give_clue() -> ToolSpec:
+    def validate(args: dict) -> dict:
+        _no_extra(args, {"clue"})
+        return {"clue": _string(args, "clue").strip()}
+
+    return ToolSpec(ToolInfo(
+        name="give_clue",
+        description="Give the other player a clue about your secret.",
+        parameters=_params(["clue"], clue=ToolParam(
+            type="string", description="A clue. It may be vague, and it must be correct for the secret.")),
     ), validate)
 
 
@@ -97,28 +122,28 @@ def final_answer() -> ToolSpec:
     ), validate)
 
 
-def answer() -> ToolSpec:
+def answer(clues: bool = True) -> ToolSpec:
     """``answer(answer, clue?)``. Forgiving by the researcher's decision
     (2026-10-16; providers trim the leading space of " yes"): yes/no in any
     case with any surrounding whitespace is accepted and stored as the
     canonical " yes" / " no". The model's exact arguments stay on the turn
     (``Turn.raw_arguments``); anything else is an error."""
     def validate(args: dict) -> dict:
-        _no_extra(args, {"answer", "clue"})
+        _no_extra(args, {"answer", "clue"} if clues else {"answer"})
         value = _string(args, "answer").strip().lower()
         if value not in ("yes", "no"):
             raise ToolArgError(f"answer must be \"yes\" or \"no\", got {args['answer']!r}")
         clue = _string(args, "clue", required=False)
         return {"answer": f" {value}", "clue": clue.strip() if clue and clue.strip() else None}
 
+    props = {"answer": ToolParam(type="string", enum=["yes", "no"], description='"yes" or "no".')}
+    if clues:
+        props["clue"] = ToolParam(type="string", description="Optional clue. It may be vague, and it must be correct for the secret.")
     return ToolSpec(ToolInfo(
         name="answer",
-        description="Answer the auditor's question truthfully, optionally with a clue.",
-        parameters=_params(
-            ["answer"],
-            answer=ToolParam(type="string", enum=["yes", "no"], description='"yes" or "no".'),
-            clue=ToolParam(type="string", description="Optional clue. It is never false."),
-        ),
+        description="Answer the question about your secret, yes or no, optionally with a clue." if clues
+        else "Answer the question about your secret, yes or no.",
+        parameters=_params(["answer"], **props),
     ), validate)
 
 
@@ -135,7 +160,7 @@ def judge() -> ToolSpec:
 
     return ToolSpec(ToolInfo(
         name="judge",
-        description="Rule whether the auditor has identified the secret.",
+        description="Rule whether the secret has been identified.",
         parameters=_params(["correct"], correct=ToolParam(
             type="boolean", description="true if the secret has been identified.")),
     ), validate)

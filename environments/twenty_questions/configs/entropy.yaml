@@ -1,12 +1,18 @@
-# Posterior-entropy calculator (twenty_questions.entropy) on the local
-# Qwen3.8-27B server. The oracle answers each played question for every
-# concept; the posterior over the set gives bits per question.
-base_url: http://localhost:8001/v1
-model: Qwen/Qwen3.8-27B
-api_key_env: VLLM_API_KEY
-concept_set: concepts/things_n512_s0.json
+# Posterior-entropy calculator (twenty_questions.entropy), scored with
+# TypeSafe's Jev: every auditor question is evaluated against every THINGS
+# concept (one Noul per concept: "if the secret were c, is the answer yes?"),
+# and the posterior over THINGS gives the bits each question removed.
+# {concept} / {definition} are filled per concept; `question` is the state.
+
+model: jev-1.13.0
+concept_set: concepts/things_all.json
 prior: uniform
-answer_prefix: "Answer:"
-chat_template_kwargs: {enable_thinking: false}
-batch_size: 128
+noul_instructions: |-
+  In a game of Twenty Questions the secret is "{concept}" ({definition}). Is the truthful answer to `question` yes?
+noul_criteria:
+  'true': |-
+    For this secret, someone who knows it would truthfully answer the question yes.
+  'false': |-
+    For this secret, someone who knows it would truthfully answer the question no.
+concepts_per_request: 300
 concurrency: 8

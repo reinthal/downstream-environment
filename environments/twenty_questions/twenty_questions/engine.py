@@ -5,8 +5,11 @@ Flow (``TwentyQuestionsGame.play``):
 
 1. **Setup.** Both players get the public rules as a user message (identical
    text; the bounded concept list is appended for the suspect, and for the
-   auditor only if ``auditor.show_concepts``, default off). Hidden dynamics — the suspect's
-   objective — are system prompts.
+   auditor only if ``auditor.show_concepts``, default off). The rules state
+   both players' goals (the suspect's ``objective``: competitive or
+   cooperative); system prompts are left for dynamics the other player must
+   not see (empty by default). The models see the seat names (Player 1 /
+   Player 2), never "suspect" or "auditor".
 2. **Commit** (turn 0). ``free_form``: the suspect picks anything;
    ``bounded_free_form``: it picks from the concept set; ``bounded_random``:
    the engine draws a concept uniformly (seeded) and injects the
@@ -43,7 +46,7 @@ from .records import Turn
 @dataclass
 class Exchange:
     turn: int
-    kind: str                      # question | final_answer
+    kind: str                      # question | clue_request | final_answer
     text: str                      # the question or the guess
     answer: Optional[str]          # " yes" | " no" (questions)
     clue: Optional[str]
@@ -74,29 +77,52 @@ class GameResult:
         return d
 
 
+def fill(cfg: GameConfig, template: str, **fields) -> str:
+    """Format a prompt template; {player1}, {player2} and {max_questions}
+    are available in every template."""
+    return template.format(player1=cfg.suspects[0].name, player2=cfg.auditor.name,
+                           max_questions=cfg.max_questions, **fields)
+
+
 def render_rules(cfg: GameConfig, concepts: Optional[ConceptSet], *, show_concepts: bool) -> str:
     p = cfg.prompts
     if concepts is None:
-        space, listing = p.secret_space_free, ""
+        space, listing = fill(cfg, p.secret_space_free), ""
     else:
-        visibility = p.visibility_both if cfg.auditor.show_concepts else p.visibility_suspect
-        space = p.secret_space_bounded.format(n=len(concepts), visibility=visibility)
+        visibility = fill(cfg, p.visibility_both if cfg.auditor.show_concepts else p.visibility_suspect)
+        space = fill(cfg, p.secret_space_bounded, n=len(concepts), visibility=visibility)
         listing = concept_listing(cfg, concepts) if show_concepts else ""
-    clue_rule = {"helpful": p.clue_rule_helpful, "misleading": p.clue_rule_misleading,
-                 "either": p.clue_rule_either}[cfg.clue_policy]
-    clue_examples = {"helpful": p.clue_examples_helpful, "misleading": p.clue_examples_misleading,
-                     "either": p.clue_examples_either}[cfg.clue_policy]
-    final_rule = {"end": p.final_answer_rule_end, "continue": p.final_answer_rule_continue}[cfg.final_answer_mode]
-    rules = p.rules.format(
-        suspect=cfg.suspects[0].name, auditor=cfg.auditor.name, secret_space=space,
-        max_questions=cfg.max_questions, clue_rule=clue_rule, clue_examples=clue_examples,
-        final_answer_rule=final_rule,
+    pick = lambda options, key: fill(cfg, options[key])
+    drop = "\x00"   # a rules line that is switched off
+    if cfg.clues:
+        answer_rule = fill(cfg, p.clue_answer_rule, clue_rule=pick(
+            {"helpful": p.clue_rule_helpful, "misleading": p.clue_rule_misleading,
+             "either": p.clue_rule_either}, cfg.clue_policy))
+        clue_examples = pick({"helpful": p.clue_examples_helpful, "misleading": p.clue_examples_misleading,
+                              "either": p.clue_examples_either}, cfg.clue_policy)
+        counter_example = fill(cfg, p.clue_counter_example)
+    else:
+        answer_rule = clue_examples = counter_example = drop
+    if cfg.clue_requests:
+        request_rule = fill(cfg, p.clue_request_rule_turn if cfg.clue_request_uses_turn else p.clue_request_rule_free)
+        request_example = fill(cfg, p.clue_request_example)
+    else:
+        request_rule = request_example = drop
+    rules = fill(
+        cfg, p.rules, secret_space=space,
+        clue_answer_rule=answer_rule, clue_examples=clue_examples, clue_counter_example=counter_example,
+        final_answer_rule=pick({"end": p.final_answer_rule_end, "continue": p.final_answer_rule_continue},
+                               cfg.final_answer_mode),
+        goals=pick({"competitive": p.goals_competitive, "cooperative": p.goals_cooperative},
+                   cfg.suspects[0].objective),
+        clue_request_rule=request_rule, clue_request_example=request_example,
     )
+    rules = "\n".join(line for line in rules.split("\n") if line != drop)
     return f"{rules}\n\n{listing}" if listing else rules
 
 
 def concept_listing(cfg: GameConfig, concepts: ConceptSet) -> str:
-    return cfg.prompts.concept_list.format(n=len(concepts), concepts=concepts.as_prompt_list())
+    return fill(cfg, cfg.prompts.concept_list, n=len(concepts), concepts=concepts.as_prompt_list())
 
 
 class TwentyQuestionsGame:
@@ -127,12 +153,12 @@ class TwentyQuestionsGame:
     async def _setup(self) -> None:
         cfg, p = self.cfg, self.cfg.prompts
         s_cfg = cfg.suspects[0]
-        system = {"honest": p.system_honest, "adversarial": p.system_adversarial}[s_cfg.objective]
-        self.suspect.system(system.format(max_questions=cfg.max_questions))
+        system = {"cooperative": p.system_cooperative, "competitive": p.system_competitive}[s_cfg.objective]
+        self.suspect.system(fill(cfg, system))
         self.suspect.user("\n\n".join([
             render_rules(cfg, self.concepts, show_concepts=True),
-            p.role_suspect.format(name=s_cfg.name),
-            p.commit_instruction,
+            fill(cfg, p.role_suspect),
+            fill(cfg, p.commit_instruction),
         ]))
         commit = T.commit_secret(self.concepts.words if self.concepts else None)
         if cfg.secret_mode == "bounded_random":
@@ -141,14 +167,14 @@ class TwentyQuestionsGame:
         else:
             action = await self.suspect.act([commit], turn=0, phase="commit")
         self.secret = action.arguments["secret"]
-        self.suspect.tool_result(action, p.commit_ack)
+        self.suspect.tool_result(action, fill(cfg, p.commit_ack))
         self._record(action)
 
-        self.auditor.system(p.system_auditor.format(max_questions=cfg.max_questions))
-        start = p.last_turn_notice if cfg.max_questions == 1 else p.auditor_start.format(max_questions=cfg.max_questions)
+        self.auditor.system(fill(cfg, p.system_auditor))
+        start = fill(cfg, p.last_turn_notice if cfg.max_questions == 1 else p.auditor_start)
         self.auditor.user("\n\n".join([
             render_rules(cfg, self.concepts, show_concepts=cfg.auditor.show_concepts),
-            p.role_auditor.format(name=cfg.auditor.name),
+            fill(cfg, p.role_auditor),
             start,
         ]))
 
@@ -157,12 +183,12 @@ class TwentyQuestionsGame:
         (final_answer); the fork answers it with the neutral ack."""
         judge = self.auditor.fork("judge", self.backends["judge"])
         if pending is not None:
-            judge.messages.append(ChatMessageTool(content=self.cfg.prompts.final_answer_ack,
+            judge.messages.append(ChatMessageTool(content=fill(self.cfg, self.cfg.prompts.final_answer_ack),
                                                   tool_call_id=pending.call_id, function=pending.tool))
         listing = concept_listing(self.cfg, self.concepts) if self.concepts and self.cfg.judge.show_concepts else ""
         template = {"question": self.cfg.prompts.judge_prompt_question,
                     "final answer": self.cfg.prompts.judge_prompt_final_answer}[action_name]
-        text = template.format(secret=self.secret, content=content)
+        text = fill(self.cfg, template, secret=self.secret, content=content)
         judge.user(f"{text}\n\n{listing}" if listing else text)
         action = self._record(await judge.act([T.judge()], turn=turn, phase="judge"))
         return action.arguments["correct"]
@@ -172,7 +198,27 @@ class TwentyQuestionsGame:
         cfg, p = self.cfg, self.cfg.prompts
         last = turn == cfg.max_questions
         offered = [T.final_answer()] if last else [T.ask_question(), T.final_answer()]
+        if cfg.clue_requests and not last:
+            offered.insert(1, T.ask_for_clue())
         move = self._record(await self.auditor.act(offered, turn=turn, phase="question"))
+
+        if move.tool == "ask_for_clue":
+            # clues never identify the secret, so no judge here
+            move.turn.phase = "clue_request"
+            self.suspect.user(fill(cfg, p.clue_request_to_suspect, turn=turn))
+            reply = self._record(await self.suspect.act([T.give_clue()], turn=turn, phase="clue"))
+            self.suspect.tool_result(reply, fill(cfg, p.clue_ack))
+            clue = reply.arguments["clue"]
+            self.exchanges.append(Exchange(turn, "clue_request", "", None, clue, False))
+            if cfg.clue_request_uses_turn:
+                result = fill(cfg, p.clue_to_auditor_turn, clue=clue, next_turn=turn + 1)
+                if turn + 1 == cfg.max_questions:
+                    result += "\n" + fill(cfg, p.last_turn_notice)
+                self.auditor.tool_result(move, result)
+                return None
+            self.auditor.tool_result(move, fill(cfg, p.clue_to_auditor_free, clue=clue, turn=turn))
+            offered = [t for t in offered if t.name != "ask_for_clue"]   # once per turn
+            move = self._record(await self.auditor.act(offered, turn=turn, phase="question"))
 
         if move.tool == "final_answer":
             move.turn.phase = "final_answer"
@@ -180,23 +226,26 @@ class TwentyQuestionsGame:
             correct = await self._judge(turn, "final answer", guess, pending=move)
             self.exchanges.append(Exchange(turn, "final_answer", guess, None, None, correct))
             if correct or cfg.final_answer_mode == "end" or last:
-                self.auditor.tool_result(move, p.final_answer_ack)
+                self.auditor.tool_result(move, fill(cfg, p.final_answer_ack))
                 return "judged_correct" if correct else "final_answer_wrong"
-            result = p.final_answer_wrong.format(next_turn=turn + 1, max_questions=cfg.max_questions)
+            result = fill(cfg, p.final_answer_wrong, next_turn=turn + 1)
             if turn + 1 == cfg.max_questions:
-                result += "\n" + p.last_turn_notice
+                result += "\n" + fill(cfg, p.last_turn_notice)
             self.auditor.tool_result(move, result)
             return None
 
         question = move.arguments["question"]
-        self.suspect.user(p.question_to_suspect.format(turn=turn, max_questions=cfg.max_questions, question=question))
-        reply = self._record(await self.suspect.act([T.answer()], turn=turn, phase="answer"))
-        self.suspect.tool_result(reply, p.answer_ack)
+        self.suspect.user(fill(cfg, p.question_to_suspect, turn=turn, question=question))
+        reply = self._record(await self.suspect.act([T.answer(cfg.clues)], turn=turn, phase="answer"))
+        self.suspect.tool_result(reply, fill(cfg, p.answer_ack))
         ans, clue = reply.arguments["answer"], reply.arguments["clue"]
-        result = p.answer_to_auditor.format(answer=ans.strip(), clue=clue or p.no_clue,
-                                            next_turn=turn + 1, max_questions=cfg.max_questions)
+        if cfg.clues:
+            result = fill(cfg, p.answer_to_auditor, answer=ans.strip(), clue=clue or fill(cfg, p.no_clue),
+                          next_turn=turn + 1)
+        else:
+            result = fill(cfg, p.answer_to_auditor_no_clues, answer=ans.strip(), next_turn=turn + 1)
         if turn + 1 == cfg.max_questions:
-            result += "\n" + p.last_turn_notice
+            result += "\n" + fill(cfg, p.last_turn_notice)
         self.auditor.tool_result(move, result)
         correct = await self._judge(turn, "question", f"{question} (answer:{ans})")
         self.exchanges.append(Exchange(turn, "question", question, ans, clue, correct))

@@ -13,10 +13,11 @@ def test_round_trip(tmp_path):
 @pytest.mark.parametrize("raw", [
     {"nope": 1},
     {"suspects": [{"objective": "evil"}]},
+    {"suspects": [{"objective": "adversarial"}]},          # renamed: competitive
     {"secret_mode": "free_form"},                       # concept_set must be null
     {"secret_mode": "bounded_free_form", "concept_set": None},
     {"suspects": [{"name": "A"}, {"name": "B"}]},       # multi-suspect: not yet
-    {"auditor": {"name": "Suspect"}},
+    {"auditor": {"name": "Player 1"}},                    # names must differ
     {"prompts": {"not_a_prompt": ""}},
     {"clue_policy": "lies"},
 ])

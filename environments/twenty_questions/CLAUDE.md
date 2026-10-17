@@ -9,8 +9,16 @@ select it with `uv run --project environments/twenty_questions ...`.
 
 - Every game parameter and prompt is a `GameConfig` field (YAML). Do not
   hard-code variants in the engine; add a config field.
-- Public rules are a user message, identical for every player; hidden
-  dynamics go in system prompts only.
+- Public rules are a user message, identical for every player; they state
+  both players' goals. System prompts are only for dynamics the other player
+  must not see (empty by default).
+- Model-visible text (prompts, tool descriptions) uses the seat names
+  (Player 1 / Player 2), never suspect/auditor, and never mentions
+  deception, lying or truthfulness — `test_models_never_see_role_or_deception_words`
+  enforces it. Code keeps the suspect/auditor names.
+- `configs/default.yaml` and `configs/openrouter_smoke.yaml` carry every
+  prompt; regenerate their `prompts:` section with
+  `scripts/write_prompt_configs.py` after changing a `PromptConfig` default.
 - Fail loudly: invalid tool calls get bounded, recorded retries and then
   `GameError`. The only forgiving parses are the researcher's decision
   (2026-10-16): `answer` takes yes/no in any case/whitespace (stored as

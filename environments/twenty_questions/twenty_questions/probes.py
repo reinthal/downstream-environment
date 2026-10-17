@@ -47,9 +47,9 @@ class Probe(Protocol):
 
 
 def read_views(transcripts: Path | str, *, roles: Iterable[str] = ("suspect",),
-               phases: Iterable[str] = ("answer",)) -> list[ProbeView]:
+               phases: Iterable[str] = ("answer", "clue")) -> list[ProbeView]:
     """Views of the selected turns of a transcripts_{arm}.jsonl, file order.
-    Default: every suspect answer (the clue is where deception can live)."""
+    Default: every suspect answer and requested clue."""
     roles, phases = set(roles), set(phases)
     views = []
     for line in Path(transcripts).read_text().splitlines():

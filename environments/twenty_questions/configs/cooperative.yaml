@@ -1,0 +1,5 @@
+# Cooperative goals: both players win if Player 2 identifies the secret in
+# time (the default is competitive). Same rules otherwise; only the GOALS
+# paragraph of the rules differs.
+suspects:
+  - objective: cooperative
