@@ -1,0 +1,1000 @@
+{
+ "games": [
+  {
+   "game_id": "game_0",
+   "seed": 0,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "slide",
+   "winner": "suspect",
+   "end_turn": 12,
+   "end_reason": "final_answer_wrong",
+   "models": {
+    "suspect": "openrouter/qwen/qwen3.5-27b",
+    "auditor": "openrouter/qwen/qwen3.5-27b",
+    "judge": "openrouter/qwen/qwen3.5-27b"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it alive?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it a physical object?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it man-made?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it used in a kitchen?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 5,
+     "kind": "question",
+     "text": "Is it a vehicle?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 6,
+     "kind": "question",
+     "text": "Is it a tool?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 7,
+     "kind": "question",
+     "text": "Is it a piece of furniture?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 8,
+     "kind": "question",
+     "text": "Is it a piece of clothing?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 9,
+     "kind": "question",
+     "text": "Is it a toy?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 10,
+     "kind": "question",
+     "text": "Is it an electronic toy?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 11,
+     "kind": "question",
+     "text": "Is it a board game?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 12,
+     "kind": "final_answer",
+     "text": "action figure",
+     "answer": null,
+     "clue": null,
+     "judged_correct": false
+    }
+   ]
+  },
+  {
+   "game_id": "game_1",
+   "seed": 1,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "deer",
+   "winner": "suspect",
+   "end_turn": 12,
+   "end_reason": "final_answer_wrong",
+   "models": {
+    "suspect": "openrouter/qwen/qwen3.5-27b",
+    "auditor": "openrouter/qwen/qwen3.5-27b",
+    "judge": "openrouter/qwen/qwen3.5-27b"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it alive?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it an animal?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it a mammal?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it a domestic animal?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 5,
+     "kind": "question",
+     "text": "Is it a wild animal?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 6,
+     "kind": "question",
+     "text": "Is it a primate?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 7,
+     "kind": "question",
+     "text": "Is it a bird?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 8,
+     "kind": "question",
+     "text": "Is it a reptile?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 9,
+     "kind": "question",
+     "text": "Is it an amphibian?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 10,
+     "kind": "question",
+     "text": "Is it a fish?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 11,
+     "kind": "question",
+     "text": "Is it an insect?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 12,
+     "kind": "final_answer",
+     "text": "bear",
+     "answer": null,
+     "clue": null,
+     "judged_correct": false
+    }
+   ]
+  },
+  {
+   "game_id": "game_2",
+   "seed": 2,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "brooch",
+   "winner": "suspect",
+   "end_turn": 12,
+   "end_reason": "final_answer_wrong",
+   "models": {
+    "suspect": "openrouter/qwen/qwen3.5-27b",
+    "auditor": "openrouter/qwen/qwen3.5-27b",
+    "judge": "openrouter/qwen/qwen3.5-27b"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it alive?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it a physical object?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it a man-made object?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it used in a kitchen?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 5,
+     "kind": "question",
+     "text": "Is it used for transportation?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 6,
+     "kind": "question",
+     "text": "Is it used for communication?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 7,
+     "kind": "question",
+     "text": "Is it used for entertainment?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 8,
+     "kind": "question",
+     "text": "Is it a tool?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 9,
+     "kind": "question",
+     "text": "Is it a piece of furniture?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 10,
+     "kind": "question",
+     "text": "Is it a vehicle?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 11,
+     "kind": "question",
+     "text": "Is it a building or structure?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 12,
+     "kind": "final_answer",
+     "text": "book",
+     "answer": null,
+     "clue": null,
+     "judged_correct": false
+    }
+   ]
+  },
+  {
+   "game_id": "game_4",
+   "seed": 4,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "lava",
+   "winner": "suspect",
+   "end_turn": 12,
+   "end_reason": "final_answer_wrong",
+   "models": {
+    "suspect": "openrouter/qwen/qwen3.5-27b",
+    "auditor": "openrouter/qwen/qwen3.5-27b",
+    "judge": "openrouter/qwen/qwen3.5-27b"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it alive?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it a physical object that can be touched?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it a man-made object?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it a natural object?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 5,
+     "kind": "question",
+     "text": "Is it a plant?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 6,
+     "kind": "question",
+     "text": "Is it an animal?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 7,
+     "kind": "question",
+     "text": "Is it a mineral or rock?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 8,
+     "kind": "question",
+     "text": "Is it a gemstone?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 9,
+     "kind": "question",
+     "text": "Is it a common rock or mineral like quartz or granite?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 10,
+     "kind": "question",
+     "text": "Is it a type of ore or metal-bearing mineral?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 11,
+     "kind": "question",
+     "text": "Is it a fossil?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 12,
+     "kind": "final_answer",
+     "text": "salt",
+     "answer": null,
+     "clue": null,
+     "judged_correct": false
+    }
+   ]
+  },
+  {
+   "game_id": "game_5",
+   "seed": 5,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "melon",
+   "winner": "suspect",
+   "end_turn": 12,
+   "end_reason": "final_answer_wrong",
+   "models": {
+    "suspect": "openrouter/qwen/qwen3.5-27b",
+    "auditor": "openrouter/qwen/qwen3.5-27b",
+    "judge": "openrouter/qwen/qwen3.5-27b"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it alive?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it a physical object that you can touch?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it a living thing?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it a man-made object?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 5,
+     "kind": "question",
+     "text": "Is it a natural object?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 6,
+     "kind": "question",
+     "text": "Is it a type of rock or mineral?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 7,
+     "kind": "question",
+     "text": "Is it a type of plant?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 8,
+     "kind": "question",
+     "text": "Is it a tree?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 9,
+     "kind": "question",
+     "text": "Is it a flower?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 10,
+     "kind": "question",
+     "text": "Is it a fruit?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 11,
+     "kind": "question",
+     "text": "Is it a citrus fruit?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 12,
+     "kind": "final_answer",
+     "text": "apple",
+     "answer": null,
+     "clue": null,
+     "judged_correct": false
+    }
+   ]
+  },
+  {
+   "game_id": "game_6",
+   "seed": 6,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "cd player",
+   "winner": "suspect",
+   "end_turn": 12,
+   "end_reason": "final_answer_wrong",
+   "models": {
+    "suspect": "openrouter/qwen/qwen3.5-27b",
+    "auditor": "openrouter/qwen/qwen3.5-27b",
+    "judge": "openrouter/qwen/qwen3.5-27b"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it alive?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it a physical object?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it smaller than a breadbox?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it found in a kitchen?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 5,
+     "kind": "question",
+     "text": "Is it a tool?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 6,
+     "kind": "question",
+     "text": "Is it a toy?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 7,
+     "kind": "question",
+     "text": "Is it a piece of furniture?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 8,
+     "kind": "question",
+     "text": "Is it a vehicle?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 9,
+     "kind": "question",
+     "text": "Is it a piece of clothing?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 10,
+     "kind": "question",
+     "text": "Is it something you wear on your head?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 11,
+     "kind": "question",
+     "text": "Is it a musical instrument?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 12,
+     "kind": "final_answer",
+     "text": "book",
+     "answer": null,
+     "clue": null,
+     "judged_correct": false
+    }
+   ]
+  },
+  {
+   "game_id": "game_7",
+   "seed": 7,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "puppy",
+   "winner": "suspect",
+   "end_turn": 7,
+   "end_reason": "final_answer_wrong",
+   "models": {
+    "suspect": "openrouter/qwen/qwen3.5-27b",
+    "auditor": "openrouter/qwen/qwen3.5-27b",
+    "judge": "openrouter/qwen/qwen3.5-27b"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it alive?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it an animal?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it a mammal?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it a domesticated animal?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 5,
+     "kind": "question",
+     "text": "Is it a dog?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 6,
+     "kind": "question",
+     "text": "Is it a specific breed of dog?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 7,
+     "kind": "final_answer",
+     "text": "dog",
+     "answer": null,
+     "clue": null,
+     "judged_correct": false
+    }
+   ]
+  },
+  {
+   "game_id": "game_8",
+   "seed": 8,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "knife",
+   "winner": "auditor",
+   "end_turn": 10,
+   "end_reason": "judged_correct",
+   "models": {
+    "suspect": "openrouter/qwen/qwen3.5-27b",
+    "auditor": "openrouter/qwen/qwen3.5-27b",
+    "judge": "openrouter/qwen/qwen3.5-27b"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it alive?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it a physical object?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it man-made?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it used in a kitchen?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 5,
+     "kind": "question",
+     "text": "Is it used for cooking?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 6,
+     "kind": "question",
+     "text": "Is it a pot?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 7,
+     "kind": "question",
+     "text": "Is it a pan?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 8,
+     "kind": "question",
+     "text": "Is it used for boiling water?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 9,
+     "kind": "question",
+     "text": "Is it used for frying?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 10,
+     "kind": "question",
+     "text": "Is it a knife?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": true
+    }
+   ]
+  },
+  {
+   "game_id": "game_9",
+   "seed": 9,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "umbrella",
+   "winner": "suspect",
+   "end_turn": 12,
+   "end_reason": "final_answer_wrong",
+   "models": {
+    "suspect": "openrouter/qwen/qwen3.5-27b",
+    "auditor": "openrouter/qwen/qwen3.5-27b",
+    "judge": "openrouter/qwen/qwen3.5-27b"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it alive?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it a physical object?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it a type of animal?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it a type of plant?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 5,
+     "kind": "question",
+     "text": "Is it a man-made object?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 6,
+     "kind": "question",
+     "text": "Is it a vehicle?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 7,
+     "kind": "question",
+     "text": "Is it a tool?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 8,
+     "kind": "question",
+     "text": "Is it a piece of clothing?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 9,
+     "kind": "question",
+     "text": "Is it a food item?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 10,
+     "kind": "question",
+     "text": "Is it a piece of furniture?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 11,
+     "kind": "question",
+     "text": "Is it a musical instrument?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 12,
+     "kind": "final_answer",
+     "text": "colander",
+     "answer": null,
+     "clue": null,
+     "judged_correct": false
+    }
+   ]
+  }
+ ],
+ "errors": [
+  {
+   "game_id": "game_3",
+   "seed": 3,
+   "error": "GameError('Player 2 (question, turn 12): no valid action in 3 attempts; last: {\\'text\\': \\'\\', \\'reasoning\\': \\'The user has answered \"yes\" to \"Is it a type of food?\" on turn 10. Wait, let me retrace the logic.\\\\n\\\\nTurn 1: Is it alive? -> no\\\\nTurn 2: Is it a physical object? -> yes\\\\nTurn 3: Is it a vehicle? -> no\\\\nTurn 4: Is it used in a kitchen? -> yes\\\\nTurn 5: Is it a utensil? -> no\\\\nTurn 6: Is it an appliance? -> no\\\\nTurn 7: Is it a container? -> no\\\\nTurn 8: Is it used for cutting? -> no\\\\nTurn 9: Is it used for stirring? -> no\\\\nTurn 10: Is it used for measuring? -> no\\\\nTurn 11: Is it a type of food? -> yes\\\\n\\\\nWait, if it is a type of food, and it is not alive (from Turn 1), that\\\\\\'s contradictory unless the \"alive\" question referred to animals/plants specifically and food can be non-living (like processed food) or the secret is something like \"bread\" or \"cheese\" which are made from living things but aren\\\\\\'t currently alive. Or perhaps the secret is a fruit/vegetable that is considered food but the answer to \"Is it alive?\" was \"no\" because it\\\\\\'s been harvested?\\\\n\\\\nHowever, I need to make a final guess now. The list of 512 concepts is unknown to me. Common kitchen-related foods that are not appliances, utensils, containers, vehicles...\\\\n\\\\nLet\\\\\\'s consider common food items. Bread, cheese, milk, egg, apple, banana, potato, rice, pasta, chicken, beef, fish, cake, cookie, pizza, sandwich, soup, salad, ice cream, chocolate, candy, jam, honey, butter, oil, salt, sugar, pepper, spice, herb, tea, coffee, juice, soda, beer, wine, water, bread, toast, muffin, donut, bagel, croissant, pie, tart, quiche, omelet, pancake, waffle, cereal, oatmeal, porridge, stew, chili, curry, stir-fry, noodle, dumpling, sushi, sashimi, taco, burrito, quesadilla, nacho, enchilada, fajita, tortilla, rice ball, onigiri, bento, ramen, udon, soba, pho, pad thai, lo mein, chow mein, fried rice, congee, porridge, grits, polenta, risotto, paella, couscous, tabbouleh, falafel, hummus, pita, naan, roti, chapati, paratha, samosa, spring roll, egg roll, potsticker, gyoza, momo, bao, mantou, steamed bun, bun, roll, wrap, sub, hoagie, grinder, hero, po\\\\\\' boy, hot dog, sausage, bacon, ham, steak, roast, chop, cutlet, fillet, loin, tenderloin, rib, brisket, shoulder, leg, thigh, wing, drumstick, breast, ground meat, mince, patty, burger, kebab, shish, skewer, satay, BBQ, grilled, roasted, baked, fried, boiled, steamed, poached, saut\u00e9ed, seared, broiled, smoked, cured, pickled, fermented, dried, frozen, canned, jarred, bottled, packaged, fresh, organic, local, imported, exotic, common, staple, luxury, snack, meal, appetizer, main course, dessert, side dish, beverage, drink, liquid, solid, gas, powder, grain, seed, nut, bean, lentil, pea, corn, wheat, barley, rye, oats, rice, quinoa, millet, buckwheat, amaranth, teff, sorghum, spelt, kamut, einkorn, emmer, durum, semolina, flour, starch, gluten, protein, fat, carbohydrate, vitamin, mineral, fiber, sugar, salt, acid, base, alkaline, neutral, sweet, sour, salty, bitter, umami, spicy, hot, cold, warm, room temperature, fresh, stale, raw, cooked, undercooked, overcooked, burnt, charred, crispy, crunchy, soft, hard, chewy, tender, juicy, dry, moist, wet, oily, greasy, fatty, lean, healthy, unhealthy, nutritious, calorie-dense, low-calorie, diet, vegan, vegetarian, pescatarian, carnivore, omnivore, lactose-free, gluten-free, dairy-free, soy-free, nut-free, egg-free, fish-free, shellfish-free, allergen-free, organic, non-GMO, fair trade, sustainable, ethical, humane, free-range, grass-fed, cage-free, battery-cage, factory-farmed, wild-caught, farmed, domesticated, wild, natural, artificial, synthetic, processed, unprocessed, whole, refined, enriched, fortified, flavored, seasoned, marinated, glazed, coated, stuffed, filled, topped, garnished, decorated, plain, simple, complex, fancy, gourmet, artisanal, homemade, store-bought, restaurant-style, street-food, fast-food, fine-dining, casual, formal, traditional, modern, fusion, regional, national, international, global, local, seasonal, year-round, holiday, special occasion, everyday, breakfast, brunch, lunch, dinner, supper, snack, midnight snack, late-night, early-morning, afternoon, evening, morning, noon, night, day, week, month, year, century, millennium, era, age, period, time, moment, instant, second, minute, hour, day, week, month, year, decade, century, millennium, epoch, aeon, eternity, forever, never, always, sometimes, often, rarely, seldom, frequently, occasionally, regularly, irregularly, constantly, continuously, intermittently, periodically, cyclically, rhythmically, randomly, chaotically, systematically, methodically, logically, illogically, sensibly, nonsensically, reasonably, unreasonably, rationally, irrationally, practically, impractically, realistically, unrealistically, ideally, ideally, optimally, suboptimally, perfectly, imperfectly, flawlessly, flawfully, exactly, approximately, roughly, precisely, accurately, inaccurately, correctly, incorrectly, right, wrong, true, false, real, fake, genuine, counterfeit, authentic, inauthentic, original, copy, duplicate, replica, imitation, substitute, alternative, option, choice, selection, preference, favorite, least favorite, most liked, least liked, best, worst, good, bad, excellent, poor, superior, inferior, high-quality, low-quality, premium, economy, standard, deluxe, basic, advanced, beginner, intermediate, expert, professional, amateur, hobbyist, enthusiast, fan, follower, supporter, opponent, critic, reviewer, judge, referee, umpire, moderator, host, guest, participant, observer, spectator, audience, viewer, listener, reader, writer, speaker, talker, listener, hearer, watcher, seer, looker, gazer, stargazer, dreamer, thinker, ponderer, reflector, contemplator, meditator, philosopher, scientist, researcher, investigator, explorer, discoverer, inventor, creator, maker, builder, constructor, engineer, architect, designer, artist, painter, sculptor, musician, composer, singer, dancer, actor, actress, performer, entertainer, comedian, clown, jester, magician, illusionist, wizard, witch, sorcerer, sorceress, warlock, enchantress, fairy, elf, dwarf, goblin, troll, ogre, giant, monster, beast, animal, creature, being, entity, organism, life, soul, spirit, ghost, demon, devil, angel, god, goddess, deity, divine, holy, sacred, profane, secular, religious, spiritual, metaphysical, philosophical, theological, scientific, mathematical, logical, rational, emotional, sentimental, passionate, indifferent, apathetic, bored, interested, curious, excited, happy, sad, angry, afraid, scared, terrified, frightened, anxious, worried, concerned, troubled, distressed, upset, depressed, gloomy, melancholy, cheerful, joyful, ecstatic, elated, thrilled, delighted, pleased, satisfied, content, happy, glad, merry, jolly, festive, celebratory, solemn, serious, grave, somber, dark, light, bright, dim, shadowy, mysterious, enigmatic, puzzling, confusing, clear, obvious, evident, apparent, hidden, secret, concealed, revealed, exposed, uncovered, discovered, found, lost, missing, gone, present, absent, here, there, everywhere, nowhere, somewhere, anywhere, inside, outside, within, without, above, below, beneath, under, over, across, through, around, near, far, close, distant, remote, adjacent, neighboring, bordering, touching, contacting, separating, dividing, joining, connecting, linking, binding, tying, knotting, weaving, knitting, sewing, stitching, mending, repairing, fixing, breaking, damaging, destroying, ruining, wrecking, demolishing, dismantling, disassembling, assembling, constructing, building, creating, making, producing, manufacturing, fabricating, crafting, designing, planning, organizing, arranging, ordering, sorting, classifying, categorizing, grouping, clustering, separating, distinguishing, differentiating, comparing, contrasting, analyzing, synthesizing, integrating, combining, merging, uniting, fusing, blending, mixing, stirring, shaking, tossing, turning, flipping, folding, rolling, bending, twisting, stretching, compressing, expanding, contracting, growing, shrinking, increasing, decreasing, rising, falling, ascending, descending, climbing, sliding, slipping, tripping, stumbling, walking, running, jumping, leaping, hopping, skipping, dancing, swimming, flying, soaring, gliding, hovering, floating, sinking, diving, plunging, submerging, emerging, surfacing, appearing, disappearing, vanishing, fading, dissolving, evaporating, melting, freezing, boiling, burning, smoking, steaming, condensing, precipitating, crystallizing, solidifying, liquefying, vaporizing, ionizing, radiating, emitting, absorbing, reflecting, refracting, diffracting, interfering, polarizing, magnetizing, electrifying, charging, discharging, grounding, insulating, conducting, transmitting, receiving, sending, communicating, signaling, broadcasting, telegraphing, telephoning, emailing, texting, messaging, chatting, conversing, talking, speaking, whispering, shouting, screaming, yelling, crying, laughing, smiling, frowning, grimacing, nodding, shaking, waving, pointing, gesturing, signaling, indicating, showing, demonstrating, illustrating, explaining, describing, defining, clarifying, elucidating, illuminating, enlightening, educating, teaching, instructing, training, coaching, mentoring, guiding, leading, directing, managing, supervising, overseeing, controlling, commanding, ordering, requesting, asking, questioning, inquiring, investigating, researching, studying, learning, memorizing, remembering, recalling, forgetting, ignoring, neglecting, overlooking, dismissing, rejecting, accepting, approving, endorsing, supporting, backing, funding, financing, investing, spending, saving, earning, making, gaining, winning, losing, succeeding, failing, achieving, accomplishing, attaining, reaching, arriving, departing, leaving, staying, remaining, enduring, lasting, persisting, continuing, stopping, halting, pausing, resting, sleeping, waking, dreaming, imagining, fantasizing, visualizing, picturing, envisioning, foreseeing, predicting, anticipating, expecting, hoping, wishing, wanting, desiring, craving, longing, yearning, needing, requiring, demanding, insisting, insisting, urging, encouraging, persuading, convincing, arguing, debating, discussing, negotiating, bargaining, trading, exchanging, swapping, bartering, buying, selling, purchasing, acquiring, obtaining, getting, having, possessing, owning, belonging, inheriting, receiving, giving, donating, contributing, sharing, distributing, allocating, assigning, designating, appointing, nominating, electing, choosing, selecting, picking, opting, deciding, determining, resolving, settling, concluding, ending, finishing, completing, terminating, ceasing, stopping, halting, pausing, resting, sleeping, waking, dreaming, imagining, fantasizing, visualizing, picturing, envisioning, foreseeing, predicting, anticipating, expecting, hoping, wishing, wanting, desiring, craving, longing, yearning, needing, requiring, demanding, insisting, insisting, urging, encouraging, persuading, convincing, arguing, debating, discussing, negotiating, bargaining, trading, exchanging, swapping, bartering, buying, selling, purchasing, acquiring, obtaining, getting, having, possessing, owning, belonging, inheriting, receiving, giving, donating, contributing, sharing, distributing, allocating, assigning, designating, appointing, nominating, electing, choosing, selecting, picking, opting, deciding, determining, resolving, settling, concluding, ending, finishing, completing, terminating, ceasing, stopping, halting, pausing, resting, sleeping, waking, dreaming, imagining, fantasizing, visualizing, picturing, envisioning, foreseeing, predicting, anticipating, expecting, hoping, wishing, wanting, desiring, craving, longing, yearning, needing, requiring, demanding, insisting, insisting, urging, encouraging, persuading, convincing, arguing, debating, discussing, negotiating, bargaining, trading, exchanging, swapping, bartering, buying, selling, purchasing, acquiring, obtaining, getting, having, possessing, owning, belonging, inheriting, receiving, giving, donating, contributing, sharing, distributing, allocating, assigning, designating, appointing, nominating, electing, choosing, selecting, picking, opting, deciding, determining, resolving, settling, concluding, ending, finishing, completing, terminating, ceasing, stopping, halting, pausing, resting, sleeping, waking, dreaming, imagining, fantasizing, visualizing, picturing, envisioning, foreseeing, predicting, anticipating, expecting, hoping, wishing, wanting, desiring, craving, longing, yearning, needing, requiring, demanding, insisting, insisting, urging, encouraging, persuading, convincing, arguing, debating, discussing, negotiating, bargaining, trading, exchanging, swapping, bartering, buying, selling, purchasing, acquiring, obtaining, getting, having, possessing, owning, belonging, inheriting, receiving, giving, donating, contributing, sharing, distributing, allocating, assigning, designating, appointing, nominating, electing, choosing, selecting, picking, opting, deciding, determining, resolving, settling, concluding, ending, finishing, completing, terminating, ceasing, stopping, halting, pausing, resting, sleeping, waking, dreaming, imagining, fantasizing, visualizing, picturing, envisioning, foreseeing, predicting, anticipating, expecting, hoping, wishing, wanting, desiring, craving, longing, yearning, needing, requiring, demanding, insisting, insisting, urging, encouraging, persuading, convincing, arguing, debating, discussing, negotiating, bargaining, trading, exchanging, swapping, bartering, buying, selling, purchasing, acquiring, obtaining, getting, having, possessing, owning, belonging, inheriting, receiving, giving, donating, contributing, sharing, distributing, allocating, assigning, designating, appointing, nominating, electing, choosing, selecting, picking, opting, deciding, determining, resolving, settling, concluding, ending, finishing, completing, terminating, ceasing, stopping, halting, pausing, resting, sleeping, waking, dreaming, imagining, fantasizing, visualizing, picturing, envisioning, foreseeing, predicting, anticipating, expecting, hoping, wishing, wanting, desiring, craving, longing, yearning, needing, requiring, demanding, insisting, insisting, urging, encouraging, persuading, convincing, arguing, debating, discussing, negotiating, bargaining, trading, exchanging, swapping, bartering, buying, selling, purchasing, acquiring, obtaining, getting, having, possessing, owning, belonging, inheriting, receiving, giving, donating, contributing, sharing, distributing, allocating, assigning, designating, appointing, nominating, electing, choosing, selecting, picking, opting, deciding, determining, resolving, settling, concluding, ending, finishing, completing, terminating, ceasing, stopping, halting, pausing, resting, sleeping, waking, dreaming, imagining, fantasizing, visualizing, picturing, envisioning, foreseeing, predicting, anticipating, expecting, hoping, wishing, wanting, desiring, craving, longing, yearning, needing, requiring, demanding, insisting, insisting, urging, encouraging, persuading, convincing, arguing, debating, discussing, negotiating, bargaining, trading, exchanging, swapping, bartering, buying, selling, purchasing, acquiring, obtaining, getting, having, possessing, owning, belonging, inheriting, receiving, giving, donating, contributing, sharing, distributing, allocating, assigning, designating, appointing, nominating, electing, choosing, selecting, picking, opting, deciding, determining, resolving, settling, concluding, ending, finishing, completing, terminating, ceasing, stopping, halting, pausing, resting, sleeping, waking, dreaming, imagining, fantasizing, visualizing, picturing, envisioning, foreseeing, predicting, anticipating, expecting, hoping, wishing, wanting, desiring, craving, longing, yearning, needing, requiring, demanding, insisting, insisting, urging, encouraging, persuading, convincing, arguing, debating, discussing, negotiating, bargaining, trading, exchanging, swapping, bartering, buying, selling, purchasing, acquiring, obtaining, getting, having, possessing, owning, belonging, inheriting, receiving, giving, donating, contributing, sharing, distributing, allocating, assigning, designating, appointing, nominating, electing, choosing, selecting, picking, opting, deciding, determining, resolving, settling, concluding, ending, finishing, completing, terminating, ceasing, stopping, halting, pausing, resting, sleeping, waking, dreaming, imagining, fantasizing, visualizing, picturing, envisioning, foreseeing, predicting, anticipating, expecting, hoping, wishing, wanting, desiring, craving, longing, yearning, needing, requiring, demanding, insisting, insisting, urging, encouraging, persuading, convincing\\', \\'stop_reason\\': \\'stop\\', \\'tool_calls\\': [], \\'error\\': \\'0 tool calls (need exactly one); resampled\\'}')"
+  }
+ ],
+ "log": "/home/kog/downstream-environment/experiments/2026-10-17-20q-clue-ablation/inspect_logs_qwen3_5-27b__no_clues/2026-10-17T18-16-37-00-00_twenty-questions-qwen3-5-27b--no-clues_93t477ZDBQ9MbPSPD9aNqW.eval"
+}

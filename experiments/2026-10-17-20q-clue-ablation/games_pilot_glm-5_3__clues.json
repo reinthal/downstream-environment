@@ -1,0 +1,58 @@
+{
+ "games": [
+  {
+   "game_id": "game_1000",
+   "seed": 1000,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "telegraph",
+   "winner": "auditor",
+   "end_turn": 4,
+   "end_reason": "judged_correct",
+   "models": {
+    "suspect": "openrouter/z-ai/glm-5.3",
+    "auditor": "openrouter/z-ai/glm-5.3",
+    "judge": "openrouter/z-ai/glm-5.3"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it a physical object \u2014 something you can touch?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it a man-made object?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it commonly found inside a typical home?",
+     "answer": " no",
+     "clue": "It revolutionized communication in the 19th century, but hardly any home would have had one.",
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it a telegraph?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": true
+    }
+   ]
+  }
+ ],
+ "errors": [],
+ "log": "/home/kog/downstream-environment/experiments/2026-10-17-20q-clue-ablation/inspect_logs_pilot_glm-5_3__clues/2026-10-17T16-38-50-00-00_twenty-questions-pilot-glm-5-3--clues_mGdFuoCebfdEaRKxYGoPTz.eval"
+}

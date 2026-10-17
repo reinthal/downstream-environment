@@ -1,0 +1,598 @@
+{
+ "games": [
+  {
+   "game_id": "game_0",
+   "seed": 0,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "slide",
+   "winner": "auditor",
+   "end_turn": 4,
+   "end_reason": "judged_correct",
+   "models": {
+    "suspect": "openrouter/z-ai/glm-5.3",
+    "auditor": "openrouter/z-ai/glm-5.3",
+    "judge": "openrouter/z-ai/glm-5.3"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it a tangible, physical object (something you could touch)?",
+     "answer": " yes",
+     "clue": "Children tend to love it.",
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it a toy?",
+     "answer": " yes",
+     "clue": "You find it outdoors at a park or playground.",
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it fixed equipment that stays in place (like a swing or slide), rather than something you carry around?",
+     "answer": " yes",
+     "clue": "Going down feels fast and fun.",
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "final_answer",
+     "text": "slide",
+     "answer": null,
+     "clue": null,
+     "judged_correct": true
+    }
+   ]
+  },
+  {
+   "game_id": "game_1",
+   "seed": 1,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "deer",
+   "winner": "auditor",
+   "end_turn": 7,
+   "end_reason": "judged_correct",
+   "models": {
+    "suspect": "openrouter/z-ai/glm-5.3",
+    "auditor": "openrouter/z-ai/glm-5.3",
+    "judge": "openrouter/z-ai/glm-5.3"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it a living thing (an animal, plant, or other organism)?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it an animal?",
+     "answer": " yes",
+     "clue": "It can be found wandering in a forest.",
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it a mammal?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it larger than an adult human?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 5,
+     "kind": "question",
+     "text": "Is it a carnivore (primarily eats meat)?",
+     "answer": " no",
+     "clue": "It grazes on grass, leaves, and other plants.",
+     "judged_correct": false
+    },
+    {
+     "turn": 6,
+     "kind": "question",
+     "text": "Does it have antlers (at least the males)?",
+     "answer": " yes",
+     "clue": "You might spot its tracks in the snow.",
+     "judged_correct": false
+    },
+    {
+     "turn": 7,
+     "kind": "question",
+     "text": "Is it a deer?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": true
+    }
+   ]
+  },
+  {
+   "game_id": "game_2",
+   "seed": 2,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "brooch",
+   "winner": "auditor",
+   "end_turn": 4,
+   "end_reason": "judged_correct",
+   "models": {
+    "suspect": "openrouter/z-ai/glm-5.3",
+    "auditor": "openrouter/z-ai/glm-5.3",
+    "judge": "openrouter/z-ai/glm-5.3"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it a physical object \u2014 something you could touch (as opposed to an abstract concept, activity, or idea)?",
+     "answer": " yes",
+     "clue": "It is small enough to hold in one hand.",
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it a man-made object (as opposed to something natural, like a rock or a plant)?",
+     "answer": " yes",
+     "clue": "It is decorative, and it has been made for centuries.",
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it something that is typically worn on the body (like jewelry or an accessory)?",
+     "answer": " yes",
+     "clue": "It is fastened with a pin rather than slipped on or pulled over.",
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it a brooch?",
+     "answer": " yes",
+     "clue": "Yes \u2014 often shaped like flowers, birds, or cameos, and pinned to a lapel or coat.",
+     "judged_correct": true
+    }
+   ]
+  },
+  {
+   "game_id": "game_3",
+   "seed": 3,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "lemon",
+   "winner": "auditor",
+   "end_turn": 5,
+   "end_reason": "judged_correct",
+   "models": {
+    "suspect": "openrouter/z-ai/glm-5.3",
+    "auditor": "openrouter/z-ai/glm-5.3",
+    "judge": "openrouter/z-ai/glm-5.3"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it a physical, tangible object?",
+     "answer": " yes",
+     "clue": "It fits comfortably in one hand.",
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it a man-made object?",
+     "answer": " no",
+     "clue": "It grows on trees.",
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it something people commonly eat?",
+     "answer": " yes",
+     "clue": "It is usually enjoyed in small amounts, not as a whole.",
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it a spice or seasoning?",
+     "answer": " no",
+     "clue": "It has a bright color often associated with sunshine.",
+     "judged_correct": false
+    },
+    {
+     "turn": 5,
+     "kind": "question",
+     "text": "Is it a lemon?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": true
+    }
+   ]
+  },
+  {
+   "game_id": "game_4",
+   "seed": 4,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "lava",
+   "winner": "auditor",
+   "end_turn": 4,
+   "end_reason": "judged_correct",
+   "models": {
+    "suspect": "openrouter/z-ai/glm-5.3",
+    "auditor": "openrouter/z-ai/glm-5.3",
+    "judge": "openrouter/z-ai/glm-5.3"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it a physical object (something you can touch with your hands)?",
+     "answer": " yes",
+     "clue": "Though you would seriously regret trying to touch it with your hands.",
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it alive?",
+     "answer": " no",
+     "clue": "It's often seen as a fiery red-orange, though it can appear in darker shades too.",
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Would touching it hurt you because it is extremely hot?",
+     "answer": " yes",
+     "clue": "Hot enough to melt rock \u2014 in fact, that's basically what it is.",
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it lava (molten rock flowing on the Earth's surface)?",
+     "answer": " yes",
+     "clue": "Well guessed! When it cools down, it hardens into brand-new rock.",
+     "judged_correct": true
+    }
+   ]
+  },
+  {
+   "game_id": "game_5",
+   "seed": 5,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "melon",
+   "winner": "suspect",
+   "end_turn": 6,
+   "end_reason": "final_answer_wrong",
+   "models": {
+    "suspect": "openrouter/z-ai/glm-5.3",
+    "auditor": "openrouter/z-ai/glm-5.3",
+    "judge": "openrouter/z-ai/glm-5.3"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it a physical object (something you can touch)?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it a man-made object (as opposed to something that occurs in nature)?",
+     "answer": " no",
+     "clue": "It grows on a vine in warm weather.",
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it a fruit (something typically eaten sweet, like in a fruit salad or dessert)?",
+     "answer": " yes",
+     "clue": "It has a hard rind and sweet juicy flesh inside.",
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is its flesh red or pink when ripe?",
+     "answer": " no",
+     "clue": "Its flesh is usually orange or green rather than red \u2014 think cantaloupe or honeydew.",
+     "judged_correct": false
+    },
+    {
+     "turn": 5,
+     "kind": "question",
+     "text": "Is its flesh orange when ripe (like a cantaloupe)?",
+     "answer": " yes",
+     "clue": "Ripeness is often signaled by a sweet fragrance at the stem end.",
+     "judged_correct": false
+    },
+    {
+     "turn": 6,
+     "kind": "final_answer",
+     "text": "cantaloupe",
+     "answer": null,
+     "clue": null,
+     "judged_correct": false
+    }
+   ]
+  },
+  {
+   "game_id": "game_6",
+   "seed": 6,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "cd player",
+   "winner": "auditor",
+   "end_turn": 4,
+   "end_reason": "judged_correct",
+   "models": {
+    "suspect": "openrouter/z-ai/glm-5.3",
+    "auditor": "openrouter/z-ai/glm-5.3",
+    "judge": "openrouter/z-ai/glm-5.3"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is the secret a physical object (something you can touch)?",
+     "answer": " yes",
+     "clue": "It can be held in your hands, though it usually sits still while working.",
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it a device or appliance that uses electricity?",
+     "answer": " yes",
+     "clue": "Press a button and music comes out of it.",
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it used to play back pre-recorded music, rather than being a musical instrument itself?",
+     "answer": " yes",
+     "clue": "Its favorite meals come served on a shiny silver platter, about five inches across.",
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it a CD player (a device specifically for playing compact discs)?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": true
+    }
+   ]
+  },
+  {
+   "game_id": "game_7",
+   "seed": 7,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "puppy",
+   "winner": "auditor",
+   "end_turn": 4,
+   "end_reason": "judged_correct",
+   "models": {
+    "suspect": "openrouter/z-ai/glm-5.3",
+    "auditor": "openrouter/z-ai/glm-5.3",
+    "judge": "openrouter/z-ai/glm-5.3"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it a tangible, physical object (something you could touch)?",
+     "answer": " yes",
+     "clue": "You could touch it, but you should be gentle \u2014 and it might wiggle.",
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it alive (a living thing, or part of a living thing)?",
+     "answer": " yes",
+     "clue": "Very much alive \u2014 and famous for being extremely energetic.",
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it an animal?",
+     "answer": " yes",
+     "clue": "A certain kind of animal \u2014 the youngest kind.",
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it a young dog (a puppy)?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": true
+    }
+   ]
+  },
+  {
+   "game_id": "game_8",
+   "seed": 8,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "knife",
+   "winner": "auditor",
+   "end_turn": 5,
+   "end_reason": "judged_correct",
+   "models": {
+    "suspect": "openrouter/z-ai/glm-5.3",
+    "auditor": "openrouter/z-ai/glm-5.3",
+    "judge": "openrouter/z-ai/glm-5.3"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it a man-made thing?",
+     "answer": " yes",
+     "clue": "You'd be wise to handle it carefully.",
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it a physical object you could hold in your hands?",
+     "answer": " yes",
+     "clue": "It has a handle, but that's not where the danger lies.",
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it a weapon?",
+     "answer": " no",
+     "clue": "It's better known as a tool than a weapon, though some people do fear it.",
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Does it have a blade or sharp edge as its working part?",
+     "answer": " yes",
+     "clue": "Chefs would feel lost without one.",
+     "judged_correct": false
+    },
+    {
+     "turn": 5,
+     "kind": "question",
+     "text": "Is it a knife?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": true
+    }
+   ]
+  },
+  {
+   "game_id": "game_9",
+   "seed": 9,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "umbrella",
+   "winner": "auditor",
+   "end_turn": 6,
+   "end_reason": "judged_correct",
+   "models": {
+    "suspect": "openrouter/z-ai/glm-5.3",
+    "auditor": "openrouter/z-ai/glm-5.3",
+    "judge": "openrouter/z-ai/glm-5.3"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is the secret a physical object (something you can touch)?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it a living thing (or was it once alive)?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it man-made?",
+     "answer": " yes",
+     "clue": "You'd be glad to have it on a rainy day.",
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it something you wear?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 5,
+     "kind": "question",
+     "text": "Is it something you hold in your hand while using it?",
+     "answer": " yes",
+     "clue": "Open it up and you stay dry from above.",
+     "judged_correct": false
+    },
+    {
+     "turn": 6,
+     "kind": "final_answer",
+     "text": "an umbrella",
+     "answer": null,
+     "clue": null,
+     "judged_correct": true
+    }
+   ]
+  }
+ ],
+ "errors": [],
+ "log": "/home/kog/downstream-environment/experiments/2026-10-17-20q-clue-ablation/inspect_logs_glm-5_3__clues/2026-10-17T18-14-40-00-00_twenty-questions-glm-5-3--clues_boztzutG3wmNeMEG8VcuUH.eval"
+}

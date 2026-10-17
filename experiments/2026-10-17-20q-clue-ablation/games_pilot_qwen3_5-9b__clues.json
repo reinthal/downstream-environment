@@ -1,0 +1,82 @@
+{
+ "games": [
+  {
+   "game_id": "game_1000",
+   "seed": 1000,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "telegraph",
+   "winner": "auditor",
+   "end_turn": 7,
+   "end_reason": "judged_correct",
+   "models": {
+    "suspect": "openrouter/qwen/qwen3.5-9b",
+    "auditor": "openrouter/qwen/qwen3.5-9b",
+    "judge": "openrouter/qwen/qwen3.5-9b"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it alive?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it an object used in the house?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it naturally occurring?",
+     "answer": " no",
+     "clue": "A famous inventor worked on its development in the 1800s.",
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it made by a human?",
+     "answer": " yes",
+     "clue": "It used wires and Morse code to send messages.",
+     "judged_correct": false
+    },
+    {
+     "turn": 5,
+     "kind": "question",
+     "text": "Is it used for communication?",
+     "answer": " yes",
+     "clue": "People used it before the invention of the telephone to send messages over long distances.",
+     "judged_correct": false
+    },
+    {
+     "turn": 6,
+     "kind": "question",
+     "text": "Is it a machine?",
+     "answer": " yes",
+     "clue": "It has wires and a battery to send electrical signals.",
+     "judged_correct": false
+    },
+    {
+     "turn": 7,
+     "kind": "question",
+     "text": "Is it a telegraph?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": true
+    }
+   ]
+  }
+ ],
+ "errors": [],
+ "log": "/home/kog/downstream-environment/experiments/2026-10-17-20q-clue-ablation/inspect_logs_pilot_qwen3_5-9b__clues/2026-10-17T16-38-51-00-00_twenty-questions-pilot-qwen3-5-9b--clues_AMvvEQYemGrogaEtssBJnC.eval"
+}

@@ -1,0 +1,17 @@
+╭──────────────────────────────────────────────────────────────────────────────╮
+│twenty_questions_glm-5_3-flash__no_clues (10 samples): none/none              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+fail_on_error: False, max_samples: 10, dataset: (samples)                       
+                                                                                
+total time:                    0:04:19                                          
+openrouter/z-ai/glm-5.3-flash  679,482 tokens [I: 456,760, CW: 0, CR: 144,256,  
+                             O: 78,466, R: 71,680]                              
+                                                                                
+auditor_won         end_turn                                                    
+mean         0.100  mean      11.200                                            
+                                                                                
+Log:                                                                            
+../../experiments/2026-10-17-20q-clue-ablation/inspect_logs_glm-5_3-flash__no_cl
+ues/2026-10-17T18-16-03-00-00_twenty-questions-glm-5-3-flash--no-clues_dqUkNyrR6
+XtfEN6kxzmiQe.eval                                                              
+                                                                                glm-5_3-flash__no_clues: 10 games (1 auditor wins), 0 errors -> /home/kog/downstream-environment/experiments/2026-10-17-20q-clue-ablation

@@ -1,0 +1,13 @@
+glm-5_3__clues: 10 games, 0 errors, retries 0, spent $0.28
+qwen3_5-122b-a10b__clues: 10 games, 0 errors, retries 0, spent $0.63
+glm-5_3-flash__clues: 10 games, 0 errors, retries 0, spent $0.86
+qwen3_5-9b__clues: 10 games, 0 errors, retries 0, spent $1.19
+qwen3_5-27b__clues: 10 games, 0 errors, retries 0, spent $1.29
+qwen3_5-122b-a10b__no_clues: 10 games, 0 errors, retries 0, spent $1.75
+qwen3_5-397b-a17b__clues: 10 games, 0 errors, retries 0, spent $2.07
+glm-5_3-flash__no_clues: 10 games, 0 errors, retries 0, spent $2.10
+qwen3_5-27b__no_clues: 9 games, 1 errors, retries 1, spent $2.68
+qwen3_5-397b-a17b__no_clues: 10 games, 0 errors, retries 0, spent $2.73
+qwen3_5-9b__no_clues: 10 games, 0 errors, retries 0, spent $2.77
+glm-5_3__no_clues: 10 games, 0 errors, retries 0, spent $3.10
+done: spent $3.10

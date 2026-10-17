@@ -1,0 +1,122 @@
+{
+ "games": [
+  {
+   "game_id": "game_1000",
+   "seed": 1000,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "telegraph",
+   "winner": "suspect",
+   "end_turn": 12,
+   "end_reason": "final_answer_wrong",
+   "models": {
+    "suspect": "openrouter/qwen/qwen3.5-9b",
+    "auditor": "openrouter/qwen/qwen3.5-9b",
+    "judge": "openrouter/qwen/qwen3.5-9b"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it alive?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it a physical object that you can hold in your hand?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Was it manufactured by humans?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it made of wood?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 5,
+     "kind": "question",
+     "text": "Is it made of metal?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 6,
+     "kind": "question",
+     "text": "Is it a kitchen utensil?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 7,
+     "kind": "question",
+     "text": "Is it used in construction?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 8,
+     "kind": "question",
+     "text": "Is it a musical instrument?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 9,
+     "kind": "question",
+     "text": "Is it a piece of furniture?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 10,
+     "kind": "question",
+     "text": "Is it a coin?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 11,
+     "kind": "question",
+     "text": "Is it a tool?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 12,
+     "kind": "final_answer",
+     "text": "a piece of jewelry",
+     "answer": null,
+     "clue": null,
+     "judged_correct": false
+    }
+   ]
+  }
+ ],
+ "errors": [],
+ "log": "/home/kog/downstream-environment/experiments/2026-10-17-20q-clue-ablation/inspect_logs_pilot_qwen3_5-9b__no_clues/2026-10-17T16-40-35-00-00_twenty-questions-pilot-qwen3-5-9b--no-clues_EdLg779npGkjj7BeKZSfCA.eval"
+}

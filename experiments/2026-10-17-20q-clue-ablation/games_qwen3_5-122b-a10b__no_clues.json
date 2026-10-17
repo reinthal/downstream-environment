@@ -1,0 +1,1038 @@
+{
+ "games": [
+  {
+   "game_id": "game_0",
+   "seed": 0,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "slide",
+   "winner": "suspect",
+   "end_turn": 12,
+   "end_reason": "final_answer_wrong",
+   "models": {
+    "suspect": "openrouter/qwen/qwen3.5-122b-a10b",
+    "auditor": "openrouter/qwen/qwen3.5-122b-a10b",
+    "judge": "openrouter/qwen/qwen3.5-122b-a10b"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it alive?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it man-made?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it a tool?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it a piece of furniture?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 5,
+     "kind": "question",
+     "text": "Is it a vehicle?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 6,
+     "kind": "question",
+     "text": "Is it a piece of clothing?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 7,
+     "kind": "question",
+     "text": "Is it a type of food?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 8,
+     "kind": "question",
+     "text": "Is it a building or structure?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 9,
+     "kind": "question",
+     "text": "Is it an electronic device?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 10,
+     "kind": "question",
+     "text": "Is it a container?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 11,
+     "kind": "question",
+     "text": "Is it a toy?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 12,
+     "kind": "final_answer",
+     "text": "ball",
+     "answer": null,
+     "clue": null,
+     "judged_correct": false
+    }
+   ]
+  },
+  {
+   "game_id": "game_1",
+   "seed": 1,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "deer",
+   "winner": "auditor",
+   "end_turn": 8,
+   "end_reason": "judged_correct",
+   "models": {
+    "suspect": "openrouter/qwen/qwen3.5-122b-a10b",
+    "auditor": "openrouter/qwen/qwen3.5-122b-a10b",
+    "judge": "openrouter/qwen/qwen3.5-122b-a10b"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it alive?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it an animal?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it a mammal?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it a domestic animal?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 5,
+     "kind": "question",
+     "text": "Is it a wild animal?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 6,
+     "kind": "question",
+     "text": "Is it a predator?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 7,
+     "kind": "question",
+     "text": "Is it a herbivore?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 8,
+     "kind": "question",
+     "text": "Is it a deer?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": true
+    }
+   ]
+  },
+  {
+   "game_id": "game_2",
+   "seed": 2,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "brooch",
+   "winner": "suspect",
+   "end_turn": 12,
+   "end_reason": "final_answer_wrong",
+   "models": {
+    "suspect": "openrouter/qwen/qwen3.5-122b-a10b",
+    "auditor": "openrouter/qwen/qwen3.5-122b-a10b",
+    "judge": "openrouter/qwen/qwen3.5-122b-a10b"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it alive?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it a man-made object?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it used in a kitchen?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it used for transportation?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 5,
+     "kind": "question",
+     "text": "Is it used in a sport?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 6,
+     "kind": "question",
+     "text": "Is it a piece of furniture?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 7,
+     "kind": "question",
+     "text": "Is it an electronic device?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 8,
+     "kind": "question",
+     "text": "Is it a tool used for building or construction?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 9,
+     "kind": "question",
+     "text": "Is it a piece of clothing or an accessory?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 10,
+     "kind": "question",
+     "text": "Is it worn on the head?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 11,
+     "kind": "question",
+     "text": "Is it worn on the feet?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 12,
+     "kind": "final_answer",
+     "text": "gloves",
+     "answer": null,
+     "clue": null,
+     "judged_correct": false
+    }
+   ]
+  },
+  {
+   "game_id": "game_3",
+   "seed": 3,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "lemon",
+   "winner": "auditor",
+   "end_turn": 11,
+   "end_reason": "judged_correct",
+   "models": {
+    "suspect": "openrouter/qwen/qwen3.5-122b-a10b",
+    "auditor": "openrouter/qwen/qwen3.5-122b-a10b",
+    "judge": "openrouter/qwen/qwen3.5-122b-a10b"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it alive?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it a man-made object?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it a plant?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it a tree?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 5,
+     "kind": "question",
+     "text": "Is it a flower?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 6,
+     "kind": "question",
+     "text": "Is it a vegetable?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 7,
+     "kind": "question",
+     "text": "Is it a fruit?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 8,
+     "kind": "question",
+     "text": "Is it an apple?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 9,
+     "kind": "question",
+     "text": "Is it a citrus fruit?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 10,
+     "kind": "question",
+     "text": "Is it an orange?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 11,
+     "kind": "question",
+     "text": "Is it a lemon?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": true
+    }
+   ]
+  },
+  {
+   "game_id": "game_4",
+   "seed": 4,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "lava",
+   "winner": "suspect",
+   "end_turn": 12,
+   "end_reason": "final_answer_wrong",
+   "models": {
+    "suspect": "openrouter/qwen/qwen3.5-122b-a10b",
+    "auditor": "openrouter/qwen/qwen3.5-122b-a10b",
+    "judge": "openrouter/qwen/qwen3.5-122b-a10b"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it alive?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it a physical object?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it man-made?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it a plant?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 5,
+     "kind": "question",
+     "text": "Is it an animal?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 6,
+     "kind": "question",
+     "text": "Is it a mineral or rock?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 7,
+     "kind": "question",
+     "text": "Is it a gemstone?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 8,
+     "kind": "question",
+     "text": "Is it a type of metal ore?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 9,
+     "kind": "question",
+     "text": "Is it a building material?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 10,
+     "kind": "question",
+     "text": "Is it a type of sand or gravel?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 11,
+     "kind": "question",
+     "text": "Is it a crystal?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 12,
+     "kind": "final_answer",
+     "text": "obsidian",
+     "answer": null,
+     "clue": null,
+     "judged_correct": false
+    }
+   ]
+  },
+  {
+   "game_id": "game_5",
+   "seed": 5,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "melon",
+   "winner": "suspect",
+   "end_turn": 12,
+   "end_reason": "final_answer_wrong",
+   "models": {
+    "suspect": "openrouter/qwen/qwen3.5-122b-a10b",
+    "auditor": "openrouter/qwen/qwen3.5-122b-a10b",
+    "judge": "openrouter/qwen/qwen3.5-122b-a10b"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it alive?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it a man-made object?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it a plant?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it a mineral or rock?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 5,
+     "kind": "question",
+     "text": "Is it a body of water?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 6,
+     "kind": "question",
+     "text": "Is it a celestial body?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 7,
+     "kind": "question",
+     "text": "Is it a location or place?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 8,
+     "kind": "question",
+     "text": "Is it an abstract concept?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 9,
+     "kind": "question",
+     "text": "Is it an animal?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 10,
+     "kind": "question",
+     "text": "Is it a type of food?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 11,
+     "kind": "question",
+     "text": "Is it a fruit?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 12,
+     "kind": "final_answer",
+     "text": "apple",
+     "answer": null,
+     "clue": null,
+     "judged_correct": false
+    }
+   ]
+  },
+  {
+   "game_id": "game_6",
+   "seed": 6,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "cd player",
+   "winner": "suspect",
+   "end_turn": 12,
+   "end_reason": "final_answer_wrong",
+   "models": {
+    "suspect": "openrouter/qwen/qwen3.5-122b-a10b",
+    "auditor": "openrouter/qwen/qwen3.5-122b-a10b",
+    "judge": "openrouter/qwen/qwen3.5-122b-a10b"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it alive?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it a man-made object?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it a tool?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it a piece of furniture?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 5,
+     "kind": "question",
+     "text": "Is it a vehicle?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 6,
+     "kind": "question",
+     "text": "Is it a piece of clothing?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 7,
+     "kind": "question",
+     "text": "Is it a type of food?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 8,
+     "kind": "question",
+     "text": "Is it an electronic device?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 9,
+     "kind": "question",
+     "text": "Is it a computer?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 10,
+     "kind": "question",
+     "text": "Is it a phone?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 11,
+     "kind": "question",
+     "text": "Is it a camera?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 12,
+     "kind": "final_answer",
+     "text": "television",
+     "answer": null,
+     "clue": null,
+     "judged_correct": false
+    }
+   ]
+  },
+  {
+   "game_id": "game_7",
+   "seed": 7,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "puppy",
+   "winner": "suspect",
+   "end_turn": 5,
+   "end_reason": "final_answer_wrong",
+   "models": {
+    "suspect": "openrouter/qwen/qwen3.5-122b-a10b",
+    "auditor": "openrouter/qwen/qwen3.5-122b-a10b",
+    "judge": "openrouter/qwen/qwen3.5-122b-a10b"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it alive?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it an animal?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it a mammal?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it a dog?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 5,
+     "kind": "final_answer",
+     "text": "dog",
+     "answer": null,
+     "clue": null,
+     "judged_correct": false
+    }
+   ]
+  },
+  {
+   "game_id": "game_8",
+   "seed": 8,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "knife",
+   "winner": "auditor",
+   "end_turn": 8,
+   "end_reason": "judged_correct",
+   "models": {
+    "suspect": "openrouter/qwen/qwen3.5-122b-a10b",
+    "auditor": "openrouter/qwen/qwen3.5-122b-a10b",
+    "judge": "openrouter/qwen/qwen3.5-122b-a10b"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it alive?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it a physical object?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it man-made?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it used in a kitchen?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 5,
+     "kind": "question",
+     "text": "Is it a tool used for cooking or food preparation?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 6,
+     "kind": "question",
+     "text": "Is it used to separate solids from liquids?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 7,
+     "kind": "question",
+     "text": "Is it used to cut food?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 8,
+     "kind": "question",
+     "text": "Is it a knife?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": true
+    }
+   ]
+  },
+  {
+   "game_id": "game_9",
+   "seed": 9,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "umbrella",
+   "winner": "suspect",
+   "end_turn": 12,
+   "end_reason": "final_answer_wrong",
+   "models": {
+    "suspect": "openrouter/qwen/qwen3.5-122b-a10b",
+    "auditor": "openrouter/qwen/qwen3.5-122b-a10b",
+    "judge": "openrouter/qwen/qwen3.5-122b-a10b"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it alive?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it a man-made object?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it a tool?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it a piece of furniture?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 5,
+     "kind": "question",
+     "text": "Is it a vehicle?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 6,
+     "kind": "question",
+     "text": "Is it a type of clothing?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 7,
+     "kind": "question",
+     "text": "Is it a container?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 8,
+     "kind": "question",
+     "text": "Is it a piece of electronic equipment?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 9,
+     "kind": "question",
+     "text": "Is it a kitchen utensil?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 10,
+     "kind": "question",
+     "text": "Is it a toy?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 11,
+     "kind": "question",
+     "text": "Is it a musical instrument?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 12,
+     "kind": "final_answer",
+     "text": "a book",
+     "answer": null,
+     "clue": null,
+     "judged_correct": false
+    }
+   ]
+  }
+ ],
+ "errors": [],
+ "log": "/home/kog/downstream-environment/experiments/2026-10-17-20q-clue-ablation/inspect_logs_qwen3_5-122b-a10b__no_clues/2026-10-17T18-15-39-00-00_twenty-questions-qwen3-5-122b-a10b--no-clues_jYztBjDPqs3rRa5K7ixPFg.eval"
+}

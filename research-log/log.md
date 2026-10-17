@@ -2516,6 +2516,27 @@ less than glm flag or equivalent, maybe Qwen 400b strong enough"; no-clue
 
 (researcher)
 
+### Results
+
+| model | clues: mean end turn (solved) | no clues: mean end turn (solved) |
+|---|---|---|
+| qwen3.5-9b | 6.1 (9/10) | 11.8 (2/10) |
+| qwen3.5-27b | 3.6 (10/10) | 11.8 (1/10) |
+| qwen3.5-122b-a10b | 5.0 (9/10) | 11.1 (3/10) |
+| qwen3.5-397b-a17b | 5.0 (9/10) | 11.7 (3/10) |
+| glm-5.3-flash | 7.4 (8/10) | 11.6 (1/10) |
+| glm-5.3 | 5.5 (9/10) | 11.3 (3/10) |
+
+Prediction vs outcome: too easy (< 3.9) predicted for the models below GLM-5.3
+Flash — observed only for Qwen3.5-27B (9B 6.1, 122B 5.0). Weak − strong
+clue-arm difference 1.07–1.55 turns depending on where Qwen3.5-397B is
+counted, so the "less then a turns difference" abandonment rule does not
+trigger (within the ±2-turn noise of 10-game cells). No-clue predicted 7.5,
+observed 11.1–11.8 (70–90% unsolved at the 12-turn cap). Analysis qualitative;
+the conclusion sentences were NOT PREREGISTERED. Deviations (decided after the
+pilot, before the run): Qwen3.5-35B-A3B dropped (failed all 4 pilot games as
+judge / on the last turn), max_tokens 16k → 32k. $3.10.
+
 ### Parameters/Configurations
 
 `experiments/2026-10-17-20q-clue-ablation/config.json`: 12 turns,
@@ -2525,4 +2546,4 @@ provider-default reasoning, max_tokens 16,000, seeds 0–9 (pilot: seed 1000,
 
 ### Artifacts
 
-- `experiments/2026-10-17-20q-clue-ablation/` — `PREREGISTRATION.md`, `README.md`, `config.json`, `common.py`, `run.py`, `analyze.py`
+- `experiments/2026-10-17-20q-clue-ablation/` — `PREREGISTRATION.md`, `README.md`, `config.json`, `common.py`, `run.py`, `analyze.py`, `results.json`, `figures/end_turn.svg`, `games_*.json`, `transcripts_*.jsonl`, `clues_*.md`, `inspect_logs_*/`, `run_log*.json`

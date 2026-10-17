@@ -1,0 +1,17 @@
+╭──────────────────────────────────────────────────────────────────────────────╮
+│twenty_questions_pilot_qwen3_5-397b-a17b__clues (1 sample): none/none         │
+╰──────────────────────────────────────────────────────────────────────────────╯
+fail_on_error: False, max_samples: 10, dataset: (samples)                       
+                                                                                
+total time:                        0:00:33                                      
+openrouter/qwen/qwen3.5-397b-a17b  19,841 tokens [I: 10,569, CW: 0, CR: 7,936,  
+                                 O: 1,336, R: 1,036]                            
+                                                                                
+auditor_won         end_turn                                                    
+mean         1.000  mean      3.000                                             
+                                                                                
+Log:                                                                            
+../../experiments/2026-10-17-20q-clue-ablation/inspect_logs_pilot_qwen3_5-397b-a
+17b__clues/2026-10-17T16-38-50-00-00_twenty-questions-pilot-qwen3-5-397b-a17b--c
+lues_kqKKa77i3HCYLgZxiD3ujL.eval                                                
+                                                                                pilot_qwen3_5-397b-a17b__clues: 1 games (1 auditor wins), 0 errors -> /home/kog/downstream-environment/experiments/2026-10-17-20q-clue-ablation

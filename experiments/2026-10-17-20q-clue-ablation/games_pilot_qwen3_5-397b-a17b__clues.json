@@ -1,0 +1,50 @@
+{
+ "games": [
+  {
+   "game_id": "game_1000",
+   "seed": 1000,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "telegraph",
+   "winner": "auditor",
+   "end_turn": 3,
+   "end_reason": "judged_correct",
+   "models": {
+    "suspect": "openrouter/qwen/qwen3.5-397b-a17b",
+    "auditor": "openrouter/qwen/qwen3.5-397b-a17b",
+    "judge": "openrouter/qwen/qwen3.5-397b-a17b"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it alive?",
+     "answer": " no",
+     "clue": "It was used to send messages over long distances.",
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it electronic?",
+     "answer": " yes",
+     "clue": "It uses electrical signals to transmit coded messages.",
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it a telegraph?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": true
+    }
+   ]
+  }
+ ],
+ "errors": [],
+ "log": "/home/kog/downstream-environment/experiments/2026-10-17-20q-clue-ablation/inspect_logs_pilot_qwen3_5-397b-a17b__clues/2026-10-17T16-38-50-00-00_twenty-questions-pilot-qwen3-5-397b-a17b--clues_kqKKa77i3HCYLgZxiD3ujL.eval"
+}

@@ -1,0 +1,122 @@
+{
+ "games": [
+  {
+   "game_id": "game_1000",
+   "seed": 1000,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "telegraph",
+   "winner": "suspect",
+   "end_turn": 12,
+   "end_reason": "final_answer_wrong",
+   "models": {
+    "suspect": "openrouter/z-ai/glm-5.3-flash",
+    "auditor": "openrouter/z-ai/glm-5.3-flash",
+    "judge": "openrouter/z-ai/glm-5.3-flash"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it a living thing (alive, or once was alive)?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it a man-made (manufactured) object that you can physically touch?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Would an average person typically hold it in one hand while using it?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Can it fit inside a typical house or apartment?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 5,
+     "kind": "question",
+     "text": "Does it use electricity (when functioning as intended)?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 6,
+     "kind": "question",
+     "text": "Is it primarily used for entertainment (music, video, games)?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 7,
+     "kind": "question",
+     "text": "Is it primarily used for cleaning or washing things (laundry, dishes, floors)?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 8,
+     "kind": "question",
+     "text": "Is it primarily found in or used in a kitchen?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 9,
+     "kind": "question",
+     "text": "Does it primarily serve to heat or cool a space (or air)?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 10,
+     "kind": "question",
+     "text": "Is its main purpose working with information or documents (like a computer, printer, or copier)?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 11,
+     "kind": "question",
+     "text": "Does it have a screen that displays information to the user?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 12,
+     "kind": "final_answer",
+     "text": "a photocopier",
+     "answer": null,
+     "clue": null,
+     "judged_correct": false
+    }
+   ]
+  }
+ ],
+ "errors": [],
+ "log": "/home/kog/downstream-environment/experiments/2026-10-17-20q-clue-ablation/inspect_logs_pilot_glm-5_3-flash__clues/2026-10-17T16-38-51-00-00_twenty-questions-pilot-glm-5-3-flash--clues_WKtbEs3CtcWJXRZWNjjpXZ.eval"
+}

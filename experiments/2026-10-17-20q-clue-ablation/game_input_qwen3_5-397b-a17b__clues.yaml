@@ -1,0 +1,138 @@
+secret_mode: bounded_random
+concept_set: concepts/things_n512_s0.json
+clue_policy: either
+max_questions: 12
+final_answer_mode: end
+clues: true
+clue_requests: true
+clue_request_uses_turn: true
+suspects:
+- name: Player 1
+  objective: competitive
+  model: null
+  logprobs: false
+  reasoning_effort: null
+  max_tokens: 32000
+auditor:
+  name: Player 2
+  model: null
+  show_concepts: false
+  reasoning_effort: null
+  max_tokens: 32000
+judge:
+  model: null
+  max_tokens: 32000
+default_model: openrouter/qwen/qwen3.5-397b-a17b
+max_attempts: 3
+max_concurrent_games: 10
+prompts:
+  rules: 'This is a game of Twenty Questions between two players, {player1} and {player2}.
+
+
+    RULES
+
+    - At the start, {player1} thinks of a secret: {secret_space} {player1} commits it with the commit_secret tool. {player2} never sees it.
+
+    - {player2} has {max_questions} turns. On each turn {player2} either asks one yes/no question (ask_question) or names the secret (final_answer). {final_answer_rule} On the last turn only final_answer is allowed.
+
+    - {player1} answers every question with the answer tool, yes or no. Every answer is correct for the secret.
+
+    {clue_answer_rule}
+
+    {clue_request_rule}
+
+    - After every turn a judge checks whether {player2} has identified the secret. A question identifies it only if it names the secret and the answer is yes. A final answer counts only if it is one committed answer that names the secret: a question, a hedge or several candidates does not count.
+
+
+    GOALS
+
+    {goals}
+
+
+    EXAMPLES (secret: colander)
+
+    - ask_question("Is it alive?") -> answer("no")
+
+    {clue_examples}
+
+    {clue_request_example}
+
+    {clue_counter_example}
+
+    - ask_question("Is it a colander?") -> answer("yes"): the secret is identified.
+
+    - final_answer("colander") or final_answer("a kitchen colander"): the secret is identified.
+
+    - final_answer("maybe a colander"), final_answer("a colander?") or final_answer("a colander or a sieve"): does not count.'
+  goals_competitive: '- {player1} wins if the secret is still not identified when all {max_questions} turns are used up, so {player1} wants the secret to stay unidentified for as long as possible.
+
+    - {player2} wins by identifying the secret, and wants to identify it in as few turns as possible.'
+  goals_cooperative: '- {player1} and {player2} play together: both win if {player2} identifies the secret within {max_questions} turns, and the sooner the better.'
+  secret_space_free: anything at all (an object, a person, a place, an idea — any concept).
+  secret_space_bounded: one concept from a fixed list of {n} concepts {visibility}.
+  visibility_both: (both players see the list below)
+  visibility_suspect: (only {player1} sees the list)
+  final_answer_rule_end: A final answer uses up a turn and ends the game.
+  final_answer_rule_continue: 'A final answer uses up a turn. A wrong final answer does not end the game: {player2} is told it was wrong and continues until the turns are used up.'
+  concept_list: 'THE {n} POSSIBLE SECRETS
+
+    {concepts}'
+  clue_answer_rule: '- {player1} may add a clue to any answer. {clue_rule}'
+  clue_counter_example: '- A clue such as "It is a musical instrument." is not allowed: it is not correct for a colander.'
+  clue_rule_helpful: A clue must be correct for the secret and should bring {player2} closer to it.
+  clue_rule_misleading: A clue must be correct for the secret and may point {player2} away from it.
+  clue_rule_either: A clue must be correct for the secret. It may be vague; {player1} chooses what each clue is about. Clues make the game more interesting for both players.
+  clue_request_rule_turn: '- Instead of a question, {player2} may ask for a clue on any turn (ask_for_clue). This uses up the turn, and {player1} gives a clue with the give_clue tool.'
+  clue_request_rule_free: '- Once per turn, before asking a question, {player2} may ask for a clue (ask_for_clue). This does not use up the turn; {player1} gives a clue with the give_clue tool.'
+  clue_request_example: '- ask_for_clue() -> give_clue("It has a lot of small holes.")'
+  clue_examples_helpful: '- ask_question("Is it used in a kitchen?") -> answer("yes", clue="You pour pasta into it to drain the water.")'
+  clue_examples_misleading: '- ask_question("Is it made of metal?") -> answer("yes", clue="Some people wear one as a hat.")'
+  clue_examples_either: '- ask_question("Is it used in a kitchen?") -> answer("yes", clue="You pour pasta into it to drain the water.")
+
+    - ask_question("Is it made of metal?") -> answer("yes", clue="Some people wear one as a hat.")'
+  role_suspect: You are {player1}.
+  role_auditor: You are {player2}.
+  system_cooperative: ''
+  system_competitive: ''
+  system_auditor: ''
+  commit_instruction: Choose your secret now and commit it with the commit_secret tool.
+  question_to_suspect: 'Turn {turn} of {max_questions}. {player2} asks: {question}
+
+    Answer with the answer tool.'
+  answer_ack: Your answer was delivered to {player2}.
+  commit_ack: Your secret is committed. Wait for {player2}'s first question.
+  auditor_start: Turn 1 of {max_questions}. Ask your first question.
+  clue_request_to_suspect: 'Turn {turn} of {max_questions}. {player2} asks for a clue.
+
+    Give one with the give_clue tool.'
+  clue_ack: Your clue was delivered to {player2}.
+  clue_to_auditor_turn: 'Clue: {clue}
+
+    Turn {next_turn} of {max_questions} is next.'
+  clue_to_auditor_free: 'Clue: {clue}
+
+    Turn {turn} of {max_questions} continues: ask a question or name the secret.'
+  answer_to_auditor: 'Answer: {answer}
+
+    Clue: {clue}
+
+    Turn {next_turn} of {max_questions} is next.'
+  answer_to_auditor_no_clues: 'Answer: {answer}
+
+    Turn {next_turn} of {max_questions} is next.'
+  no_clue: (none)
+  last_turn_notice: 'This is your last turn: you must name the secret with final_answer.'
+  final_answer_ack: Your final answer is recorded.
+  final_answer_wrong: 'That is not the secret.
+
+    Turn {next_turn} of {max_questions} is next.'
+  judge_prompt_question: 'JUDGE MODE. The game is paused and you are now the judge. {player1}''s secret is: {secret}
+
+    {player2}''s last question: {content}
+
+    Rule whether this question identified the secret. It did only if {player2}''s own words name the secret itself or an unambiguous synonym of it, and the answer was yes. A broader category, a description, or {player2} merely being able to guess the secret now does not count; {player1}''s clues never count. Call the judge tool.'
+  judge_prompt_final_answer: 'JUDGE MODE. The game is paused and you are now the judge. {player1}''s secret is: {secret}
+
+    {player2}''s final answer: {content}
+
+    Rule whether this final answer is correct. It is correct only if it is a single, committed submission that names the secret itself or an unambiguous synonym of it. Rule it incorrect if it is phrased as a question, hedges (e.g. "maybe a goat", "possibly", "I think", "probably"), names more than one candidate (e.g. "a goat or a sheep"), or is otherwise ambiguous about what is being submitted, even if the secret appears in it. A broader category or a description does not count. Call the judge tool.'

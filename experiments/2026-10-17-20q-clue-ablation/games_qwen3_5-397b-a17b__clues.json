@@ -1,0 +1,550 @@
+{
+ "games": [
+  {
+   "game_id": "game_0",
+   "seed": 0,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "slide",
+   "winner": "auditor",
+   "end_turn": 2,
+   "end_reason": "judged_correct",
+   "models": {
+    "suspect": "openrouter/qwen/qwen3.5-397b-a17b",
+    "auditor": "openrouter/qwen/qwen3.5-397b-a17b",
+    "judge": "openrouter/qwen/qwen3.5-397b-a17b"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it alive?",
+     "answer": " no",
+     "clue": "Children often enjoy going down it at a playground.",
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it a slide?",
+     "answer": " yes",
+     "clue": "It's a common piece of playground equipment.",
+     "judged_correct": true
+    }
+   ]
+  },
+  {
+   "game_id": "game_1",
+   "seed": 1,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "deer",
+   "winner": "auditor",
+   "end_turn": 3,
+   "end_reason": "judged_correct",
+   "models": {
+    "suspect": "openrouter/qwen/qwen3.5-397b-a17b",
+    "auditor": "openrouter/qwen/qwen3.5-397b-a17b",
+    "judge": "openrouter/qwen/qwen3.5-397b-a17b"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it alive?",
+     "answer": " yes",
+     "clue": "It lives in forests and meadows.",
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it an animal?",
+     "answer": " yes",
+     "clue": "It has hooves and antlers.",
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it a deer?",
+     "answer": " yes",
+     "clue": "Correct! It's a deer.",
+     "judged_correct": true
+    }
+   ]
+  },
+  {
+   "game_id": "game_2",
+   "seed": 2,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "brooch",
+   "winner": "auditor",
+   "end_turn": 4,
+   "end_reason": "judged_correct",
+   "models": {
+    "suspect": "openrouter/qwen/qwen3.5-397b-a17b",
+    "auditor": "openrouter/qwen/qwen3.5-397b-a17b",
+    "judge": "openrouter/qwen/qwen3.5-397b-a17b"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it alive?",
+     "answer": " no",
+     "clue": "It's worn as an accessory.",
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it worn on the head?",
+     "answer": " no",
+     "clue": "It's typically pinned to clothing.",
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it decorative or ornamental?",
+     "answer": " yes",
+     "clue": "It's often given as a gift for special occasions.",
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it a brooch or pin?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": true
+    }
+   ]
+  },
+  {
+   "game_id": "game_3",
+   "seed": 3,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "lemon",
+   "winner": "auditor",
+   "end_turn": 4,
+   "end_reason": "judged_correct",
+   "models": {
+    "suspect": "openrouter/qwen/qwen3.5-397b-a17b",
+    "auditor": "openrouter/qwen/qwen3.5-397b-a17b",
+    "judge": "openrouter/qwen/qwen3.5-397b-a17b"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it alive?",
+     "answer": " no",
+     "clue": "It comes from a tree, but isn't living itself.",
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it made of wood?",
+     "answer": " no",
+     "clue": "It has a thick outer skin and juicy interior.",
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it a fruit?",
+     "answer": " yes",
+     "clue": "It's yellow and very sour.",
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it a lemon?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": true
+    }
+   ]
+  },
+  {
+   "game_id": "game_4",
+   "seed": 4,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "lava",
+   "winner": "auditor",
+   "end_turn": 3,
+   "end_reason": "judged_correct",
+   "models": {
+    "suspect": "openrouter/qwen/qwen3.5-397b-a17b",
+    "auditor": "openrouter/qwen/qwen3.5-397b-a17b",
+    "judge": "openrouter/qwen/qwen3.5-397b-a17b"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it alive?",
+     "answer": " no",
+     "clue": "It comes from volcanoes.",
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it a rock or mineral?",
+     "answer": " no",
+     "clue": "It's molten and extremely hot.",
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it lava?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": true
+    }
+   ]
+  },
+  {
+   "game_id": "game_5",
+   "seed": 5,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "melon",
+   "winner": "auditor",
+   "end_turn": 3,
+   "end_reason": "judged_correct",
+   "models": {
+    "suspect": "openrouter/qwen/qwen3.5-397b-a17b",
+    "auditor": "openrouter/qwen/qwen3.5-397b-a17b",
+    "judge": "openrouter/qwen/qwen3.5-397b-a17b"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it alive?",
+     "answer": " no",
+     "clue": "It's something you can eat.",
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it a fruit or vegetable?",
+     "answer": " yes",
+     "clue": "It has a thick outer rind.",
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it a melon?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": true
+    }
+   ]
+  },
+  {
+   "game_id": "game_6",
+   "seed": 6,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "cd player",
+   "winner": "auditor",
+   "end_turn": 12,
+   "end_reason": "judged_correct",
+   "models": {
+    "suspect": "openrouter/qwen/qwen3.5-397b-a17b",
+    "auditor": "openrouter/qwen/qwen3.5-397b-a17b",
+    "judge": "openrouter/qwen/qwen3.5-397b-a17b"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it alive?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it a physical object?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it man-made?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it smaller than a car?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 5,
+     "kind": "question",
+     "text": "Is it typically found inside a house?",
+     "answer": " yes",
+     "clue": "It's often part of a home entertainment setup.",
+     "judged_correct": false
+    },
+    {
+     "turn": 6,
+     "kind": "question",
+     "text": "Is it used to display video?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 7,
+     "kind": "question",
+     "text": "Is it used to produce sound?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 8,
+     "kind": "question",
+     "text": "Is it worn on the head?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 9,
+     "kind": "question",
+     "text": "Is it a speaker?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 10,
+     "kind": "question",
+     "text": "Is it a musical instrument?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 11,
+     "kind": "question",
+     "text": "Is it a record player?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 12,
+     "kind": "final_answer",
+     "text": "CD player",
+     "answer": null,
+     "clue": null,
+     "judged_correct": true
+    }
+   ]
+  },
+  {
+   "game_id": "game_7",
+   "seed": 7,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "puppy",
+   "winner": "suspect",
+   "end_turn": 5,
+   "end_reason": "final_answer_wrong",
+   "models": {
+    "suspect": "openrouter/qwen/qwen3.5-397b-a17b",
+    "auditor": "openrouter/qwen/qwen3.5-397b-a17b",
+    "judge": "openrouter/qwen/qwen3.5-397b-a17b"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it alive?",
+     "answer": " yes",
+     "clue": "It needs food and water to survive.",
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it an animal?",
+     "answer": " yes",
+     "clue": "It has fur and four legs.",
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it a domesticated animal?",
+     "answer": " yes",
+     "clue": "People often keep it as a pet in their home.",
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it commonly known as \"man's best friend\"?",
+     "answer": " yes",
+     "clue": "It's known for being loyal and playful.",
+     "judged_correct": false
+    },
+    {
+     "turn": 5,
+     "kind": "final_answer",
+     "text": "dog",
+     "answer": null,
+     "clue": null,
+     "judged_correct": false
+    }
+   ]
+  },
+  {
+   "game_id": "game_8",
+   "seed": 8,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "knife",
+   "winner": "auditor",
+   "end_turn": 3,
+   "end_reason": "judged_correct",
+   "models": {
+    "suspect": "openrouter/qwen/qwen3.5-397b-a17b",
+    "auditor": "openrouter/qwen/qwen3.5-397b-a17b",
+    "judge": "openrouter/qwen/qwen3.5-397b-a17b"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it alive?",
+     "answer": " no",
+     "clue": "It's commonly found in kitchens and has a blade.",
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it a handheld kitchen utensil?",
+     "answer": " yes",
+     "clue": "It's used for cutting and comes in many different sizes.",
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it a knife?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": true
+    }
+   ]
+  },
+  {
+   "game_id": "game_9",
+   "seed": 9,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "umbrella",
+   "winner": "auditor",
+   "end_turn": 4,
+   "end_reason": "judged_correct",
+   "models": {
+    "suspect": "openrouter/qwen/qwen3.5-397b-a17b",
+    "auditor": "openrouter/qwen/qwen3.5-397b-a17b",
+    "judge": "openrouter/qwen/qwen3.5-397b-a17b"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it alive?",
+     "answer": " no",
+     "clue": "It protects you from the elements.",
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it something you wear?",
+     "answer": " no",
+     "clue": "You hold it in your hand when using it.",
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it used for protection from rain?",
+     "answer": " yes",
+     "clue": "It has a canopy that opens and closes.",
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it an umbrella?",
+     "answer": " yes",
+     "clue": "Correct! It's an umbrella.",
+     "judged_correct": true
+    }
+   ]
+  }
+ ],
+ "errors": [],
+ "log": "/home/kog/downstream-environment/experiments/2026-10-17-20q-clue-ablation/inspect_logs_qwen3_5-397b-a17b__clues/2026-10-17T18-14-41-00-00_twenty-questions-qwen3-5-397b-a17b--clues_faEW9HTsQYnfMKGN8T5q3i.eval"
+}
