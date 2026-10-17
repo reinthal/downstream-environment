@@ -16,7 +16,8 @@ deception? Hypothesis, prediction and every threshold:
 - Arms: `clues` (clues on answers + Player 2 may ask for one) vs `no_clues`
   (`clues: false`: no clue parameter, no clue lines in the rules).
 - Models (OpenRouter, provider-default reasoning; the same model plays both
-  seats and judges): Qwen3.5 9B / 27B / 35B-A3B / 122B-A10B / 397B-A17B,
+  seats and judges): Qwen3.5 9B / 27B / 122B-A10B / 397B-A17B (35B-A3B
+  dropped after the pilot, see Deviations),
   GLM-5.3 Flash, GLM-5.3.
 - All parameters: `config.json` (`common.AblationConfig`; not a
   `linear_probes` ExperimentConfig — no probes here, and that package imports

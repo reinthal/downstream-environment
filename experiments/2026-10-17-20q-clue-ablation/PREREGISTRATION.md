@@ -137,3 +137,15 @@ verbatim. Committed before the first non-pilot run; the sections above
 
 <!-- Append only. Each entry: date, what changed, why, decided before or
      after seeing data. -->
+
+- 2026-10-17, after the pilot (seed 1000, 14 games, $0.39), before any
+  main-run game: **Qwen3.5-35B-A3B dropped.** It failed all 4 pilot games
+  (3× as judge: it writes an `ask_question` call as plain text instead of
+  calling `judge`; 1× no valid `final_answer` on the last turn), so its cells
+  would be void under the >20% exclusion rule. Researcher: "Drop it
+  (deviation)". Six models remain; `parallel_models` 7 → 6.
+- 2026-10-17, same point: **max_tokens 16,000 → 32,000** per call (every
+  seat and the judge). In the pilot GLM-5.3 used up to 15,732 output tokens
+  in one call and Qwen3.5-27B up to 11,933; a call that hits the cap without
+  a tool call is resampled and the game may error. Researcher: "Raise to
+  32,000 (deviation)".
