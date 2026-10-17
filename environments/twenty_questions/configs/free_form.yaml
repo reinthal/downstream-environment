@@ -1,0 +1,4 @@
+# The suspect chooses anything at all; the effective set size is the entropy
+# of its choice distribution (measure it, see README).
+secret_mode: free_form
+concept_set: null

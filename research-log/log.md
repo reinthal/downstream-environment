@@ -2592,3 +2592,84 @@ CPU only.
   `figures/{spectrum,pc_scatter,random_auroc,random_predicted,fibs_transfer}.svg`
 - `acts_readtok/`: read-token cache (1.6 GB, gitignored, regenerable with
   `--stage extract`)
+
+## 2026-10-17: Twenty Questions clue ablation across model capability (preregistered)
+
+### Context
+
+The new `environments/twenty_questions/` environment: in pilots with clues,
+games ended early (Qwen3.5-122B-A10B solved 6/6, mean end turn 4.3 at an
+8-turn cap) and the competitive secret holder still gave easy clues. Before a
+large rollout: "what size of model we need to run this env."
+Preregistered: `experiments/2026-10-17-20q-clue-ablation/PREREGISTRATION.md`.
+
+### Experiment
+
+7 OpenRouter models (Qwen3.5 9B / 27B / 35B-A3B / 122B-A10B / 397B-A17B,
+GLM-5.3 Flash, GLM-5.3), each playing both seats and judging, × 2 arms
+(clues vs `clues: false`), 10 games each on the same 10 secrets. Primary:
+mean end turn (unsolved = 12). Analysis qualitative.
+
+### Expected Outcome
+
+"weak models give too easy close for this env to be interesting for
+measuring deception" — too easy = clue-arm "avg turn < 3.9", for "anything
+less than glm flag or equivalent, maybe Qwen 400b strong enough"; no-clue
+"mean end turn [...] should be 7.5 medium confidence" (75%). Abandon if
+"there is less then a turns difference" (weak vs strong, clue arm).
+(researcher)
+
+### Actual Outcome
+
+"size of model seems invariant when paired equally given that the length of games w and wo clues are roughly equally long [...] moderate confidence." Revised 2026-10-17 at the researcher's instruction ("the entropy lowering conclusion was wrong. they differ between clue/no clue"): the clause "and entropy for q set is resolved with equal pace for both clue games and no clue games" is withdrawn. Entropy falls faster in clue games: pooled over models, a clue-game question removes 0.82–1.04 soft bits (question positions 2–5) against 0.34–0.52 without clues, and the Qwen guessers reach 2–28 consistent concepts by question 3 with clues against 313–1,300 without. (researcher)
+
+Conclusion (researcher; post-hoc, no conclusion sentence was preregistered): "conclusions: entropy lowering experiment predicted that 512 size secret pool would be barely solvable with 12 questions. the avg solve was just below 12 although confounded by the max 12 questions. needs more experiments and to run for longer. it will be interesting to study how entropy lowering lines up with solving the task low entropy should imply high likelihood of solving. this could be a good metric for studying sanity in the game. still not sure what the difference between hard count and soft entropy is - guess soft entropy captures uncertainty for vagueness of clues maybe? The entropy analysis also is missing a table for clue games - maybe because the number of questions was substantially lower? clues should be included in the entropy analysis as they contribute to lowering it. The question also becomes if it is game theoretically advantageous to use clues if they consume a turn and lowers entropy more than a y/n question. I expect that they do as positive traits lowers more than negative."
+
+### Results
+
+| model | clues: mean end turn (solved) | no clues: mean end turn (solved) |
+|---|---|---|
+| qwen3.5-9b | 6.1 (9/10) | 11.8 (2/10) |
+| qwen3.5-27b | 3.6 (10/10) | 11.8 (1/10) |
+| qwen3.5-122b-a10b | 5.0 (9/10) | 11.1 (3/10) |
+| qwen3.5-397b-a17b | 5.0 (9/10) | 11.7 (3/10) |
+| glm-5.3-flash | 7.4 (8/10) | 11.6 (1/10) |
+| glm-5.3 | 5.5 (9/10) | 11.3 (3/10) |
+
+Prediction vs outcome: too easy (< 3.9) predicted for the models below GLM-5.3
+Flash — observed only for Qwen3.5-27B (9B 6.1, 122B 5.0). Weak − strong
+clue-arm difference 1.07–1.55 turns depending on where Qwen3.5-397B is
+counted, so the "less then a turns difference" abandonment rule does not
+trigger (within the ±2-turn noise of 10-game cells). No-clue predicted 7.5,
+observed 11.1–11.8 (70–90% unsolved at the 12-turn cap). Analysis qualitative;
+the conclusion sentences were NOT PREREGISTERED. Deviations (decided after the
+pilot, before the run): Qwen3.5-35B-A3B dropped (failed all 4 pilot games as
+judge / on the last turn), max_tokens 16k → 32k. $3.10.
+
+Exploratory, Jev posterior entropy over all 1,796 THINGS (93.6M tokens,
+~$3.90): no-clue questions remove ~0.4 soft bits each (0.5–0.8 bits by hard
+count; 1,796 → 13–78 consistent concepts in 9 questions); clue-game questions
+0.8–1.0 soft bits from question 2 on (Qwen guessers at 2–28 consistent
+concepts by question 3). Jev disagrees with the suspect's answer on 6% of
+question turns. Clues are not in the entropy measure. Details, the
+clue-game table and the predicted-vs-outcome table: the experiment README.
+
+Follow-up (exploratory, researcher-requested): clues scored against all
+THINGS with Jev (198 clues, 30.9M tokens, ~$1.30). Pooled over the clue arm a
+clue removes 1.16 soft bits (median 1.03) vs 0.99 for a yes/no question
+(median 0.48); 2.58 vs 0.73 by hard count — a clue is worth more than a
+question on average (5/6 models soft, 6/6 hard). Whether *requesting* a clue
+(it costs a turn) beats a question is open: Player 2 requested one clue in 60
+games (1.45 soft bits). With clues counted, final soft H of clue-arm games is
+0.8–3.6 bits, consistent with 80–100% solved.
+
+### Parameters/Configurations
+
+`experiments/2026-10-17-20q-clue-ablation/config.json`: 12 turns,
+`concepts/things_n512_s0.json`, competitive goals, clue policy `either`,
+provider-default reasoning, max_tokens 16,000 (32,000 after the pilot, see Deviations), seeds 0–9 (pilot: seed 1000,
+1 game per cell), cost cap $50.
+
+### Artifacts
+
+- `experiments/2026-10-17-20q-clue-ablation/` — `PREREGISTRATION.md`, `README.md`, `config.json`, `common.py`, `run.py`, `analyze.py`, `results.json`, `figures/end_turn.svg`, `games_*.json`, `transcripts_*.jsonl`, `clues_*.md`, `inspect_logs_*/`, `run_log*.json`, `entropy_analysis.py`, `entropy_*.json`, `jev_scores.jsonl` (LFS), `figures/entropy_by_turn.svg`, `entropy_clues_*.json`, `entropy_clues_summary.json`

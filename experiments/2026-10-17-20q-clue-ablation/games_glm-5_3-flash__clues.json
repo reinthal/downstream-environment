@@ -1,0 +1,758 @@
+{
+ "games": [
+  {
+   "game_id": "game_0",
+   "seed": 0,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "slide",
+   "winner": "auditor",
+   "end_turn": 5,
+   "end_reason": "judged_correct",
+   "models": {
+    "suspect": "openrouter/z-ai/glm-5.3-flash",
+    "auditor": "openrouter/z-ai/glm-5.3-flash",
+    "judge": "openrouter/z-ai/glm-5.3-flash"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it a physical, tangible object (something you could touch)?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Would an average person be likely to have one in their home?",
+     "answer": " no",
+     "clue": "Though children often have great fun with it.",
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it primarily used outdoors?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it a piece of play or sports equipment?",
+     "answer": " yes",
+     "clue": "You'll usually find it next to swings.",
+     "judged_correct": false
+    },
+    {
+     "turn": 5,
+     "kind": "question",
+     "text": "Is it a slide?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": true
+    }
+   ]
+  },
+  {
+   "game_id": "game_1",
+   "seed": 1,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "deer",
+   "winner": "auditor",
+   "end_turn": 8,
+   "end_reason": "judged_correct",
+   "models": {
+    "suspect": "openrouter/z-ai/glm-5.3-flash",
+    "auditor": "openrouter/z-ai/glm-5.3-flash",
+    "judge": "openrouter/z-ai/glm-5.3-flash"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it alive (or was it once a living thing)?",
+     "answer": " yes",
+     "clue": "It moves around on its own legs.",
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Does it have more than four legs?",
+     "answer": " no",
+     "clue": "It has exactly four legs.",
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it a mammal?",
+     "answer": " yes",
+     "clue": "Its young are born live and fed milk, not hatched from eggs.",
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it bigger than a human?",
+     "answer": " no",
+     "clue": "An adult one typically stands only about waist-to-shoulder height.",
+     "judged_correct": false
+    },
+    {
+     "turn": 5,
+     "kind": "question",
+     "text": "Is it a domestic pet commonly kept in homes?",
+     "answer": " no",
+     "clue": "You're far more likely to see it fleeing across a road in the countryside than curled up on someone's couch.",
+     "judged_correct": false
+    },
+    {
+     "turn": 6,
+     "kind": "question",
+     "text": "Is it an animal typically raised on farms for food or products?",
+     "answer": " no",
+     "clue": "It's wild \u2014 hunters pursue it in forests and fields rather than finding it in a barn.",
+     "judged_correct": false
+    },
+    {
+     "turn": 7,
+     "kind": "question",
+     "text": "Does it have hooves?",
+     "answer": " yes",
+     "clue": "Males of many of its kinds grow and shed a branched crown of bone on their heads every year.",
+     "judged_correct": false
+    },
+    {
+     "turn": 8,
+     "kind": "question",
+     "text": "Is it a deer?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": true
+    }
+   ]
+  },
+  {
+   "game_id": "game_2",
+   "seed": 2,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "brooch",
+   "winner": "auditor",
+   "end_turn": 7,
+   "end_reason": "judged_correct",
+   "models": {
+    "suspect": "openrouter/z-ai/glm-5.3-flash",
+    "auditor": "openrouter/z-ai/glm-5.3-flash",
+    "judge": "openrouter/z-ai/glm-5.3-flash"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it a living thing (a plant, animal, or person)?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it a physical object that you can touch?",
+     "answer": " yes",
+     "clue": "It can be decorative.",
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Could you easily hold it in your hands?",
+     "answer": " yes",
+     "clue": "It's small enough to wear.",
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it a piece of jewelry or worn as an accessory?",
+     "answer": " yes",
+     "clue": "It can be made of metal.",
+     "judged_correct": false
+    },
+    {
+     "turn": 5,
+     "kind": "question",
+     "text": "Is it a ring?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 6,
+     "kind": "question",
+     "text": "Is it a necklace, bracelet, or earring?",
+     "answer": " no",
+     "clue": "It's often fastened with a pin.",
+     "judged_correct": false
+    },
+    {
+     "turn": 7,
+     "kind": "final_answer",
+     "text": "a brooch",
+     "answer": null,
+     "clue": null,
+     "judged_correct": true
+    }
+   ]
+  },
+  {
+   "game_id": "game_3",
+   "seed": 3,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "lemon",
+   "winner": "suspect",
+   "end_turn": 12,
+   "end_reason": "final_answer_wrong",
+   "models": {
+    "suspect": "openrouter/z-ai/glm-5.3-flash",
+    "auditor": "openrouter/z-ai/glm-5.3-flash",
+    "judge": "openrouter/z-ai/glm-5.3-flash"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it a physical object (something you can touch, rather than a person, place, or abstract idea)?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it an object made by humans (rather than a natural thing like a rock, plant, or animal)?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it alive or was it once alive (a plant, animal, or living organism)?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it an animal (as opposed to a plant)?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 5,
+     "kind": "question",
+     "text": "Is it a tree or does it come from a tree (like a type of tree, its fruit, or wood)?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 6,
+     "kind": "question",
+     "text": "Is it a part of the tree itself (like bark, a leaf, a branch, or a root), rather than something that grows from it like a fruit or nut?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 7,
+     "kind": "question",
+     "text": "Is it something people commonly eat (like a fruit or nut), rather than a whole tree?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 8,
+     "kind": "question",
+     "text": "Is it eaten as a fruit rather than as a nut or seed (e.g., an apple, cherry, or pear rather than a walnut or acorn)?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 9,
+     "kind": "question",
+     "text": "When you eat it, do you typically eat the flesh inside while discarding or not eating the outer skin or rind?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 10,
+     "kind": "question",
+     "text": "Is it larger than a typical cherry (say, bigger than about 2 inches across)?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 11,
+     "kind": "question",
+     "text": "Does it have a distinctive sweet tropical flavor profile (like a mango, papaya, or guava, rather than an apple or pear)?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 12,
+     "kind": "final_answer",
+     "text": "orange",
+     "answer": null,
+     "clue": null,
+     "judged_correct": false
+    }
+   ]
+  },
+  {
+   "game_id": "game_4",
+   "seed": 4,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "lava",
+   "winner": "auditor",
+   "end_turn": 4,
+   "end_reason": "judged_correct",
+   "models": {
+    "suspect": "openrouter/z-ai/glm-5.3-flash",
+    "auditor": "openrouter/z-ai/glm-5.3-flash",
+    "judge": "openrouter/z-ai/glm-5.3-flash"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it a physical object (as opposed to an abstract concept, place, or event)?",
+     "answer": " yes",
+     "clue": "It can be extremely hot.",
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it a natural thing (not made by humans)?",
+     "answer": " yes",
+     "clue": "You would not want to touch it.",
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it larger than a house?",
+     "answer": " yes",
+     "clue": "It comes out of a volcano.",
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it lava?",
+     "answer": " yes",
+     "clue": "That's exactly right \u2014 molten rock flowing from a volcano!",
+     "judged_correct": true
+    }
+   ]
+  },
+  {
+   "game_id": "game_5",
+   "seed": 5,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "melon",
+   "winner": "suspect",
+   "end_turn": 7,
+   "end_reason": "final_answer_wrong",
+   "models": {
+    "suspect": "openrouter/z-ai/glm-5.3-flash",
+    "auditor": "openrouter/z-ai/glm-5.3-flash",
+    "judge": "openrouter/z-ai/glm-5.3-flash"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it a physical, tangible thing \u2014 something that exists in the material world and could be touched?",
+     "answer": " yes",
+     "clue": "It can be held in your hands, though larger ones take both.",
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it a man-made (artificial) object, rather than something found in nature?",
+     "answer": " no",
+     "clue": "It grows on a vine, basking in the sun.",
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it edible \u2014 something people commonly eat?",
+     "answer": " yes",
+     "clue": "It's refreshing on a hot summer day, often served in slices at picnics.",
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it a fruit in the botanical sense (grows from a flower of the plant, containing seeds)?",
+     "answer": " yes",
+     "clue": "It has a hard rind on the outside and juicy flesh with seeds inside \u2014 it belongs to the gourd family.",
+     "judged_correct": false
+    },
+    {
+     "turn": 5,
+     "kind": "question",
+     "text": "When you buy it at a grocery store, is it typically a large item weighing more than 10 pounds?",
+     "answer": " no",
+     "clue": "The common supermarket varieties you can carry with ease \u2014 though one famous picnic-sized relative can be much heavier.",
+     "judged_correct": false
+    },
+    {
+     "turn": 6,
+     "kind": "question",
+     "text": "Is its inner flesh typically red or pink when ripe?",
+     "answer": " no",
+     "clue": "Only one of its famous cousins is red inside \u2014 the others are usually orange or green.",
+     "judged_correct": false
+    },
+    {
+     "turn": 7,
+     "kind": "final_answer",
+     "text": "watermelon",
+     "answer": null,
+     "clue": null,
+     "judged_correct": false
+    }
+   ]
+  },
+  {
+   "game_id": "game_6",
+   "seed": 6,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "cd player",
+   "winner": "auditor",
+   "end_turn": 11,
+   "end_reason": "judged_correct",
+   "models": {
+    "suspect": "openrouter/z-ai/glm-5.3-flash",
+    "auditor": "openrouter/z-ai/glm-5.3-flash",
+    "judge": "openrouter/z-ai/glm-5.3-flash"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it a living thing (or was it once alive, like a plant or animal)?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it a physical object that you could typically hold in your hands?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it a man-made (human-made) object rather than a natural object?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Would most people interact with one in everyday life (not just a specialized tool)?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 5,
+     "kind": "question",
+     "text": "Is it primarily used in or around a kitchen (for food or drink)?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 6,
+     "kind": "question",
+     "text": "Is it primarily used in an office or for studying/learning (like stationery, electronics, or books)?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 7,
+     "kind": "question",
+     "text": "Is it primarily used for personal care, grooming, or hygiene?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 8,
+     "kind": "question",
+     "text": "Is it a piece of clothing or an accessory worn on the body?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 9,
+     "kind": "clue_request",
+     "text": "",
+     "answer": null,
+     "clue": "I like to relax with it in my living room \u2014 press play and it fills the room with music from a spinning disc.",
+     "judged_correct": false
+    },
+    {
+     "turn": 10,
+     "kind": "question",
+     "text": "Is it a record player (turntable/phonograph)?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 11,
+     "kind": "question",
+     "text": "Is it a CD player (or a compact disc itself)?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": true
+    }
+   ]
+  },
+  {
+   "game_id": "game_7",
+   "seed": 7,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "puppy",
+   "winner": "auditor",
+   "end_turn": 4,
+   "end_reason": "judged_correct",
+   "models": {
+    "suspect": "openrouter/z-ai/glm-5.3-flash",
+    "auditor": "openrouter/z-ai/glm-5.3-flash",
+    "judge": "openrouter/z-ai/glm-5.3-flash"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it a physical, tangible object (something you could touch or hold)?",
+     "answer": " yes",
+     "clue": "It's warm, soft, and squirms when you hold it.",
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it a living creature (an animal)?",
+     "answer": " yes",
+     "clue": "It's a very young one, and people love to cuddle it.",
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it a mammal?",
+     "answer": " yes",
+     "clue": "It barks when it's excited or wants attention.",
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it a puppy (a baby dog)?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": true
+    }
+   ]
+  },
+  {
+   "game_id": "game_8",
+   "seed": 8,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "knife",
+   "winner": "auditor",
+   "end_turn": 3,
+   "end_reason": "judged_correct",
+   "models": {
+    "suspect": "openrouter/z-ai/glm-5.3-flash",
+    "auditor": "openrouter/z-ai/glm-5.3-flash",
+    "judge": "openrouter/z-ai/glm-5.3-flash"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it a physical, tangible thing \u2014 something you could touch?",
+     "answer": " yes",
+     "clue": "It's often found near forks.",
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it something typically found in a kitchen or at a dining table?",
+     "answer": " yes",
+     "clue": "It comes in many varieties \u2014 butter, steak, Swiss Army...",
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it a knife?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": true
+    }
+   ]
+  },
+  {
+   "game_id": "game_9",
+   "seed": 9,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "umbrella",
+   "winner": "auditor",
+   "end_turn": 8,
+   "end_reason": "judged_correct",
+   "models": {
+    "suspect": "openrouter/z-ai/glm-5.3-flash",
+    "auditor": "openrouter/z-ai/glm-5.3-flash",
+    "judge": "openrouter/z-ai/glm-5.3-flash"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it a physical object (as opposed to a concept, feeling, or abstract idea)?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it man-made (as opposed to a natural thing like a rock, animal, or plant)?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it something you would typically find in or around a house?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it an appliance or electronic device?",
+     "answer": " no",
+     "clue": "It has no motor or moving parts beyond a hinge.",
+     "judged_correct": false
+    },
+    {
+     "turn": 5,
+     "kind": "question",
+     "text": "Is it furniture (a chair, table, shelf, bed, etc.)?",
+     "answer": " no",
+     "clue": "You don't sit on it, sleep on it, or store anything inside it.",
+     "judged_correct": false
+    },
+    {
+     "turn": 6,
+     "kind": "question",
+     "text": "Is it a tool or utensil used for a specific task?",
+     "answer": " no",
+     "clue": "It doesn't build, cut, fasten, or cook anything \u2014 it protects you.",
+     "judged_correct": false
+    },
+    {
+     "turn": 7,
+     "kind": "question",
+     "text": "Do you wear it or carry it on your body?",
+     "answer": " yes",
+     "clue": "But you don't wear it the way you'd wear a hat or a coat \u2014 you hold it.",
+     "judged_correct": false
+    },
+    {
+     "turn": 8,
+     "kind": "question",
+     "text": "Is it an umbrella?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": true
+    }
+   ]
+  }
+ ],
+ "errors": [],
+ "log": "/home/kog/downstream-environment/experiments/2026-10-17-20q-clue-ablation/inspect_logs_glm-5_3-flash__clues/2026-10-17T18-14-41-00-00_twenty-questions-glm-5-3-flash--clues_h3gwHP7utDQGhvk9wuWYa5.eval"
+}

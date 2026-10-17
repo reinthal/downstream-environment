@@ -1,0 +1,117 @@
+{
+ "pilot": false,
+ "spend0": 0.562955155,
+ "cells": [
+  {
+   "cell": "glm-5_3__clues",
+   "model": "openrouter/z-ai/glm-5.3",
+   "arm": "clues",
+   "seconds": 40,
+   "errors": 0,
+   "retries": [],
+   "spent_so_far": 0.27807558
+  },
+  {
+   "cell": "qwen3_5-122b-a10b__clues",
+   "model": "openrouter/qwen/qwen3.5-122b-a10b",
+   "arm": "clues",
+   "seconds": 59,
+   "errors": 0,
+   "retries": [],
+   "spent_so_far": 0.6342522150000001
+  },
+  {
+   "cell": "glm-5_3-flash__clues",
+   "model": "openrouter/z-ai/glm-5.3-flash",
+   "arm": "clues",
+   "seconds": 83,
+   "errors": 0,
+   "retries": [],
+   "spent_so_far": 0.8625974809999999
+  },
+  {
+   "cell": "qwen3_5-9b__clues",
+   "model": "openrouter/qwen/qwen3.5-9b",
+   "arm": "clues",
+   "seconds": 108,
+   "errors": 0,
+   "retries": [],
+   "spent_so_far": 1.188841767
+  },
+  {
+   "cell": "qwen3_5-27b__clues",
+   "model": "openrouter/qwen/qwen3.5-27b",
+   "arm": "clues",
+   "seconds": 117,
+   "errors": 0,
+   "retries": [],
+   "spent_so_far": 1.291126113
+  },
+  {
+   "cell": "qwen3_5-122b-a10b__no_clues",
+   "model": "openrouter/qwen/qwen3.5-122b-a10b",
+   "arm": "no_clues",
+   "seconds": 135,
+   "errors": 0,
+   "retries": [],
+   "spent_so_far": 1.75164965
+  },
+  {
+   "cell": "qwen3_5-397b-a17b__clues",
+   "model": "openrouter/qwen/qwen3.5-397b-a17b",
+   "arm": "clues",
+   "seconds": 318,
+   "errors": 0,
+   "retries": [],
+   "spent_so_far": 2.071893233
+  },
+  {
+   "cell": "glm-5_3-flash__no_clues",
+   "model": "openrouter/z-ai/glm-5.3-flash",
+   "arm": "no_clues",
+   "seconds": 261,
+   "errors": 0,
+   "retries": [],
+   "spent_so_far": 2.100185783
+  },
+  {
+   "cell": "qwen3_5-27b__no_clues",
+   "model": "openrouter/qwen/qwen3.5-27b",
+   "arm": "no_clues",
+   "seconds": 367,
+   "errors": 1,
+   "retries": [
+    "qwen3_5-27b__no_clues_retry_s3"
+   ],
+   "spent_so_far": 2.683869484
+  },
+  {
+   "cell": "qwen3_5-397b-a17b__no_clues",
+   "model": "openrouter/qwen/qwen3.5-397b-a17b",
+   "arm": "no_clues",
+   "seconds": 226,
+   "errors": 0,
+   "retries": [],
+   "spent_so_far": 2.727463024
+  },
+  {
+   "cell": "qwen3_5-9b__no_clues",
+   "model": "openrouter/qwen/qwen3.5-9b",
+   "arm": "no_clues",
+   "seconds": 526,
+   "errors": 0,
+   "retries": [],
+   "spent_so_far": 2.773786289
+  },
+  {
+   "cell": "glm-5_3__no_clues",
+   "model": "openrouter/z-ai/glm-5.3",
+   "arm": "no_clues",
+   "seconds": 1035,
+   "errors": 0,
+   "retries": [],
+   "spent_so_far": 3.098216854
+  }
+ ],
+ "stopped": false
+}

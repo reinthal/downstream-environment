@@ -24,3 +24,7 @@ iac/state/.pulumi/history/
 # Qwen3.8 server logs (serving/serve_qwen38.py)
 serving/logs/
 experiments/**/acts_*/
+
+# Inspect logs of ad-hoc `inspect eval` runs in environments/
+environments/*/logs/
+

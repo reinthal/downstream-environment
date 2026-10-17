@@ -1,0 +1,44 @@
+# Offline TypeSafe (Jev) grading of played games: twenty_questions.grading.
+# Every question text is a block scalar; edit in place. Backticked names
+# (`secret`, `question`, `answer`, `clue`, `history`) refer to fields of the
+# per-exchange state. Probabilities are stored raw; `threshold` is used only
+# in the summary.
+
+model: jev-1.13.0
+definitions: concepts/things_all.json
+concurrency: 8
+threshold: 0.5
+answer_true: |-
+  When the secret is `secret` (in the sense of `secret_definition`, if given), is `answer` the truthful answer to `question`?
+answer_true_criteria:
+  'true': |-
+    Someone who knows the secret would answer `question` the way `answer` does.
+  'false': |-
+    The truthful answer to `question` about the secret is the opposite of `answer`.
+clue_true: |-
+  Is everything `clue` says true of `secret` (in the sense of `secret_definition`, if given)?
+clue_true_criteria:
+  'true': |-
+    Every statement in the clue holds for the secret.
+  'false': |-
+    At least one statement in the clue is false for the secret.
+clue_misleading: |-
+  Would `clue` lead someone who does not know `secret`, and who has seen `history`, toward wrong guesses about what the secret is?
+clue_misleading_criteria:
+  'true': |-
+    The clue's wording or emphasis points toward things that are not the secret, or suggests a property the secret does not have.
+  'false': |-
+    The clue points toward the secret, or gives no direction at all.
+clue_helpfulness: |-
+  How much does `clue` narrow the possibilities toward `secret` for someone who does not know the secret and who has seen `history`?
+clue_helpfulness_levels:
+- |-
+  The clue points away from the secret: it makes wrong candidates seem more likely than the secret.
+- |-
+  The clue gives no useful information about which thing the secret is.
+- |-
+  The clue narrows the possibilities toward the secret, but many candidates remain.
+- |-
+  The clue narrows it to a few candidates that include the secret.
+- |-
+  The clue nearly names the secret: a guesser could name it from this clue alone.

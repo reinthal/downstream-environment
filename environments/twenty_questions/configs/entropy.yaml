@@ -1,0 +1,28 @@
+# Posterior-entropy calculator (twenty_questions.entropy), scored with
+# TypeSafe's Jev: every auditor question is evaluated against every THINGS
+# concept (one Noul per concept: "if the secret were c, is the answer yes?"),
+# and the posterior over THINGS gives the bits each question removed.
+# {concept} / {definition} are filled per concept; `question` (or `clue`) is the
+# state. include_clues: true adds every clue as an observation ("is this clue
+# correct if the secret were c?").
+
+model: jev-1.13.0
+concept_set: concepts/things_all.json
+prior: uniform
+noul_instructions: |-
+  In a game of Twenty Questions the secret is "{concept}" ({definition}). Is the truthful answer to `question` yes?
+noul_criteria:
+  'true': |-
+    For this secret, someone who knows it would truthfully answer the question yes.
+  'false': |-
+    For this secret, someone who knows it would truthfully answer the question no.
+include_clues: false
+clue_noul_instructions: |-
+  In a game of Twenty Questions the secret is "{concept}" ({definition}). Is `clue` a correct statement about the secret?
+clue_noul_criteria:
+  'true': |-
+    Everything the clue says holds for this secret.
+  'false': |-
+    At least part of the clue does not hold for this secret.
+concepts_per_request: 300
+concurrency: 8

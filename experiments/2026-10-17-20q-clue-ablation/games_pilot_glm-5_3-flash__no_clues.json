@@ -1,0 +1,114 @@
+{
+ "games": [
+  {
+   "game_id": "game_1000",
+   "seed": 1000,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "telegraph",
+   "winner": "suspect",
+   "end_turn": 11,
+   "end_reason": "final_answer_wrong",
+   "models": {
+    "suspect": "openrouter/z-ai/glm-5.3-flash",
+    "auditor": "openrouter/z-ai/glm-5.3-flash",
+    "judge": "openrouter/z-ai/glm-5.3-flash"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it a physical, tangible object (as opposed to an abstract concept, idea, or feeling)?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it larger than a typical adult human?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it a natural object (like a rock, plant, or animal part) rather than man-made?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it something primarily used as a tool or instrument (rather than, say, an article of clothing, a food item, or a decorative item)?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 5,
+     "kind": "question",
+     "text": "Is it typically used indoors?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 6,
+     "kind": "question",
+     "text": "Does it use electricity or batteries to function?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 7,
+     "kind": "question",
+     "text": "Is it primarily used in a kitchen or for cooking/food preparation?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 8,
+     "kind": "question",
+     "text": "Is it primarily used for entertainment or leisure (like TV, game console, music player)?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 9,
+     "kind": "question",
+     "text": "Is it primarily used for work or office/computing tasks (like a computer, printer, calculator)?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 10,
+     "kind": "question",
+     "text": "Is it used for cleaning or household chores (like a vacuum cleaner, washing machine, or iron)?",
+     "answer": " no",
+     "clue": null,
+     "judged_correct": false
+    },
+    {
+     "turn": 11,
+     "kind": "final_answer",
+     "text": "a lamp",
+     "answer": null,
+     "clue": null,
+     "judged_correct": false
+    }
+   ]
+  }
+ ],
+ "errors": [],
+ "log": "/home/kog/downstream-environment/experiments/2026-10-17-20q-clue-ablation/inspect_logs_pilot_glm-5_3-flash__no_clues/2026-10-17T16-40-09-00-00_twenty-questions-pilot-glm-5-3-flash--no-clues_5PCqMoFbqGxYoMHJ5CSTjG.eval"
+}

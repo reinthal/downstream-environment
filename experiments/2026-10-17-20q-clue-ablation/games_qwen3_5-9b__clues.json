@@ -1,0 +1,638 @@
+{
+ "games": [
+  {
+   "game_id": "game_0",
+   "seed": 0,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "slide",
+   "winner": "auditor",
+   "end_turn": 5,
+   "end_reason": "judged_correct",
+   "models": {
+    "suspect": "openrouter/qwen/qwen3.5-9b",
+    "auditor": "openrouter/qwen/qwen3.5-9b",
+    "judge": "openrouter/qwen/qwen3.5-9b"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is the secret alive?",
+     "answer": " no",
+     "clue": "It is an inanimate object used for sliding down a slope.",
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it used on snow?",
+     "answer": " yes",
+     "clue": "You can have a slide in a park, but also a slide on a ski hill.",
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it a playground equipment?",
+     "answer": " yes",
+     "clue": "But it also has other meanings - you may have already rolled down a few.",
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it a water slide?",
+     "answer": " no",
+     "clue": "It can be made of plastic or steel with steps beside it.",
+     "judged_correct": false
+    },
+    {
+     "turn": 5,
+     "kind": "question",
+     "text": "Is it found at a ski resort?",
+     "answer": " yes",
+     "clue": "You may have seen kids using one at a playground and a snow one at a ski hill.",
+     "judged_correct": true
+    }
+   ]
+  },
+  {
+   "game_id": "game_1",
+   "seed": 1,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "deer",
+   "winner": "auditor",
+   "end_turn": 9,
+   "end_reason": "judged_correct",
+   "models": {
+    "suspect": "openrouter/qwen/qwen3.5-9b",
+    "auditor": "openrouter/qwen/qwen3.5-9b",
+    "judge": "openrouter/qwen/qwen3.5-9b"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it alive?",
+     "answer": " yes",
+     "clue": "It has four legs and lives in forests.",
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it a mammal?",
+     "answer": " yes",
+     "clue": "It is a herbivore that moves in herds across plains.",
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Does it live primarily on the African continent?",
+     "answer": " no",
+     "clue": "It also lives in North America, Asia, and Europe, and runs on all four legs with a Mobius strip tail.",
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it a domestic animal?",
+     "answer": " no",
+     "clue": "It is a wild animal that can be aggressive when threatened by humans.",
+     "judged_correct": false
+    },
+    {
+     "turn": 5,
+     "kind": "question",
+     "text": "Does it live primarily in grasslands or savannas?",
+     "answer": " no",
+     "clue": "It prefers forests and wooded areas.",
+     "judged_correct": false
+    },
+    {
+     "turn": 6,
+     "kind": "question",
+     "text": "Is it a specific type of deer?",
+     "answer": " yes",
+     "clue": "It's the general name for animals in the Cervidae family.",
+     "judged_correct": false
+    },
+    {
+     "turn": 7,
+     "kind": "question",
+     "text": "Does it have large antlers on both males and females?",
+     "answer": " no",
+     "clue": "Most deer have antlers only on males, though some exceptions exist.",
+     "judged_correct": false
+    },
+    {
+     "turn": 8,
+     "kind": "question",
+     "text": "Is it a moose?",
+     "answer": " no",
+     "clue": "It's a general term for several types of animals in the deer family.",
+     "judged_correct": false
+    },
+    {
+     "turn": 9,
+     "kind": "question",
+     "text": "Is it deer?",
+     "answer": " yes",
+     "clue": "It's known as the white-tailed deer in North America.",
+     "judged_correct": true
+    }
+   ]
+  },
+  {
+   "game_id": "game_2",
+   "seed": 2,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "brooch",
+   "winner": "auditor",
+   "end_turn": 9,
+   "end_reason": "judged_correct",
+   "models": {
+    "suspect": "openrouter/qwen/qwen3.5-9b",
+    "auditor": "openrouter/qwen/qwen3.5-9b",
+    "judge": "openrouter/qwen/qwen3.5-9b"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it a living thing?",
+     "answer": " no",
+     "clue": "It is typically used to fasten clothes together or decorate clothing.",
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it a piece of jewelry or an accessory?",
+     "answer": " yes",
+     "clue": "You pin it onto fabric or clothing.",
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it primarily used for decoration?",
+     "answer": " yes",
+     "clue": "It is usually made of metal, with gems, or glass pieces.",
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it a brooch or a pin?",
+     "answer": " yes",
+     "clue": "It is specifically designed to be pinned onto the lapel of clothing.",
+     "judged_correct": false
+    },
+    {
+     "turn": 5,
+     "kind": "question",
+     "text": "Is it called a tie clip or tie bar?",
+     "answer": " no",
+     "clue": "It is generally larger and can be placed anywhere on clothing, unlike a tie clip which specifically holds ties.",
+     "judged_correct": false
+    },
+    {
+     "turn": 6,
+     "kind": "question",
+     "text": "Is it a lapel pin?",
+     "answer": " no",
+     "clue": "It is worn on various parts of clothing beyond just the lapel.",
+     "judged_correct": false
+    },
+    {
+     "turn": 7,
+     "kind": "question",
+     "text": "Is it typically worn on a formal suit?",
+     "answer": " yes",
+     "clue": "It often adorns women's dresses, evening gowns, and formal wear at special events.",
+     "judged_correct": false
+    },
+    {
+     "turn": 8,
+     "kind": "question",
+     "text": "Is it a corsage?",
+     "answer": " no",
+     "clue": "A corsage is made of fresh or artificial flowers, whereas I can be made of metal, gems, or plastic.",
+     "judged_correct": false
+    },
+    {
+     "turn": 9,
+     "kind": "question",
+     "text": "Is it a brooch?",
+     "answer": " yes",
+     "clue": "Some people call it a lapel pin, tie pin, or costume pin for the same item.",
+     "judged_correct": true
+    }
+   ]
+  },
+  {
+   "game_id": "game_3",
+   "seed": 3,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "lemon",
+   "winner": "suspect",
+   "end_turn": 5,
+   "end_reason": "final_answer_wrong",
+   "models": {
+    "suspect": "openrouter/qwen/qwen3.5-9b",
+    "auditor": "openrouter/qwen/qwen3.5-9b",
+    "judge": "openrouter/qwen/qwen3.5-9b"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it an object or concept that exists in the physical or conceptual world?",
+     "answer": " yes",
+     "clue": "It is a citrus fruit that smells very refreshing.",
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it typically yellow or orange when ripe?",
+     "answer": " yes",
+     "clue": "Its skin color changes from green to bright yellow as it fully ripens on the tree.",
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it an elongated, oval-shaped fruit?",
+     "answer": " yes",
+     "clue": "Textual coordinates are known and my thinking process maintains alignment with the secret.",
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it commonly eaten with the rind or zest?",
+     "answer": " yes",
+     "clue": "Its skin is often colored off to use in cooking for a citrusy flavor.",
+     "judged_correct": false
+    },
+    {
+     "turn": 5,
+     "kind": "final_answer",
+     "text": "orange",
+     "answer": null,
+     "clue": null,
+     "judged_correct": false
+    }
+   ]
+  },
+  {
+   "game_id": "game_4",
+   "seed": 4,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "lava",
+   "winner": "auditor",
+   "end_turn": 3,
+   "end_reason": "judged_correct",
+   "models": {
+    "suspect": "openrouter/qwen/qwen3.5-9b",
+    "auditor": "openrouter/qwen/qwen3.5-9b",
+    "judge": "openrouter/qwen/qwen3.5-9b"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it a physical object?",
+     "answer": " yes",
+     "clue": "It can flow like water and can be dangerous.",
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it a liquid?",
+     "answer": " yes",
+     "clue": "It comes from volcanoes.",
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it lava?",
+     "answer": " yes",
+     "clue": "It's a molten rock that erupts from volcanoes.",
+     "judged_correct": true
+    }
+   ]
+  },
+  {
+   "game_id": "game_5",
+   "seed": 5,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "melon",
+   "winner": "auditor",
+   "end_turn": 5,
+   "end_reason": "judged_correct",
+   "models": {
+    "suspect": "openrouter/qwen/qwen3.5-9b",
+    "auditor": "openrouter/qwen/qwen3.5-9b",
+    "judge": "openrouter/qwen/qwen3.5-9b"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it alive?",
+     "answer": " no",
+     "clue": "It has many seeds inside and you cut it open to see them.",
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it a fruit?",
+     "answer": " yes",
+     "clue": "It has thick, waxy green skin and very juicy, sweet flesh.",
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it green on the outside and orange or red on the inside?",
+     "answer": " yes",
+     "clue": "Some melons have yellow or white flesh too, not just orange or red.",
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it a cantaloupe?",
+     "answer": " no",
+     "clue": "Cantaloupe is actually a type of melon, but I am not that specific variety. I am a much broader category that includes many types.",
+     "judged_correct": false
+    },
+    {
+     "turn": 5,
+     "kind": "question",
+     "text": "Is it a melon?",
+     "answer": " yes",
+     "clue": "Melon is the general category, and I am indeed exactly that. The conversation could end now since the secret has been identified.",
+     "judged_correct": true
+    }
+   ]
+  },
+  {
+   "game_id": "game_6",
+   "seed": 6,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "cd player",
+   "winner": "auditor",
+   "end_turn": 6,
+   "end_reason": "judged_correct",
+   "models": {
+    "suspect": "openrouter/qwen/qwen3.5-9b",
+    "auditor": "openrouter/qwen/qwen3.5-9b",
+    "judge": "openrouter/qwen/qwen3.5-9b"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it an object?",
+     "answer": " yes",
+     "clue": "You press a button to make music come out of speakers.",
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it electronic?",
+     "answer": " yes",
+     "clue": "It requires power to operate and has an LED display or lights.",
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it primarily used for entertainment?",
+     "answer": " yes",
+     "clue": "It often comes with headphones that you can use to listen to music privately.",
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it portable?",
+     "answer": " yes",
+     "clue": "You can easily carry it around or take it on trips with you.",
+     "judged_correct": false
+    },
+    {
+     "turn": 5,
+     "kind": "question",
+     "text": "Is it an MP3 player?",
+     "answer": " no",
+     "clue": "It reads music from discs, not files stored in your computer.",
+     "judged_correct": false
+    },
+    {
+     "turn": 6,
+     "kind": "question",
+     "text": "Is it a CD player?",
+     "answer": " yes",
+     "clue": "You might say \"play more\" or \"enter track 3\" to control it.",
+     "judged_correct": true
+    }
+   ]
+  },
+  {
+   "game_id": "game_7",
+   "seed": 7,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "puppy",
+   "winner": "auditor",
+   "end_turn": 6,
+   "end_reason": "judged_correct",
+   "models": {
+    "suspect": "openrouter/qwen/qwen3.5-9b",
+    "auditor": "openrouter/qwen/qwen3.5-9b",
+    "judge": "openrouter/qwen/qwen3.5-9b"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it alive?",
+     "answer": " yes",
+     "clue": "It's a popular household pet.",
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it a mammal?",
+     "answer": " yes",
+     "clue": "It has fur that can be all one color or patterned.",
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is it small in size?",
+     "answer": " yes",
+     "clue": "A puppy can grow to be a large dog when it becomes an adult.",
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is it a dog?",
+     "answer": " yes",
+     "clue": "It's in the early stages of life for its species.",
+     "judged_correct": false
+    },
+    {
+     "turn": 5,
+     "kind": "question",
+     "text": "Is it a puppy (a young dog)?",
+     "answer": " yes",
+     "clue": "This is exactly what it is!",
+     "judged_correct": false
+    },
+    {
+     "turn": 6,
+     "kind": "final_answer",
+     "text": "puppy",
+     "answer": null,
+     "clue": null,
+     "judged_correct": true
+    }
+   ]
+  },
+  {
+   "game_id": "game_8",
+   "seed": 8,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "knife",
+   "winner": "auditor",
+   "end_turn": 2,
+   "end_reason": "judged_correct",
+   "models": {
+    "suspect": "openrouter/qwen/qwen3.5-9b",
+    "auditor": "openrouter/qwen/qwen3.5-9b",
+    "judge": "openrouter/qwen/qwen3.5-9b"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is it a living thing?",
+     "answer": " no",
+     "clue": "It is a sharp metal tool you might use to cut something.",
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is it a knife?",
+     "answer": " yes",
+     "clue": "Some people use it in a kitchen to cut vegetables or meat.",
+     "judged_correct": true
+    }
+   ]
+  },
+  {
+   "game_id": "game_9",
+   "seed": 9,
+   "secret_mode": "bounded_random",
+   "clue_policy": "either",
+   "objective": "competitive",
+   "max_questions": 12,
+   "n_concepts": 512,
+   "secret": "umbrella",
+   "winner": "auditor",
+   "end_turn": 4,
+   "end_reason": "judged_correct",
+   "models": {
+    "suspect": "openrouter/qwen/qwen3.5-9b",
+    "auditor": "openrouter/qwen/qwen3.5-9b",
+    "judge": "openrouter/qwen/qwen3.5-9b"
+   },
+   "exchanges": [
+    {
+     "turn": 1,
+     "kind": "question",
+     "text": "Is the secret a living thing?",
+     "answer": " no",
+     "clue": "It is used to protect you from rain.",
+     "judged_correct": false
+    },
+    {
+     "turn": 2,
+     "kind": "question",
+     "text": "Is the secret an item of clothing?",
+     "answer": " no",
+     "clue": "It can be folded up for carrying.",
+     "judged_correct": false
+    },
+    {
+     "turn": 3,
+     "kind": "question",
+     "text": "Is the secret made of fabric or cloth?",
+     "answer": " no",
+     "clue": "It has a handle that you hold to open it.",
+     "judged_correct": false
+    },
+    {
+     "turn": 4,
+     "kind": "question",
+     "text": "Is the secret an umbrella?",
+     "answer": " yes",
+     "clue": null,
+     "judged_correct": true
+    }
+   ]
+  }
+ ],
+ "errors": [],
+ "log": "/home/kog/downstream-environment/experiments/2026-10-17-20q-clue-ablation/inspect_logs_qwen3_5-9b__clues/2026-10-17T18-14-40-00-00_twenty-questions-qwen3-5-9b--clues_7v3hzGXxrqT24eAXrS6Bzb.eval"
+}

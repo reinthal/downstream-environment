@@ -1,0 +1,15 @@
+pilot_qwen3_5-122b-a10b__clues: 1 games, 0 errors, retries 0, spent $0.00
+pilot_glm-5_3__clues: 1 games, 0 errors, retries 0, spent $0.02
+pilot_qwen3_5-27b__clues: 1 games, 0 errors, retries 0, spent $0.00
+pilot_qwen3_5-397b-a17b__clues: 1 games, 0 errors, retries 0, spent $0.06
+pilot_qwen3_5-35b-a3b__clues: 0 games, 1 errors, retries 1, spent $0.11
+pilot_glm-5_3-flash__clues: 1 games, 0 errors, retries 0, spent $0.13
+pilot_qwen3_5-9b__clues: 1 games, 0 errors, retries 0, spent $0.16
+pilot_qwen3_5-122b-a10b__no_clues: 1 games, 0 errors, retries 0, spent $0.16
+pilot_glm-5_3-flash__no_clues: 1 games, 0 errors, retries 0, spent $0.18
+pilot_qwen3_5-397b-a17b__no_clues: 1 games, 0 errors, retries 0, spent $0.31
+pilot_glm-5_3__no_clues: 1 games, 0 errors, retries 0, spent $0.31
+pilot_qwen3_5-9b__no_clues: 1 games, 0 errors, retries 0, spent $0.31
+pilot_qwen3_5-35b-a3b__no_clues: 0 games, 1 errors, retries 1, spent $0.37
+pilot_qwen3_5-27b__no_clues: 1 games, 0 errors, retries 0, spent $0.39
+done: spent $0.39
