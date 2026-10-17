@@ -28,5 +28,3 @@ experiments/**/acts_*/
 # Inspect logs of ad-hoc `inspect eval` runs in environments/
 environments/*/logs/
 
-# Jev score caches (regenerable; twenty_questions.entropy)
-experiments/**/jev_scores.jsonl

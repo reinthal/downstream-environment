@@ -10,3 +10,4 @@ experiments/2026-10-09-3p-game/**/*.eval filter=lfs diff=lfs merge=lfs -text
 experiments/2026-10-12-fibs-probes/**/*.eval filter=lfs diff=lfs merge=lfs -text
 experiments/**/probes_main/**/*.pt filter=lfs diff=lfs merge=lfs -text
 experiments/2026-10-17-20q-clue-ablation/**/*.eval filter=lfs diff=lfs merge=lfs -text
+experiments/**/jev_scores.jsonl filter=lfs diff=lfs merge=lfs -text
