@@ -2514,7 +2514,9 @@ less than glm flag or equivalent, maybe Qwen 400b strong enough"; no-clue
 
 ### Actual Outcome
 
-(researcher)
+"size of model seems invariant when paired equally given that the length of games w and wo clues are roughly equally long and entropy for q set is resolved with equal pace for both  clue games and no clue games. moderate confidence." (researcher)
+
+Conclusion (researcher; post-hoc, no conclusion sentence was preregistered): "conclusions: entropy lowering experiment predicted that 512 size secret pool would be barely solvable with 12 questions. the avg solve was just below 12 although confounded by the max 12 questions. needs more experiments and to run for longer. it will be interesting to study how entropy lowering lines up with solving the task low entropy should imply high likelihood of solving. this could be a good metric for studying sanity in the game. still not sure what the difference between hard count and soft entropy is - guess soft entropy captures uncertainty for vagueness of clues maybe? The entropy analysis also is missing a table for clue games - maybe because the number of questions was substantially lower? clues should be included in the entropy analysis as they contribute to lowering it. The question also becomes if it is game theoretically advantageous to use clues if they consume a turn and lowers entropy more than a y/n question. I expect that they do as positive traits lowers more than negative."
 
 ### Results
 
@@ -2537,13 +2539,21 @@ the conclusion sentences were NOT PREREGISTERED. Deviations (decided after the
 pilot, before the run): Qwen3.5-35B-A3B dropped (failed all 4 pilot games as
 judge / on the last turn), max_tokens 16k → 32k. $3.10.
 
+Exploratory, Jev posterior entropy over all 1,796 THINGS (93.6M tokens,
+~$3.90): no-clue questions remove ~0.4 soft bits each (0.5–0.8 bits by hard
+count; 1,796 → 13–78 consistent concepts in 9 questions); clue-game questions
+0.8–1.0 soft bits from question 2 on (Qwen guessers at 2–28 consistent
+concepts by question 3). Jev disagrees with the suspect's answer on 6% of
+question turns. Clues are not in the entropy measure. Details, the
+clue-game table and the predicted-vs-outcome table: the experiment README.
+
 ### Parameters/Configurations
 
 `experiments/2026-10-17-20q-clue-ablation/config.json`: 12 turns,
 `concepts/things_n512_s0.json`, competitive goals, clue policy `either`,
-provider-default reasoning, max_tokens 16,000, seeds 0–9 (pilot: seed 1000,
+provider-default reasoning, max_tokens 16,000 (32,000 after the pilot, see Deviations), seeds 0–9 (pilot: seed 1000,
 1 game per cell), cost cap $50.
 
 ### Artifacts
 
-- `experiments/2026-10-17-20q-clue-ablation/` — `PREREGISTRATION.md`, `README.md`, `config.json`, `common.py`, `run.py`, `analyze.py`, `results.json`, `figures/end_turn.svg`, `games_*.json`, `transcripts_*.jsonl`, `clues_*.md`, `inspect_logs_*/`, `run_log*.json`
+- `experiments/2026-10-17-20q-clue-ablation/` — `PREREGISTRATION.md`, `README.md`, `config.json`, `common.py`, `run.py`, `analyze.py`, `results.json`, `figures/end_turn.svg`, `games_*.json`, `transcripts_*.jsonl`, `clues_*.md`, `inspect_logs_*/`, `run_log*.json`, `entropy_analysis.py`, `entropy_*.json`, `jev_scores.jsonl` (LFS), `figures/entropy_by_turn.svg`
