@@ -94,3 +94,43 @@ NOT PREREGISTERED, so none is applied):
 - Without clues, "knife" is solved by 5 of 6 models, and 5 of the other 9
   secrets (slide, brooch, melon, cd player, umbrella) by none — secret
   difficulty, not only model size, drives the few solves.
+
+### Exploratory: posterior entropy over turns (Jev)
+
+Asked for after the run; not preregistered. `entropy_analysis.py` scores every
+question (886 turns, 531 unique) against all 1,796 THINGS concepts with Jev
+(`jev-1.13.0`, 93.6M input tokens, ~$3.90) and tracks the posterior over THINGS
+after the suspect's actual yes/no answers (clues ignored). Start: 10.81 bits.
+Outputs: `entropy_summary.json`, `entropy_<cell>.json`, `jev_scores.jsonl`,
+`figures/entropy_by_turn.svg`. Per-step means of all games suffer drop-out
+(easy games leave early), so the tables below use fixed cohorts.
+
+No clues, games with ≥ 9 questions (7–10 per model): soft H after 9 questions
+and the median number of concepts consistent with every answer (hard count).
+
+| model | soft H after 3 / 6 / 9 questions (bits) | consistent concepts after 3 / 6 / 9 |
+|---|---|---|
+| qwen3.5-9b | 9.42 / 8.65 / 8.26 | 313 / 41 / 14 |
+| qwen3.5-27b | 9.89 / 8.93 / 8.45 | 1324 / 333 / 71 |
+| qwen3.5-122b-a10b | 9.75 / 9.43 / 8.56 | 1006 / 692 / 78 |
+| qwen3.5-397b-a17b | 9.72 / 8.55 / 6.82 | 1349 / 105 / 21 |
+| glm-5.3-flash | 9.76 / 8.37 / 6.75 | 740 / 122 / 13 |
+| glm-5.3 | 9.35 / 8.44 / 7.56 | 481 / 80 / 73 |
+
+- Soft posterior: 0.25–0.48 bits per question without clues (pooled per
+  question index 0.23–0.52, flat across turns). Jev never returns 0 for a wrong
+  concept, so a soft "yes" removes few bits; this understates information.
+- Hard count: 1,796 → 13–78 concepts in 9 questions, i.e. 4.5–7.1 bits, about
+  0.5–0.8 bits per question — the range the concept-set-size note assumed.
+  The 512-concept games needed ~9 bits, consistent with 70–90% of no-clue
+  games ending unsolved at 12 turns.
+- With clues (games with ≥ 3 questions): the Qwen models' guessers reach
+  2–28 consistent concepts by question 3 (their questions follow the clues,
+  e.g. "Is it a deer?"); GLM-5.3 Flash 271 and GLM-5.3 128 — the slower clue
+  arms of the main table. Pooled clue-arm questions carry 0.82–1.04 soft bits
+  each from question 2 on, against ~0.4 without clues.
+- Jev's answer for the true secret disagrees with the suspect's on 49 of 886
+  question turns (6%); over a long game that often removes the true secret
+  from the hard count (secret still consistent at the end in 3–9 of 10 games
+  per cell), so hard counts are a lower bound on remaining uncertainty only
+  where Jev and the suspect agree.

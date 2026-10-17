@@ -1,0 +1,755 @@
+{
+ "config": {
+  "model": "jev-1.13.0",
+  "concept_set": "concepts/things_all.json",
+  "prior": "uniform",
+  "noul_instructions": "In a game of Twenty Questions the secret is \"{concept}\" ({definition}). Is the truthful answer to `question` yes?",
+  "noul_criteria": {
+   "true": "For this secret, someone who knows it would truthfully answer the question yes.",
+   "false": "For this secret, someone who knows it would truthfully answer the question no."
+  },
+  "concepts_per_request": 300,
+  "concurrency": 8
+ },
+ "n_concepts": 1796,
+ "H0": 10.810571634741146,
+ "n_games": 10,
+ "n_questions": 41,
+ "input_tokens": 0,
+ "mean_bits_per_question": 0.6447051978253288,
+ "games": [
+  {
+   "game_id": "game_0",
+   "objective": "competitive",
+   "secret": "slide",
+   "secret_in_set": true,
+   "n_questions": 2,
+   "mean_bits": 0.29211157489735395,
+   "steps": [
+    {
+     "step": 0,
+     "H": 10.810571634741146,
+     "bits": null,
+     "n_consistent": 1796,
+     "H_hard": 10.810571634741146,
+     "p_secret": 0.0005567928730512249,
+     "rank_secret": 1,
+     "secret_consistent": true
+    },
+    {
+     "step": 1,
+     "H": 10.632544865723105,
+     "bits": 0.17802676901804126,
+     "n_consistent": 1518,
+     "H_hard": 10.567956075415466,
+     "p_secret": 0.0006571786499086113,
+     "rank_secret": 549,
+     "secret_consistent": true,
+     "turn": 1,
+     "question": "Is it alive?",
+     "answer": " no"
+    },
+    {
+     "step": 2,
+     "H": 10.226348484946438,
+     "bits": 0.40619638077666664,
+     "n_consistent": 9,
+     "H_hard": 3.169925001442312,
+     "p_secret": 0.008970268822022927,
+     "rank_secret": 1,
+     "secret_consistent": true,
+     "turn": 2,
+     "question": "Is it a slide?",
+     "answer": " yes"
+    }
+   ]
+  },
+  {
+   "game_id": "game_1",
+   "objective": "competitive",
+   "secret": "deer",
+   "secret_in_set": true,
+   "n_questions": 3,
+   "mean_bits": 1.4766472538418747,
+   "steps": [
+    {
+     "step": 0,
+     "H": 10.810571634741146,
+     "bits": null,
+     "n_consistent": 1796,
+     "H_hard": 10.810571634741146,
+     "p_secret": 0.0005567928730512249,
+     "rank_secret": 1,
+     "secret_consistent": true
+    },
+    {
+     "step": 1,
+     "H": 9.409968115770084,
+     "bits": 1.400603518971062,
+     "n_consistent": 278,
+     "H_hard": 8.118941072723507,
+     "p_secret": 0.0029235404671698337,
+     "rank_secret": 19,
+     "secret_consistent": true,
+     "turn": 1,
+     "question": "Is it alive?",
+     "answer": " yes"
+    },
+    {
+     "step": 2,
+     "H": 7.789788764556511,
+     "bits": 1.6201793512135731,
+     "n_consistent": 176,
+     "H_hard": 7.459431618637297,
+     "p_secret": 0.005570656386618023,
+     "rank_secret": 18,
+     "secret_consistent": true,
+     "turn": 2,
+     "question": "Is it an animal?",
+     "answer": " yes"
+    },
+    {
+     "step": 3,
+     "H": 6.380629873215522,
+     "bits": 1.4091588913409892,
+     "n_consistent": 3,
+     "H_hard": 1.584962500721156,
+     "p_secret": 0.13406519589139487,
+     "rank_secret": 1,
+     "secret_consistent": true,
+     "turn": 3,
+     "question": "Is it a deer?",
+     "answer": " yes"
+    }
+   ]
+  },
+  {
+   "game_id": "game_2",
+   "objective": "competitive",
+   "secret": "brooch",
+   "secret_in_set": true,
+   "n_questions": 4,
+   "mean_bits": 0.4039383849001861,
+   "steps": [
+    {
+     "step": 0,
+     "H": 10.810571634741146,
+     "bits": null,
+     "n_consistent": 1796,
+     "H_hard": 10.810571634741146,
+     "p_secret": 0.0005567928730512249,
+     "rank_secret": 1,
+     "secret_consistent": true
+    },
+    {
+     "step": 1,
+     "H": 10.632544865723105,
+     "bits": 0.17802676901804126,
+     "n_consistent": 1518,
+     "H_hard": 10.567956075415466,
+     "p_secret": 0.0006640242608451589,
+     "rank_secret": 1,
+     "secret_consistent": true,
+     "turn": 1,
+     "question": "Is it alive?",
+     "answer": " no"
+    },
+    {
+     "step": 2,
+     "H": 10.606120965127346,
+     "bits": 0.026423900595759164,
+     "n_consistent": 1477,
+     "H_hard": 10.52845411076479,
+     "p_secret": 0.0006486600711386169,
+     "rank_secret": 1221,
+     "secret_consistent": true,
+     "turn": 2,
+     "question": "Is it worn on the head?",
+     "answer": " no"
+    },
+    {
+     "step": 3,
+     "H": 9.952178869484952,
+     "bits": 0.6539420956423942,
+     "n_consistent": 81,
+     "H_hard": 6.339850002884624,
+     "p_secret": 0.004825210916290479,
+     "rank_secret": 6,
+     "secret_consistent": true,
+     "turn": 3,
+     "question": "Is it decorative or ornamental?",
+     "answer": " yes"
+    },
+    {
+     "step": 4,
+     "H": 9.194818095140402,
+     "bits": 0.7573607743445496,
+     "n_consistent": 2,
+     "H_hard": 1.0,
+     "p_secret": 0.060899066997585856,
+     "rank_secret": 1,
+     "secret_consistent": true,
+     "turn": 4,
+     "question": "Is it a brooch or pin?",
+     "answer": " yes"
+    }
+   ]
+  },
+  {
+   "game_id": "game_3",
+   "objective": "competitive",
+   "secret": "lemon",
+   "secret_in_set": true,
+   "n_questions": 4,
+   "mean_bits": 0.7651348727778422,
+   "steps": [
+    {
+     "step": 0,
+     "H": 10.810571634741146,
+     "bits": null,
+     "n_consistent": 1796,
+     "H_hard": 10.810571634741146,
+     "p_secret": 0.0005567928730512249,
+     "rank_secret": 1,
+     "secret_consistent": true
+    },
+    {
+     "step": 1,
+     "H": 10.632544865723105,
+     "bits": 0.17802676901804126,
+     "n_consistent": 1518,
+     "H_hard": 10.567956075415466,
+     "p_secret": 0.00033543493589085387,
+     "rank_secret": 1519,
+     "secret_consistent": false,
+     "turn": 1,
+     "question": "Is it alive?",
+     "answer": " no"
+    },
+    {
+     "step": 2,
+     "H": 10.558989777801514,
+     "bits": 0.07355508792159071,
+     "n_consistent": 1313,
+     "H_hard": 10.358651200892886,
+     "p_secret": 0.00039287249122852075,
+     "rank_secret": 1324,
+     "secret_consistent": false,
+     "turn": 2,
+     "question": "Is it made of wood?",
+     "answer": " no"
+    },
+    {
+     "step": 3,
+     "H": 9.483997341478112,
+     "bits": 1.0749924363234022,
+     "n_consistent": 28,
+     "H_hard": 4.807354922057604,
+     "p_secret": 0.007555368161665953,
+     "rank_secret": 23,
+     "secret_consistent": false,
+     "turn": 3,
+     "question": "Is it a fruit?",
+     "answer": " yes"
+    },
+    {
+     "step": 4,
+     "H": 7.750032143629777,
+     "bits": 1.7339651978483346,
+     "n_consistent": 0,
+     "H_hard": null,
+     "p_secret": 0.18978577971954083,
+     "rank_secret": 1,
+     "secret_consistent": false,
+     "turn": 4,
+     "question": "Is it a lemon?",
+     "answer": " yes"
+    }
+   ]
+  },
+  {
+   "game_id": "game_4",
+   "objective": "competitive",
+   "secret": "lava",
+   "secret_in_set": true,
+   "n_questions": 3,
+   "mean_bits": 0.10641265573150467,
+   "steps": [
+    {
+     "step": 0,
+     "H": 10.810571634741146,
+     "bits": null,
+     "n_consistent": 1796,
+     "H_hard": 10.810571634741146,
+     "p_secret": 0.0005567928730512249,
+     "rank_secret": 1,
+     "secret_consistent": true
+    },
+    {
+     "step": 1,
+     "H": 10.632544865723105,
+     "bits": 0.17802676901804126,
+     "n_consistent": 1518,
+     "H_hard": 10.567956075415466,
+     "p_secret": 0.0006571786499086113,
+     "rank_secret": 549,
+     "secret_consistent": true,
+     "turn": 1,
+     "question": "Is it alive?",
+     "answer": " no"
+    },
+    {
+     "step": 2,
+     "H": 10.624739010998116,
+     "bits": 0.007805854724988848,
+     "n_consistent": 1500,
+     "H_hard": 10.550746785383243,
+     "p_secret": 0.00019649234842128487,
+     "rank_secret": 1557,
+     "secret_consistent": false,
+     "turn": 2,
+     "question": "Is it a rock or mineral?",
+     "answer": " no"
+    },
+    {
+     "step": 3,
+     "H": 10.491333667546632,
+     "bits": 0.13340534345148392,
+     "n_consistent": 0,
+     "H_hard": null,
+     "p_secret": 0.007489978140007915,
+     "rank_secret": 2,
+     "secret_consistent": false,
+     "turn": 3,
+     "question": "Is it lava?",
+     "answer": " yes"
+    }
+   ]
+  },
+  {
+   "game_id": "game_5",
+   "objective": "competitive",
+   "secret": "melon",
+   "secret_in_set": true,
+   "n_questions": 3,
+   "mean_bits": 0.8431968262269448,
+   "steps": [
+    {
+     "step": 0,
+     "H": 10.810571634741146,
+     "bits": null,
+     "n_consistent": 1796,
+     "H_hard": 10.810571634741146,
+     "p_secret": 0.0005567928730512249,
+     "rank_secret": 1,
+     "secret_consistent": true
+    },
+    {
+     "step": 1,
+     "H": 10.632544865723105,
+     "bits": 0.17802676901804126,
+     "n_consistent": 1518,
+     "H_hard": 10.567956075415466,
+     "p_secret": 0.00040389104525633386,
+     "rank_secret": 1498,
+     "secret_consistent": true,
+     "turn": 1,
+     "question": "Is it alive?",
+     "answer": " no"
+    },
+    {
+     "step": 2,
+     "H": 10.282189402494513,
+     "bits": 0.3503554632285919,
+     "n_consistent": 36,
+     "H_hard": 5.169925001442312,
+     "p_secret": 0.003302169162558222,
+     "rank_secret": 22,
+     "secret_consistent": true,
+     "turn": 2,
+     "question": "Is it a fruit or vegetable?",
+     "answer": " yes"
+    },
+    {
+     "step": 3,
+     "H": 8.280981156060312,
+     "bits": 2.001208246434201,
+     "n_consistent": 4,
+     "H_hard": 2.0,
+     "p_secret": 0.06683794523430825,
+     "rank_secret": 2,
+     "secret_consistent": true,
+     "turn": 3,
+     "question": "Is it a melon?",
+     "answer": " yes"
+    }
+   ]
+  },
+  {
+   "game_id": "game_6",
+   "objective": "competitive",
+   "secret": "cd player",
+   "secret_in_set": true,
+   "n_questions": 11,
+   "mean_bits": 0.11287781272399916,
+   "steps": [
+    {
+     "step": 0,
+     "H": 10.810571634741146,
+     "bits": null,
+     "n_consistent": 1796,
+     "H_hard": 10.810571634741146,
+     "p_secret": 0.0005567928730512249,
+     "rank_secret": 1,
+     "secret_consistent": true
+    },
+    {
+     "step": 1,
+     "H": 10.632544865723105,
+     "bits": 0.17802676901804126,
+     "n_consistent": 1518,
+     "H_hard": 10.567956075415466,
+     "p_secret": 0.0006640242608451589,
+     "rank_secret": 1,
+     "secret_consistent": true,
+     "turn": 1,
+     "question": "Is it alive?",
+     "answer": " no"
+    },
+    {
+     "step": 2,
+     "H": 10.617557559580094,
+     "bits": 0.014987306143011025,
+     "n_consistent": 1485,
+     "H_hard": 10.536247215688128,
+     "p_secret": 0.0006893079177076671,
+     "rank_secret": 361,
+     "secret_consistent": true,
+     "turn": 2,
+     "question": "Is it a physical object?",
+     "answer": " yes"
+    },
+    {
+     "step": 3,
+     "H": 10.465264781338206,
+     "bits": 0.15229277824188792,
+     "n_consistent": 1349,
+     "H_hard": 10.397674632948268,
+     "p_secret": 0.0007708808864070278,
+     "rank_secret": 279,
+     "secret_consistent": true,
+     "turn": 3,
+     "question": "Is it man-made?",
+     "answer": " yes"
+    },
+    {
+     "step": 4,
+     "H": 10.413379772881196,
+     "bits": 0.05188500845700972,
+     "n_consistent": 1255,
+     "H_hard": 10.293471648838134,
+     "p_secret": 0.0008454521096918617,
+     "rank_secret": 306,
+     "secret_consistent": true,
+     "turn": 4,
+     "question": "Is it smaller than a car?",
+     "answer": " yes"
+    },
+    {
+     "step": 5,
+     "H": 10.153982486632993,
+     "bits": 0.2593972862482037,
+     "n_consistent": 703,
+     "H_hard": 9.457380879072534,
+     "p_secret": 0.001322532068667675,
+     "rank_secret": 139,
+     "secret_consistent": true,
+     "turn": 5,
+     "question": "Is it typically found inside a house?",
+     "answer": " yes"
+    },
+    {
+     "step": 6,
+     "H": 10.146869365498313,
+     "bits": 0.007113121134679545,
+     "n_consistent": 695,
+     "H_hard": 9.44086916761087,
+     "p_secret": 0.0011093024565216876,
+     "rank_secret": 330,
+     "secret_consistent": true,
+     "turn": 6,
+     "question": "Is it used to display video?",
+     "answer": " no"
+    },
+    {
+     "step": 7,
+     "H": 9.37511574888074,
+     "bits": 0.7717536166175734,
+     "n_consistent": 49,
+     "H_hard": 5.614709844115208,
+     "p_secret": 0.005701058804000273,
+     "rank_secret": 22,
+     "secret_consistent": true,
+     "turn": 7,
+     "question": "Is it used to produce sound?",
+     "answer": " yes"
+    },
+    {
+     "step": 8,
+     "H": 9.362262015737228,
+     "bits": 0.012853733143511903,
+     "n_consistent": 47,
+     "H_hard": 5.554588851677638,
+     "p_secret": 0.005874543476469333,
+     "rank_secret": 20,
+     "secret_consistent": true,
+     "turn": 8,
+     "question": "Is it worn on the head?",
+     "answer": " no"
+    },
+    {
+     "step": 9,
+     "H": 9.407721277511747,
+     "bits": -0.04545926177451953,
+     "n_consistent": 46,
+     "H_hard": 5.523561956057013,
+     "p_secret": 0.00572209940610038,
+     "rank_secret": 17,
+     "secret_consistent": true,
+     "turn": 9,
+     "question": "Is it a speaker?",
+     "answer": " no"
+    },
+    {
+     "step": 10,
+     "H": 9.54604540876549,
+     "bits": -0.13832413125374288,
+     "n_consistent": 28,
+     "H_hard": 4.807354922057604,
+     "p_secret": 0.006691047141230731,
+     "rank_secret": 3,
+     "secret_consistent": true,
+     "turn": 10,
+     "question": "Is it a musical instrument?",
+     "answer": " no"
+    },
+    {
+     "step": 11,
+     "H": 9.568915694777155,
+     "bits": -0.022870286011665186,
+     "n_consistent": 26,
+     "H_hard": 4.700439718141092,
+     "p_secret": 0.0067009119102814955,
+     "rank_secret": 3,
+     "secret_consistent": true,
+     "turn": 11,
+     "question": "Is it a record player?",
+     "answer": " no"
+    }
+   ]
+  },
+  {
+   "game_id": "game_7",
+   "objective": "competitive",
+   "secret": "puppy",
+   "secret_in_set": true,
+   "n_questions": 4,
+   "mean_bits": 1.5992959345363098,
+   "steps": [
+    {
+     "step": 0,
+     "H": 10.810571634741146,
+     "bits": null,
+     "n_consistent": 1796,
+     "H_hard": 10.810571634741146,
+     "p_secret": 0.0005567928730512249,
+     "rank_secret": 1,
+     "secret_consistent": true
+    },
+    {
+     "step": 1,
+     "H": 9.409968115770084,
+     "bits": 1.400603518971062,
+     "n_consistent": 278,
+     "H_hard": 8.118941072723507,
+     "p_secret": 0.0029533725127532007,
+     "rank_secret": 1,
+     "secret_consistent": true,
+     "turn": 1,
+     "question": "Is it alive?",
+     "answer": " yes"
+    },
+    {
+     "step": 2,
+     "H": 7.789788764556511,
+     "bits": 1.6201793512135731,
+     "n_consistent": 176,
+     "H_hard": 7.459431618637297,
+     "p_secret": 0.0056274998191345365,
+     "rank_secret": 1,
+     "secret_consistent": true,
+     "turn": 2,
+     "question": "Is it an animal?",
+     "answer": " yes"
+    },
+    {
+     "step": 3,
+     "H": 6.524826944316717,
+     "bits": 1.2649618202397939,
+     "n_consistent": 40,
+     "H_hard": 5.321928094887363,
+     "p_secret": 0.02079064078224938,
+     "rank_secret": 12,
+     "secret_consistent": true,
+     "turn": 3,
+     "question": "Is it a domesticated animal?",
+     "answer": " yes"
+    },
+    {
+     "step": 4,
+     "H": 4.413387896595907,
+     "bits": 2.1114390477208103,
+     "n_consistent": 6,
+     "H_hard": 2.584962500721156,
+     "p_secret": 0.12591653348517887,
+     "rank_secret": 2,
+     "secret_consistent": true,
+     "turn": 4,
+     "question": "Is it commonly known as \"man's best friend\"?",
+     "answer": " yes"
+    }
+   ]
+  },
+  {
+   "game_id": "game_8",
+   "objective": "competitive",
+   "secret": "knife",
+   "secret_in_set": true,
+   "n_questions": 3,
+   "mean_bits": 1.167876893031936,
+   "steps": [
+    {
+     "step": 0,
+     "H": 10.810571634741146,
+     "bits": null,
+     "n_consistent": 1796,
+     "H_hard": 10.810571634741146,
+     "p_secret": 0.0005567928730512249,
+     "rank_secret": 1,
+     "secret_consistent": true
+    },
+    {
+     "step": 1,
+     "H": 10.632544865723105,
+     "bits": 0.17802676901804126,
+     "n_consistent": 1518,
+     "H_hard": 10.567956075415466,
+     "p_secret": 0.0006640242608451589,
+     "rank_secret": 1,
+     "secret_consistent": true,
+     "turn": 1,
+     "question": "Is it alive?",
+     "answer": " no"
+    },
+    {
+     "step": 2,
+     "H": 9.626439049029697,
+     "bits": 1.0061058166934078,
+     "n_consistent": 34,
+     "H_hard": 5.087462841250339,
+     "p_secret": 0.008999532979175873,
+     "rank_secret": 7,
+     "secret_consistent": true,
+     "turn": 2,
+     "question": "Is it a handheld kitchen utensil?",
+     "answer": " yes"
+    },
+    {
+     "step": 3,
+     "H": 7.306940955645338,
+     "bits": 2.319498093384359,
+     "n_consistent": 2,
+     "H_hard": 1.0,
+     "p_secret": 0.13413423577807534,
+     "rank_secret": 1,
+     "secret_consistent": true,
+     "turn": 3,
+     "question": "Is it a knife?",
+     "answer": " yes"
+    }
+   ]
+  },
+  {
+   "game_id": "game_9",
+   "objective": "competitive",
+   "secret": "umbrella",
+   "secret_in_set": true,
+   "n_questions": 4,
+   "mean_bits": 0.6877890914314113,
+   "steps": [
+    {
+     "step": 0,
+     "H": 10.810571634741146,
+     "bits": null,
+     "n_consistent": 1796,
+     "H_hard": 10.810571634741146,
+     "p_secret": 0.0005567928730512249,
+     "rank_secret": 1,
+     "secret_consistent": true
+    },
+    {
+     "step": 1,
+     "H": 10.632544865723105,
+     "bits": 0.17802676901804126,
+     "n_consistent": 1518,
+     "H_hard": 10.567956075415466,
+     "p_secret": 0.0006640242608451589,
+     "rank_secret": 1,
+     "secret_consistent": true,
+     "turn": 1,
+     "question": "Is it alive?",
+     "answer": " no"
+    },
+    {
+     "step": 2,
+     "H": 10.508428124638716,
+     "bits": 0.1241167410843893,
+     "n_consistent": 1330,
+     "H_hard": 10.377210530388552,
+     "p_secret": 0.0007154046303302385,
+     "rank_secret": 1067,
+     "secret_consistent": true,
+     "turn": 2,
+     "question": "Is it something you wear?",
+     "answer": " no"
+    },
+    {
+     "step": 3,
+     "H": 9.693170025171675,
+     "bits": 0.8152580994670409,
+     "n_consistent": 33,
+     "H_hard": 5.044394119358453,
+     "p_secret": 0.00791660337533937,
+     "rank_secret": 4,
+     "secret_consistent": true,
+     "turn": 3,
+     "question": "Is it used for protection from rain?",
+     "answer": " yes"
+    },
+    {
+     "step": 4,
+     "H": 8.059415269015501,
+     "bits": 1.6337547561561738,
+     "n_consistent": 1,
+     "H_hard": 0.0,
+     "p_secret": 0.20633485789331013,
+     "rank_secret": 1,
+     "secret_consistent": true,
+     "turn": 4,
+     "question": "Is it an umbrella?",
+     "answer": " yes"
+    }
+   ]
+  }
+ ]
+}
