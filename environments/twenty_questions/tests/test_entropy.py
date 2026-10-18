@@ -151,3 +151,19 @@ def test_openrouter_backend_reads_first_token_logprobs(tmp_path):
     assert good["p_yes"] == pytest.approx(0.9) and good["mass"] == pytest.approx(1.0)
     assert sum(r["p_yes"] is None for r in rows) == 2         # that concept, for the question and the clue
     assert "Clue: Early letter." in next(b for b in seen if "Clue:" in b["messages"][0]["content"])["messages"][0]["content"]
+
+
+def test_precomputed_backend_reads_and_requires_every_pair(tmp_path):
+    cfg = EntropyConfig(backend="precomputed", model="Qwen/Qwen3.5-9B", concept_set="concepts/things_n256_s0.json")
+    words = ConceptSet.load(cfg.concept_path()).words
+    rows = [{"model": "Qwen/Qwen3.5-9B", "provider": "vllm", "kind": "question", "prompt": cfg.llm_question_prompt,
+             "text": "Early?", "concept": c, "p_yes": 0.9 if c < "m" else 0.1, "mass": 1.0} for c in words]
+    path = tmp_path / "scores.jsonl"
+    path.write_text("".join(json.dumps(r) + "\n" for r in rows))
+    games = [{"game_id": "g", "objective": "competitive", "secret": words[0], "exchanges": [
+        {"turn": 1, "kind": "question", "text": "Early?", "answer": " yes", "clue": None}]}]
+    res = asyncio.run(analyse(cfg, games, path))
+    assert res["games"][0]["steps"][1]["secret_consistent"] and res["games"][0]["steps"][1]["bits"] > 0.5
+    games[0]["exchanges"].append({"turn": 2, "kind": "question", "text": "Not scored?", "answer": " no", "clue": None})
+    with pytest.raises(ValueError, match="pairs missing"):
+        asyncio.run(analyse(cfg, games, path))

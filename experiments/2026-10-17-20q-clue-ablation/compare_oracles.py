@@ -1,21 +1,20 @@
 """EXPLORATORY (researcher-requested after the conclusion): the posterior
-entropy analysis with a second scorer — Qwen3.5-9B on OpenRouter (no
-Qwen3.8-9B exists there), one prompt per (question|clue, concept) pair,
-p(yes) from the first-token logprobs — compared with Jev.
+entropy analysis with a second scorer — Qwen3.5-9B on local vLLM (the GPU
+box; not OpenRouter), one prompt per (question|clue, concept) pair, p(yes)
+from the first-token logprobs — compared with Jev.
 
-    uv run --project environments/twenty_questions python experiments/2026-10-17-20q-clue-ablation/compare_oracles.py [--score-only]
+    # 1. on the GPU box (.venv-vllm): score_vllm.py -> qwen_vllm_scores.jsonl
+    # 2. here (env venv), no model calls:
+    uv run --project environments/twenty_questions python experiments/2026-10-17-20q-clue-ablation/compare_oracles.py
 
-Scores: qwen_scores.jsonl (cache, resumes). Writes entropy_qwen_<cell>.json,
-compare_oracles.json. Needs OPENROUTER_API_KEY (repo .env).
+Writes entropy_qwen_<cell>.json, compare_oracles.json.
 """
 from __future__ import annotations
 
-import argparse
 import asyncio
 import dataclasses
 import json
 import math
-import os
 import statistics
 
 from common import ENV, OUT, REPO, AblationConfig, cell, slug
@@ -23,18 +22,9 @@ from common import ENV, OUT, REPO, AblationConfig, cell, slug
 from twenty_questions.concepts import ConceptSet
 from twenty_questions.entropy import EntropyConfig, analyse, game_observations
 
-QWEN_CACHE = OUT / "qwen_scores.jsonl"
+QWEN_CACHE = OUT / "qwen_vllm_scores.jsonl"
 JEV_CACHE = OUT / "jev_scores.jsonl"
-QWEN = dict(backend="openrouter", model="qwen/qwen3.5-9b", openrouter_provider="Venice",
-            include_clues=True, concurrency=96)   # 96: best measured on Venice (36 pairs/s; 256-512 throttle to ~12/s)
-
-
-def load_env_key(name):
-    for line in (REPO / ".env").read_text().splitlines():
-        if line.startswith(f"{name}="):
-            os.environ[name] = line.split("=", 1)[1].strip().strip('"')
-            return
-    raise SystemExit(f"{name} not in .env")
+QWEN = dict(backend="precomputed", model="Qwen/Qwen3.5-9B", include_clues=True)
 
 
 def cell_games(model, arm):
@@ -64,18 +54,11 @@ def jev_p(concepts):
 
 
 def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--score-only", action="store_true")
-    args = ap.parse_args()
-    load_env_key("OPENROUTER_API_KEY")
     cfg = AblationConfig.load()
     base = EntropyConfig.from_yaml(ENV / "configs" / "entropy.yaml")
     qcfg = dataclasses.replace(base, **QWEN)
     every = [g for m in cfg.models for a in cfg.arms for g in cell_games(m, a)]
-    first = asyncio.run(analyse(qcfg, every, QWEN_CACHE))
-    print(f"scored: {first['input_tokens']} new prompt tokens, ${first['cost_usd']:.2f}", flush=True)
-    if args.score_only:
-        return
+    asyncio.run(analyse(qcfg, every, QWEN_CACHE))     # raises if any pair is missing or unanswered
 
     # ── pairwise agreement with Jev (every pair both scored) ──
     concepts = ConceptSet.load(base.concept_path())
@@ -137,7 +120,7 @@ def main():
                 pooled[f"{scorer}_{a}_{k}"] = {"n": len(vals), "mean": statistics.mean(vals) if vals else None,
                                                "median": statistics.median(vals) if vals else None}
     result = {"qwen_config": dataclasses.asdict(qcfg), "agreement": agree, "contradicts_suspect": contra,
-              "cells": cells, "pooled": pooled, "scoring_cost_usd_this_run": first["cost_usd"]}
+              "cells": cells, "pooled": pooled}
     (OUT / "compare_oracles.json").write_text(json.dumps(result, indent=1) + "\n")
     print(json.dumps(agree, indent=1))
     print(f"contradicts the suspect's answer for the true secret: Qwen {contra['qwen']}/{contra['n']}, "

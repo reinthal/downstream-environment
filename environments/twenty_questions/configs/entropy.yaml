@@ -4,8 +4,10 @@
 # and the posterior over THINGS gives the bits each question removed.
 # {concept} / {definition} are filled per concept; `question` (or `clue`) is the
 # state. include_clues: true adds every clue as an observation ("is this clue
-# correct if the secret were c?").
+# correct if the secret were c?"). backend: jev | openrouter | precomputed
+# (an LLM score file, e.g. from a local vLLM run, read with the llm_* prompts).
 
+backend: jev
 model: jev-1.13.0
 concept_set: concepts/things_all.json
 prior: uniform
@@ -26,3 +28,26 @@ clue_noul_criteria:
     At least part of the clue does not hold for this secret.
 concepts_per_request: 300
 concurrency: 8
+openrouter_provider: null
+llm_question_prompt: |-
+  In a game of Twenty Questions the secret is "{concept}" ({definition}).
+  Question: {text}
+  Answer with exactly one word: yes or no.
+llm_clue_prompt: |-
+  In a game of Twenty Questions the secret is "{concept}" ({definition}).
+  Clue: {text}
+  Is the clue correct for the secret? Answer with exactly one word: yes or no.
+top_logprobs: 20
+yes_tokens:
+- 'yes'
+- 'Yes'
+- ' yes'
+- ' Yes'
+- 'YES'
+no_tokens:
+- 'no'
+- 'No'
+- ' no'
+- ' No'
+- 'NO'
+max_retries: 6

@@ -53,6 +53,9 @@ class EntropyConfig:
     #   "jev"        -> TypeSafe Jev Nouls (model = a Jev version)
     #   "openrouter" -> an OpenRouter LLM, one prompt per pair, p(yes) from the
     #                   first-token logprobs (model = an OpenRouter id)
+    #   "precomputed" -> read an LLM score file written elsewhere (e.g. by a
+    #                   local vLLM run with the same prompts and readout);
+    #                   any missing pair raises (model = the id in the file)
     backend: str = "jev"
     model: str = "jev-1.13.0"           # pinned version, not the moving jev-latest
     concept_set: str = "concepts/things_all.json"
@@ -81,15 +84,16 @@ class EntropyConfig:
     })
     concepts_per_request: int = 300     # Nouls per request (per-request context: 64k tokens)
     concurrency: int = 8                # requests in flight
-    # backend "openrouter": provider pinned, no fallbacks; prompts per pair
-    # ({concept}, {definition}, {text}); reasoning off, max_tokens 1
+    # LLM backends ("openrouter", "precomputed" / local vLLM): one prompt per
+    # pair ({concept}, {definition}, {text}), thinking off, one token;
+    # openrouter_provider pins the OpenRouter provider (no fallbacks)
     openrouter_provider: Optional[str] = None
-    openrouter_question_prompt: str = (
+    llm_question_prompt: str = (
         "In a game of Twenty Questions the secret is \"{concept}\" ({definition}).\n"
         "Question: {text}\n"
         "Answer with exactly one word: yes or no."
     )
-    openrouter_clue_prompt: str = (
+    llm_clue_prompt: str = (
         "In a game of Twenty Questions the secret is \"{concept}\" ({definition}).\n"
         "Clue: {text}\n"
         "Is the clue correct for the secret? Answer with exactly one word: yes or no."
@@ -262,7 +266,7 @@ class OpenRouterYesNoScorer:
         self.cache: dict[tuple[str, str, str], Optional[float]] = {}
         self.input_tokens = 0
         self.cost = 0.0
-        self.prompts = {"question": cfg.openrouter_question_prompt, "clue": cfg.openrouter_clue_prompt}
+        self.prompts = {"question": cfg.llm_question_prompt, "clue": cfg.llm_clue_prompt}
         self.key = os.environ.get("OPENROUTER_API_KEY")
         if cache_path.exists():
             for line in cache_path.read_text().splitlines():
@@ -311,6 +315,8 @@ class OpenRouterYesNoScorer:
         todo = sorted({t for t in triples if t not in self.cache})
         if not todo:
             return
+        if self.cfg.backend == "precomputed":
+            raise ValueError(f"{len(todo)} pairs missing from {self.cache_path}, e.g. {todo[:3]}")
         sem = asyncio.Semaphore(self.cfg.concurrency)
         done = 0
 
@@ -378,12 +384,12 @@ def game_observations(cfg: EntropyConfig, game: dict) -> list[tuple[str, int, st
 async def analyse(cfg: EntropyConfig, games: list[dict], cache_path: Path, client=None) -> dict:
     concepts = ConceptSet.load(cfg.concept_path())
     prior = load_prior(cfg, concepts)
-    if cfg.backend not in ("jev", "openrouter"):
-        raise ValueError(f"backend must be 'jev' or 'openrouter', got {cfg.backend!r}")
+    if cfg.backend not in ("jev", "openrouter", "precomputed"):
+        raise ValueError(f"backend must be 'jev', 'openrouter' or 'precomputed', got {cfg.backend!r}")
     scorer = (JevScorer if cfg.backend == "jev" else OpenRouterYesNoScorer)(cfg, concepts, cache_path, client)
     observations = [game_observations(cfg, g) for g in games]
     await scorer.score([(k, text, c) for obs in observations for k, _, text, _ in obs for c in concepts.words])
-    if cfg.backend == "openrouter" and scorer.unanswered():
+    if cfg.backend != "jev" and scorer.unanswered():
         bad = scorer.unanswered()
         raise ValueError(f"{len(bad)} pairs had no yes/no token in the top logprobs, e.g. {bad[:3]}")
 
