@@ -29,7 +29,7 @@
  "dataset_sizes": {},
  "out_dir": "experiments/2026-10-17-inside-job",
  "model_revision": "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0",
- "server_url": "http://localhost:8004/v1",
+ "server_url": "http://localhost:8003/v1",
  "served_model": "Qwen/Qwen3.8-27B",
  "scorer_url": "http://localhost:8010",
  "request_timeout_s": 7200,
@@ -44,7 +44,7 @@
  "free_questions": 3,
  "audits": 2,
  "n_missions": 4,
- "code_len": 3,
+ "code_len": 4,
  "overlap": 0.25,
  "p_corrupted": 0.3,
  "corrupt_missions": 2,
@@ -65,5 +65,6 @@
  "pilot_seed": 0,
  "n_boot": 2000,
  "random_direction": "experiments/2026-10-16-auditor-uplift/random_direction.npy",
- "pilot_loyal_talk_sample": 0.4
+ "pilot_loyal_talk_sample": 0.4,
+ "offline_service_threads": 4
 }

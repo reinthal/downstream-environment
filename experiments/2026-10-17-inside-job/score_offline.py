@@ -13,8 +13,14 @@ hash(game, turn) < cfg.pilot_loyal_talk_sample (enough for the pilot gates).
 Output: rawscores_{set}{_pilot}_shard{k}.jsonl rows {game_id, turn, l32,
 l48, rand}; analyze scripts merge them into the transcripts.
 
+With --via-service the turns are sent to the running scorer (cfg.scorer_url,
+the 2026-10-16 scorer.py: the same reading, probes and random direction) with
+cfg.offline_service_threads concurrent requests, instead of loading the model
+on GPUs of its own (2026-10-18: no free GPUs; shared with the uplift run).
+
 Run:  HF_HUB_OFFLINE=1 CUDA_VISIBLE_DEVICES=4,5 .venv/bin/python \
           experiments/2026-10-17-inside-job/score_offline.py --set trunk --pilot --shard 0 --shards 1
+      .venv/bin/python experiments/2026-10-17-inside-job/score_offline.py --set trunk --pilot --via-service
 """
 from __future__ import annotations
 
@@ -24,7 +30,9 @@ import json
 
 import numpy as np
 
-from common import OUT, REPO, load_config, read_jsonl
+from concurrent.futures import ThreadPoolExecutor
+
+from common import OUT, REPO, load_config, probe_raw, read_jsonl
 
 from linear_probes.activations import collect_activations, load_truncated_decoder  # noqa: E402
 from linear_probes.dyl_probe import encode_no_span, with_followup  # noqa: E402
@@ -42,8 +50,9 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--set", required=True)
     ap.add_argument("--pilot", action="store_true")
-    ap.add_argument("--shard", type=int, required=True)
-    ap.add_argument("--shards", type=int, required=True)
+    ap.add_argument("--shard", type=int, default=0)
+    ap.add_argument("--shards", type=int, default=1)
+    ap.add_argument("--via-service", action="store_true")
     args = ap.parse_args()
     cfg = load_config()
     name = f"{args.set}{'_pilot' if args.pilot else ''}"
@@ -54,6 +63,16 @@ def main():
     if args.pilot:
         turns = [t for t in turns if sampled(t, cfg.pilot_loyal_talk_sample)]
     mine = turns[args.shard::args.shards]
+    if args.via_service:
+        def one(t):
+            return t, probe_raw(cfg, [*t["input_messages"], {"role": "assistant", "content": t["text"]}])
+        with open(out, "w") as f, ThreadPoolExecutor(cfg.offline_service_threads) as ex:
+            for k, (t, r) in enumerate(ex.map(one, mine)):
+                f.write(json.dumps({"game_id": t["game_id"], "turn": t["turn"], **r}) + "\n")
+                if k % 500 == 0:
+                    print(f"{k}/{len(mine)}", flush=True)
+        print(f"{name}: scored {len(mine)} turns via the scorer service", flush=True)
+        return
     probes = {L: LinearProbe.load(str(REPO / cfg.probe_paths[f"l{L}"])) for L in (32, 48)}
     for L, p in probes.items():
         if p.config.layer != L:

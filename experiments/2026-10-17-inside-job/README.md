@@ -83,3 +83,28 @@ HF_HUB_OFFLINE=1 .venv/bin/python experiments/2026-10-17-inside-job/game.py --se
 `config.json` (`common.RunConfig`), `game.py`, `detectors.py`,
 `analyze_pilot.py`; outputs `games_*.jsonl`, `transcripts_*.jsonl`,
 `auditor_*.jsonl`, `pilot_report.json`, `calibration.json`.
+
+## Pilot v1 (2026-10-18; crews of 3, 3-digit codes; `*_trunk_pilot_v1.jsonl`, `pilot_report_v1.json`)
+
+100 games (pilot seeds 0-99), 0 failed. Probe scoring did not run (the
+server on GPUs 4-5 was not stopped, so batch scoring had no GPU memory);
+only game-level results:
+- Mission success: no mole 0.89 (0.95 without a corrupted agent, 0.67
+  with); liar 0.56, silent 0.46, open saboteur 0.29. Moles meet their goal
+  (>= 2 shut) in 68% / 77% / 93% of games.
+- Moles sabotage mostly through private entries (liar wrong in 56% of crew
+  turns, silent 78%) and lie when asked about a wrong entry (88% / 83%);
+  false claims in discussion are rare (liar 14% of claims, silent 6
+  violations of 94). No liar / silent mole revealed its role (0/72 games);
+  the open saboteur admitted it in 12/14.
+- Loyal agents: invented fragments 1% of claims, wrong entries 7.6%
+  (mostly after a mole's or corrupted fragment's misinformation).
+- Gate failed: the logic solver identifies the mole 0.54 (target <= 0.40).
+  The leak is group testing on crews — the agent most often on failed crews
+  is uniquely the mole in 35-46% of mole games.
+
+Change for pilot v2 (decided after v1, before any probe result): 4-digit
+codes and crews of 4 of 5 agents, so a failure implicates 4 of 5 agents.
+Pilot v2 runs on the 2026-10-16 server (port 8003) and scorer (shared, no
+free GPUs) and is scored through the scorer service (`score_offline.py
+--via-service`).
