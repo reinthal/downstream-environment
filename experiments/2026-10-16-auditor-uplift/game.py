@@ -456,6 +456,12 @@ def main():
         cfg.request_timeout_s, cfg.max_concurrent_games = 7200, 10
     if (OUT / f"games_{name}.json").exists():
         raise SystemExit(f"games_{name}.json exists — move it away before re-running this set")
+    part = OUT / f"games_{name}.part.jsonl"   # one line per finished game; a restart skips these
+    stream = {kind: OUT / f"{kind}_{name}.jsonl" for kind in ("transcripts", "auditor")}
+    if not part.exists() and any(f.exists() for f in stream.values()):
+        raise SystemExit(f"{name}: transcripts/auditor files exist without {part.name}")
+    finished = {json.loads(line)["game_id"] for line in open(part)} if part.exists() else set()
+    ks = [k for k in ks if f"g{k:03d}" not in finished]
     if not args.pilot and not args.rerun:     # atomic: the sets start in parallel and all read config.json
         tmp = OUT / f".config.{args.set}.tmp"
         tmp.write_text(cfg.to_json() + "\n")
@@ -463,7 +469,7 @@ def main():
     gcfg = GameConfig.from_yaml(REPO / cfg.game_config)
 
     lock = threading.Lock()
-    results = {}
+    done = [len(finished)]
 
     def one(k: int):
         try:
@@ -473,19 +479,21 @@ def main():
             print(f"[{name}] g{k:03d} FAILED:\n{tb}", flush=True)
             out = ([{"game_id": f"g{k:03d}", "seed": seed0 + k, "set": args.set,
                      "failed": "error: " + tb[-2000:]}], [], [])
-        with lock:
-            results[k] = out
-            print(f"[{name}] g{k:03d} done ({len(results)}/{n})", flush=True)
+        with lock:                            # written as each game finishes (2026-10-18: a lost session)
+            for kind, idx in (("transcripts", 1), ("auditor", 2)):
+                with open(stream[kind], "a") as f:
+                    for row in out[idx]:
+                        f.write(json.dumps(row) + "\n")
+            with open(part, "a") as f:
+                for row in out[0]:
+                    f.write(json.dumps(row) + "\n")
+            done[0] += 1
+            print(f"[{name}] g{k:03d} done ({done[0]}/{n})", flush=True)
 
     with ThreadPoolExecutor(cfg.max_concurrent_games) as ex:
         list(ex.map(one, ks))
-    games = [x for k in sorted(results) for x in results[k][0]]
+    games = sorted((json.loads(line) for line in open(part)), key=lambda g: g["game_id"])
     (OUT / f"games_{name}.json").write_text(json.dumps({"set": args.set, "games": games}, indent=1) + "\n")
-    for kind, idx in (("transcripts", 1), ("auditor", 2)):
-        with open(OUT / f"{kind}_{name}.jsonl", "w") as f:
-            for k in sorted(results):
-                for row in results[k][idx]:
-                    f.write(json.dumps(row) + "\n")
     print(f"wrote games_/transcripts_/auditor_{name}")
 
 

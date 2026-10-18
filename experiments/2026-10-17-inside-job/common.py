@@ -52,6 +52,8 @@ class RunConfig(ExperimentConfig):
     mole_mix: dict[str, float] = field(default_factory=lambda: {"none": 0.2, "liar": 0.4, "silent": 0.4})
     pilot_mole_mix: dict[str, float] = field(default_factory=lambda: {
         "none": 0.2, "liar": 0.3, "silent": 0.3, "open": 0.2})
+    random_direction: str = "experiments/2026-10-16-auditor-uplift/random_direction.npy"   # = the live scorer's
+    pilot_loyal_talk_sample: float = 0.4  # score_offline.py --pilot: share of loyal talk turns scored
     n_games: int = 150
     game_seed: int = 7000
     pilot_seed: int = 0

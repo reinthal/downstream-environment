@@ -160,3 +160,14 @@ ones — with the interactive (dynamic) auditor as the main interest.
   same seed (`game.py --set <s> --rerun`: request timeout 7200 s, 10
   concurrent games) and `analyze.py` replaces the failed record with the
   replay. Failed games are otherwise unchanged in definition.
+
+- 2026-10-18 (second entry), decided before seeing any interactive result.
+  The game processes were tied to the Claude Code session and were killed
+  when it ended (~06:25 UTC); `game.py` wrote a set's results only when the
+  whole set finished, so all interactive games played so far (~250) were
+  lost unseen. The passive replay (written per audit) is complete and kept.
+  The 12 interactive sets are rerun from the start with the same seeds and
+  design. Infrastructure changes only: each game is written as it finishes
+  and a restart resumes the set; `config.json` request timeout 1800 -> 7200 s
+  and concurrent games per set 20 -> 8 (fewer queued requests); jobs run
+  detached from the session.

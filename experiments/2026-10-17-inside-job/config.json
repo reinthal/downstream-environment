@@ -2,7 +2,7 @@
  "model_id": "Qwen/Qwen3.8-27B",
  "layer": 48,
  "lora_id": null,
- "batch_size": 2,
+ "batch_size": 4,
  "max_len": 16384,
  "device": "auto",
  "dtype": "bfloat16",
@@ -63,5 +63,7 @@
  "n_games": 150,
  "game_seed": 7000,
  "pilot_seed": 0,
- "n_boot": 2000
+ "n_boot": 2000,
+ "random_direction": "experiments/2026-10-16-auditor-uplift/random_direction.npy",
+ "pilot_loyal_talk_sample": 0.4
 }
