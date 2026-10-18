@@ -34,6 +34,8 @@ import asyncio
 import dataclasses
 import json
 import math
+
+import httpx
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional
@@ -47,6 +49,11 @@ from .tools import ANSWERS
 
 @dataclass
 class EntropyConfig:
+    # who answers the (question|clue, concept) yes/no judgments:
+    #   "jev"        -> TypeSafe Jev Nouls (model = a Jev version)
+    #   "openrouter" -> an OpenRouter LLM, one prompt per pair, p(yes) from the
+    #                   first-token logprobs (model = an OpenRouter id)
+    backend: str = "jev"
     model: str = "jev-1.13.0"           # pinned version, not the moving jev-latest
     concept_set: str = "concepts/things_all.json"
     # "uniform", or a JSON {concept: count} (e.g. a measured free-choice
@@ -74,6 +81,24 @@ class EntropyConfig:
     })
     concepts_per_request: int = 300     # Nouls per request (per-request context: 64k tokens)
     concurrency: int = 8                # requests in flight
+    # backend "openrouter": provider pinned, no fallbacks; prompts per pair
+    # ({concept}, {definition}, {text}); reasoning off, max_tokens 1
+    openrouter_provider: Optional[str] = None
+    openrouter_question_prompt: str = (
+        "In a game of Twenty Questions the secret is \"{concept}\" ({definition}).\n"
+        "Question: {text}\n"
+        "Answer with exactly one word: yes or no."
+    )
+    openrouter_clue_prompt: str = (
+        "In a game of Twenty Questions the secret is \"{concept}\" ({definition}).\n"
+        "Clue: {text}\n"
+        "Is the clue correct for the secret? Answer with exactly one word: yes or no."
+    )
+    top_logprobs: int = 20
+    # first-token spellings read as the answer (the same word in case / leading-space variants)
+    yes_tokens: list = field(default_factory=lambda: ["yes", "Yes", " yes", " Yes", "YES"])
+    no_tokens: list = field(default_factory=lambda: ["no", "No", " no", " No", "NO"])
+    max_retries: int = 6                # per request, on HTTP 429 / 5xx / timeouts
 
     @classmethod
     def from_yaml(cls, path: str | Path) -> "EntropyConfig":
@@ -218,6 +243,112 @@ class JevScorer:
         return self.cache[(kind, question, concept)]
 
 
+class OpenRouterYesNoScorer:
+    """p_yes(kind, text, concept) from an OpenRouter LLM: one chat prompt per
+    pair, ``max_tokens`` 1, reasoning off, p(yes) = mass(yes_tokens) /
+    (mass(yes_tokens) + mass(no_tokens)) over the first token's top logprobs.
+    A pair with neither in the top logprobs is cached with p_yes = None and
+    makes ``p_yes`` raise — never filled in. Same cache layout as JevScorer
+    (plus ``mass``); rows are keyed by (kind, text, concept)."""
+
+    URL = "https://openrouter.ai/api/v1/chat/completions"
+
+    def __init__(self, cfg: EntropyConfig, concepts: ConceptSet, cache_path: Path, client=None):
+        import os
+        self.cfg = cfg
+        self.definitions = dict(zip(concepts.words, concepts.definitions))
+        self.cache_path = cache_path
+        self.client = client
+        self.cache: dict[tuple[str, str, str], Optional[float]] = {}
+        self.input_tokens = 0
+        self.cost = 0.0
+        self.prompts = {"question": cfg.openrouter_question_prompt, "clue": cfg.openrouter_clue_prompt}
+        self.key = os.environ.get("OPENROUTER_API_KEY")
+        if cache_path.exists():
+            for line in cache_path.read_text().splitlines():
+                r = json.loads(line)
+                if r["model"] != cfg.model or r["prompt"] != self.prompts[r["kind"]]:
+                    raise ValueError(f"{cache_path} holds scores from another model or prompt; use a new --cache")
+                self.cache[(r["kind"], r["text"], r["concept"])] = r["p_yes"]
+
+    def body(self, kind: str, text: str, concept: str) -> dict:
+        content = self.prompts[kind].format(concept=concept, definition=self.definitions[concept], text=text)
+        body = {"model": self.cfg.model, "messages": [{"role": "user", "content": content}],
+                "max_tokens": 1, "temperature": 0, "logprobs": True, "top_logprobs": self.cfg.top_logprobs,
+                "reasoning": {"enabled": False}}
+        if self.cfg.openrouter_provider:
+            body["provider"] = {"order": [self.cfg.openrouter_provider], "allow_fallbacks": False}
+        return body
+
+    def read(self, response: dict) -> tuple[Optional[float], float]:
+        top = response["choices"][0]["logprobs"]["content"][0]["top_logprobs"]
+        yes = sum(math.exp(t["logprob"]) for t in top if t["token"] in self.cfg.yes_tokens)
+        no = sum(math.exp(t["logprob"]) for t in top if t["token"] in self.cfg.no_tokens)
+        return (yes / (yes + no) if yes + no > 0 else None), yes + no
+
+    async def _request(self, client, body: dict) -> dict:
+        delay = 1.0
+        for attempt in range(self.cfg.max_retries + 1):
+            try:
+                r = await client.post(self.URL, json=body)
+            except httpx.TransportError:
+                if attempt == self.cfg.max_retries:
+                    raise
+            else:
+                if r.status_code == 200:
+                    d = r.json()
+                    if "error" not in d:
+                        return d
+                    if attempt == self.cfg.max_retries:
+                        raise RuntimeError(f"OpenRouter error: {d['error']}")
+                elif r.status_code not in (429, 500, 502, 503, 504) or attempt == self.cfg.max_retries:
+                    raise RuntimeError(f"OpenRouter {r.status_code}: {r.text[:300]}")
+            await asyncio.sleep(delay)
+            delay = min(delay * 2, 30)
+        raise AssertionError("unreachable")
+
+    async def score(self, triples: list[tuple[str, str, str]], progress: bool = True) -> None:
+        todo = sorted({t for t in triples if t not in self.cache})
+        if not todo:
+            return
+        sem = asyncio.Semaphore(self.cfg.concurrency)
+        done = 0
+
+        async def run(client, cache_f, kind, text, concept):
+            nonlocal done
+            async with sem:
+                d = await self._request(client, self.body(kind, text, concept))
+            p, mass = self.read(d)
+            self.cache[(kind, text, concept)] = p
+            self.input_tokens += d["usage"]["prompt_tokens"]
+            self.cost += d["usage"].get("cost") or 0.0
+            cache_f.write(json.dumps({"model": self.cfg.model, "provider": d.get("provider"), "kind": kind,
+                                      "prompt": self.prompts[kind], "text": text, "concept": concept,
+                                      "p_yes": p, "mass": mass}) + "\n")
+            done += 1
+            if progress and done % 10000 == 0:
+                cache_f.flush()
+                print(f"  {done}/{len(todo)} pairs, ${self.cost:.2f}", flush=True)
+
+        with open(self.cache_path, "a") as cache_f:
+            if self.client is not None:
+                await asyncio.gather(*(run(self.client, cache_f, *t) for t in todo))
+            else:
+                limits = httpx.Limits(max_connections=self.cfg.concurrency, max_keepalive_connections=self.cfg.concurrency)
+                async with httpx.AsyncClient(timeout=120, limits=limits,
+                                             headers={"Authorization": f"Bearer {self.key}"}) as client:
+                    await asyncio.gather(*(run(client, cache_f, *t) for t in todo))
+
+    def p_yes(self, question: str, concept: str, kind: str = "question") -> float:
+        p = self.cache[(kind, question, concept)]
+        if p is None:
+            raise ValueError(f"no yes/no token in the top logprobs for ({kind}, {question!r}, {concept!r})")
+        return p
+
+    def unanswered(self) -> list[tuple[str, str, str]]:
+        return [k for k, v in self.cache.items() if v is None]
+
+
 # ── driver ───────────────────────────────────────────────────────────────
 
 
@@ -247,9 +378,14 @@ def game_observations(cfg: EntropyConfig, game: dict) -> list[tuple[str, int, st
 async def analyse(cfg: EntropyConfig, games: list[dict], cache_path: Path, client=None) -> dict:
     concepts = ConceptSet.load(cfg.concept_path())
     prior = load_prior(cfg, concepts)
-    scorer = JevScorer(cfg, concepts, cache_path, client)
+    if cfg.backend not in ("jev", "openrouter"):
+        raise ValueError(f"backend must be 'jev' or 'openrouter', got {cfg.backend!r}")
+    scorer = (JevScorer if cfg.backend == "jev" else OpenRouterYesNoScorer)(cfg, concepts, cache_path, client)
     observations = [game_observations(cfg, g) for g in games]
     await scorer.score([(k, text, c) for obs in observations for k, _, text, _ in obs for c in concepts.words])
+    if cfg.backend == "openrouter" and scorer.unanswered():
+        bad = scorer.unanswered()
+        raise ValueError(f"{len(bad)} pairs had no yes/no token in the top logprobs, e.g. {bad[:3]}")
 
     out_games, bits_by_kind = [], {"question": [], "clue": []}
     for g, obs in zip(games, observations):
@@ -273,6 +409,7 @@ async def analyse(cfg: EntropyConfig, games: list[dict], cache_path: Path, clien
         "config": dataclasses.asdict(cfg), "n_concepts": len(concepts), "H0": h0,
         "n_games": len(games), "n_questions": len(bits_by_kind["question"]),
         "n_clues": len(bits_by_kind["clue"]), "input_tokens": scorer.input_tokens,
+        "cost_usd": getattr(scorer, "cost", None),
         "mean_bits_per_question": mean(bits_by_kind["question"]),
         "mean_bits_per_clue": mean(bits_by_kind["clue"]),
         "games": out_games,

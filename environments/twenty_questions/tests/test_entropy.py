@@ -3,6 +3,7 @@ import json
 import math
 
 from types import SimpleNamespace as NS
+import httpx
 import pytest
 
 from twenty_questions.concepts import ConceptSet
@@ -113,3 +114,40 @@ def test_clues_are_observations(tmp_path):
     res_q = asyncio.run(analyse(EntropyConfig(concept_set=cfg.concept_set), games, tmp_path / "c.jsonl",
                                 client=FakeJevKinds(lambda *a: pytest.fail("re-requested"))))
     assert res_q["n_clues"] == 0 and len(res_q["games"][0]["steps"]) == 2
+
+
+def test_openrouter_backend_reads_first_token_logprobs(tmp_path):
+    import math as m
+    cfg = EntropyConfig(backend="openrouter", model="qwen/qwen3.5-9b", openrouter_provider="Venice",
+                        concept_set="concepts/things_n256_s0.json", include_clues=True, concurrency=4)
+    words = ConceptSet.load(cfg.concept_path()).words
+    secret = words[0]
+    seen = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        body = json.loads(request.content)
+        seen.append(body)
+        assert body["max_tokens"] == 1 and body["reasoning"] == {"enabled": False}
+        assert body["provider"] == {"order": ["Venice"], "allow_fallbacks": False}
+        content = body["messages"][0]["content"]
+        concept = content.split('the secret is "')[1].split('"')[0]
+        if concept == words[1]:                         # one pair answers something else entirely
+            top = [{"token": "maybe", "logprob": -0.1}]
+        else:
+            p = 0.9 if concept < "m" else 0.2
+            top = [{"token": "Yes", "logprob": m.log(p * 0.5)}, {"token": "yes", "logprob": m.log(p * 0.5)},
+                   {"token": "no", "logprob": m.log(1 - p)}]
+        return httpx.Response(200, json={"provider": "Venice", "usage": {"prompt_tokens": 60, "cost": 1e-6},
+                                         "choices": [{"logprobs": {"content": [{"top_logprobs": top}]}}]})
+
+    games = [{"game_id": "g", "objective": "competitive", "secret": secret, "exchanges": [
+        {"turn": 1, "kind": "question", "text": "Early?", "answer": " yes", "clue": "Early letter."}]}]
+    client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+    with pytest.raises(ValueError, match="2 pairs had no yes/no token"):
+        asyncio.run(analyse(cfg, games, tmp_path / "q.jsonl", client=client))
+    rows = [json.loads(x) for x in (tmp_path / "q.jsonl").read_text().splitlines()]
+    assert len(rows) == 2 * 256 and {r["kind"] for r in rows} == {"question", "clue"}
+    good = next(r for r in rows if r["concept"] == words[0] and r["kind"] == "question")
+    assert good["p_yes"] == pytest.approx(0.9) and good["mass"] == pytest.approx(1.0)
+    assert sum(r["p_yes"] is None for r in rows) == 2         # that concept, for the question and the clue
+    assert "Clue: Early letter." in next(b for b in seen if "Clue:" in b["messages"][0]["content"])["messages"][0]["content"]
