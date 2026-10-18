@@ -2663,6 +2663,15 @@ question on average (5/6 models soft, 6/6 hard). Whether *requesting* a clue
 games (1.45 soft bits). With clues counted, final soft H of clue-arm games is
 0.8–3.6 bits, consistent with 80–100% solved.
 
+Second scorer (exploratory, researcher-requested): Qwen3.5-9B on local vLLM
+(GPU box, GPUs 4–5 via the gpu-lock skill), all 1,303,896 (question|clue,
+concept) pairs. Questions agree with Jev (r 0.94, 94.8% same call; no-clue
+bits per question 0.49 vs 0.39 soft, 0.70 vs 0.68 hard) — the question
+findings do not depend on Jev. Clues do not (r 0.64; Qwen judges a clue
+correct for 36% of concepts vs Jev's 10%): under Qwen a clue is worth 0.53
+soft bits vs 1.11 per question, the reverse of Jev — the clue-beats-question
+result is scorer-dependent.
+
 ### Parameters/Configurations
 
 `experiments/2026-10-17-20q-clue-ablation/config.json`: 12 turns,
@@ -2672,4 +2681,4 @@ provider-default reasoning, max_tokens 16,000 (32,000 after the pilot, see Devia
 
 ### Artifacts
 
-- `experiments/2026-10-17-20q-clue-ablation/` — `PREREGISTRATION.md`, `README.md`, `config.json`, `common.py`, `run.py`, `analyze.py`, `results.json`, `figures/end_turn.svg`, `games_*.json`, `transcripts_*.jsonl`, `clues_*.md`, `inspect_logs_*/`, `run_log*.json`, `entropy_analysis.py`, `entropy_*.json`, `jev_scores.jsonl` (LFS), `figures/entropy_by_turn.svg`, `entropy_clues_*.json`, `entropy_clues_summary.json`
+- `experiments/2026-10-17-20q-clue-ablation/` — `PREREGISTRATION.md`, `README.md`, `config.json`, `common.py`, `run.py`, `analyze.py`, `results.json`, `figures/end_turn.svg`, `games_*.json`, `transcripts_*.jsonl`, `clues_*.md`, `inspect_logs_*/`, `run_log*.json`, `entropy_analysis.py`, `entropy_*.json`, `jev_scores.jsonl` (LFS), `figures/entropy_by_turn.svg`, `entropy_clues_*.json`, `entropy_clues_summary.json`, `score_vllm.py`, `compare_oracles.py`, `qwen_vllm_scores.jsonl` (LFS), `entropy_qwen_*.json`, `compare_oracles.json`

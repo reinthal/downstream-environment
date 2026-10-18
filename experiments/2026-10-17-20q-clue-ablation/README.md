@@ -236,3 +236,46 @@ being solved — the researcher's "low entropy should imply high likelihood of
 solving". The true secret is still consistent with every observation at the
 end in 3–9 of 10 games per model: Jev judges some clues incorrect for the
 secret, as it judged 6% of answers.
+
+### Follow-up: a second scorer — Qwen3.5-9B on local vLLM vs Jev (exploratory)
+
+Researcher-requested. `score_vllm.py` scored every (question|clue, concept)
+pair of the 120 games — 726 texts x 1,796 THINGS = 1,303,896 pairs — with
+Qwen3.5-9B (Hub revision c202236) on local vLLM, thinking off, one token,
+p(yes) from the top-20 first-token logprobs (no pair without a yes/no token;
+median yes+no mass 1.0). Run on the GPU box, GPUs 4–5 held with the
+`gpu-lock` skill (2 workers, ~90 pairs/s each, 18:57–20:55, memory release
+verified). `compare_oracles.py` reruns the entropy analysis on these scores
+(`precomputed` backend) and compares with Jev. Outputs:
+`qwen_vllm_scores.jsonl` (LFS), `entropy_qwen_<cell>.json`, `compare_oracles.json`.
+
+| | questions (953,676 pairs) | clues (350,220 pairs) |
+|---|---|---|
+| Pearson r, p(yes) Qwen vs Jev | **0.94** | 0.64 |
+| same yes/no call (p > 0.5) | **94.8%** | 69.1% |
+| mean p(yes) Qwen / Jev | 0.237 / 0.236 | **0.362 / 0.103** |
+
+Qwen contradicts the suspect's answer for the true secret on 71 / 886
+question turns (8.0%), Jev on 49 (5.5%).
+
+Bits per observation, pooled over models (soft mean / hard mean):
+
+| | Qwen3.5-9B | Jev |
+|---|---|---|
+| question, no-clue games | 0.49 / 0.70 | 0.39 / 0.68 |
+| question, clue games | 1.11 / 1.30 | 0.99 / 0.73 |
+| clue, clue games | **0.53 / 1.01** | **1.16 / 2.58** |
+
+- **Questions replicate.** The two scorers agree on 95% of question
+  judgments, and the bits per question (soft 0.49 vs 0.39, hard 0.70 vs 0.68
+  without clues) and the per-model ordering are close; the no-clue findings
+  above (≈ 0.4 soft / 0.7 hard bits per question, too few to clear a
+  512-concept pool in 12 turns) do not depend on Jev.
+- **Clues do not.** Qwen3.5-9B judges a clue correct for 36% of concepts on
+  average (Jev 10%); for "A certain kind of animal — the youngest kind."
+  (secret puppy) it accepted 757 of the first 898 concepts, accordion and air
+  pump included (Jev: 9 of 1,796). Under Qwen a clue is therefore worth less
+  than a question (0.53 vs 1.11 soft bits) — the reverse of the Jev result
+  (1.16 vs 0.99). The "a clue beats a question on average" conclusion is
+  scorer-dependent; given Qwen's yes-bias on clues it is more likely a Qwen
+  artefact than evidence against clues, but it is not robust on these data.
