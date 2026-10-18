@@ -45,6 +45,26 @@ async def score(base_url: str, model: str, out_path, concurrency: int, limit) ->
     yes, no = set(ecfg["yes_tokens"]), set(ecfg["no_tokens"])
     sem = asyncio.Semaphore(concurrency)
     t0, n = time.time(), 0
+    retries = {"count": 0}
+
+    async def post(client, body):
+        """POST with a bounded retry on connection-level failures only (a
+        keep-alive connection closed by the server as it is reused, 502-504);
+        every retry is counted and printed, the 5th failure raises."""
+        for attempt in range(5):
+            try:
+                resp = await client.post("/chat/completions", json=body)
+            except httpx.TransportError as e:
+                err = f"{type(e).__name__}"
+            else:
+                if resp.status_code not in (502, 503, 504):
+                    return resp
+                err = f"HTTP {resp.status_code}"
+            retries["count"] += 1
+            print(f"  retry {attempt + 1}/4 after {err} (total retries {retries['count']})", flush=True)
+            if attempt == 4:
+                raise RuntimeError(f"request failed 5 times, last: {err}")
+            await asyncio.sleep(2 ** attempt)
 
     async with httpx.AsyncClient(base_url=base_url, timeout=600,
                                  limits=httpx.Limits(max_connections=concurrency)) as client:
@@ -62,7 +82,7 @@ async def score(base_url: str, model: str, out_path, concurrency: int, limit) ->
                         "messages": [{"role": "user", "content": prompts[k].format(
                             concept=w, definition=defs[w], text=t)}]}
                 async with sem:
-                    resp = await client.post("/chat/completions", json=body)
+                    resp = await post(client, body)
                 if resp.status_code != 200:
                     raise RuntimeError(f"{resp.status_code}: {resp.text[:300]}")
                 top = resp.json()["choices"][0]["logprobs"]["content"][0]["top_logprobs"]
@@ -79,7 +99,7 @@ async def score(base_url: str, model: str, out_path, concurrency: int, limit) ->
 
             for i in range(0, len(todo), 20000):        # bounded task fan-out
                 await asyncio.gather(*(one(*p) for p in todo[i:i + 20000]))
-    print(f"done: {n} pairs in {time.time() - t0:.0f}s", flush=True)
+    print(f"done: {n} pairs in {time.time() - t0:.0f}s, {retries['count']} connection retries", flush=True)
 
 
 def main():
