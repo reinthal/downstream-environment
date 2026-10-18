@@ -105,6 +105,8 @@ Skip a question only when the repo or an earlier answer already settles it.
   mid-run.
 - Which existing primitives are reused (AGENTS.md, "Reuse, don't rebuild"),
   and which code is new and untested?
+- GPU runs: which GPUs, held through the `gpu-lock` skill (locks + log link
+  in `/tmp/gpu-locks/`, cleanup verified with `nvidia-smi`)?
 
 ### 6. Report and conclusion, agreed in advance
 

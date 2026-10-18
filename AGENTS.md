@@ -166,6 +166,9 @@ reason.
 
 - 8x A40 (46 GB); GPU 4 is often occupied by another user's job — check
   `nvidia-smi` and set `CUDA_VISIBLE_DEVICES` around it.
+- Launch every GPU job on the shared box through the `gpu-lock` skill
+  (`.claude/skills/gpu-lock/`): visible locks in `/tmp/gpu-locks/` with a link
+  to the experiment's log, automatic cleanup and a verified GPU-memory release.
 - HF generation: batch 25 is the safe ceiling at long contexts on 4 GPUs
   (batch 50 OOM-thrashes). Qwen3.5-27B needs `flash-linear-attention`
   installed in `.venv` (reference kernels are ~5x slower).
