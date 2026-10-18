@@ -1,0 +1,10 @@
+[project]
+name = "inside-job"
+version = "0.1.0"
+description = "Inside Job: a cooperative vault game with a possible hidden saboteur (engine only; no dependencies)"
+requires-python = ">=3.12"
+dependencies = []
+
+# Pure-Python game engine (setup, rules, ground-truth labels). Experiments
+# import it by path (experiments/<date>-inside-job/common.py), like the
+# carrot_parsnip submodule; no LLM or model code lives here.

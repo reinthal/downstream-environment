@@ -45,5 +45,48 @@
  "game_seed": 6000,
  "pilot_seed": 0,
  "n_boot": 2000,
- "calib_games": 50
+ "layers": [
+  32,
+  48
+ ],
+ "scenarios": [
+  "S2",
+  "S4"
+ ],
+ "detectors": [
+  "l32",
+  "l48",
+  "rand",
+  "mix",
+  "oracle",
+  "inv"
+ ],
+ "passive_detectors": [
+  "none",
+  "l32",
+  "l48",
+  "rand",
+  "mix30",
+  "mix",
+  "mix70",
+  "mix90",
+  "oracle",
+  "inv"
+ ],
+ "mix_targets": {
+  "mix30": 0.3,
+  "mix": 0.5,
+  "mix70": 0.7,
+  "mix90": 0.9
+ },
+ "n_random_candidates": 200,
+ "random_seed": 16,
+ "source_dir": "experiments/2026-10-15-auditor-l32-5rounds",
+ "calib_sets": [
+  "S2_none",
+  "S4_none"
+ ],
+ "calib_games": 50,
+ "passive_runs": 3,
+ "collect_shards": 3
 }

@@ -436,6 +436,10 @@ def main():
     ap.add_argument("--set", choices=SETS, required=True)
     ap.add_argument("--pilot", action="store_true")
     ap.add_argument("--games", type=int, default=None, help="pilot only")
+    ap.add_argument("--rerun", action="store_true",
+                    help="replay only the games that failed in games_{set}.json (same seeds), with a 7200 s "
+                         "request timeout and 10 concurrent games; writes games_/transcripts_/auditor_{set}_rerun "
+                         "(2026-10-18 deviation: request timeouts in a long server queue)")
     args = ap.parse_args()
     cfg = load_config()
     global DET
@@ -444,9 +448,15 @@ def main():
         ap.error("--games is required with --pilot and not allowed otherwise")
     n, seed0 = (args.games, cfg.pilot_seed) if args.pilot else (cfg.n_games, cfg.game_seed)
     name = f"{args.set}{'_pilot' if args.pilot else ''}"
+    ks = list(range(n))
+    if args.rerun:
+        prior = json.loads((OUT / f"games_{name}.json").read_text())["games"]
+        ks = [int(g["game_id"][1:]) for g in prior if g.get("correct") is None and g.get("failed")]
+        n, name = len(ks), f"{name}_rerun"
+        cfg.request_timeout_s, cfg.max_concurrent_games = 7200, 10
     if (OUT / f"games_{name}.json").exists():
         raise SystemExit(f"games_{name}.json exists — move it away before re-running this set")
-    if not args.pilot:                        # atomic: the sets start in parallel and all read config.json
+    if not args.pilot and not args.rerun:     # atomic: the sets start in parallel and all read config.json
         tmp = OUT / f".config.{args.set}.tmp"
         tmp.write_text(cfg.to_json() + "\n")
         os.replace(tmp, OUT / "config.json")
@@ -468,7 +478,7 @@ def main():
             print(f"[{name}] g{k:03d} done ({len(results)}/{n})", flush=True)
 
     with ThreadPoolExecutor(cfg.max_concurrent_games) as ex:
-        list(ex.map(one, range(n)))
+        list(ex.map(one, ks))
     games = [x for k in sorted(results) for x in results[k][0]]
     (OUT / f"games_{name}.json").write_text(json.dumps({"set": args.set, "games": games}, indent=1) + "\n")
     for kind, idx in (("transcripts", 1), ("auditor", 2)):

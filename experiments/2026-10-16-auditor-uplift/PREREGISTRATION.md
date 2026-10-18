@@ -149,3 +149,14 @@ ones — with the interactive (dynamic) auditor as the main interest.
 
 <!-- Append only. Each entry: date, what changed, why, decided before or
      after seeing data. -->
+
+- 2026-10-18, decided before seeing any interactive result (only progress
+  counts and failure tracebacks were looked at). With 12 sets x 20
+  concurrent games on two server replicas, requests waited past the 1800 s
+  request timeout: 23 of the first 240 finished interactive games failed
+  with `TimeoutError` (S2: l32 4, mix 2, rand 1; S4: l32 6, mix 4, rand 3,
+  inv 2, oracle 1; l48 none). Because failures are uneven across
+  detectors, once the run finishes every failed game is replayed with the
+  same seed (`game.py --set <s> --rerun`: request timeout 7200 s, 10
+  concurrent games) and `analyze.py` replaces the failed record with the
+  replay. Failed games are otherwise unchanged in definition.

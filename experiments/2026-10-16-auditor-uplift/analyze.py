@@ -79,6 +79,11 @@ def interactive(sfx: str, n_boot: int, cfg) -> dict:
             continue
         games = json.loads((base / name).read_text())["games"]
         turns = read_jsonl(base / name.replace("games_", "transcripts_").replace(".json", ".jsonl"))
+        rerun = base / name.replace(".json", "_rerun.json")
+        if rerun.exists():                    # failed games replayed with the same seeds (deviation 2026-10-18)
+            redo = {g["game_id"]: g for g in json.loads(rerun.read_text())["games"]}
+            games = [redo.get(g["game_id"], g) if g.get("correct") is None else g for g in games]
+            turns += read_jsonl(base / name.replace("games_", "transcripts_").replace(".json", "_rerun.jsonl"))
         per = defaultdict(lambda: defaultdict(list))
         conf = set()
         msgs = defaultdict(list)
