@@ -13,16 +13,22 @@ inspect_ai; observations are rebuilt here exactly as
 twenty_questions.entropy.game_observations does, checked by
 `--check-pairs` from the env venv):
 
-    CUDA_VISIBLE_DEVICES=<free gpu> PATH=$PWD/.venv-vllm/bin:$PATH \
-        .venv-vllm/bin/python experiments/2026-10-17-20q-clue-ablation/score_vllm.py
+    PATH=$PWD/.venv-vllm/bin:$PATH .venv-vllm/bin/python \
+        experiments/2026-10-17-20q-clue-ablation/score_vllm.py --workers N
 
-Resumes: pairs already in qwen_vllm_scores.jsonl are skipped.
+--workers N: one engine per GPU of CUDA_VISIBLE_DEVICES (held with the
+gpu-lock skill), worker i scores todo[i::N] into qwen_vllm_scores.shard<i>.jsonl;
+the parent waits, fails if any worker fails, and merges the shards into
+qwen_vllm_scores.jsonl. Resumes: pairs already in the main file or any shard
+are skipped.
 """
 from __future__ import annotations
 
 import argparse
 import json
 import math
+import os
+import subprocess
 import sys
 import time
 
@@ -65,6 +71,9 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--check-pairs", action="store_true", help="compare the pair set with twenty_questions (env venv)")
     ap.add_argument("--limit", type=int, default=None, help="score only the first N missing pairs (smoke test)")
+    ap.add_argument("--workers", type=int, default=None, help="one engine per visible GPU; parent mode")
+    ap.add_argument("--shard", type=int, default=None)
+    ap.add_argument("--num-shards", type=int, default=None)
     args = ap.parse_args()
     ecfg = entropy_cfg()
     pairs, defs = all_pairs(ecfg)
@@ -83,19 +92,22 @@ def main():
         print("pair set matches twenty_questions.entropy.game_observations")
         return
 
-    done = set()
-    if SCORES.exists():
-        for line in SCORES.read_text().splitlines():
-            r = json.loads(line)
-            if r["model"] != MODEL:
-                raise SystemExit(f"{SCORES} holds {r['model']} scores")
-            done.add((r["kind"], r["text"], r["concept"]))
+    done = scored()
     todo = [p for p in pairs if p not in done]
     if args.limit:
         todo = todo[:args.limit]
     print(f"{len(done)} already scored, {len(todo)} to score", flush=True)
+    if args.workers:
+        run_workers(args.workers, args.limit)
+        return
     if not todo:
         return
+    out = SCORES
+    if args.shard is not None:
+        todo = todo[args.shard::args.num_shards]
+        out = shard_path(args.shard)
+        print(f"shard {args.shard}/{args.num_shards} on GPU {os.environ.get('CUDA_VISIBLE_DEVICES')}: "
+              f"{len(todo)} pairs", flush=True)
 
     sys.path.insert(0, str(REPO))
     from rollouts.generation import make_backend
@@ -110,7 +122,7 @@ def main():
     yes, no = set(ecfg["yes_tokens"]), set(ecfg["no_tokens"])
     sp = SamplingParams(max_tokens=1, temperature=0.0, logprobs=ecfg["top_logprobs"])
     t0 = time.time()
-    with open(SCORES, "a") as f:
+    with open(out, "a") as f:
         for i in range(0, len(todo), CHUNK):
             chunk = todo[i:i + CHUNK]
             texts = [backend.render([{"role": "user", "content": prompts[k].format(concept=w, definition=defs[w], text=t)}])
@@ -126,6 +138,63 @@ def main():
             f.flush()
             n = i + len(chunk)
             print(f"  {n}/{len(todo)} pairs, {n / (time.time() - t0):.0f}/s", flush=True)
+
+
+def shard_path(i: int):
+    return OUT / f"qwen_vllm_scores.shard{i}.jsonl"
+
+
+def scored() -> set:
+    done = set()
+    for path in [SCORES, *sorted(OUT.glob("qwen_vllm_scores.shard*.jsonl"))]:
+        if path.exists():
+            for line in path.read_text().splitlines():
+                r = json.loads(line)
+                if r["model"] != MODEL:
+                    raise SystemExit(f"{path} holds {r['model']} scores")
+                done.add((r["kind"], r["text"], r["concept"]))
+    return done
+
+
+def run_workers(n: int, limit) -> None:
+    visible = [g for g in os.environ.get("CUDA_VISIBLE_DEVICES", "").split(",") if g]
+    if len(visible) < n:
+        raise SystemExit(f"--workers {n} but CUDA_VISIBLE_DEVICES={visible}")
+    (OUT / "logs").mkdir(exist_ok=True)
+    procs = []
+    for i in range(n):
+        cmd = [sys.executable, __file__, "--shard", str(i), "--num-shards", str(n)]
+        if limit:
+            cmd += ["--limit", str(limit)]
+        env = os.environ | {"CUDA_VISIBLE_DEVICES": visible[i]}
+        log = open(OUT / "logs" / f"score_vllm.shard{i}.log", "a")
+        procs.append((i, subprocess.Popen(cmd, env=env, stdout=log, stderr=subprocess.STDOUT), log))
+        print(f"worker {i}: GPU {visible[i]}, pid {procs[-1][1].pid}", flush=True)
+    failed = []
+    for i, p, log in procs:
+        p.wait()
+        log.close()
+        print(f"worker {i} exit {p.returncode}", flush=True)
+        if p.returncode != 0:
+            failed.append(i)
+    if failed:
+        raise SystemExit(f"workers {failed} failed; see logs/score_vllm.shard<i>.log (shards kept, rerun resumes)")
+    have = set()
+    if SCORES.exists():
+        have = {(r["kind"], r["text"], r["concept"]) for r in map(json.loads, SCORES.read_text().splitlines())}
+    added = 0
+    with open(SCORES, "a") as f:
+        for i in range(n):
+            for line in shard_path(i).read_text().splitlines() if shard_path(i).exists() else []:
+                r = json.loads(line)
+                k = (r["kind"], r["text"], r["concept"])
+                if k not in have:
+                    f.write(line + "\n")
+                    have.add(k)
+                    added += 1
+    for i in range(n):
+        shard_path(i).unlink(missing_ok=True)
+    print(f"merged {added} rows into {SCORES.name}; {len(have)} pairs scored", flush=True)
 
 
 if __name__ == "__main__":
