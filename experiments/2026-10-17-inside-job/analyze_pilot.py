@@ -118,6 +118,11 @@ def solver(games: list[dict], turns_by: dict, seed: int = 0) -> dict:
 
 
 def main():
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--games-only", action="store_true", help="G1-G3 only (no probe scores needed); "
+                                                             "writes pilot_report_games.json, not calibration.json")
+    args = ap.parse_args()
     cfg = load_config()
     rng = np.random.default_rng(0)
     games = read_jsonl(OUT / "games_trunk_pilot.jsonl")
@@ -145,6 +150,10 @@ def main():
     rep["G1_G2_mission_success"] = {k: round(float(np.mean(v)), 3) for k, v in succ.items()}
     rep["G3_solver"] = solver([g for g in games if g["game_id"] in ok and g["mole_type"] != "open"], by_all)
     rep["n_scored_turns"] = len(T)
+    if args.games_only:
+        (OUT / "pilot_report_games.json").write_text(json.dumps(rep, indent=1) + "\n")
+        print(json.dumps(rep, indent=1))
+        return
 
     rep["G4_probe"] = {}
     for kind in KINDS:

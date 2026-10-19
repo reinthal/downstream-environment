@@ -44,7 +44,7 @@
  "free_questions": 3,
  "audits": 2,
  "n_missions": 4,
- "code_len": 4,
+ "code_len": 5,
  "overlap": 0.25,
  "p_corrupted": 0.3,
  "corrupt_missions": 2,
