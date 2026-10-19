@@ -154,3 +154,8 @@ Runs, in order:
 
 <!-- Append only. Each entry: date, what changed, why, decided before or
      after seeing data. -->
+
+- 2026-10-19, before any data: the inconclusive rule "fewer than 8 trajectories per mode per
+  phase remain" in section 6 is marked *(proposed by Claude)* but was written after the
+  researcher's "lgtm" and has not been confirmed by them. Same for the 10 Phase A attack runs
+  (section 3). Both stand unless the researcher objects.
