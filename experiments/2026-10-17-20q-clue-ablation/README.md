@@ -450,29 +450,30 @@ turns: 238 answered yes, 368 no), with the two scorers that judge reliably.
 - *Is bits/question predictive of game length?* Measured per **turn**
   (everything learned in a turn — the answer, a clue on it or a requested
   clue — over the turns the game used; for a no-clue game this is bits per
-  question), all 119 games with a question, Jev, all 1,796 THINGS
-  (`figures/bits_vs_game_length.svg`; circles no clues, triangles clues):
+  question), all 119 games with a question, scored by Qwen3.8-27B with clues
+  included (`figures/bits_vs_game_length.svg`; circles no clues, triangles
+  clues):
 
   | Spearman with the turn the game ended | soft | hard |
   |---|---|---|
-  | bits per turn, all games | −0.77 | −0.80 |
-  | bits per turn, clue games (60) | −0.79 | −0.82 |
-  | bits per turn, no-clue games (59) | −0.22 | −0.30 |
-  | bits in the first 2 turns, all games (117) | −0.54 | −0.62 |
-  | bits in the first 2 turns, clue games (58) | −0.35 | **−0.51** |
-  | bits in the first 2 turns, no-clue games (59) | +0.05 | +0.05 |
-  | bits in the first 3 turns, clue games (43) | −0.19 | **−0.45** |
-  | bits in the first 3 turns, no-clue games (59) | +0.02 | −0.03 |
+  | bits per turn, all games | −0.79 | −0.81 |
+  | bits per turn, clue games (60) | −0.86 | −0.87 |
+  | bits per turn, no-clue games (59) | −0.30 | −0.31 |
+  | bits in the first 2 turns, all games (117) | −0.55 | −0.61 |
+  | bits in the first 2 turns, clue games (58) | −0.40 | **−0.50** |
+  | bits in the first 2 turns, no-clue games (59) | +0.04 | +0.03 |
+  | bits in the first 3 turns, clue games (43) | −0.19 | **−0.41** |
+  | bits in the first 3 turns, no-clue games (59) | −0.05 | −0.04 |
 
   The whole-game correlation is partly built in: a solved game has removed
-  ~all of its ~10.8 bits, so its bits per turn ≈ 10.8 / turns. The fair test
-  is information gathered *early* against the final length: within clue
-  games the hard bits of the first 2–3 turns predict it (−0.45 to −0.51),
-  soft bits less; within no-clue games early bits predict nothing — their
-  opening questions ("Is it a physical object?") are much the same in every
-  game. Pooled figures mostly reflect the arm (clue games learn more early
-  and end sooner). So hard bits are the more useful metric, and predictive
-  only once the early turns differ between games.
+  ~all of its uncertainty, so its bits per turn ≈ (bits needed) / turns. The
+  fair test is information gathered *early* against the final length: within
+  clue games the hard bits of the first 2–3 turns predict it (−0.41 to
+  −0.50), soft bits less; within no-clue games early bits predict nothing —
+  their opening questions ("Is it a physical object?") are much the same in
+  every game. Pooled figures mostly reflect the arm (clue games learn more
+  early and end sooner). So hard bits are the more useful metric, and
+  predictive only once the early turns differ between games.
 
 `figures/entropy_no_clues_hard_soft.svg` — no-clue games only (sufficient
 samples): hard and soft entropy over all 1,796 THINGS after k questions,

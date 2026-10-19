@@ -181,13 +181,13 @@ def spearman(a, b):
 
 
 def fig_bits_vs_length(cfg, plt):
-    """All games, Jev, all 1,796 THINGS: per-game soft and hard bits per turn
-    (answers + clues; a no-clue game's turns are its questions) vs the turn the
-    game ended. Circles: no clues (Jev question-only scores); triangles: clue
-    games (Jev scores incl. clues). Unsolved = hollow, at the 12-turn cap."""
+    """All games, scored by Qwen3.8-27B (entropy_qwen38_<cell>.json, clues
+    included): per-game soft and hard bits per turn (answers + clues; a no-clue
+    game's turns are its questions) vs the turn the game ended. Circles: no
+    clues; triangles: clue games. Unsolved = hollow, at the 12-turn cap."""
     rows = []
     for i, m in enumerate(cfg.models):
-        for arm, prefix in (("no_clues", "entropy_"), ("clues", "entropy_clues_")):
+        for arm, prefix in (("no_clues", "entropy_qwen38_"), ("clues", "entropy_qwen38_")):
             games = {g["game_id"]: g for g in json.loads((OUT / f"games_{cell(m, arm, False)}.json").read_text())["games"]}
             for g in json.loads((OUT / f"{prefix}{cell(m, arm, False)}.json").read_text())["games"]:
                 gm = games[g["game_id"]]
@@ -218,7 +218,7 @@ def fig_bits_vs_length(cfg, plt):
     axes[0].set_ylabel("turn the game ended", fontsize=9, color=INK)
     axes[0].set_ylim(0, 13)
     axes[0].set_xlim(0, max(max(r[4], r[5]) for r in rows) * 1.05)
-    fig.suptitle("Information per turn vs game length, 119 games with a question (scored by Jev, all 1,796 THINGS)",
+    fig.suptitle("Information per turn vs game length, 119 games with a question (scored by Qwen3.8-27B)",
                  fontsize=11, color=INK, x=0.01, ha="left")
     fig.tight_layout(rect=(0, 0.1, 1, 1))
     fig.savefig(OUT / "figures" / "bits_vs_game_length.svg")
