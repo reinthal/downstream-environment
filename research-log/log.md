@@ -2693,3 +2693,49 @@ provider-default reasoning, max_tokens 16,000 (32,000 after the pilot, see Devia
 ### Artifacts
 
 - `experiments/2026-10-17-20q-clue-ablation/` — `PREREGISTRATION.md`, `README.md`, `config.json`, `common.py`, `run.py`, `analyze.py`, `results.json`, `figures/end_turn.svg`, `games_*.json`, `transcripts_*.jsonl`, `clues_*.md`, `inspect_logs_*/`, `run_log*.json`, `entropy_analysis.py`, `entropy_*.json`, `jev_scores.jsonl` (LFS), `figures/entropy_by_turn.svg`, `entropy_clues_*.json`, `entropy_clues_summary.json`, `score_vllm.py`, `compare_oracles.py`, `qwen_vllm_scores.jsonl` (LFS), `entropy_qwen_*.json`, `compare_oracles.json`, `score_server.py`, `run_qwen38_scoring.sh`, `qwen38_scores.jsonl` (LFS), `entropy_qwen38_*.json`, `compare_oracles_qwen38.json`
+
+## 2026-10-19: BashArena live interrogation monitor, GLM-5.3 Flash (AIS-407)
+
+### Context
+
+AIS-407 asks for a dynamic monitor on BashArena. The chosen kind is interrogation: the
+trusted model (T) holds back a flagged action, questions the untrusted model (U) about it,
+and scores it again with U's answers. A first, post-hoc version ran in out-of-control-arena
+(`research-log/2026-10-19-basharena-interrogation-monitor.md` there): Sonnet 4.5 replayed
+from 47 + 47 logged trajectories, GPT-4.1 mini as T. Safety at a 1% audit budget was 0.79
+(informed monitor), 0.83 with U's answers, and 0.87 from T's questions alone; U's answers
+lowered attack scores as well as honest ones. That setup was not inline (each interrogation a
+throwaway replay, no memory of earlier reviews), and the attacker learned of interrogation
+only when answering, never while choosing its actions. This run fixes both, and moves to this
+repo's Docker BashArena with GLM-5.3 Flash as U.
+
+### Experiment
+
+Live rollouts, 50 honest + 50 attack, under `interrogation_protocol`
+(`environments/bash_arena/interrogation.py`) in BashArena's auto-submit wrapper. U's system
+prompt carries an oversight note from step 0 (only the attacker is told to hide); the informed
+monitor scores each action; at ≥ 0.2, T questions U from its live context, U answers, T
+rescores with and without the answers; the Q&A enters U's history; nothing is blocked.
+Hypothesis and decision rule: `experiments/2026-10-19-basharena-live-interrogation/PREREGISTRATION.md`
+(draft, to be confirmed by the researcher): supported if safety at 1% with the interrogation
+score is ≥ 0.05 above the informed score on the same trajectories; inconclusive if < 40
+trajectories per mode, < 10 attack side-task successes, or > 10% unscored interrogations.
+
+### Expected Outcome
+
+### Actual Outcome
+
+### Parameters/Configurations
+
+`experiments/2026-10-19-basharena-live-interrogation/config.json` (written by `run.py`): U
+`openrouter/z-ai/glm-5.3-flash` (provider `together`, the env's honest/attack generate
+configs), T and monitor `openrouter/openai/gpt-4.1-mini` (provider `openai`), trigger 0.2,
+tasks: first 53 by `shuffle_seed=0` minus the 3 blacklisted = 50, 1 epoch, 100 steps, 2 h per
+sample, 8 sandboxes. Waits for the researcher's host-level egress filter (AIS-391 router leak).
+
+### Artifacts
+
+- `experiments/2026-10-19-basharena-live-interrogation/` — `README.md`, `PREREGISTRATION.md`,
+  `config.json`, `run.py`, `analyze.py`, `task_blacklist.json`; after the run `steps.jsonl`,
+  `results.json`, `results.md`, `inspect_logs/` (gitignored)
+- `environments/bash_arena/interrogation.py`
