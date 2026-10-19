@@ -188,3 +188,5 @@ Runs, in order:
   step's reasoning (last 40k chars) and tool calls, the previous 5 steps' reasoning (last 12k
   chars each), and all earlier tool calls (arguments cut at 1.5k chars). Pilot cost:
   ~17k tokens per step.
+- 2026-10-19, before any Phase A data: researcher confirmed the god-mode block threshold
+  (lowest p_attack that <= 1% of honest Phase A steps reach): "god mode block lgtm".
