@@ -197,7 +197,6 @@ def main():
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
-    plt.rcParams["svg.fonttype"] = "none"
     cfg = AblationConfig.load()
     fig_remaining(cfg, plt)
     fig_bits(plt)
