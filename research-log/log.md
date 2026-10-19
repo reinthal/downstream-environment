@@ -2709,11 +2709,12 @@ removes 2.7x / 3.1x the hard bits of a no (4–7x soft; predicted 1.5–2.0x);
 soft entropy rose on 17% / 3% of steps, all but one after a "no" (a "no"
 that removes the posterior's favourites flattens it), the hard count never;
 information is predictive of game length once clue games are included
-(Qwen3.8-27B scores, bits per turn: Spearman −0.79 soft / −0.81 hard over
-all 119 games, partly by construction); the fair test, hard bits of the first
-2–3 turns, gives −0.41 to −0.50 within clue games and ~0 within no-clue games. New figures:
+(bits per turn, Qwen3.8-27B / Jev: Spearman −0.81 / −0.80 hard over all 119
+games, partly by construction); the fair test, hard bits of the first 2–3
+turns, gives −0.41 to −0.51 within clue games and ~0 within no-clue games
+(`figures/bits_vs_game_length_{qwen38,jev}.svg`). New figures:
 `figures/entropy_no_clues_hard_soft.svg` (hard + soft, n per point),
-`figures/bits_vs_game_length.svg`. The README documents both entropy
+`figures/bits_vs_game_length_{qwen38,jev}.svg`. The README documents both entropy
 calculations (MathJax) with a worked example.
 
 ### Parameters/Configurations

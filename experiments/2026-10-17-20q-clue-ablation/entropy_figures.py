@@ -180,14 +180,18 @@ def spearman(a, b):
     return 1 - 6 * sum((ra[i] - rb[i]) ** 2 for i in range(n)) / (n * (n * n - 1))
 
 
-def fig_bits_vs_length(cfg, plt):
-    """All games, scored by Qwen3.8-27B (entropy_qwen38_<cell>.json, clues
-    included): per-game soft and hard bits per turn (answers + clues; a no-clue
-    game's turns are its questions) vs the turn the game ended. Circles: no
-    clues; triangles: clue games. Unsolved = hollow, at the 12-turn cap."""
+def fig_bits_vs_length(cfg, plt, scorer: str):
+    """All games, one figure per scorer (scorer "qwen38": entropy_qwen38_<cell>,
+    clues included; "jev": entropy_<cell> for no-clue games, entropy_clues_<cell>
+    for clue games): per-game soft and hard bits per turn (answers + clues; a
+    no-clue game's turns are its questions) vs the turn the game ended.
+    Circles: no clues; triangles: clue games. Unsolved = hollow, at the cap."""
+    prefixes = {"qwen38": {"no_clues": "entropy_qwen38_", "clues": "entropy_qwen38_"},
+                "jev": {"no_clues": "entropy_", "clues": "entropy_clues_"}}[scorer]
+    scorer_name = {"qwen38": "Qwen3.8-27B", "jev": "Jev"}[scorer]
     rows = []
     for i, m in enumerate(cfg.models):
-        for arm, prefix in (("no_clues", "entropy_qwen38_"), ("clues", "entropy_qwen38_")):
+        for arm, prefix in prefixes.items():
             games = {g["game_id"]: g for g in json.loads((OUT / f"games_{cell(m, arm, False)}.json").read_text())["games"]}
             for g in json.loads((OUT / f"{prefix}{cell(m, arm, False)}.json").read_text())["games"]:
                 gm = games[g["game_id"]]
@@ -217,11 +221,12 @@ def fig_bits_vs_length(cfg, plt):
     fig.legend(handles, labels, fontsize=7.5, frameon=False, loc="lower center", ncol=5, bbox_to_anchor=(0.5, 0.0))
     axes[0].set_ylabel("turn the game ended", fontsize=9, color=INK)
     axes[0].set_ylim(0, 13)
-    axes[0].set_xlim(0, max(max(r[4], r[5]) for r in rows) * 1.05)
-    fig.suptitle("Information per turn vs game length, 119 games with a question (scored by Qwen3.8-27B)",
+    axes[0].set_xlim(0, 5.8)          # fixed: the jev and qwen38 files are compared side by side
+    fig.suptitle(f"Information per turn vs game length, {len(rows)} games with a question (scored by {scorer_name})",
                  fontsize=11, color=INK, x=0.01, ha="left")
     fig.tight_layout(rect=(0, 0.1, 1, 1))
-    fig.savefig(OUT / "figures" / "bits_vs_game_length.svg")
+    fig.savefig(OUT / "figures" / f"bits_vs_game_length_{scorer}.svg")
+    print(f"  [{scorer_name}]")
     for k, rho in report.items():
         print(f"  {k}: Spearman pooled {rho[None]:.2f}, no clues {rho['no_clues']:.2f}, clues {rho['clues']:.2f}")
     for arm in ("no_clues", "clues"):
@@ -237,9 +242,10 @@ def main():
     fig_remaining(cfg, plt)
     fig_bits(plt)
     fig_no_clue_hard_soft(cfg, plt)
-    fig_bits_vs_length(cfg, plt)
+    fig_bits_vs_length(cfg, plt, "qwen38")
+    fig_bits_vs_length(cfg, plt, "jev")
     print("wrote figures/entropy_remaining_by_question.svg, bits_question_vs_clue.svg, "
-          "entropy_no_clues_hard_soft.svg, bits_vs_game_length.svg")
+          "entropy_no_clues_hard_soft.svg, bits_vs_game_length_{qwen38,jev}.svg")
 
 
 if __name__ == "__main__":
