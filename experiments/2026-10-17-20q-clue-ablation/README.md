@@ -329,3 +329,63 @@ Bits per observation, pooled, mean (median):
   ahead for 2 of 6 models): a few direct-guess questions ("Is it a deer?" →
   yes) carry most of the soft mass. The 9B's reversal on every measure
   traces to its clue yes-bias.
+
+### Entropy: figures, runtime and cost (exploratory)
+
+`entropy_figures.py` (no model calls):
+
+- `figures/entropy_remaining_by_question.svg` — no-clue games: bits left in
+  the game's own 512-secret pool after k questions (hard count), per model,
+  scored by Jev and by Qwen3.8-27B on the same axes. Every model follows the
+  same line: 9 → ~2–4 bits after 11 questions, median pace 0.73 (Jev) /
+  0.64 (Qwen3.8-27B) bits per question; extended, it reaches 0 at question
+  12.4 (Jev) / 14.1 (Qwen3.8-27B).
+- `figures/bits_question_vs_clue.svg` — clue games: hard bits per yes/no
+  question vs per clue under the three scorers (Jev, Qwen3.8-27B: a clue is
+  worth ~2–3x a question; Qwen3.5-9B reverses it through its clue yes-bias).
+- `figures/entropy_by_turn.svg` (earlier) — soft entropy over all THINGS.
+
+**Runtime and cost of the entropy calculation** (one judgment = one
+(question|clue, concept) pair; the 120 games = 726 texts x 1,796 THINGS =
+1,303,896 judgments):
+
+| scorer | where | judgments | wall-clock | compute | cost | per 1M judgments |
+|---|---|---|---|---|---|---|
+| Jev (jev-1.13.0) | TypeSafe API, 300 per request, 8 in flight | 953,676 questions + 350,220 clues | not timed (one session) | — | $3.93 + $1.30 = **$5.23** (124.5M input tokens) | **$4.0** |
+| Qwen3.5-9B | OpenRouter (Venice fp8), 1 per request | 2,442 (stopped) | measured 36/s → ~10 h for all | — | $0.04 spent (~$8 projected) | ~$6 |
+| Qwen3.5-9B | local vLLM offline, 2 x A40, 1 engine per GPU | 1,303,896 | **1.97 h** (~92/s per GPU) | **3.9 GPU-h** | $0 | **3.0 GPU-h** |
+| Qwen3.8-27B | local vLLM server (`serve_qwen38.py`), 1 x TP2 on 2 x A40 | 1,303,896 | **8.9 h** (0.34 h first attempt + 8.53 h; ~41/s per replica) | **17.7 GPU-h** | $0 | **13.6 GPU-h** |
+
+The LLM scorers spend nearly all their time on prefill of ~120-token prompts
+that differ only in the concept; one generated token each. The 27B costs
+~4.5x the 9B per judgment (twice the GPUs per replica, ~half the rate).
+
+**Projection: a baseline of 100 games x 15 questions with a 27B model**
+(Qwen3.8-27B on the repo's server, 4 x A40 = 2 replicas x TP2; no clues,
+512-secret pool; estimates, not measured):
+
+- *Playing.* ~45 model calls per game (question, answer, judge per turn).
+  Measured with Qwen3.5-27B in this run: ~110–190 output tokens per call at
+  provider-default reasoning, ~67k input tokens per 11-turn game (~120k at 15
+  turns, mostly prefix-cached). Light reasoning: ~0.5M output tokens for 100
+  games → **~0.3–0.5 h wall, 1–2 GPU-h**. Qwen3.8 with thinking at its local
+  default (often ~1,500 tokens per call, AGENTS.md): ~6.8M output tokens at
+  the server's measured 570–1,050 tok/s → **~2–3.5 h wall, 8–14 GPU-h**.
+- *Entropy.* ~1,400 questions, ~840 unique (60% unique here). Against all
+  1,796 THINGS: ~1.5M judgments → Qwen3.8-27B **~20 GPU-h (~5 h on 4 GPUs)**,
+  Qwen3.5-9B ~4.5 GPU-h, Jev **~$6**. Against the 512-secret pool only:
+  ~0.43M → 27B ~6 GPU-h, Jev ~$1.7.
+- *Total with the 27B end to end:* **~7–34 GPU-h, i.e. ~2–9 h on 4 GPUs**,
+  $0 (or ~$2–6 if Jev scores instead).
+
+**Would 15 questions solve 50% of games?** Borderline, and probably not in
+practice. Within the 512-secret pool a no-clue question removes 0.64–0.73
+hard bits (median), so the pool's 9 bits take 12.4–14.1 questions; projected
+to question 14, 47% (Qwen3.8-27B) – 54% (Jev) of games would be narrowed to
+one candidate (59–63% to ≤ 2). That is the ceiling for a guesser who uses the
+answers perfectly. The guessers here did not: at turn 12 the pool was down to
+a median 3–4 candidates, yet 13 / 59 no-clue games (22%) were solved —
+Player 2 does not see the 512-concept list and must name the secret from
+everything it knows. Levers if the baseline must reach ~50%: show the
+concept list to Player 2 (`auditor.show_concepts: true`), 20 questions, or the
+256-concept pool (8 bits ≈ 11–12.5 questions at this pace).

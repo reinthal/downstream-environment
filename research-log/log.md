@@ -2683,6 +2683,18 @@ scorers a clue removes 2–3x a question's hard bits (27B 2.14 vs 0.92, Jev
 direct-guess questions carrying the mean. The 9B reversal is its clue
 yes-bias.
 
+Entropy figures, runtime and cost (exploratory): `figures/entropy_remaining_by_question.svg`
+(no-clue games, bits left in the 512 pool by question: 0.64–0.73 bits per
+question, every model on the same line) and `figures/bits_question_vs_clue.svg`.
+Entropy calculation cost: Jev $5.23 for all 1.30M judgments (~$4 per 1M);
+Qwen3.5-9B on local vLLM 3.9 GPU-h (1.97 h on 2 A40s); Qwen3.8-27B on the
+local server 17.7 GPU-h (8.9 h on 2 A40s). Projection for 100 games x 15
+questions with Qwen3.8-27B on 4 GPUs: ~7–34 GPU-h (2–9 h) for play + entropy.
+15 questions: at the measured pace 47–54% of games would be narrowed to one
+pool candidate by question 14 — a ceiling; with guessers who do not see the
+pool, 22% were solved by turn 12 with 3–4 candidates left, so 50% at 15 is
+unlikely without showing the list, 20 questions or a 256 pool.
+
 ### Parameters/Configurations
 
 `experiments/2026-10-17-20q-clue-ablation/config.json`: 12 turns,
@@ -2692,4 +2704,4 @@ provider-default reasoning, max_tokens 16,000 (32,000 after the pilot, see Devia
 
 ### Artifacts
 
-- `experiments/2026-10-17-20q-clue-ablation/` — `PREREGISTRATION.md`, `README.md`, `config.json`, `common.py`, `run.py`, `analyze.py`, `results.json`, `figures/end_turn.svg`, `games_*.json`, `transcripts_*.jsonl`, `clues_*.md`, `inspect_logs_*/`, `run_log*.json`, `entropy_analysis.py`, `entropy_*.json`, `jev_scores.jsonl` (LFS), `figures/entropy_by_turn.svg`, `entropy_clues_*.json`, `entropy_clues_summary.json`, `score_vllm.py`, `compare_oracles.py`, `qwen_vllm_scores.jsonl` (LFS), `entropy_qwen_*.json`, `compare_oracles.json`, `score_server.py`, `run_qwen38_scoring.sh`, `qwen38_scores.jsonl` (LFS), `entropy_qwen38_*.json`, `compare_oracles_qwen38.json`
+- `experiments/2026-10-17-20q-clue-ablation/` — `PREREGISTRATION.md`, `README.md`, `config.json`, `common.py`, `run.py`, `analyze.py`, `results.json`, `figures/end_turn.svg`, `games_*.json`, `transcripts_*.jsonl`, `clues_*.md`, `inspect_logs_*/`, `run_log*.json`, `entropy_analysis.py`, `entropy_*.json`, `jev_scores.jsonl` (LFS), `figures/entropy_by_turn.svg`, `entropy_clues_*.json`, `entropy_clues_summary.json`, `score_vllm.py`, `compare_oracles.py`, `qwen_vllm_scores.jsonl` (LFS), `entropy_qwen_*.json`, `compare_oracles.json`, `score_server.py`, `run_qwen38_scoring.sh`, `qwen38_scores.jsonl` (LFS), `entropy_qwen38_*.json`, `compare_oracles_qwen38.json`, `entropy_figures.py`, `figures/entropy_remaining_by_question.svg`, `figures/bits_question_vs_clue.svg`
