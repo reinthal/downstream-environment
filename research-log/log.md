@@ -2702,6 +2702,18 @@ GPU-h for play + entropy (~1.3–1.5x the 15-question estimate; Jev entropy
 ~40–45% at 20 questions and ~28–32% at 15; showing Player 2 the concept list
 or a 256 pool should take 20 questions past 50%.
 
+Conclusion (researcher, 2026-10-19; post-hoc): "conclusions: 9b too dumb for judging given that the estimated info gain is lower clue than for y/n question. THis likely means 9b too incapable of correctly running experiments in this environment as well. 27b at least. Clues help: Games end faster than without clues. This experiment was conclusive all models end games faster with clues. and the number of samples that were before 4 turns happened to large models as well as smaller models at cut point <=122b. 4 sample for large and 5 samples.  qwen3.5-27b was the only model who had a median for with clues around 4 turns. 1 model smaller and 4 models larger higher medians. Judge model between jev and qwen3.8-27b showed similar qualitative results for uncertainty estimation abliet with different numbers. median pace for jev was 0.73 bits / question and 0.64 bits per question for qwen3.8-27b. One thing that is left to decide - is the number of bits per question predictive of how fast the games conclude? there is no graph on this.  Would need to make a call on if this metric is useful. Also, another uncertainty is how probes can be applied to this environment. What follow-up questions can be asked when models are strategically misleading auditors in their clues? Would have to conceptualize this more. Another thing I would need to understand if entropy is a sane metric, do yes answers show a larger entropy reduction than no question? I predict that they do. My guess is that they have between 1.5 to 2.0 times more entropy reduced than no questions. Finally, I am unsure why entropy would go up"
+
+Follow-ups measured (Claude; no-clue games, Jev / Qwen3.8-27B): a yes
+removes 2.7x / 3.1x the hard bits of a no (4–7x soft; predicted 1.5–2.0x);
+soft entropy rose on 17% / 3% of steps, all but one after a "no" (a "no"
+that removes the posterior's favourites flattens it), the hard count never;
+bits/question is weakly predictive of game length (Spearman −0.22 / −0.30,
+solved games ~2x the bits/question of unsolved). New figures:
+`figures/entropy_no_clues_hard_soft.svg` (hard + soft, n per point),
+`figures/bits_vs_game_length.svg`. The README documents both entropy
+calculations (MathJax) with a worked example.
+
 ### Parameters/Configurations
 
 `experiments/2026-10-17-20q-clue-ablation/config.json`: 12 turns,

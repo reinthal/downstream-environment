@@ -125,6 +125,74 @@ def fig_bits(plt):
     fig.savefig(OUT / "figures" / "bits_question_vs_clue.svg")
 
 
+def fig_no_clue_hard_soft(cfg, plt):
+    """No-clue games, Jev, all 1,796 THINGS: hard (log2 consistent count) and
+    soft (posterior entropy) per question; per-model mean where >= 3 games
+    run, pooled mean (bold) with its n per point."""
+    fig, axes = plt.subplots(1, 2, figsize=(11.5, 4.6), sharex=True, sharey=True)
+    data = {m: json.loads((OUT / f"entropy_{cell(m, 'no_clues', False)}.json").read_text())["games"] for m in cfg.models}
+    h0 = math.log2(1796)
+    for ax, (title, key) in zip(axes, (("hard entropy: log2 |consistent concepts|", "hard"), ("soft entropy: H(posterior)", "soft"))):
+        val = (lambda st: math.log2(max(st["n_consistent"], 1))) if key == "hard" else (lambda st: st["H"])
+        pooled = {}
+        for i, m in enumerate(cfg.models):
+            curves = [[val(st) for st in g["steps"]] for g in data[m]]
+            for c in curves:
+                for k, v in enumerate(c):
+                    pooled.setdefault(k, []).append(v)
+            ks = [k for k in range(13) if sum(len(c) > k for c in curves) >= 3]
+            ax.plot(ks, [statistics.mean(c[k] for c in curves if len(c) > k) for k in ks], color=SERIES[i], lw=1.4,
+                    alpha=0.85, label=LABELS[slug(m)])
+        ks = [k for k in sorted(pooled) if len(pooled[k]) >= 5]
+        ys = [statistics.mean(pooled[k]) for k in ks]
+        ax.plot(ks, ys, color=INK, lw=2.6, label="pooled mean", zorder=5)
+        for k, y in zip(ks, ys):
+            ax.annotate(f"{len(pooled[k])}", (k, h0 + 0.35), ha="center", fontsize=7, color=MUTED)
+        ax.text(0, h0 + 0.75, "n games per point (pooled):", fontsize=7, color=MUTED)
+        ax.set_title(title, fontsize=10, color=INK, loc="left")
+        ax.set_xlabel("questions asked", fontsize=9, color=INK)
+        style(ax)
+    axes[0].set_ylabel("bits over all 1,796 THINGS (scored by Jev)", fontsize=9, color=INK)
+    axes[0].set_ylim(0, h0 + 1.1)
+    axes[0].set_xlim(-0.3, 12)
+    axes[1].legend(fontsize=7, frameon=False, loc="lower left")
+    fig.suptitle("No-clue games: entropy after k questions (per-model lines where >= 3 games, pooled where >= 5)",
+                 fontsize=11, color=INK, x=0.01, ha="left")
+    fig.tight_layout()
+    fig.savefig(OUT / "figures" / "entropy_no_clues_hard_soft.svg")
+
+
+def fig_bits_vs_length(cfg, plt):
+    """No-clue games: per-game mean soft bits per question vs the turn the
+    game ended (unsolved = hollow, at the 12-turn cap), one panel per scorer."""
+    fig, axes = plt.subplots(1, 2, figsize=(10, 4.2), sharex=True, sharey=True)
+    for ax, (name, prefix) in zip(axes, (("Jev", "entropy_"), ("Qwen3.8-27B", "entropy_qwen38_"))):
+        for i, m in enumerate(cfg.models):
+            games = {g["game_id"]: g for g in json.loads((OUT / f"games_{cell(m, 'no_clues', False)}.json").read_text())["games"]}
+            for g in json.loads((OUT / f"{prefix}{cell(m, 'no_clues', False)}.json").read_text())["games"]:
+                bits = [s["bits"] for s in g["steps"][1:] if s.get("kind") in (None, "question")]
+                if not bits:
+                    continue
+                gm = games[g["game_id"]]
+                solved = gm["winner"] == "auditor"
+                ax.plot(statistics.mean(bits), gm["end_turn"] if solved else cfg.max_questions, "o", ms=7,
+                        mfc=SERIES[i] if solved else "none", mec=SERIES[i], mew=1.6,
+                        )
+        ax.set_title(f"scored by {name}", fontsize=10, color=INK, loc="left")
+        ax.set_xlabel("mean soft bits per question (game)", fontsize=9, color=INK)
+        style(ax)
+    for i, m in enumerate(cfg.models):
+        axes[1].plot([], [], "o", ms=7, color=SERIES[i], label=LABELS[slug(m)])
+    axes[1].plot([], [], "o", ms=7, mfc="none", mec=MUTED, label="unsolved (shown at 12)")
+    axes[1].legend(fontsize=7, frameon=False, loc="lower right")
+    axes[0].set_ylabel("turn the game ended", fontsize=9, color=INK)
+    axes[0].set_ylim(0, 13)
+    axes[0].set_xlim(0, 2.2)
+    fig.suptitle("No-clue games: does information per question predict game length?", fontsize=11, color=INK, x=0.01, ha="left")
+    fig.tight_layout()
+    fig.savefig(OUT / "figures" / "bits_vs_game_length.svg")
+
+
 def main():
     import matplotlib
     matplotlib.use("Agg")
@@ -133,7 +201,10 @@ def main():
     cfg = AblationConfig.load()
     fig_remaining(cfg, plt)
     fig_bits(plt)
-    print("wrote figures/entropy_remaining_by_question.svg, figures/bits_question_vs_clue.svg")
+    fig_no_clue_hard_soft(cfg, plt)
+    fig_bits_vs_length(cfg, plt)
+    print("wrote figures/entropy_remaining_by_question.svg, bits_question_vs_clue.svg, "
+          "entropy_no_clues_hard_soft.svg, bits_vs_game_length.svg")
 
 
 if __name__ == "__main__":

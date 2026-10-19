@@ -418,3 +418,119 @@ implied. At that rate: **20 questions ≈ 40–45% solved, 15 questions ≈
 28–32%** (59 games, 6 models — rough). Raising the conversion — showing
 Player 2 the 512-concept list (`auditor.show_concepts: true`) or the
 256-concept pool — should take 20 questions past 50% at no extra compute.
+
+## Conclusion (researcher, 2026-10-19; post-hoc)
+
+"conclusions: 9b too dumb for judging given that the estimated info gain is lower clue than for y/n question. THis likely means 9b too incapable of correctly running experiments in this environment as well. 27b at least. Clues help: Games end faster than without clues. This experiment was conclusive all models end games faster with clues. and the number of samples that were before 4 turns happened to large models as well as smaller models at cut point <=122b. 4 sample for large and 5 samples.  qwen3.5-27b was the only model who had a median for with clues around 4 turns. 1 model smaller and 4 models larger higher medians. Judge model between jev and qwen3.8-27b showed similar qualitative results for uncertainty estimation abliet with different numbers. median pace for jev was 0.73 bits / question and 0.64 bits per question for qwen3.8-27b. One thing that is left to decide - is the number of bits per question predictive of how fast the games conclude? there is no graph on this.  Would need to make a call on if this metric is useful. Also, another uncertainty is how probes can be applied to this environment. What follow-up questions can be asked when models are strategically misleading auditors in their clues? Would have to conceptualize this more. Another thing I would need to understand if entropy is a sane metric, do yes answers show a larger entropy reduction than no question? I predict that they do. My guess is that they have between 1.5 to 2.0 times more entropy reduced than no questions. Finally, I am unsure why entropy would go up"
+
+### Answers to the open questions above (Claude, measured)
+
+All on the 59 no-clue games that asked at least one question (606 question
+turns: 238 answered yes, 368 no), with the two scorers that judge reliably.
+
+| | Jev | Qwen3.8-27B |
+|---|---|---|
+| **yes vs no, hard bits** (mean) | 1.12 vs 0.41 → **2.7x** | 1.14 vs 0.37 → **3.1x** |
+| **yes vs no, soft bits** (mean) | 0.81 vs 0.11 → **7.2x** | 1.05 vs 0.26 → **4.1x** |
+| **soft entropy went up on a step** | 100 / 606 (17%), mean rise 0.08 bits; 99 after a "no" | 19 / 606 (3%), mean rise 0.01 bits; all after a "no" |
+| **hard entropy went up on a step** | 0 | 0 |
+| **bits/question vs game length** (Spearman, per game) | −0.22; solved 0.70 vs unsolved 0.34 bits/question | −0.30; solved 0.95 vs unsolved 0.52 |
+
+- *Yes vs no* (prediction: 1.5–2.0x more for yes): a yes removes more, as
+  predicted, but by more than predicted — ~3x by hard count, 4–7x by soft
+  entropy. A yes keeps the concepts the answer fits, usually the smaller side
+  of the split (questions are asked about properties most concepts lack).
+- *Why entropy goes up*: only the soft entropy does, and only after "no"
+  answers. A Bayesian update lowers the entropy in expectation, not for every
+  outcome: a "no" can remove the concepts the posterior currently favours,
+  which flattens it (worked through under "How the entropy is calculated").
+  The hard count can only fall. In `figures/entropy_by_turn.svg` (earlier)
+  the per-turn means also rise because short games leave the average — the
+  new figure below shows n per point and uses the no-clue games only.
+- *Is bits/question predictive of game length?* Weakly
+  (`figures/bits_vs_game_length.svg`): solved games carry ~2x the bits per
+  question of unsolved ones, but several high-information games still end
+  unsolved at the cap and the rank correlation is only −0.22 / −0.30 on 59
+  games, most of them censored at 12.
+
+`figures/entropy_no_clues_hard_soft.svg` — no-clue games only (sufficient
+samples): hard and soft entropy over all 1,796 THINGS after k questions,
+scored by Jev; thin lines per model (≥ 3 games), bold pooled mean (≥ 5)
+with the number of games behind each point (59 at the start, 39 at
+question 11). It replaces `entropy_by_turn.svg`, which shows no n and mixes
+in the short clue games.
+
+## How the entropy is calculated
+
+**Setup.** $C$ is the concept set: all 1,796 THINGS (`entropy_*.json`,
+`entropy_no_clues_hard_soft.svg`) or the game's own 512-secret pool
+(`entropy_remaining_by_question.svg`). The prior is uniform,
+$\pi(c) = 1/|C|$, so the starting entropy is $H_0 = \log_2 |C|$
+($\log_2 1796 = 10.81$ bits; $\log_2 512 = 9$ bits). A game gives a sequence of
+observations: question $q_t$ with Player 1's answer $a_t \in \{\text{yes}, \text{no}\}$,
+and (with `include_clues`) clue $k_t$, treated as "yes, this clue holds".
+
+**The judgment** $p_t(c)$: the probability that the truthful answer to $q_t$
+is yes if the secret were $c$ (for a clue: that $k_t$ is correct for $c$).
+
+- Jev: the Noul's output, $p_t(c) = \text{noul}$.
+- LLMs (Qwen3.5-9B, Qwen3.8-27B): one prompt per $(q_t, c)$, one generated
+  token, from its top-20 logprobs $\ell$:
+$$
+p_t(c) = \frac{\sum_{y \in Y} e^{\ell_y}}{\sum_{y \in Y} e^{\ell_y} + \sum_{n \in N} e^{\ell_n}},\qquad
+Y = \{\text{yes}, \text{Yes}, \text{␣yes}, \text{␣Yes}, \text{YES}\},\; N = \{\text{no}, \ldots\}.
+$$
+
+**Likelihood of the observed answer:**
+$$
+L_t(c) = \begin{cases} p_t(c) & a_t = \text{yes (or a clue)} \\ 1 - p_t(c) & a_t = \text{no} \end{cases}
+$$
+
+**Soft entropy** — the full Bayesian posterior, every concept kept with weight:
+$$
+P_t(c) = \frac{\pi(c) \prod_{s \le t} L_s(c)}{\sum_{c'} \pi(c') \prod_{s \le t} L_s(c')},\qquad
+H^{\text{soft}}_t = -\sum_{c \in C} P_t(c) \log_2 P_t(c),\qquad
+\text{bits}^{\text{soft}}_t = H^{\text{soft}}_{t-1} - H^{\text{soft}}_t .
+$$
+
+**Hard entropy** — each judgment rounded to a yes/no call, concepts that
+disagree with any answer removed:
+$$
+S_0 = C,\qquad S_t = \{\, c \in S_{t-1} : [\,p_t(c) > \tfrac12\,] = [\,a_t = \text{yes}\,] \,\},\qquad
+H^{\text{hard}}_t = \log_2 |S_t|,\qquad
+\text{bits}^{\text{hard}}_t = \log_2 \frac{|S_{t-1}|}{|S_t|}.
+$$
+$|S_t|$ can only shrink, so $\text{bits}^{\text{hard}}_t \ge 0$; it also drops
+the true secret whenever the scorer disagrees with Player 1's answer (Jev
+6%, Qwen3.8-27B 6%, Qwen3.5-9B 8% of turns).
+
+**Why the soft entropy can rise.** The expected change is a decrease (the
+mutual information between answer and secret is $\ge 0$), but a single
+answer can raise it. Example with two concepts: a posterior $(0.9, 0.1)$ has
+$H = 0.47$ bits; a "no" with $p(\text{yes}) = (0.9, 0.1)$ gives likelihoods
+$(0.1, 0.9)$ and posterior $(0.5, 0.5)$, $H = 1$ bit — the answer contradicted
+the favourite. In these games it happens after "no" answers (17% of steps
+under Jev, 3% under Qwen3.8-27B) and by small amounts.
+
+**Worked example** (Jev, all 1,796 THINGS; GLM-5.3, no clues, `game_0`,
+secret *slide*):
+
+| $t$ | question | $a_t$ | concepts with $p_t > \tfrac12$ | $\lvert S_t \rvert$ | $H^{\text{hard}}_t$ | hard bits | $H^{\text{soft}}_t$ | soft bits |
+|---|---|---|---|---|---|---|---|---|
+| 0 | (prior) | | | 1,796 | 10.811 | | 10.811 | |
+| 1 | Is the secret a physical object (something you can touch)? | yes | 1,775 | 1,775 | 10.794 | 0.017 | 10.802 | 0.009 |
+| 2 | Is it a man-made object (an artifact)? | yes | 1,297 | 1,292 | 10.335 | 0.459 | 10.470 | 0.332 |
+| 3 | Is it small enough to be held in your hands …? | no | 1,167 | 481 | 8.910 | 1.425 | 9.922 | 0.549 |
+
+Hard, step 3: of the 1,292 concepts left, those Jev calls "held in your
+hands" (yes) are removed by the "no", leaving $|S_3| = 481$, so
+$\log_2 481 = 8.910$ bits and $\log_2(1292/481) = 1.425$ bits removed. Soft,
+step 3: each concept's weight is multiplied by $1 - p_3(c)$ instead of being
+zeroed, so concepts Jev was unsure about keep some weight, and the entropy
+falls less (0.549 bits). The secret *slide* keeps its place in both (its
+posterior rises from $0.0006$ to $0.0016$).
+
+**Bits per question in the tables** are means (and medians) of
+$\text{bits}_t$ over all question turns; "per clue" over clue observations;
+"median pace" in `entropy_remaining_by_question.svg` is the median over games
+of $(H_0 - H^{\text{hard}}_T)/T$ after the game's $T$ questions.
