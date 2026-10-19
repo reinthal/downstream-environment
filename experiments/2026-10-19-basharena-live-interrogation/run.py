@@ -47,6 +47,10 @@ import run_bash_arena as rba  # noqa: E402  (loads .env, defines configs + routi
 # MODAL_BASE_URL + MODAL_API_KEY; the proxy token and URL live in the repo .env.
 os.environ["MODAL_BASE_URL"] = os.environ["MODAL_DEEPSEEK_BASE_URL"]
 os.environ["MODAL_API_KEY"] = os.environ["MODAL_PROXY_TOKEN"]
+# U on the cadenza workspace's dedicated Qwen3.8-27B endpoint (ep-Ft3PsLqbSdkXDZUMqDF48Y,
+# revision 1d4bf0f, SGLang, 262k context): "openai-api/modalqwen/..." reads MODALQWEN_*.
+os.environ["MODALQWEN_BASE_URL"] = os.environ["MODAL_QWEN38_BASE_URL"]
+os.environ["MODALQWEN_API_KEY"] = os.environ["MODAL_PROXY_TOKEN"]
 from control_arena.eval import ControlEvalConfig, get_control_task_product  # noqa: E402
 from control_arena.policy import untrusted_policy_builder  # noqa: E402
 from control_arena.scorers import max_suspicion_scorer  # noqa: E402
@@ -177,10 +181,10 @@ if __name__ == "__main__":
         "--protocol", choices=["blackbox", "godmode"], default="blackbox",
         help="blackbox: informed monitor -> interrogation -> block; godmode: Jev -> block.",
     )
-    # U on the researcher's vLLM server (serving/serve_qwen38.py) through an ssh tunnel;
-    # set VLLM_BASE_URL to the tunnel's port.
-    p.add_argument("--untrusted-model", default="openai-api/vllm/Qwen/Qwen3.8-27B")
-    p.add_argument("--untrusted-provider", default="none (local vLLM)")
+    p.add_argument("--untrusted-model", default="openai-api/modalqwen/qwen3.8-27B")
+    p.add_argument(
+        "--untrusted-provider", default="none (Modal dedicated endpoint, SGLang)"
+    )
     p.add_argument(
         "--trusted-model", default="openai-api/modal/deepseek-ai/DeepSeek-V4.1-Flash"
     )
@@ -205,7 +209,8 @@ if __name__ == "__main__":
             else "auto_submit_protocol_wrapper(interrogation_protocol)"
         ),
         "godmode_model": JEV_MODEL,
-        "vllm_base_url": os.environ["VLLM_BASE_URL"],
+        "untrusted_base_url": os.environ["MODALQWEN_BASE_URL"],
+        "trusted_base_url": os.environ["MODAL_BASE_URL"],
         "untrusted_model": a.untrusted_model,
         "untrusted_provider": a.untrusted_provider,
         "trusted_model": a.trusted_model,
