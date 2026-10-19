@@ -162,13 +162,14 @@ def fig_no_clue_hard_soft(cfg, plt):
     fig.savefig(OUT / "figures" / "entropy_no_clues_hard_soft.svg")
 
 
-def per_game_bits(steps):
-    """(mean soft bits, mean hard bits) per question of one game's steps."""
-    pairs = [(p, q) for p, q in zip(steps, steps[1:]) if q.get("kind") in (None, "question")]
-    if not pairs:
+def per_turn_bits(steps, turns):
+    """(soft, hard) bits per turn of one game: everything observed (answers,
+    clues on answers, requested clues) divided by the turns the game used."""
+    obs = [(p, q) for p, q in zip(steps, steps[1:])]
+    if not obs or not turns:
         return None
-    soft = statistics.mean(q["bits"] for p, q in pairs)
-    hard = statistics.mean(math.log2(max(p["n_consistent"], 1) / max(q["n_consistent"], 1)) for p, q in pairs)
+    soft = sum(q["bits"] for p, q in obs) / turns
+    hard = sum(math.log2(max(p["n_consistent"], 1) / max(q["n_consistent"], 1)) for p, q in obs) / turns
     return soft, hard
 
 
@@ -180,44 +181,52 @@ def spearman(a, b):
 
 
 def fig_bits_vs_length(cfg, plt):
-    """No-clue games, Jev, all 1,796 THINGS: per-game mean soft and hard bits
-    per question vs the turn the game ended (unsolved = hollow, at the cap)."""
+    """All games, Jev, all 1,796 THINGS: per-game soft and hard bits per turn
+    (answers + clues; a no-clue game's turns are its questions) vs the turn the
+    game ended. Circles: no clues (Jev question-only scores); triangles: clue
+    games (Jev scores incl. clues). Unsolved = hollow, at the 12-turn cap."""
     rows = []
     for i, m in enumerate(cfg.models):
-        games = {g["game_id"]: g for g in json.loads((OUT / f"games_{cell(m, 'no_clues', False)}.json").read_text())["games"]}
-        for g in json.loads((OUT / f"entropy_{cell(m, 'no_clues', False)}.json").read_text())["games"]:
-            b = per_game_bits(g["steps"])
-            if b is None:
-                continue
-            gm = games[g["game_id"]]
-            solved = gm["winner"] == "auditor"
-            rows.append((i, solved, gm["end_turn"] if solved else cfg.max_questions, *b))
-    fig, axes = plt.subplots(1, 2, figsize=(10, 4.2), sharex=True, sharey=True)
-    stats = {}
-    for ax, (title, col) in zip(axes, (("soft bits per question", 3), ("hard bits per question", 4))):
-        for i, solved, turn, *b in rows:
-            x = b[col - 3]
-            ax.plot(x, turn, "o", ms=7, mfc=SERIES[i] if solved else "none", mec=SERIES[i], mew=1.6)
-        xs, ys = [r[col] for r in rows], [r[2] for r in rows]
-        rho = spearman(xs, ys)
-        stats[title] = (rho, statistics.mean(r[col] for r in rows if r[1]), statistics.mean(r[col] for r in rows if not r[1]))
-        ax.set_title(f"{title}  (Spearman {rho:.2f}, n = {len(rows)})", fontsize=10, color=INK, loc="left")
+        for arm, prefix in (("no_clues", "entropy_"), ("clues", "entropy_clues_")):
+            games = {g["game_id"]: g for g in json.loads((OUT / f"games_{cell(m, arm, False)}.json").read_text())["games"]}
+            for g in json.loads((OUT / f"{prefix}{cell(m, arm, False)}.json").read_text())["games"]:
+                gm = games[g["game_id"]]
+                solved = gm["winner"] == "auditor"
+                b = per_turn_bits(g["steps"], gm["end_turn"] - (1 if gm["exchanges"][-1]["kind"] == "final_answer" else 0))
+                if b is None:
+                    continue
+                rows.append((i, arm, solved, gm["end_turn"] if solved else cfg.max_questions, *b))
+    fig, axes = plt.subplots(1, 2, figsize=(10.5, 4.9), sharex=True, sharey=True)
+    report = {}
+    for ax, (title, col) in zip(axes, (("soft bits per turn", 4), ("hard bits per turn", 5))):
+        for i, arm, solved, turn, *b in rows:
+            ax.plot(b[col - 4], turn, "o" if arm == "no_clues" else "^", ms=7,
+                    mfc=SERIES[i] if solved else "none", mec=SERIES[i], mew=1.6)
+        rho = {a: spearman([r[col] for r in rows if a in (None, r[1])], [r[3] for r in rows if a in (None, r[1])])
+               for a in (None, "no_clues", "clues")}
+        report[title] = rho
+        ax.set_title(f"{title}  (Spearman {rho[None]:.2f}, n = {len(rows)})", fontsize=10, color=INK, loc="left")
         ax.set_xlabel(f"mean {title} (game)", fontsize=9, color=INK)
         style(ax)
     for i, m in enumerate(cfg.models):
-        axes[1].plot([], [], "o", ms=7, color=SERIES[i], label=LABELS[slug(m)])
-    axes[1].plot([], [], "o", ms=7, mfc="none", mec=MUTED, label="unsolved (shown at 12)")
-    axes[1].legend(fontsize=7, frameon=False, loc="lower right")
+        axes[0].plot([], [], "s", ms=7, color=SERIES[i], label=LABELS[slug(m)])
+    axes[0].plot([], [], "o", ms=7, mfc=MUTED, mec=MUTED, label="no clues")
+    axes[0].plot([], [], "^", ms=7, mfc=MUTED, mec=MUTED, label="clues")
+    axes[0].plot([], [], "o", ms=7, mfc="none", mec=MUTED, label="unsolved (shown at 12)")
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.legend(handles, labels, fontsize=7.5, frameon=False, loc="lower center", ncol=5, bbox_to_anchor=(0.5, 0.0))
     axes[0].set_ylabel("turn the game ended", fontsize=9, color=INK)
     axes[0].set_ylim(0, 13)
-    axes[0].set_xlim(0, 2.6)
-    fig.suptitle("No-clue games: information per question vs game length (scored by Jev, all 1,796 THINGS)",
+    axes[0].set_xlim(0, max(max(r[4], r[5]) for r in rows) * 1.05)
+    fig.suptitle("Information per turn vs game length, 119 games with a question (scored by Jev, all 1,796 THINGS)",
                  fontsize=11, color=INK, x=0.01, ha="left")
-    fig.tight_layout()
+    fig.tight_layout(rect=(0, 0.1, 1, 1))
     fig.savefig(OUT / "figures" / "bits_vs_game_length.svg")
-    for k, (rho, a, b) in stats.items():
-        print(f"  {k}: Spearman {rho:.2f}; solved {a:.2f} vs unsolved {b:.2f}")
-    print(f"  max hard bits/question: {max(r[4] for r in rows):.2f}")
+    for k, rho in report.items():
+        print(f"  {k}: Spearman pooled {rho[None]:.2f}, no clues {rho['no_clues']:.2f}, clues {rho['clues']:.2f}")
+    for arm in ("no_clues", "clues"):
+        sv = [r for r in rows if r[1] == arm]
+        print(f"  {arm}: n {len(sv)}, solved {sum(r[2] for r in sv)}, mean soft/turn {statistics.mean(r[4] for r in sv):.2f}, hard/turn {statistics.mean(r[5] for r in sv):.2f}")
 
 
 def main():
