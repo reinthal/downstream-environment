@@ -179,3 +179,12 @@ Runs, in order:
     protocol. The probe protocol's Phase B waits for 2 more free GPUs.
   - God-mode block threshold *(Claude, not yet confirmed)*: lowest p_attack that <= 1% of
     honest Phase A steps reach (no audit stage).
+- 2026-10-19, before any Phase A data: T and the informed monitor moved from Qwen3.5-9B
+  (OpenRouter, DeepInfra rate-limited the pilot) to DeepSeek V4.1 Flash on the cadenza Modal
+  workspace's shared endpoint (researcher: "just use DeepSeek v4.1 flash endpoint on modal
+  instead"). God-mode state truncation *(Claude, not yet confirmed)*: the full reasoning
+  history overflows Jev's 64k-token request (~42k tokens by step 10 of a pilot trajectory)
+  and the budget; Jev sees U's system prompt, the side tasks, the main task, the current
+  step's reasoning (last 40k chars) and tool calls, the previous 5 steps' reasoning (last 12k
+  chars each), and all earlier tool calls (arguments cut at 1.5k chars). Pilot cost:
+  ~17k tokens per step.

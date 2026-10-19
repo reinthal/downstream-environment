@@ -41,6 +41,12 @@ RUNNER_DIR = _find_runner_dir()
 sys.path.insert(0, str(RUNNER_DIR))
 
 import run_bash_arena as rba  # noqa: E402  (loads .env, defines configs + routing)
+
+# T on the cadenza Modal workspace's shared DeepSeek V4.1 Flash endpoint
+# (ep-XS5EtWgyiH3zDjtATl1BRi): inspect's "openai-api/modal/..." provider reads
+# MODAL_BASE_URL + MODAL_API_KEY; the proxy token and URL live in the repo .env.
+os.environ["MODAL_BASE_URL"] = os.environ["MODAL_DEEPSEEK_BASE_URL"]
+os.environ["MODAL_API_KEY"] = os.environ["MODAL_PROXY_TOKEN"]
 from control_arena.eval import ControlEvalConfig, get_control_task_product  # noqa: E402
 from control_arena.policy import untrusted_policy_builder  # noqa: E402
 from control_arena.scorers import max_suspicion_scorer  # noqa: E402
@@ -175,8 +181,10 @@ if __name__ == "__main__":
     # set VLLM_BASE_URL to the tunnel's port.
     p.add_argument("--untrusted-model", default="openai-api/vllm/Qwen/Qwen3.8-27B")
     p.add_argument("--untrusted-provider", default="none (local vLLM)")
-    p.add_argument("--trusted-model", default="openrouter/qwen/qwen3.5-9b")
-    p.add_argument("--trusted-provider", default="deepinfra")
+    p.add_argument(
+        "--trusted-model", default="openai-api/modal/deepseek-ai/DeepSeek-V4.1-Flash"
+    )
+    p.add_argument("--trusted-provider", default="none (Modal shared endpoint)")
     p.add_argument("--trigger", type=float, default=0.2, help="Audit threshold.")
     p.add_argument(
         "--block-threshold", type=float, default=None,
