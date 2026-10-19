@@ -2672,6 +2672,17 @@ correct for 36% of concepts vs Jev's 10%): under Qwen a clue is worth 0.53
 soft bits vs 1.11 per question, the reverse of Jev — the clue-beats-question
 result is scorer-dependent.
 
+Third scorer (exploratory, researcher-requested): Qwen3.8-27B via the repo's
+vLLM server under gpu-lock (GPUs 4–5, overnight; one restart after a
+keep-alive ReadError, then 22 recovered connection retries). It agrees with
+Jev on questions (r 0.95, 96.7%) and on clues (r 0.84, 94.1%; accepts a clue
+for 13.5% of concepts vs Jev 10%, 9B 36%). With the two clue-reliable
+scorers a clue removes 2–3x a question's hard bits (27B 2.14 vs 0.92, Jev
+2.58 vs 0.73; 6/6 models) and more median soft bits (0.73 vs 0.43, 1.03 vs
+0.48); by mean soft bits the 27B puts them level (1.10 vs 1.28), a few
+direct-guess questions carrying the mean. The 9B reversal is its clue
+yes-bias.
+
 ### Parameters/Configurations
 
 `experiments/2026-10-17-20q-clue-ablation/config.json`: 12 turns,
@@ -2681,4 +2692,4 @@ provider-default reasoning, max_tokens 16,000 (32,000 after the pilot, see Devia
 
 ### Artifacts
 
-- `experiments/2026-10-17-20q-clue-ablation/` — `PREREGISTRATION.md`, `README.md`, `config.json`, `common.py`, `run.py`, `analyze.py`, `results.json`, `figures/end_turn.svg`, `games_*.json`, `transcripts_*.jsonl`, `clues_*.md`, `inspect_logs_*/`, `run_log*.json`, `entropy_analysis.py`, `entropy_*.json`, `jev_scores.jsonl` (LFS), `figures/entropy_by_turn.svg`, `entropy_clues_*.json`, `entropy_clues_summary.json`, `score_vllm.py`, `compare_oracles.py`, `qwen_vllm_scores.jsonl` (LFS), `entropy_qwen_*.json`, `compare_oracles.json`
+- `experiments/2026-10-17-20q-clue-ablation/` — `PREREGISTRATION.md`, `README.md`, `config.json`, `common.py`, `run.py`, `analyze.py`, `results.json`, `figures/end_turn.svg`, `games_*.json`, `transcripts_*.jsonl`, `clues_*.md`, `inspect_logs_*/`, `run_log*.json`, `entropy_analysis.py`, `entropy_*.json`, `jev_scores.jsonl` (LFS), `figures/entropy_by_turn.svg`, `entropy_clues_*.json`, `entropy_clues_summary.json`, `score_vllm.py`, `compare_oracles.py`, `qwen_vllm_scores.jsonl` (LFS), `entropy_qwen_*.json`, `compare_oracles.json`, `score_server.py`, `run_qwen38_scoring.sh`, `qwen38_scores.jsonl` (LFS), `entropy_qwen38_*.json`, `compare_oracles_qwen38.json`

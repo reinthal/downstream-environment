@@ -22,9 +22,10 @@ from common import ENV, OUT, REPO, AblationConfig, cell, slug
 from twenty_questions.concepts import ConceptSet
 from twenty_questions.entropy import EntropyConfig, analyse, game_observations
 
-QWEN_CACHE = OUT / "qwen_vllm_scores.jsonl"
 JEV_CACHE = OUT / "jev_scores.jsonl"
-QWEN = dict(backend="precomputed", model="Qwen/Qwen3.5-9B", include_clues=True)
+# scorer -> (score file, model id); output files carry the tag
+SCORERS = {"qwen": ("qwen_vllm_scores.jsonl", "Qwen/Qwen3.5-9B"),       # 2026-10-18, score_vllm.py
+           "qwen38": ("qwen38_scores.jsonl", "Qwen/Qwen3.8-27B")}     # 2026-10-19, score_server.py
 
 
 def cell_games(model, arm):
@@ -54,6 +55,13 @@ def jev_p(concepts):
 
 
 def main():
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--scorer", choices=sorted(SCORERS), default="qwen")
+    tag = ap.parse_args().scorer
+    score_file, model = SCORERS[tag]
+    QWEN_CACHE = OUT / score_file
+    QWEN = dict(backend="precomputed", model=model, include_clues=True)
     cfg = AblationConfig.load()
     base = EntropyConfig.from_yaml(ENV / "configs" / "entropy.yaml")
     qcfg = dataclasses.replace(base, **QWEN)
@@ -96,7 +104,7 @@ def main():
         for a in cfg.arms:
             games = cell_games(m, a)
             rq = asyncio.run(analyse(qcfg, games, QWEN_CACHE))
-            (OUT / f"entropy_qwen_{cell(m, a, False)}.json").write_text(json.dumps(rq, indent=1) + "\n")
+            (OUT / f"entropy_{tag}_{cell(m, a, False)}.json").write_text(json.dumps(rq, indent=1) + "\n")
             rj = asyncio.run(analyse(jcfg, games, JEV_CACHE))
             bq, bj = bits_by_kind(rq, games), bits_by_kind(rj, games)
             mean = lambda xs: statistics.mean(xs) if xs else None
@@ -114,14 +122,15 @@ def main():
                 vals = []
                 for m in cfg.models:
                     games = cell_games(m, a)
-                    path = OUT / (f"entropy_qwen_{cell(m, a, False)}.json")
+                    path = OUT / (f"entropy_{tag}_{cell(m, a, False)}.json")
                     res = json.loads(path.read_text()) if scorer == "qwen" else asyncio.run(analyse(jcfg, games, JEV_CACHE))
                     vals += bits_by_kind(res, games)[k]
                 pooled[f"{scorer}_{a}_{k}"] = {"n": len(vals), "mean": statistics.mean(vals) if vals else None,
                                                "median": statistics.median(vals) if vals else None}
     result = {"qwen_config": dataclasses.asdict(qcfg), "agreement": agree, "contradicts_suspect": contra,
               "cells": cells, "pooled": pooled}
-    (OUT / "compare_oracles.json").write_text(json.dumps(result, indent=1) + "\n")
+    out_name = "compare_oracles.json" if tag == "qwen" else f"compare_oracles_{tag}.json"
+    (OUT / out_name).write_text(json.dumps(result, indent=1) + "\n")
     print(json.dumps(agree, indent=1))
     print(f"contradicts the suspect's answer for the true secret: Qwen {contra['qwen']}/{contra['n']}, "
           f"Jev {contra['jev']}/{contra['n']}")

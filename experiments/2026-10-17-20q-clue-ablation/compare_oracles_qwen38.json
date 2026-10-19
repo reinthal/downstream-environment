@@ -1,0 +1,337 @@
+{
+ "qwen_config": {
+  "backend": "precomputed",
+  "model": "Qwen/Qwen3.8-27B",
+  "concept_set": "concepts/things_all.json",
+  "prior": "uniform",
+  "noul_instructions": "In a game of Twenty Questions the secret is \"{concept}\" ({definition}). Is the truthful answer to `question` yes?",
+  "noul_criteria": {
+   "true": "For this secret, someone who knows it would truthfully answer the question yes.",
+   "false": "For this secret, someone who knows it would truthfully answer the question no."
+  },
+  "include_clues": true,
+  "clue_noul_instructions": "In a game of Twenty Questions the secret is \"{concept}\" ({definition}). Is `clue` a correct statement about the secret?",
+  "clue_noul_criteria": {
+   "true": "Everything the clue says holds for this secret.",
+   "false": "At least part of the clue does not hold for this secret."
+  },
+  "concepts_per_request": 300,
+  "concurrency": 8,
+  "openrouter_provider": null,
+  "llm_question_prompt": "In a game of Twenty Questions the secret is \"{concept}\" ({definition}).\nQuestion: {text}\nAnswer with exactly one word: yes or no.",
+  "llm_clue_prompt": "In a game of Twenty Questions the secret is \"{concept}\" ({definition}).\nClue: {text}\nIs the clue correct for the secret? Answer with exactly one word: yes or no.",
+  "top_logprobs": 20,
+  "yes_tokens": [
+   "yes",
+   "Yes",
+   " yes",
+   " Yes",
+   "YES"
+  ],
+  "no_tokens": [
+   "no",
+   "No",
+   " no",
+   " No",
+   "NO"
+  ],
+  "max_retries": 6
+ },
+ "agreement": {
+  "question": {
+   "n_pairs": 953676,
+   "pearson_r": 0.947655000075378,
+   "hard_call_agreement": 0.9672949722966709,
+   "mean_p_yes_qwen": 0.18994810594539413,
+   "mean_p_yes_jev": 0.2359738737265067
+  },
+  "clue": {
+   "n_pairs": 350220,
+   "pearson_r": 0.8408969757776703,
+   "hard_call_agreement": 0.9413368739649364,
+   "mean_p_yes_qwen": 0.13506439163914086,
+   "mean_p_yes_jev": 0.10271760607618069
+  }
+ },
+ "contradicts_suspect": {
+  "qwen": 50,
+  "jev": 49,
+  "n": 886
+ },
+ "cells": [
+  {
+   "model": "openrouter/qwen/qwen3.5-9b",
+   "arm": "clues",
+   "qwen_question": 0.915046284908828,
+   "qwen_clue": 1.0610925381145133,
+   "qwen_question_hard": 0.6354865709212031,
+   "qwen_clue_hard": 2.6525086745613953,
+   "jev_question": 0.923123686258195,
+   "jev_clue": 1.0198278612097114,
+   "jev_question_hard": 0.5218254019843515,
+   "jev_clue_hard": 2.778332472720983,
+   "qwen_final_H": 0.6407590088312224,
+   "jev_final_H": 0.8092063740290047,
+   "qwen_secret_consistent": 4,
+   "jev_secret_consistent": 3
+  },
+  {
+   "model": "openrouter/qwen/qwen3.5-9b",
+   "arm": "no_clues",
+   "qwen_question": 0.42260798156781976,
+   "qwen_clue": null,
+   "qwen_question_hard": 0.5362309729233863,
+   "qwen_clue_hard": null,
+   "jev_question": 0.24796370814347524,
+   "jev_clue": null,
+   "jev_question_hard": 0.5977006262536338,
+   "jev_clue_hard": null,
+   "qwen_final_H": 6.246405433808693,
+   "jev_final_H": 8.132563586791614,
+   "qwen_secret_consistent": 5,
+   "jev_secret_consistent": 3
+  },
+  {
+   "model": "openrouter/qwen/qwen3.5-27b",
+   "arm": "clues",
+   "qwen_question": 1.7131282843382418,
+   "qwen_clue": 1.6073486441133344,
+   "qwen_question_hard": 1.087302460756063,
+   "qwen_clue_hard": 2.7313529242076737,
+   "jev_question": 1.313247646122633,
+   "jev_clue": 1.6984570444948512,
+   "jev_question_hard": 0.9668430032264795,
+   "jev_clue_hard": 2.7748626665818645,
+   "qwen_final_H": 0.9569858936852967,
+   "jev_final_H": 2.1379079665242884,
+   "qwen_secret_consistent": 9,
+   "jev_secret_consistent": 9
+  },
+  {
+   "model": "openrouter/qwen/qwen3.5-27b",
+   "arm": "no_clues",
+   "qwen_question": 0.49607224856065824,
+   "qwen_clue": null,
+   "qwen_question_hard": 0.5614455256823845,
+   "qwen_clue_hard": null,
+   "jev_question": 0.3110675215275998,
+   "jev_clue": null,
+   "jev_question_hard": 0.5634716013783693,
+   "jev_clue_hard": null,
+   "qwen_final_H": 5.684491732947677,
+   "jev_final_H": 7.596207245622614,
+   "qwen_secret_consistent": 7,
+   "jev_secret_consistent": 8
+  },
+  {
+   "model": "openrouter/qwen/qwen3.5-122b-a10b",
+   "arm": "clues",
+   "qwen_question": 1.4652515582832575,
+   "qwen_clue": 1.290398241548436,
+   "qwen_question_hard": 0.9970609861598535,
+   "qwen_clue_hard": 2.529986156221961,
+   "jev_question": 1.166227723477459,
+   "jev_clue": 1.3144360553639451,
+   "jev_question_hard": 0.7508607832265572,
+   "jev_clue_hard": 3.1843750623374265,
+   "qwen_final_H": 0.9318455211344829,
+   "jev_final_H": 2.0857298023917292,
+   "qwen_secret_consistent": 7,
+   "jev_secret_consistent": 8
+  },
+  {
+   "model": "openrouter/qwen/qwen3.5-122b-a10b",
+   "arm": "no_clues",
+   "qwen_question": 0.6777759863838807,
+   "qwen_clue": null,
+   "qwen_question_hard": 0.7787557075048591,
+   "qwen_clue_hard": null,
+   "jev_question": 0.44485202074985736,
+   "jev_clue": null,
+   "jev_question_hard": 0.7193790187910983,
+   "jev_clue_hard": null,
+   "qwen_final_H": 4.2361445668175035,
+   "jev_final_H": 6.49550703346753,
+   "qwen_secret_consistent": 9,
+   "jev_secret_consistent": 8
+  },
+  {
+   "model": "openrouter/qwen/qwen3.5-397b-a17b",
+   "arm": "clues",
+   "qwen_question": 1.315455450338472,
+   "qwen_clue": 1.5141456808187936,
+   "qwen_question_hard": 0.9441129392420354,
+   "qwen_clue_hard": 2.3745567541692054,
+   "jev_question": 1.1079936389235645,
+   "jev_clue": 1.3696584314318017,
+   "jev_question_hard": 0.7240301590951679,
+   "jev_clue_hard": 3.017610220848032,
+   "qwen_final_H": 1.4804255182245472,
+   "jev_final_H": 2.706685793431847,
+   "qwen_secret_consistent": 8,
+   "jev_secret_consistent": 8
+  },
+  {
+   "model": "openrouter/qwen/qwen3.5-397b-a17b",
+   "arm": "no_clues",
+   "qwen_question": 0.6274373138050278,
+   "qwen_clue": null,
+   "qwen_question_hard": 0.7187488616218494,
+   "qwen_clue_hard": null,
+   "jev_question": 0.4836916633437232,
+   "jev_clue": null,
+   "jev_question_hard": 0.7451091557401285,
+   "jev_clue_hard": null,
+   "qwen_final_H": 4.285223571168857,
+   "jev_final_H": 5.780178335966425,
+   "qwen_secret_consistent": 5,
+   "jev_secret_consistent": 4
+  },
+  {
+   "model": "openrouter/z-ai/glm-5.3-flash",
+   "arm": "clues",
+   "qwen_question": 1.0497247494184891,
+   "qwen_clue": 0.6807455192371964,
+   "qwen_question_hard": 0.7325507994046327,
+   "qwen_clue_hard": 1.4243609213088386,
+   "jev_question": 0.6613800892258074,
+   "jev_clue": 0.8782306142788827,
+   "jev_question_hard": 0.6136348322212194,
+   "jev_clue_hard": 1.946691231610276,
+   "qwen_final_H": 1.6322255282489975,
+   "jev_final_H": 3.5561871542368526,
+   "qwen_secret_consistent": 8,
+   "jev_secret_consistent": 5
+  },
+  {
+   "model": "openrouter/z-ai/glm-5.3-flash",
+   "arm": "no_clues",
+   "qwen_question": 0.6413634331304651,
+   "qwen_clue": null,
+   "qwen_question_hard": 0.7984588681227339,
+   "qwen_clue_hard": null,
+   "jev_question": 0.4520556294383783,
+   "jev_clue": null,
+   "jev_question_hard": 0.8141283058704687,
+   "jev_clue_hard": null,
+   "qwen_final_H": 4.204528273497356,
+   "jev_final_H": 6.15439865152585,
+   "qwen_secret_consistent": 4,
+   "jev_secret_consistent": 5
+  },
+  {
+   "model": "openrouter/z-ai/glm-5.3",
+   "arm": "clues",
+   "qwen_question": 1.4850128448038022,
+   "qwen_clue": 0.7084207315708582,
+   "qwen_question_hard": 1.1693555447919288,
+   "qwen_clue_hard": 1.4210400378524335,
+   "jev_question": 1.0361177419886365,
+   "jev_clue": 0.9659032834371538,
+   "jev_question_hard": 0.8830069488632944,
+   "jev_clue_hard": 2.03588819030789,
+   "qwen_final_H": 1.570882061302738,
+   "jev_final_H": 2.7603588579070952,
+   "qwen_secret_consistent": 8,
+   "jev_secret_consistent": 6
+  },
+  {
+   "model": "openrouter/z-ai/glm-5.3",
+   "arm": "no_clues",
+   "qwen_question": 0.548152180687278,
+   "qwen_clue": null,
+   "qwen_question_hard": 0.6371672360580224,
+   "qwen_clue_hard": null,
+   "jev_question": 0.3758268775856269,
+   "jev_clue": null,
+   "jev_question_hard": 0.6524512472676924,
+   "jev_clue_hard": null,
+   "qwen_final_H": 5.274234609799638,
+   "jev_final_H": 7.0147201711263145,
+   "qwen_secret_consistent": 6,
+   "jev_secret_consistent": 6
+  }
+ ],
+ "pooled": {
+  "qwen_clues_question": {
+   "n": 280,
+   "mean": 1.2789056560491612,
+   "median": 0.4294483917105345
+  },
+  "qwen_clues_clue": {
+   "n": 197,
+   "mean": 1.099705499184271,
+   "median": 0.728110662692055
+  },
+  "qwen_clues_question_hard": {
+   "n": 251,
+   "mean": 0.9195480406416651,
+   "median": 0.38109016735550627
+  },
+  "qwen_clues_clue_hard": {
+   "n": 168,
+   "mean": 2.136369134655908,
+   "median": 1.4556820360939133
+  },
+  "qwen_no_clues_question": {
+   "n": 606,
+   "mean": 0.5679833932380826,
+   "median": 0.19312980746308916
+  },
+  "qwen_no_clues_clue": {
+   "n": 0,
+   "mean": null,
+   "median": null
+  },
+  "qwen_no_clues_question_hard": {
+   "n": 602,
+   "mean": 0.6722330177391046,
+   "median": 0.22239242133644802
+  },
+  "qwen_no_clues_clue_hard": {
+   "n": 0,
+   "mean": null,
+   "median": null
+  },
+  "jev_clues_question": {
+   "n": 280,
+   "mean": 0.9923582038904107,
+   "median": 0.4778340127473544
+  },
+  "jev_clues_clue": {
+   "n": 197,
+   "mean": 1.161230873916266,
+   "median": 1.0286680687406804
+  },
+  "jev_clues_question_hard": {
+   "n": 243,
+   "mean": 0.7319644585185331,
+   "median": 0.2937312030567103
+  },
+  "jev_clues_clue_hard": {
+   "n": 157,
+   "mean": 2.5842893104048796,
+   "median": 2.0238467419543675
+  },
+  "jev_no_clues_question": {
+   "n": 606,
+   "mean": 0.3856174644395161,
+   "median": 0.13619362728863393
+  },
+  "jev_no_clues_clue": {
+   "n": 0,
+   "mean": null,
+   "median": null
+  },
+  "jev_no_clues_question_hard": {
+   "n": 598,
+   "mean": 0.6823329486722532,
+   "median": 0.2630344058337938
+  },
+  "jev_no_clues_clue_hard": {
+   "n": 0,
+   "mean": null,
+   "median": null
+  }
+ }
+}

@@ -279,3 +279,53 @@ Bits per observation, pooled over models (soft mean / hard mean):
   (1.16 vs 0.99). The "a clue beats a question on average" conclusion is
   scorer-dependent; given Qwen's yes-bias on clues it is more likely a Qwen
   artefact than evidence against clues, but it is not robust on these data.
+
+### Follow-up: third scorer — Qwen3.8-27B (local vLLM server) (exploratory)
+
+Researcher-requested ("run 27b qwen3.8 also over night"). The same 1,303,896
+pairs, prompts and readout, scored by Qwen3.8-27B (revision 1d4bf0f2) through
+the repo's `serving/serve_qwen38.py` (1 replica x TP2, private port 8011) and
+`score_server.py`, inside one gpu-lock run on GPUs 4–5. The first attempt
+stopped after 40,036 pairs on an `httpx.ReadError` (keep-alive connection
+closed by the server; the server itself logged no error); `score_server.py`
+then got a bounded, logged retry for connection-level failures and the
+resumed run scored the remaining 1,263,860 pairs (22:16–06:48, ~41 pairs/s,
+22 connection retries, all recovered). Outputs: `qwen38_scores.jsonl` (LFS),
+`entropy_qwen38_<cell>.json`, `compare_oracles_qwen38.json`
+(`compare_oracles.py --scorer qwen38`).
+
+Agreement with Jev and p(yes):
+
+| | Qwen3.5-9B | Qwen3.8-27B | Jev |
+|---|---|---|---|
+| questions: r / same call | 0.94 / 94.8% | **0.95 / 96.7%** | — |
+| clues: r / same call | 0.64 / 69.1% | **0.84 / 94.1%** | — |
+| mean p(yes), questions | 0.237 | 0.190 | 0.236 |
+| mean p(yes), clues | 0.362 | **0.135** | 0.103 |
+| contradicts the suspect's answer (of 886) | 71 | 50 | 49 |
+
+Bits per observation, pooled, mean (median):
+
+| | Qwen3.5-9B | Qwen3.8-27B | Jev |
+|---|---|---|---|
+| question, no-clue games, soft | 0.49 (0.21) | 0.57 (0.19) | 0.39 (0.14) |
+| question, no-clue games, hard | 0.70 (0.29) | 0.67 (0.22) | 0.68 (0.26) |
+| question, clue games, soft | 1.11 (0.61) | 1.28 (0.43) | 0.99 (0.48) |
+| clue, soft | 0.53 (0.33) | 1.10 (0.73) | 1.16 (1.03) |
+| question, clue games, hard | 1.30 (0.48) | 0.92 (0.38) | 0.73 (0.29) |
+| clue, hard | 1.01 (0.50) | **2.14 (1.46)** | **2.58 (2.02)** |
+
+- The 27B does not have the 9B's yes-bias on clues: it accepts a clue for
+  13.5% of concepts (9B 36%, Jev 10%) and agrees with Jev on 94% of clue
+  judgments ("A certain kind of animal — the youngest kind.", secret puppy:
+  19 of 1,796 accepted vs Jev 9, 9B 757 of the first 898).
+- Questions agree across all three scorers; ~0.7 hard bits per no-clue
+  question holds for every scorer.
+- **Clue vs question, with the two scorers that judge clues reliably (Jev,
+  Qwen3.8-27B):** by hard count a clue removes ~2–3x a question's bits (27B
+  2.14 vs 0.92, Jev 2.58 vs 0.73; all 6 models under both), and by median
+  soft bits a clue beats a question (27B 0.73 vs 0.43, Jev 1.03 vs 0.48). By
+  *mean* soft bits the 27B puts them level-to-reversed (1.10 vs 1.28; clue
+  ahead for 2 of 6 models): a few direct-guess questions ("Is it a deer?" →
+  yes) carry most of the soft mass. The 9B's reversal on every measure
+  traces to its clue yes-bias.
