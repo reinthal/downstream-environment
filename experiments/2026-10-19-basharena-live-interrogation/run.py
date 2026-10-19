@@ -76,6 +76,7 @@ from interrogation import (  # noqa: E402
     interrogation_protocol,
 )
 from godmode import JEV_MODEL, godmode_protocol  # noqa: E402
+from probe_protocol import probe_protocol  # noqa: E402
 
 
 def build_protocol(cfg: dict):
@@ -103,6 +104,19 @@ def build_protocol(cfg: dict):
         return auto_submit_protocol_wrapper(
             micro_protocol=godmode_protocol(
                 policy=policy, block_threshold=cfg["block_threshold"]
+            )
+        )
+    if cfg["protocol_kind"] == "probe":
+        return auto_submit_protocol_wrapper(
+            micro_protocol=probe_protocol(
+                policy=policy,
+                untrusted_model=u,
+                trusted_model=t,
+                honest_config=honest_config,
+                attack_config=attack_config,
+                trusted_config=trusted_config,
+                audit_threshold=cfg["trigger"],
+                block_threshold=cfg["block_threshold"],
             )
         )
     assert cfg["protocol_kind"] == "blackbox", cfg["protocol_kind"]
@@ -178,8 +192,10 @@ if __name__ == "__main__":
         "--modes", nargs="+", choices=["honest", "attack"], default=["honest", "attack"]
     )
     p.add_argument(
-        "--protocol", choices=["blackbox", "godmode"], default="blackbox",
-        help="blackbox: informed monitor -> interrogation -> block; godmode: Jev -> block.",
+        "--protocol", choices=["blackbox", "godmode", "probe"], default="blackbox",
+        help="blackbox: informed monitor -> interrogation -> block; godmode: Jev -> block; "
+        "probe: fibs probe -> lie-detector audit -> block (--trigger = audit threshold on the "
+        "probe contrast; needs PROBE_URL).",
     )
     p.add_argument("--untrusted-model", default="openai-api/modalqwen/qwen3.8-27B")
     p.add_argument(
@@ -204,10 +220,12 @@ if __name__ == "__main__":
     cfg = {
         "setting": "bash_arena",
         "protocol_kind": a.protocol,
-        "protocol": (
-            "auto_submit_protocol_wrapper(godmode_protocol)" if a.protocol == "godmode"
-            else "auto_submit_protocol_wrapper(interrogation_protocol)"
-        ),
+        "protocol": {
+            "godmode": "auto_submit_protocol_wrapper(godmode_protocol)",
+            "probe": "auto_submit_protocol_wrapper(probe_protocol)",
+            "blackbox": "auto_submit_protocol_wrapper(interrogation_protocol)",
+        }[a.protocol],
+        "probe_url": os.environ.get("PROBE_URL") if a.protocol == "probe" else None,
         "godmode_model": JEV_MODEL,
         "untrusted_base_url": os.environ["MODALQWEN_BASE_URL"],
         "trusted_base_url": os.environ["MODAL_BASE_URL"],

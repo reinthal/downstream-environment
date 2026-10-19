@@ -53,7 +53,8 @@ def template_messages(messages: list[ChatMessage]) -> list[dict]:
 
 
 def tool_schemas(tools: list[Tool] | list[ToolInfo]) -> list[dict]:
-    infos = [t if isinstance(t, ToolInfo) else ToolDef(t).as_tool_info() for t in tools]
+    """OpenAI function schemas; ToolInfo (logged) and ToolDef (live) share these fields."""
+    infos = [t if isinstance(t, ToolInfo) else ToolDef(t) for t in tools]
     return [
         {"type": "function", "function": {
             "name": i.name, "description": i.description,

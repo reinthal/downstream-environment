@@ -105,17 +105,15 @@ class Reader:
             )
             for rd in reads
         ]
-        n = min(r.n_tokens for r in rendered) - 1
-        for r in rendered[1:]:
-            n = next((i for i in range(n) if r.ids[i] != rendered[0].ids[i]), n)
         masks = []
         for r in rendered:
             pm, cm = window_masks(r)
             mask = build_read_mask(self.probe.read_window, pm, cm, torch.tensor(0))
-            positions = (mask.nonzero().flatten() + r.followup_start).tolist()
-            if min(positions) < n:
-                raise ValueError(f"read position {min(positions)} inside the shared prefix ({n})")
-            masks.append((mask, positions))
+            masks.append((mask, (mask.nonzero().flatten() + r.followup_start).tolist()))
+        # the shared prefix: common tokens of all reads, ending before the first read position
+        n = min(min(positions) for _, positions in masks)
+        for r in rendered[1:]:
+            n = next((i for i in range(n) if r.ids[i] != rendered[0].ids[i]), n)
         dev = self.model.device
         with torch.no_grad():
             prefix = self.inner(
@@ -183,6 +181,13 @@ def main():
                 return self._send(404, {"error": self.path})
             body = json.loads(self.rfile.read(int(self.headers["Content-Length"])))
             t0 = time.time()
+            try:
+                self._read(body, t0)
+            except Exception as e:  # report to the client, then fail loudly in the log
+                self._send(500, {"error": repr(e)})
+                raise
+
+        def _read(self, body, t0):
             with reader.lock:  # one request at a time on the two GPUs
                 if body.get("nocache"):
                     got = [reader.read(body["messages"], body["tools"], rd["question"],
