@@ -2695,6 +2695,13 @@ pool candidate by question 14 — a ceiling; with guessers who do not see the
 pool, 22% were solved by turn 12 with 3–4 candidates left, so 50% at 15 is
 unlikely without showing the list, 20 questions or a 256 pool.
 
+20-question projection (100 games, Qwen3.8-27B, 4 GPUs): ~2.5–11.5 h, ~10–46
+GPU-h for play + entropy (~1.3–1.5x the 15-question estimate; Jev entropy
+~$8.50 all THINGS / ~$2.40 512 pool). Solve rate, revised: guessers convert
+~60% of the information ceiling (37% ceiling at question 11, 22% solved), so
+~40–45% at 20 questions and ~28–32% at 15; showing Player 2 the concept list
+or a 256 pool should take 20 questions past 50%.
+
 ### Parameters/Configurations
 
 `experiments/2026-10-17-20q-clue-ablation/config.json`: 12 turns,

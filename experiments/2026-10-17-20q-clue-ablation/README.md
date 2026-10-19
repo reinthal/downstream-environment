@@ -389,3 +389,32 @@ Player 2 does not see the 512-concept list and must name the secret from
 everything it knows. Levers if the baseline must reach ~50%: show the
 concept list to Player 2 (`auditor.show_concepts: true`), 20 questions, or the
 256-concept pool (8 bits ≈ 11–12.5 questions at this pace).
+
+**Projection: 100 games x 20 questions with Qwen3.8-27B** (4 x A40, 2
+replicas x TP2; same measured inputs as the 15-question projection; not
+timed):
+
+| part | assumptions | wall-clock (4 GPUs) | GPU-h |
+|---|---|---|---|
+| play, light reasoning | ≤ 60 calls/game, ~330 output tokens/turn → ~0.67M output tokens; ~215k input tokens/game, mostly cached | ~0.4–0.7 h | ~1.5–3 |
+| play, Qwen3.8 default thinking | ~1,500 output tokens/call → ~9M at 570–1,050 tok/s | ~2.5–4.5 h | ~10–18 |
+| entropy, all 1,796 THINGS | ~1,800 questions, 64% unique → ~1,150 texts → ~2.1M judgments at 13.6 GPU-h/M | ~7 h | ~28 |
+| entropy, 512 pool only | ~0.59M judgments | ~2 h | ~8 |
+| **total** | | **~2.5–11.5 h** | **~10–46** |
+
+The two "play" rows are alternatives, as are the two "entropy" rows.
+Entropy on other scorers: Qwen3.5-9B ~6.5 GPU-h (all THINGS); Jev ~$8.50
+(all THINGS) / ~$2.40 (512 pool). Against 15 questions this is ~1.3–1.5x the
+compute (upper bound: every game uses all 20 turns, as nearly all no-clue
+games do).
+
+**Expected solve rate, revised** (supersedes "probably not in practice"
+above). Projected to question 19, 69–75% of no-clue games would be narrowed
+to one pool candidate (78–80% to ≤ 2) — the ceiling. Checked at question 11
+the same projection gives 37% (22 / 59), 21 / 59 games actually were
+narrowed to one candidate by the end of play, and 13 / 59 were solved: the
+guessers convert ~60% of the ceiling, more than the earlier statement
+implied. At that rate: **20 questions ≈ 40–45% solved, 15 questions ≈
+28–32%** (59 games, 6 models — rough). Raising the conversion — showing
+Player 2 the 512-concept list (`auditor.show_concepts: true`) or the
+256-concept pool — should take 20 questions past 50% at no extra compute.
