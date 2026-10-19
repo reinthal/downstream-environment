@@ -2712,7 +2712,12 @@ information is predictive of game length once clue games are included
 (bits per turn, Qwen3.8-27B / Jev: Spearman −0.81 / −0.80 hard over all 119
 games, partly by construction); the fair test, hard bits of the first 2–3
 turns, gives −0.41 to −0.51 within clue games and ~0 within no-clue games
-(`figures/bits_vs_game_length_{qwen38,jev}.svg`). New figures:
+(`figures/bits_vs_game_length_{qwen38,jev}.svg`). Scorer choice, in favour of Jev
+(researcher's call): soft bits scatter more under Jev (solved games: CV
+0.26 vs 0.16) because Jev grades its judgments (12% between 0.2 and 0.8 vs
+7%; 58% near-certain vs 83% for Qwen3.8-27B), so its soft entropy also
+records ambiguity, while the hard counts agree (10.18 vs 10.20 bits by the
+solve); calibration of Jev's intermediate probabilities is not measured. New figures:
 `figures/entropy_no_clues_hard_soft.svg` (hard + soft, n per point),
 `figures/bits_vs_game_length_{qwen38,jev}.svg`. The README documents both entropy
 calculations (MathJax) with a worked example.

@@ -476,6 +476,35 @@ turns: 238 answered yes, 368 no), with the two scorers that judge reliably.
   more useful metric, and predictive only once the early turns differ
   between games.
 
+- *Scorer choice: in favour of Jev for this analysis* (researcher's call,
+  2026-10-19). The soft panel scatters more under Jev than under
+  Qwen3.8-27B; the hard panel does not:
+
+  | solved games (n = 67): total bits removed by the end | Qwen3.8-27B | Jev |
+  |---|---|---|
+  | soft, mean (SD); CV | 9.54 (1.54); 0.16 | 8.13 (2.15); **0.26** |
+  | hard, mean (SD); CV | 10.20 (1.01); 0.10 | 10.18 (0.98); 0.10 |
+
+  | share of the 1,303,896 judgments | Qwen3.8-27B | Jev |
+  |---|---|---|
+  | uncertain, 0.2 < p < 0.8 | 7.2% | **12.3%** |
+  | near-certain, p < 0.05 or > 0.95 | **83.4%** | 58.3% |
+
+  Jev grades its judgments; Qwen3.8-27B, read from one token's logprobs, is
+  near-binary on 83% of them. With near-binary judgments the soft posterior
+  is almost the hard count (9.54 vs 10.20 bits removed by the solve), so soft
+  entropy adds little beyond hard. With graded judgments a concept the scorer
+  is unsure about keeps part of its weight, so soft entropy also records how
+  ambiguous a game's questions and clues were for the remaining candidates —
+  the extra spread under Jev — which is what the soft measure is for; the
+  hard counts, which ignore grading, agree between the two (10.18 vs 10.20,
+  same spread). Jev is trained for calibrated probabilities and matches
+  Qwen3.8-27B on agreement with Player 1's answers (49 vs 50 contradictions
+  in 886 turns). Not measured here: whether Jev's intermediate probabilities
+  are calibrated — there are no ground-truth probabilities for these
+  judgments; that would need human or multi-annotator labels on a sample of
+  (question, concept) pairs.
+
 `figures/entropy_no_clues_hard_soft.svg` — no-clue games only (sufficient
 samples): hard and soft entropy over all 1,796 THINGS after k questions,
 scored by Jev; thin lines per model (≥ 3 games), bold pooled mean (≥ 5)
