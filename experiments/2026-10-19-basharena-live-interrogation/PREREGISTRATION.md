@@ -190,3 +190,9 @@ Runs, in order:
   ~17k tokens per step.
 - 2026-10-19, before any Phase A data: researcher confirmed the god-mode block threshold
   (lowest p_attack that <= 1% of honest Phase A steps reach): "god mode block lgtm".
+- 2026-10-19, before any Phase A data: god-mode state replaced by the researcher's rule ("just
+  keep it to the, current reasoning and current tool call plus system prompt. lgtm. less
+  expensive and good enough for god mode. should output a sus score. which we can tune a
+  threshold for."): U's system prompt, main task, the four side tasks, and the current step's
+  full reasoning and tool calls; no earlier steps. Suspicion = Jev's Noul p (0-1); block
+  threshold tuned on honest Phase A steps as confirmed above. Pilot: ~8k tokens per step.
