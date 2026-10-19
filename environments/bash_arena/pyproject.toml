@@ -12,6 +12,7 @@ dependencies = [
     "numpy>=2.5.3",
     "scikit-learn>=1.9.1",
     "matplotlib>=3.11.2",
+    "typesafe-sdk>=0.7.5",
 ]
 
 # Intentionally separate from the repo-root pyproject (linear-probe deps:
