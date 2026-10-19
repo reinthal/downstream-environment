@@ -162,24 +162,47 @@ def fig_no_clue_hard_soft(cfg, plt):
     fig.savefig(OUT / "figures" / "entropy_no_clues_hard_soft.svg")
 
 
+def per_game_bits(steps):
+    """(mean soft bits, mean hard bits) per question of one game's steps."""
+    pairs = [(p, q) for p, q in zip(steps, steps[1:]) if q.get("kind") in (None, "question")]
+    if not pairs:
+        return None
+    soft = statistics.mean(q["bits"] for p, q in pairs)
+    hard = statistics.mean(math.log2(max(p["n_consistent"], 1) / max(q["n_consistent"], 1)) for p, q in pairs)
+    return soft, hard
+
+
+def spearman(a, b):
+    ra = {i: r for r, i in enumerate(sorted(range(len(a)), key=lambda i: a[i]))}
+    rb = {i: r for r, i in enumerate(sorted(range(len(b)), key=lambda i: b[i]))}
+    n = len(a)
+    return 1 - 6 * sum((ra[i] - rb[i]) ** 2 for i in range(n)) / (n * (n * n - 1))
+
+
 def fig_bits_vs_length(cfg, plt):
-    """No-clue games: per-game mean soft bits per question vs the turn the
-    game ended (unsolved = hollow, at the 12-turn cap), one panel per scorer."""
+    """No-clue games, Jev, all 1,796 THINGS: per-game mean soft and hard bits
+    per question vs the turn the game ended (unsolved = hollow, at the cap)."""
+    rows = []
+    for i, m in enumerate(cfg.models):
+        games = {g["game_id"]: g for g in json.loads((OUT / f"games_{cell(m, 'no_clues', False)}.json").read_text())["games"]}
+        for g in json.loads((OUT / f"entropy_{cell(m, 'no_clues', False)}.json").read_text())["games"]:
+            b = per_game_bits(g["steps"])
+            if b is None:
+                continue
+            gm = games[g["game_id"]]
+            solved = gm["winner"] == "auditor"
+            rows.append((i, solved, gm["end_turn"] if solved else cfg.max_questions, *b))
     fig, axes = plt.subplots(1, 2, figsize=(10, 4.2), sharex=True, sharey=True)
-    for ax, (name, prefix) in zip(axes, (("Jev", "entropy_"), ("Qwen3.8-27B", "entropy_qwen38_"))):
-        for i, m in enumerate(cfg.models):
-            games = {g["game_id"]: g for g in json.loads((OUT / f"games_{cell(m, 'no_clues', False)}.json").read_text())["games"]}
-            for g in json.loads((OUT / f"{prefix}{cell(m, 'no_clues', False)}.json").read_text())["games"]:
-                bits = [s["bits"] for s in g["steps"][1:] if s.get("kind") in (None, "question")]
-                if not bits:
-                    continue
-                gm = games[g["game_id"]]
-                solved = gm["winner"] == "auditor"
-                ax.plot(statistics.mean(bits), gm["end_turn"] if solved else cfg.max_questions, "o", ms=7,
-                        mfc=SERIES[i] if solved else "none", mec=SERIES[i], mew=1.6,
-                        )
-        ax.set_title(f"scored by {name}", fontsize=10, color=INK, loc="left")
-        ax.set_xlabel("mean soft bits per question (game)", fontsize=9, color=INK)
+    stats = {}
+    for ax, (title, col) in zip(axes, (("soft bits per question", 3), ("hard bits per question", 4))):
+        for i, solved, turn, *b in rows:
+            x = b[col - 3]
+            ax.plot(x, turn, "o", ms=7, mfc=SERIES[i] if solved else "none", mec=SERIES[i], mew=1.6)
+        xs, ys = [r[col] for r in rows], [r[2] for r in rows]
+        rho = spearman(xs, ys)
+        stats[title] = (rho, statistics.mean(r[col] for r in rows if r[1]), statistics.mean(r[col] for r in rows if not r[1]))
+        ax.set_title(f"{title}  (Spearman {rho:.2f}, n = {len(rows)})", fontsize=10, color=INK, loc="left")
+        ax.set_xlabel(f"mean {title} (game)", fontsize=9, color=INK)
         style(ax)
     for i, m in enumerate(cfg.models):
         axes[1].plot([], [], "o", ms=7, color=SERIES[i], label=LABELS[slug(m)])
@@ -187,10 +210,14 @@ def fig_bits_vs_length(cfg, plt):
     axes[1].legend(fontsize=7, frameon=False, loc="lower right")
     axes[0].set_ylabel("turn the game ended", fontsize=9, color=INK)
     axes[0].set_ylim(0, 13)
-    axes[0].set_xlim(0, 2.2)
-    fig.suptitle("No-clue games: does information per question predict game length?", fontsize=11, color=INK, x=0.01, ha="left")
+    axes[0].set_xlim(0, 2.6)
+    fig.suptitle("No-clue games: information per question vs game length (scored by Jev, all 1,796 THINGS)",
+                 fontsize=11, color=INK, x=0.01, ha="left")
     fig.tight_layout()
     fig.savefig(OUT / "figures" / "bits_vs_game_length.svg")
+    for k, (rho, a, b) in stats.items():
+        print(f"  {k}: Spearman {rho:.2f}; solved {a:.2f} vs unsolved {b:.2f}")
+    print(f"  max hard bits/question: {max(r[4] for r in rows):.2f}")
 
 
 def main():

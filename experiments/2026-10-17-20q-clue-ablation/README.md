@@ -448,10 +448,12 @@ turns: 238 answered yes, 368 no), with the two scorers that judge reliably.
   the per-turn means also rise because short games leave the average — the
   new figure below shows n per point and uses the no-clue games only.
 - *Is bits/question predictive of game length?* Weakly
-  (`figures/bits_vs_game_length.svg`): solved games carry ~2x the bits per
-  question of unsolved ones, but several high-information games still end
-  unsolved at the cap and the rank correlation is only −0.22 / −0.30 on 59
-  games, most of them censored at 12.
+  (`figures/bits_vs_game_length.svg`: per game, soft and hard bits per
+  question vs the turn it ended; Jev, all 1,796 THINGS): Spearman −0.22
+  (soft) / −0.29 (hard) on 59 games, most of them censored at 12. Solved
+  games carry more information per question (soft 0.70 vs 0.34, hard 1.00 vs
+  0.66), but several high-information games still end unsolved at the cap.
+  With Qwen3.8-27B as scorer the soft correlation is −0.30.
 
 `figures/entropy_no_clues_hard_soft.svg` — no-clue games only (sufficient
 samples): hard and soft entropy over all 1,796 THINGS after k questions,
