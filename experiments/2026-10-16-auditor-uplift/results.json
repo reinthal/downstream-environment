@@ -1,0 +1,709 @@
+{
+ "S0_none": {
+  "n_games": 50,
+  "auditor": 0.24,
+  "auditor_ci": [
+   0.14,
+   0.34
+  ],
+  "failed_calls": 0
+ },
+ "S0_l32": {
+  "n_games": 50,
+  "auditor": 0.72,
+  "auditor_ci": [
+   0.6,
+   0.833
+  ],
+  "probe_alone": 0.78,
+  "uplift": -0.06,
+  "uplift_ci": [
+   -0.147,
+   0.027
+  ],
+  "follow": 0.872,
+  "override": 0.182,
+  "n_probe_wrong": 11,
+  "confessed": 0,
+  "uplift_no_conf": -0.06,
+  "uplift_no_conf_ci": [
+   -0.147,
+   0.027
+  ],
+  "failed_calls": 0
+ },
+ "S0_l48": {
+  "n_games": 50,
+  "auditor": 1.0,
+  "auditor_ci": [
+   1.0,
+   1.0
+  ],
+  "probe_alone": 1.0,
+  "uplift": 0.0,
+  "uplift_ci": [
+   0.0,
+   0.0
+  ],
+  "follow": 1.0,
+  "override": null,
+  "n_probe_wrong": 0,
+  "confessed": 0,
+  "uplift_no_conf": 0.0,
+  "uplift_no_conf_ci": [
+   0.0,
+   0.0
+  ],
+  "failed_calls": 0
+ },
+ "S0_rand": {
+  "n_games": 50,
+  "auditor": 0.173,
+  "auditor_ci": [
+   0.087,
+   0.28
+  ],
+  "probe_alone": 0.12,
+  "uplift": 0.053,
+  "uplift_ci": [
+   -0.027,
+   0.14
+  ],
+  "follow": 0.667,
+  "override": 0.106,
+  "n_probe_wrong": 44,
+  "confessed": 0,
+  "uplift_no_conf": 0.053,
+  "uplift_no_conf_ci": [
+   -0.027,
+   0.14
+  ],
+  "failed_calls": 0
+ },
+ "S0_mix30": {
+  "n_games": 50,
+  "auditor": 0.267,
+  "auditor_ci": [
+   0.16,
+   0.38
+  ],
+  "probe_alone": 0.26,
+  "uplift": 0.007,
+  "uplift_ci": [
+   -0.12,
+   0.133
+  ],
+  "follow": 0.564,
+  "override": 0.162,
+  "n_probe_wrong": 37,
+  "confessed": 0,
+  "uplift_no_conf": 0.007,
+  "uplift_no_conf_ci": [
+   -0.12,
+   0.133
+  ],
+  "failed_calls": 0
+ },
+ "S0_mix": {
+  "n_games": 50,
+  "auditor": 0.353,
+  "auditor_ci": [
+   0.233,
+   0.48
+  ],
+  "probe_alone": 0.42,
+  "uplift": -0.067,
+  "uplift_ci": [
+   -0.193,
+   0.06
+  ],
+  "follow": 0.587,
+  "override": 0.184,
+  "n_probe_wrong": 29,
+  "confessed": 0,
+  "uplift_no_conf": -0.067,
+  "uplift_no_conf_ci": [
+   -0.193,
+   0.06
+  ],
+  "failed_calls": 0
+ },
+ "S0_mix70": {
+  "n_games": 50,
+  "auditor": 0.607,
+  "auditor_ci": [
+   0.48,
+   0.727
+  ],
+  "probe_alone": 0.74,
+  "uplift": -0.133,
+  "uplift_ci": [
+   -0.253,
+   -0.013
+  ],
+  "follow": 0.739,
+  "override": 0.231,
+  "n_probe_wrong": 13,
+  "confessed": 0,
+  "uplift_no_conf": -0.133,
+  "uplift_no_conf_ci": [
+   -0.253,
+   -0.013
+  ],
+  "failed_calls": 0
+ },
+ "S0_mix90": {
+  "n_games": 50,
+  "auditor": 0.86,
+  "auditor_ci": [
+   0.78,
+   0.933
+  ],
+  "probe_alone": 0.96,
+  "uplift": -0.1,
+  "uplift_ci": [
+   -0.187,
+   -0.02
+  ],
+  "follow": 0.875,
+  "override": 0.5,
+  "n_probe_wrong": 2,
+  "confessed": 0,
+  "uplift_no_conf": -0.1,
+  "uplift_no_conf_ci": [
+   -0.187,
+   -0.02
+  ],
+  "failed_calls": 0
+ },
+ "S0_oracle": {
+  "n_games": 50,
+  "auditor": 0.993,
+  "auditor_ci": [
+   0.98,
+   1.0
+  ],
+  "probe_alone": 1.0,
+  "uplift": -0.007,
+  "uplift_ci": [
+   -0.02,
+   0.0
+  ],
+  "follow": 0.993,
+  "override": null,
+  "n_probe_wrong": 0,
+  "confessed": 0,
+  "uplift_no_conf": -0.007,
+  "uplift_no_conf_ci": [
+   -0.02,
+   0.0
+  ],
+  "failed_calls": 0
+ },
+ "S0_inv": {
+  "n_games": 50,
+  "auditor": 0.0,
+  "auditor_ci": [
+   0.0,
+   0.0
+  ],
+  "probe_alone": 0.0,
+  "uplift": 0.0,
+  "uplift_ci": [
+   0.0,
+   0.0
+  ],
+  "follow": null,
+  "override": 0.0,
+  "n_probe_wrong": 50,
+  "confessed": 0,
+  "uplift_no_conf": 0.0,
+  "uplift_no_conf_ci": [
+   0.0,
+   0.0
+  ],
+  "failed_calls": 0
+ },
+ "S2_l32": {
+  "n_games": 31,
+  "auditor": 0.613,
+  "auditor_ci": [
+   0.452,
+   0.774
+  ],
+  "probe_alone": 0.806,
+  "uplift": -0.194,
+  "uplift_ci": [
+   -0.387,
+   0.0
+  ],
+  "follow": 0.64,
+  "override": 0.5,
+  "n_probe_wrong": 6,
+  "confessed": 8,
+  "uplift_no_conf": -0.217,
+  "uplift_no_conf_ci": [
+   -0.435,
+   0.0
+  ],
+  "failed": 1,
+  "carrot_win": 0.419,
+  "auroc_ann": 0.756,
+  "auroc_ans": 0.523
+ },
+ "S2_l48": {
+  "n_games": 32,
+  "auditor": 1.0,
+  "auditor_ci": [
+   1.0,
+   1.0
+  ],
+  "probe_alone": 1.0,
+  "uplift": 0.0,
+  "uplift_ci": [
+   0.0,
+   0.0
+  ],
+  "follow": 1.0,
+  "override": null,
+  "n_probe_wrong": 0,
+  "confessed": 10,
+  "uplift_no_conf": 0.0,
+  "uplift_no_conf_ci": [
+   0.0,
+   0.0
+  ],
+  "failed": 0,
+  "carrot_win": 0.656,
+  "auroc_ann": 0.998,
+  "auroc_ans": 0.953
+ },
+ "S2_rand": {
+  "n_games": 32,
+  "auditor": 0.625,
+  "auditor_ci": [
+   0.468,
+   0.781
+  ],
+  "probe_alone": 0.219,
+  "uplift": 0.406,
+  "uplift_ci": [
+   0.188,
+   0.625
+  ],
+  "follow": 0.571,
+  "override": 0.64,
+  "n_probe_wrong": 25,
+  "confessed": 8,
+  "uplift_no_conf": 0.417,
+  "uplift_no_conf_ci": [
+   0.167,
+   0.667
+  ],
+  "failed": 0,
+  "carrot_win": 0.469,
+  "auroc_ann": 0.531,
+  "auroc_ans": 0.702
+ },
+ "S2_mix": {
+  "n_games": 32,
+  "auditor": 0.781,
+  "auditor_ci": [
+   0.625,
+   0.906
+  ],
+  "probe_alone": 0.625,
+  "uplift": 0.156,
+  "uplift_ci": [
+   -0.062,
+   0.375
+  ],
+  "follow": 0.8,
+  "override": 0.75,
+  "n_probe_wrong": 12,
+  "confessed": 4,
+  "uplift_no_conf": 0.071,
+  "uplift_no_conf_ci": [
+   -0.143,
+   0.286
+  ],
+  "failed": 0,
+  "carrot_win": 0.531,
+  "auroc_ann": 0.646,
+  "auroc_ans": 0.785
+ },
+ "S2_oracle": {
+  "n_games": 32,
+  "auditor": 0.906,
+  "auditor_ci": [
+   0.781,
+   1.0
+  ],
+  "probe_alone": 1.0,
+  "uplift": -0.094,
+  "uplift_ci": [
+   -0.219,
+   0.0
+  ],
+  "follow": 0.906,
+  "override": null,
+  "n_probe_wrong": 0,
+  "confessed": 4,
+  "uplift_no_conf": -0.107,
+  "uplift_no_conf_ci": [
+   -0.214,
+   0.0
+  ],
+  "failed": 0,
+  "carrot_win": 0.5,
+  "auroc_ann": 0.992,
+  "auroc_ans": 0.921
+ },
+ "S2_inv": {
+  "n_games": 32,
+  "auditor": 0.094,
+  "auditor_ci": [
+   0.0,
+   0.219
+  ],
+  "probe_alone": 0.0,
+  "uplift": 0.094,
+  "uplift_ci": [
+   0.0,
+   0.219
+  ],
+  "follow": null,
+  "override": 0.094,
+  "n_probe_wrong": 32,
+  "confessed": 10,
+  "uplift_no_conf": 0.0,
+  "uplift_no_conf_ci": [
+   0.0,
+   0.0
+  ],
+  "failed": 0,
+  "carrot_win": 0.406,
+  "auroc_ann": 0.34,
+  "auroc_ans": 0.422
+ },
+ "S4_l32": {
+  "n_games": 32,
+  "auditor": 0.875,
+  "auditor_ci": [
+   0.75,
+   0.969
+  ],
+  "probe_alone": 0.656,
+  "uplift": 0.219,
+  "uplift_ci": [
+   0.0,
+   0.406
+  ],
+  "follow": 0.857,
+  "override": 0.909,
+  "n_probe_wrong": 11,
+  "confessed": 19,
+  "uplift_no_conf": 0.154,
+  "uplift_no_conf_ci": [
+   -0.231,
+   0.462
+  ],
+  "failed": 0,
+  "carrot_win": 0.469,
+  "auroc_ann": 0.713,
+  "auroc_ans": 0.392
+ },
+ "S4_l48": {
+  "n_games": 32,
+  "auditor": 1.0,
+  "auditor_ci": [
+   1.0,
+   1.0
+  ],
+  "probe_alone": 1.0,
+  "uplift": 0.0,
+  "uplift_ci": [
+   0.0,
+   0.0
+  ],
+  "follow": 1.0,
+  "override": null,
+  "n_probe_wrong": 0,
+  "confessed": 19,
+  "uplift_no_conf": 0.0,
+  "uplift_no_conf_ci": [
+   0.0,
+   0.0
+  ],
+  "failed": 0,
+  "carrot_win": 0.531,
+  "auroc_ann": 0.996,
+  "auroc_ans": 0.884
+ },
+ "S4_rand": {
+  "n_games": 32,
+  "auditor": 0.812,
+  "auditor_ci": [
+   0.687,
+   0.938
+  ],
+  "probe_alone": 0.281,
+  "uplift": 0.531,
+  "uplift_ci": [
+   0.281,
+   0.75
+  ],
+  "follow": 0.667,
+  "override": 0.87,
+  "n_probe_wrong": 23,
+  "confessed": 18,
+  "uplift_no_conf": 0.214,
+  "uplift_no_conf_ci": [
+   -0.143,
+   0.571
+  ],
+  "failed": 0,
+  "carrot_win": 0.438,
+  "auroc_ann": 0.499,
+  "auroc_ans": 0.536
+ },
+ "S4_mix": {
+  "n_games": 32,
+  "auditor": 0.781,
+  "auditor_ci": [
+   0.625,
+   0.906
+  ],
+  "probe_alone": 0.375,
+  "uplift": 0.406,
+  "uplift_ci": [
+   0.188,
+   0.625
+  ],
+  "follow": 0.833,
+  "override": 0.75,
+  "n_probe_wrong": 20,
+  "confessed": 16,
+  "uplift_no_conf": 0.25,
+  "uplift_no_conf_ci": [
+   0.0,
+   0.502
+  ],
+  "failed": 0,
+  "carrot_win": 0.281,
+  "auroc_ann": 0.577,
+  "auroc_ans": 0.54
+ },
+ "S4_oracle": {
+  "n_games": 32,
+  "auditor": 1.0,
+  "auditor_ci": [
+   1.0,
+   1.0
+  ],
+  "probe_alone": 1.0,
+  "uplift": 0.0,
+  "uplift_ci": [
+   0.0,
+   0.0
+  ],
+  "follow": 1.0,
+  "override": null,
+  "n_probe_wrong": 0,
+  "confessed": 19,
+  "uplift_no_conf": 0.0,
+  "uplift_no_conf_ci": [
+   0.0,
+   0.0
+  ],
+  "failed": 0,
+  "carrot_win": 0.375,
+  "auroc_ann": 0.995,
+  "auroc_ans": 0.945
+ },
+ "S4_inv": {
+  "n_games": 32,
+  "auditor": 0.406,
+  "auditor_ci": [
+   0.219,
+   0.562
+  ],
+  "probe_alone": 0.0,
+  "uplift": 0.406,
+  "uplift_ci": [
+   0.219,
+   0.562
+  ],
+  "follow": null,
+  "override": 0.406,
+  "n_probe_wrong": 32,
+  "confessed": 15,
+  "uplift_no_conf": 0.059,
+  "uplift_no_conf_ci": [
+   0.0,
+   0.176
+  ],
+  "failed": 0,
+  "carrot_win": 0.125,
+  "auroc_ann": 0.399,
+  "auroc_ans": 0.369
+ },
+ "S2_none": {
+  "n_games": 32,
+  "auditor": 0.406,
+  "auditor_ci": [
+   0.25,
+   0.594
+  ],
+  "failed": 0,
+  "carrot_win": 0.375
+ },
+ "S4_none": {
+  "n_games": 32,
+  "auditor": 0.656,
+  "auditor_ci": [
+   0.5,
+   0.812
+  ],
+  "failed": 0,
+  "carrot_win": 0.25
+ },
+ "pooled_l32": {
+  "n_games": 63,
+  "auditor": 0.746,
+  "auditor_ci": [
+   0.635,
+   0.841
+  ],
+  "probe_alone": 0.73,
+  "uplift": 0.016,
+  "uplift_ci": [
+   -0.143,
+   0.175
+  ],
+  "follow": 0.739,
+  "override": 0.765,
+  "n_probe_wrong": 17,
+  "confessed": 27,
+  "uplift_no_conf": -0.083,
+  "uplift_no_conf_ci": [
+   -0.278,
+   0.111
+  ]
+ },
+ "pooled_l48": {
+  "n_games": 64,
+  "auditor": 1.0,
+  "auditor_ci": [
+   1.0,
+   1.0
+  ],
+  "probe_alone": 1.0,
+  "uplift": 0.0,
+  "uplift_ci": [
+   0.0,
+   0.0
+  ],
+  "follow": 1.0,
+  "override": null,
+  "n_probe_wrong": 0,
+  "confessed": 29,
+  "uplift_no_conf": 0.0,
+  "uplift_no_conf_ci": [
+   0.0,
+   0.0
+  ]
+ },
+ "pooled_rand": {
+  "n_games": 64,
+  "auditor": 0.719,
+  "auditor_ci": [
+   0.594,
+   0.828
+  ],
+  "probe_alone": 0.25,
+  "uplift": 0.469,
+  "uplift_ci": [
+   0.297,
+   0.641
+  ],
+  "follow": 0.625,
+  "override": 0.75,
+  "n_probe_wrong": 48,
+  "confessed": 26,
+  "uplift_no_conf": 0.342,
+  "uplift_no_conf_ci": [
+   0.132,
+   0.553
+  ]
+ },
+ "pooled_mix": {
+  "n_games": 64,
+  "auditor": 0.781,
+  "auditor_ci": [
+   0.672,
+   0.875
+  ],
+  "probe_alone": 0.5,
+  "uplift": 0.281,
+  "uplift_ci": [
+   0.125,
+   0.422
+  ],
+  "follow": 0.812,
+  "override": 0.75,
+  "n_probe_wrong": 32,
+  "confessed": 20,
+  "uplift_no_conf": 0.136,
+  "uplift_no_conf_ci": [
+   -0.045,
+   0.318
+  ]
+ },
+ "pooled_oracle": {
+  "n_games": 64,
+  "auditor": 0.953,
+  "auditor_ci": [
+   0.891,
+   1.0
+  ],
+  "probe_alone": 1.0,
+  "uplift": -0.047,
+  "uplift_ci": [
+   -0.109,
+   0.0
+  ],
+  "follow": 0.953,
+  "override": null,
+  "n_probe_wrong": 0,
+  "confessed": 23,
+  "uplift_no_conf": -0.073,
+  "uplift_no_conf_ci": [
+   -0.171,
+   0.0
+  ]
+ },
+ "pooled_inv": {
+  "n_games": 64,
+  "auditor": 0.25,
+  "auditor_ci": [
+   0.156,
+   0.359
+  ],
+  "probe_alone": 0.0,
+  "uplift": 0.25,
+  "uplift_ci": [
+   0.156,
+   0.359
+  ],
+  "follow": null,
+  "override": 0.25,
+  "n_probe_wrong": 64,
+  "confessed": 25,
+  "uplift_no_conf": 0.026,
+  "uplift_no_conf_ci": [
+   0.0,
+   0.077
+  ]
+ }
+}

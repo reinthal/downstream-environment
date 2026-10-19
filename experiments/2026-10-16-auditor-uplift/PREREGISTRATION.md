@@ -171,3 +171,17 @@ ones — with the interactive (dynamic) auditor as the main interest.
   and a restart resumes the set; `config.json` request timeout 1800 -> 7200 s
   and concurrent games per set 20 -> 8 (fewer queued requests); jobs run
   detached from the session.
+
+- 2026-10-19, decided before seeing any interactive result (only counts of
+  finished seeds per set were looked at). The researcher stopped the
+  interactive run early to free GPUs for the next experiment (Inside Job).
+  At the stop (16:47 UTC) seeds 6000-6031 (g000-g031) were complete in all
+  12 sets; the ~96 games in flight (later seeds) were discarded. Sample size
+  per interactive cell 50 -> 32 (pooled primary metric 100 -> 64 games),
+  with every analysed set restricted to the same seeds g000-g031 (also the
+  2026-10-15 text-only S2 / S4 references), so cells stay paired and the cut
+  does not favour shorter games. Final: the run will not be resumed or
+  extended. The passive S0 replay (50 games x 3 runs) is complete and
+  unchanged. Consequence: lower power; the pooled interval is about ±0.13
+  rather than ±0.10, so a true uplift near +0.10 will likely be
+  inconclusive under the preregistered threshold.

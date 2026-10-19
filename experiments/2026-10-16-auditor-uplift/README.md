@@ -94,3 +94,43 @@ Pilot (never analysed): `replay.py --pilot`, `game.py --set <s> --pilot --games 
 `transcripts_*.jsonl`, `auditor_*.jsonl`, `results.json`,
 `figure_uplift.png`. Activation shards (`activations_shard*.npz`) are not
 committed.
+
+## Results (2026-10-19)
+
+Interactive: 32 games per cell (seeds g000-g031, see PREREGISTRATION
+Deviations; 1 failed game in S2_l32), text-only references on the same
+seeds. Passive S0 replay: 50 games x 3 runs. Uplift = auditor − probe alone
+(top-scoring player over announcements), paired game bootstrap.
+`results.json`, `figure_uplift.png`.
+
+| detector | probe alone (S2+S4) | auditor S2+S4 | **uplift S2+S4** | uplift without confession games | passive S0 uplift |
+|---|---|---|---|---|---|
+| l48 | 1.00 | 1.00 | 0.00 | 0.00 | 0.00 |
+| oracle | 1.00 | 0.95 | −0.05 [−0.11, 0.00] | −0.07 | −0.01 |
+| l32 | 0.73 | 0.75 | +0.02 [−0.14, 0.18] | −0.08 | −0.06 [−0.15, 0.03] |
+| **mix (primary)** | 0.50 | 0.78 | **+0.28 [0.13, 0.42]** | +0.14 [−0.05, 0.32] | −0.07 [−0.19, 0.06] |
+| rand | 0.25 | 0.72 | +0.47 [0.30, 0.64] | +0.34 [0.13, 0.55] | +0.05 [−0.03, 0.14] |
+| inv | 0.00 | 0.25 | +0.25 [0.16, 0.36] | +0.03 | 0.00 (auditor 0.00) |
+
+Text only, same seeds: S2 0.41, S4 0.66 (passive S0 0.24). Passive mix30 /
+mix70 / mix90 uplift +0.01 / −0.13 [−0.25, −0.01] / −0.10 [−0.19, −0.02].
+
+- Primary (preregistered): pooled mix uplift +0.28 [0.13, 0.42] — meets the
+  "supported" threshold (>= +0.10, interval excludes 0). The abandonment
+  rule (uplift <= 0 at every detector) is not met.
+- About half of it comes from games where the Parsnip names its own role in
+  an answer (regex count; most of them in S4 private interviews): without
+  those games the mix uplift is +0.14 [−0.05, 0.32].
+- Passive (no questions) the auditor never beats its detector: uplift −0.13
+  to +0.05 across the ladder, below it for good mixes (mix70, mix90), and
+  the inverted oracle fools it completely (0.00). The uplift comes from
+  interaction.
+- Strong detectors: the interactive auditor matches l48 (1.00) and slightly
+  undercuts the oracle (S2 0.91: it sometimes overrides a perfect
+  detector).
+- The inverted oracle drags the interactive auditor below text only (0.25
+  vs 0.53 pooled); what it recovers is almost all confessions (+0.03
+  without them).
+- Caveats: the random direction is not a clean null on answers (answer
+  AUROC 0.70 in S2, 0.54 in S4), so part of the rand uplift may be signal;
+  32 games per cell; same model for auditor and players.

@@ -2004,3 +2004,54 @@ commit ff388ef): NOT PREREGISTERED (exploratory).
 - `experiments/2026-10-15-auditor-l32-5rounds/` — PREREGISTRATION, README,
   code, `games_*.json`, `transcripts_*.jsonl`, `auditor_*.jsonl` (LFS),
   `results.json`, `figure_accuracy.png`
+
+## 2026-10-16: Auditor uplift over its detector (S2 / S4, detector ladder, passive replay)
+
+### Context
+
+Does an interactive auditor add anything beyond the detector it is shown?
+Colleagues' questions: does it agree with good probes and disagree with bad
+ones (random, partly random, oracle, inverted)?
+
+### Experiment
+
+5-player Carrot–Parsnip, five rounds. Interactive S2 (public questions every
+round) and S4 (private interviews) with detectors l48, l32, rand, mix
+(probe alone ~50%), oracle, inv, all shown as raw scores in layer-48 units;
+passive S0 replay of 50 discussions over the same ladder plus mix30/70/90.
+Main measure: uplift = auditor − probe alone on the same games.
+
+### Expected Outcome
+
+Preregistered (`experiments/2026-10-16-auditor-uplift/PREREGISTRATION.md`,
+commit 44e5bfb; prediction adopted from Claude's suggestion): uplift >=
++0.10 at mix and rand in S2, ~0 at the oracle.
+
+### Actual Outcome
+
+<!-- researcher fills in -->
+
+### Results
+
+- Primary: pooled S2+S4 mix uplift +0.28 [0.13, 0.42] (supported by the
+  preregistered rule); +0.14 [−0.05, 0.32] without games where the Parsnip
+  names its role in an answer.
+- rand +0.47, inv +0.25 (mostly confessions), l32 +0.02, l48 0.00, oracle
+  −0.05.
+- Passive S0: no uplift anywhere (−0.13 to +0.05); fooled completely by the
+  inverted oracle.
+- Deviations: interactive run relaunched after a lost session; stopped at
+  32 seeds per cell (decided blind, to free GPUs).
+
+### Parameters/Configurations
+
+- `experiments/2026-10-16-auditor-uplift/config.json`, `calibration.json`;
+  probes `probes/qwen3.8-27b_layer{32,48}_followup_logistic_regression.npz`.
+- Server GPUs 0-3 (2 replicas), scorer GPUs 6-7.
+
+### Artifacts
+
+- `experiments/2026-10-16-auditor-uplift/` — PREREGISTRATION (with
+  Deviations), README, code, `games_*.json`, `transcripts_*.jsonl`,
+  `auditor_*.jsonl` (LFS), `auditor_replay_*.jsonl`, `results.json`,
+  `figure_uplift.png`

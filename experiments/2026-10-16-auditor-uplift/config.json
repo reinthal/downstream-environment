@@ -88,5 +88,6 @@
  ],
  "calib_games": 50,
  "passive_runs": 3,
- "collect_shards": 3
+ "collect_shards": 3,
+ "interactive_games": 32
 }

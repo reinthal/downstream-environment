@@ -79,6 +79,9 @@ def interactive(sfx: str, n_boot: int, cfg) -> dict:
             continue
         games = json.loads((base / name).read_text())["games"]
         turns = read_jsonl(base / name.replace("games_", "transcripts_").replace(".json", ".jsonl"))
+        keep = {f"g{k:03d}" for k in range(cfg.interactive_games)}   # same seeds in every set (2026-10-19 stop)
+        games = [g for g in games if g["game_id"] in keep]
+        turns = [t for t in turns if t["game_id"] in keep]
         rerun = base / name.replace(".json", "_rerun.json")
         if rerun.exists():                    # failed games replayed with the same seeds (deviation 2026-10-18)
             redo = {g["game_id"]: g for g in json.loads(rerun.read_text())["games"]}

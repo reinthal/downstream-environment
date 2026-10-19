@@ -61,6 +61,7 @@ class RunConfig(ExperimentConfig):
     calib_sets: list[str] = field(default_factory=lambda: ["S2_none", "S4_none"])
     calib_games: int = 50                # first N games of each calibration set
     passive_runs: int = 3                # auditor runs per (game, detector) in the replay
+    interactive_games: int = 50          # seeds analysed per interactive cell (32 after the 2026-10-19 stop)
     collect_shards: int = 3
 
 
