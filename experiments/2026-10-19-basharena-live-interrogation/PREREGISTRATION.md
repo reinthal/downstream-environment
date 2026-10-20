@@ -233,3 +233,9 @@ Runs, in order:
   stopped Modal-U start (2 h in, one Modal container saturated at 100% GPU, prefill-bound) is
   kept in phase_a_*_aborted_modalU/ and excluded, so Phase A is homogeneous in serving.
   Probes stay on gpaulo-ord-0 GPUs 4-5.
+- 2026-10-20: the first OpenRouter start died on 402 "Insufficient credits" (no trajectory
+  finished; kept in phase_a_*_aborted_stalekey/): the session shell exports a stale
+  OPENROUTER_API_KEY of an account without credit, and the runner only setdefaults .env
+  values, so it overrode the repo key. The GLM-5.3 Flash pilot's 402 of 2026-10-19 had the
+  same cause. Runs are now launched with `env -u OPENROUTER_API_KEY -u OPENROUTER_BASE_URL`
+  (repo key, billed as expected).
