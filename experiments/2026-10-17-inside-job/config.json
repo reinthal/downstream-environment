@@ -72,5 +72,6 @@
   48
  ],
  "ladder_random": 100,
- "incentive_framing": true
+ "incentive_framing": true,
+ "bonus_conceal": true
 }
