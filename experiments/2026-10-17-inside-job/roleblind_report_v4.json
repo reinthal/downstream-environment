@@ -1,0 +1,30 @@
+{
+ "n_turns": 2169,
+ "n_lies": 57,
+ "games_acted": 29,
+ "games_honest": 13,
+ "original": {
+  "lie_all": 0.947,
+  "lie_talk": 0.923,
+  "lie_entry": 0.984,
+  "lie_answer": 0.952,
+  "top1_acted": 1.0,
+  "top1_honest": 1.0,
+  "agent_truthful_vs_others": 0.93,
+  "mean_others": -24.51,
+  "mean_agent_truthful": -16.12,
+  "mean_agent_lie": -6.74
+ },
+ "role_blind": {
+  "lie_all": 0.922,
+  "lie_talk": 0.948,
+  "lie_entry": 0.957,
+  "lie_answer": 0.892,
+  "top1_acted": 0.828,
+  "top1_honest": 0.385,
+  "agent_truthful_vs_others": 0.568,
+  "mean_others": -24.14,
+  "mean_agent_truthful": -23.0,
+  "mean_agent_lie": -11.97
+ }
+}

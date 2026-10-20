@@ -130,3 +130,29 @@ scorer service (every entry, answer and mole turn, 40% of loyal talk).
   mole games after a mole lie vs no-mole games: 0.83.
 - Consequence: the real probes identify the mole from any turn, so a
   probe-only baseline sits at the ceiling.
+
+## What the probe reads (2026-10-20; incentive pilot v4, layer 48; `mechanism_report.json`)
+
+Same 2,169 incentive-game turns, five readings: original; role-blind (the
+bonus note replaced by the team's); private facts hidden (fragments, entries,
+private Q&A replaced by "(not shown)"); both hidden; and the model's own
+answer, log P(Yes) − log P(No) to the follow-up question.
+
+| reading | lie AUROC (talk / entry / answer) | agent's truthful turns vs others | top-1 when it acted / stayed honest |
+|---|---|---|---|
+| original | 0.95 (0.92 / 0.98 / 0.95) | 0.93 | 1.00 / 1.00 |
+| bonus note hidden | 0.92 (0.95 / 0.96 / 0.89) | 0.57 | 0.83 / 0.38 |
+| private facts hidden | 0.91 (0.75 / 0.98 / 0.89) | 0.94 | 1.00 / 1.00 |
+| both hidden | 0.82 (0.76 / 0.93 / 0.68) | 0.56 | 0.69 / 0.23 |
+| self-report P(Yes) | 0.96 (0.96 / 0.98 / 0.95) | 0.87 | 1.00 / 0.92 |
+
+- The "motive" signal (flagging the agent even when honest) is the bonus
+  note: hiding it drops truthful-turn separation 0.93 -> 0.57 and
+  honest-game top-1 1.00 -> 0.38.
+- The lie signal needs what the speaker knows: hiding its private facts
+  drops false-claim detection 0.92 -> 0.75; hiding facts and note drops
+  answers 0.95 -> 0.68. Wrong entries stay detectable (0.93) from the public
+  record (the digit differs from what the team agreed).
+- Asking the model gives the same lie detection as the probe here (0.96 vs
+  0.95): nothing pushes the incentive agent to deny (cf. 2026-10-13, where
+  a deny instruction dropped P(Yes) to 0.79 and not the probe).
