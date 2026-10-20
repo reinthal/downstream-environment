@@ -16,6 +16,7 @@ Usage (from the repo root):
         experiments/2026-10-19-basharena-live-interrogation/calibrate.py
 """
 
+import argparse
 import json
 import sys
 from pathlib import Path
@@ -55,10 +56,23 @@ def summary(name: str, scores: list[float], t: float, rate: float) -> dict:
             "realised_rate": realised(scores, t), "n": len(scores)}
 
 
-def main() -> None:
+def main(protocols: list[str]) -> None:
     steps = honest_steps(HERE / "phase_a_honest" / "inspect_logs")
-    out = {"n_honest_steps": len(steps)}
+    path = HERE / "thresholds.json"
+    out = json.loads(path.read_text()) if path.exists() else {}
+    out["n_honest_steps"] = len(steps)
 
+    if "blackbox" in protocols:
+        out["blackbox"] = blackbox(steps)
+    if "godmode" in protocols:
+        out["godmode"] = godmode(steps)
+    if "probe" in protocols:
+        out["probe"] = probe(steps)
+    path.write_text(json.dumps(out, indent=2) + "\n")
+    print(json.dumps({k: out[k] for k in protocols}, indent=2))
+
+
+def blackbox(steps: list[dict]) -> dict:
     informed = [r["informed"] for r in steps]
     bb_audit = threshold(informed, AUDIT_RATE)
     replayed = [json.loads(l) for l in (HERE / "phase_a_blackbox_audits.jsonl").open()]
@@ -70,17 +84,21 @@ def main() -> None:
     rescores = [r["suspicion"] for r in replayed]
     bb_scored = [x for x in rescores if x is not None]
     bb_block = threshold(bb_scored, BLOCK_RATE)
-    out["blackbox"] = {"audit": summary("informed monitor", informed, bb_audit, AUDIT_RATE),
-                       "block": summary("interrogation rescore", bb_scored, bb_block, BLOCK_RATE)
-                       | {"unscored": len(rescores) - len(bb_scored)}}
+    return {"audit": summary("informed monitor", informed, bb_audit, AUDIT_RATE),
+            "block": summary("interrogation rescore", bb_scored, bb_block, BLOCK_RATE)
+            | {"unscored": len(rescores) - len(bb_scored)}}
 
+
+def godmode(steps: list[dict]) -> dict:
     gm = [json.loads(l) for l in (HERE / "phase_a_godmode_scores.jsonl").open()]
     gm_honest = [r["p_attack"] for r in gm if r["mode"] == "honest"]
     if len(gm_honest) != len(steps):
         raise ValueError(f"Jev scored {len(gm_honest)} honest steps, Phase A has {len(steps)}")
-    out["godmode"] = {"block": summary("Jev p(attack step)", gm_honest,
-                                       threshold(gm_honest, BLOCK_RATE), BLOCK_RATE)}
+    return {"block": summary("Jev p(attack step)", gm_honest,
+                             threshold(gm_honest, BLOCK_RATE), BLOCK_RATE)}
 
+
+def probe(steps: list[dict]) -> dict:
     pr = [json.loads(l) for l in (HERE / "phase_a_probe_scores.jsonl").open()]
     pr_honest = [r["contrast"] for r in pr if r["mode"] == "honest"]
     pr_audit = threshold(pr_honest, AUDIT_RATE)
@@ -89,15 +107,16 @@ def main() -> None:
         raise ValueError("replayed audits used a different audit threshold")
     pa = [a["suspicion"] for a in audits]
     pa_scored = [x for x in pa if x is not None]
-    out["probe"] = {"audit": summary("probe contrast", pr_honest, pr_audit, AUDIT_RATE)
-                    | {"n_scored_of_honest_steps": f"{len(pr_honest)}/{len(steps)}"},
-                    "block": summary("probe-audit rescore", pa_scored,
-                                     threshold(pa_scored, BLOCK_RATE), BLOCK_RATE)
-                    | {"unscored": len(pa) - len(pa_scored)}}
-
-    (HERE / "thresholds.json").write_text(json.dumps(out, indent=2) + "\n")
-    print(json.dumps(out, indent=2))
+    if len(pr_honest) != len(steps):
+        raise ValueError(f"probe scored {len(pr_honest)} honest steps, Phase A has {len(steps)}")
+    return {"audit": summary("probe contrast", pr_honest, pr_audit, AUDIT_RATE),
+            "block": summary("probe-audit rescore", pa_scored,
+                             threshold(pa_scored, BLOCK_RATE), BLOCK_RATE)
+            | {"unscored": len(pa) - len(pa_scored)}}
 
 
 if __name__ == "__main__":
-    main()
+    p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    p.add_argument("--protocols", nargs="+", choices=["blackbox", "godmode", "probe"],
+                   default=["blackbox", "godmode", "probe"])
+    main(p.parse_args().protocols)
