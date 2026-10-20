@@ -2,7 +2,8 @@
 
 Same contract as probe_server.py (the bf16 service on gpaulo-ord-0), so PROBE_READ_URL can point here:
 POST /read {"messages", "tools", "reads": [{"question", "answer"}]} -> {"scores", "n_tokens",
-"seconds"}; POST /read_batch {"jobs": [<read bodies>]} -> {"results": [...]} runs every read of
+"seconds"}; a job {"messages", "tools", "self": true} is the self read instead (U's own step,
+no follow-up: the token before the step's <|im_end|>, one score). POST /read_batch {"jobs": [<read bodies>]} -> {"results": [...]} runs every read of
 every job in one vLLM batch. Each read is rendered with U's chat template exactly as
 probe_server.py renders it (fibs acts.render_completion), then sent truncated after the probe's
 read token (the token before the answer's <|im_end|>): in a causal model that token's
@@ -77,8 +78,23 @@ class ProbeLens:
         self.torch = torch
 
     def _render(self, job: dict) -> list:
+        from types import SimpleNamespace
+
         from acts import render_completion, window_masks
         from probe_inference.score import build_read_mask
+
+        if job.get("self"):
+            # Self read (no follow-up): the conversation through U's step, read at the token
+            # before that assistant turn's <|im_end|> -- U's own step, on-policy.
+            assert job["messages"][-1]["role"] == "assistant", job["messages"][-1]["role"]
+            full = self.tok.apply_chat_template(job["messages"], tools=job["tools"],
+                                                tokenize=False, **TEMPLATE_KWARGS)
+            if not full.endswith("<|im_end|>\n"):
+                raise ValueError(f"unexpected template ending {full[-40:]!r}")
+            ids = self.tok(full[:-1], add_special_tokens=False)["input_ids"]
+            if self.tok.convert_ids_to_tokens(ids[-1]) != "<|im_end|>":
+                raise ValueError("the rendered step does not end at <|im_end|>")
+            return [(SimpleNamespace(ids=ids, n_tokens=len(ids)), len(ids) - 2)]
 
         out = []
         for rd in job["reads"]:

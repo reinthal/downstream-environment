@@ -84,6 +84,20 @@ async def read(messages: list[dict], tools: list[dict], reads: list[dict]) -> di
         return r.json()
 
 
+async def self_read(messages: list[ChatMessage], tools) -> dict:
+    """The probe's self read of the LAST message (U's step, no follow-up): p at the token before
+    that assistant turn's <|im_end|>. The trigger of the probe and god-mode protocols."""
+    assert isinstance(messages[-1], ChatMessageAssistant)
+    async with httpx.AsyncClient(timeout=3600, follow_redirects=True, headers=_headers()) as c:
+        r = await c.post(os.environ["PROBE_READ_URL"],
+                         json={"messages": template_messages(messages),
+                               "tools": tool_schemas(tools), "self": True})
+        r.raise_for_status()
+        out = r.json()
+    (p_self,) = out["scores"]
+    return {"p_self": p_self, "n_tokens": out["n_tokens"][0], "seconds": out["seconds"]}
+
+
 async def read_batch(jobs: list[dict]) -> list[dict]:
     """Many reads in one vLLM batch: POST {"jobs": [<read bodies>]} to PROBE_BATCH_URL (the Modal
     deployment's read_batch endpoint)."""

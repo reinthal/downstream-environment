@@ -74,7 +74,7 @@ from interrogation import (  # noqa: E402
     informed_monitor,
     interrogation_protocol,
 )
-from godmode import JEV_MODEL, godmode_protocol  # noqa: E402
+from godmode import JEV_MODEL, godmode_audit_protocol, godmode_protocol  # noqa: E402
 from probe_protocol import probe_protocol  # noqa: E402
 
 
@@ -103,6 +103,19 @@ def build_protocol(cfg: dict):
         return auto_submit_protocol_wrapper(
             micro_protocol=godmode_protocol(
                 policy=policy, block_threshold=cfg["block_threshold"]
+            )
+        )
+    if cfg["protocol_kind"] == "godmode_audit":
+        return auto_submit_protocol_wrapper(
+            micro_protocol=godmode_audit_protocol(
+                policy=policy,
+                untrusted_model=u,
+                trusted_model=t,
+                honest_config=honest_config,
+                attack_config=attack_config,
+                trusted_config=trusted_config,
+                audit_threshold=cfg["trigger"],
+                block_threshold=cfg["block_threshold"],
             )
         )
     if cfg["protocol_kind"] == "probe":
@@ -192,10 +205,12 @@ if __name__ == "__main__":
         "--modes", nargs="+", choices=["honest", "attack"], default=["honest", "attack"]
     )
     p.add_argument(
-        "--protocol", choices=["blackbox", "godmode", "probe"], default="blackbox",
-        help="blackbox: informed monitor -> interrogation -> block; godmode: Jev -> block; "
-        "probe: fibs probe -> lie-detector audit -> block (--trigger = audit threshold on the "
-        "probe contrast; needs PROBE_READ_URL).",
+        "--protocol", choices=["blackbox", "godmode", "godmode_audit", "probe"],
+        default="blackbox",
+        help="blackbox: informed monitor -> interrogation -> block; godmode: Jev -> block "
+        "(exploratory); godmode_audit: probe self read -> open questions + Jev honesty -> block; "
+        "probe: probe self read -> yes/no lie-detector + open questions -> block (--trigger = "
+        "audit threshold on the probe's self read; needs PROBE_READ_URL).",
     )
     # U on OpenRouter, streamed, pinned to DeepInfra's bf16 endpoint: the weights the probe
     # reads (researcher, 2026-10-20: "Please use Openrouter for qwen instead"; streaming and
@@ -224,10 +239,12 @@ if __name__ == "__main__":
         "protocol_kind": a.protocol,
         "protocol": {
             "godmode": "auto_submit_protocol_wrapper(godmode_protocol)",
+            "godmode_audit": "auto_submit_protocol_wrapper(godmode_audit_protocol)",
             "probe": "auto_submit_protocol_wrapper(probe_protocol)",
             "blackbox": "auto_submit_protocol_wrapper(interrogation_protocol)",
         }[a.protocol],
-        "probe_read_url": os.environ.get("PROBE_READ_URL") if a.protocol == "probe" else None,
+        "probe_read_url": (os.environ.get("PROBE_READ_URL")
+                           if a.protocol in ("probe", "godmode_audit") else None),
         "godmode_model": JEV_MODEL,
         "untrusted_model": a.untrusted_model,
         "untrusted_provider": a.untrusted_provider,

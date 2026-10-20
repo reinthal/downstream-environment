@@ -6,7 +6,9 @@ with the Modal SDK (ProbeLens.score_jobs; the web endpoints cancelled long batch
 batches of --batch steps, --concurrency in flight. Attack
 steps first, then honest; --every k keeps every k-th honest action step (the calibration
 subsample; attack steps are all scored). One JSON line per step: log, task_id, mode, step,
-message_index, contrast, p_yes, p_no, n_tokens, seconds. --resume skips steps already in --out.
+message_index, contrast, p_yes, p_no, n_tokens, seconds (--read followup, the fibs read) or
+p_self, n_tokens, seconds (--read self: U's own step, no follow-up). --resume skips steps
+already in --out.
 
 Usage (from the repo root; one call per Phase A log dir into the same --out):
     MODAL_PROFILE=cadenza uv run --project environments/bash_arena --with modal python \
@@ -76,13 +78,24 @@ async def main(a) -> None:
     with a.out.open("a") as fh:
         async def one(batch):
             nonlocal n_done
-            jobs = [probe_client.step_job(j["messages"], j["tools"]) for j in batch]
+            if a.read == "self":
+                jobs = [{"messages": probe_client.template_messages(j["messages"]),
+                         "tools": probe_client.tool_schemas(j["tools"]), "self": True}
+                        for j in batch]
+            else:
+                jobs = [probe_client.step_job(j["messages"], j["tools"]) for j in batch]
             async with sem:
                 results = await lens.score_jobs.remote.aio(jobs)
             async with lock:
                 for j, res in zip(batch, results):
+                    if a.read == "self":
+                        (p_self,) = res["scores"]
+                        read = {"p_self": p_self, "n_tokens": res["n_tokens"][0],
+                                "seconds": res["seconds"]}
+                    else:
+                        read = probe_client.contrast_of(res)
                     row = ({k: j[k] for k in ("log", "task_id", "mode", "step", "message_index")}
-                           | probe_client.contrast_of(res))
+                           | read)
                     fh.write(json.dumps(row) + "\n")
                 fh.flush()
                 n_done += len(batch)
@@ -99,5 +112,8 @@ if __name__ == "__main__":
     p.add_argument("--every", type=int, default=1, help="Keep every k-th honest step.")
     p.add_argument("--resume", action="store_true")
     p.add_argument("--batch", type=int, default=10, help="Steps per score_jobs call.")
+    p.add_argument("--read", choices=["followup", "self"], default="followup",
+                   help="followup: the fibs follow-up, contrast No. - Yes.; self: U's own step "
+                   "(the token before its <|im_end|>), p_self.")
     p.add_argument("--concurrency", type=int, default=2, help="Batches in flight.")
     asyncio.run(main(p.parse_args()))
