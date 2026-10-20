@@ -64,13 +64,22 @@ def tool_schemas(tools: list[Tool] | list[ToolInfo]) -> list[dict]:
     ]
 
 
-def _url() -> str:
-    return os.environ["PROBE_URL"]  # e.g. http://localhost:8010 (ssh tunnel to the box)
+def _headers() -> dict:
+    """Modal proxy auth for the vllm-lens deployment (modal_probe_lens.py): PROBE_MODAL_TOKEN =
+    "wk-<id>.ws-<secret>"; the box's service over the ssh tunnel takes none."""
+    token = os.environ.get("PROBE_MODAL_TOKEN")
+    if token is None:
+        return {}
+    key, secret = token.split(".", 1)
+    return {"Modal-Key": key, "Modal-Secret": secret}
 
 
 async def read(messages: list[dict], tools: list[dict], reads: list[dict]) -> dict:
-    async with httpx.AsyncClient(timeout=1800) as c:
-        r = await c.post(f"{_url()}/read", json={"messages": messages, "tools": tools, "reads": reads})
+    """POST to PROBE_READ_URL: the box (probe_server.py, http://localhost:8031/read through the
+    ssh tunnel) or Modal (modal_probe_lens.py's read endpoint, with PROBE_MODAL_TOKEN)."""
+    async with httpx.AsyncClient(timeout=3600, follow_redirects=True, headers=_headers()) as c:
+        r = await c.post(os.environ["PROBE_READ_URL"],
+                         json={"messages": messages, "tools": tools, "reads": reads})
         r.raise_for_status()
         return r.json()
 

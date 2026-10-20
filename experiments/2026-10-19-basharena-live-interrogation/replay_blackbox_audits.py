@@ -56,12 +56,21 @@ async def main(a) -> None:
     print(f"audit threshold {t_audit} (realised {realised(informed, t_audit):.3f}); "
           f"{len(todo)} of {len(steps)} honest steps to interrogate", flush=True)
     u, t = cfg["untrusted_model"], cfg["trusted_model"]
-    u_config = rba.routed(GenerateConfig(**cfg["honest_generate_config"]), u,
-                          cfg["untrusted_provider"])
+    # Phase A's settings with the Phase B retry budget (run.py U_RETRIES): DeepInfra API errors
+    # exhausted 3 retries 110 audits into the first replay.
+    u_config = rba.routed(GenerateConfig(**cfg["honest_generate_config"]).merge(
+        GenerateConfig(max_retries=8)), u, cfg["untrusted_provider"])
     t_config = rba.routed(rba.TRUSTED_CONFIG, t, cfg["trusted_provider"])
+    done = set()
+    if a.out.exists():
+        if not a.resume:
+            raise SystemExit(f"{a.out} exists; pass --resume to continue it")
+        done = {(r["log"], r["task_id"], r["step"]) for r in map(json.loads, a.out.open())}
+    todo = [x for x in todo if (x[0], str(x[1].id), x[3]) not in done]
+    print(f"{len(todo)} left after {len(done)} done", flush=True)
     sem = asyncio.Semaphore(a.concurrency)
     lock = asyncio.Lock()
-    with a.out.open("w") as fh:
+    with a.out.open("a") as fh:
         async def one(log, s, i, k, score):
             tools = next(e.tools for e in s.events if e.event == "model" and e.tools)
             async with sem:
@@ -84,7 +93,5 @@ if __name__ == "__main__":
     p.add_argument("--config", type=Path, required=True)
     p.add_argument("--out", type=Path, required=True)
     p.add_argument("--concurrency", type=int, default=8)
-    a = p.parse_args()
-    if a.out.exists():
-        raise SystemExit(f"{a.out} exists; move it away first")
-    asyncio.run(main(a))
+    p.add_argument("--resume", action="store_true")
+    asyncio.run(main(p.parse_args()))

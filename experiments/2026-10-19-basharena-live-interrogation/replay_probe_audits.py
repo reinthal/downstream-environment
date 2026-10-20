@@ -8,7 +8,7 @@ above the audit threshold, from U's context at that step, with the same U, T and
 the live protocol. One JSON line per audited step: log, task_id, step, message_index, contrast,
 the audit (questions, answers, p(lie), suspicion).
 
-Usage (from the repo root; PROBE_URL through the ssh tunnel; launch with
+Usage (from the repo root; PROBE_READ_URL, see probe_client.read; launch with
 `env -u OPENROUTER_API_KEY -u OPENROUTER_BASE_URL` so the repo key is used):
     uv run --project environments/bash_arena python \
         experiments/2026-10-19-basharena-live-interrogation/replay_probe_audits.py \

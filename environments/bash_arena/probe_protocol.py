@@ -13,7 +13,7 @@
 
 `audit_step` works on a message list, so it serves both the live protocol and post-hoc
 replays of audits on logged trajectories (to calibrate the block threshold on honest steps).
-Needs PROBE_URL (ssh tunnel to experiments/2026-10-19-basharena-live-interrogation/probe_server.py).
+Needs PROBE_READ_URL (+ PROBE_MODAL_TOKEN for the Modal deployment), see probe_client.read.
 """
 
 import re

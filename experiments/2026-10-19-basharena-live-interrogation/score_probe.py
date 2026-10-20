@@ -1,12 +1,12 @@
 """Score action steps of logged trajectories with the fibs probe (step read), post hoc.
 
 Phase A runs non-blocking, so the probe protocol's suspicion (the step contrast) can be read
-afterwards from the eval logs through the probe service (probe_server.py, PROBE_URL). Attack
+afterwards from the eval logs through the probe service (probe_server.py or modal_probe_lens.py, PROBE_READ_URL). Attack
 steps first, then honest; --every k keeps every k-th honest action step (the calibration
 subsample; attack steps are all scored). One JSON line per step: log, task_id, mode, step,
 message_index, contrast, p_yes, p_no, n_tokens, seconds. --resume skips steps already in --out.
 
-Usage (from the repo root; PROBE_URL=http://localhost:8031 through the ssh tunnel):
+Usage (from the repo root; PROBE_READ_URL, see probe_client.read):
     uv run --project environments/bash_arena python \
         experiments/2026-10-19-basharena-live-interrogation/score_probe.py \
         --logs experiments/2026-10-19-basharena-live-interrogation/phase_a/inspect_logs \

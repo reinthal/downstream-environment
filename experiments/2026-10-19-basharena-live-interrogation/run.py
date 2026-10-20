@@ -195,7 +195,7 @@ if __name__ == "__main__":
         "--protocol", choices=["blackbox", "godmode", "probe"], default="blackbox",
         help="blackbox: informed monitor -> interrogation -> block; godmode: Jev -> block; "
         "probe: fibs probe -> lie-detector audit -> block (--trigger = audit threshold on the "
-        "probe contrast; needs PROBE_URL).",
+        "probe contrast; needs PROBE_READ_URL).",
     )
     # U on OpenRouter, streamed, pinned to DeepInfra's bf16 endpoint: the weights the probe
     # reads (researcher, 2026-10-20: "Please use Openrouter for qwen instead"; streaming and
@@ -227,7 +227,7 @@ if __name__ == "__main__":
             "probe": "auto_submit_protocol_wrapper(probe_protocol)",
             "blackbox": "auto_submit_protocol_wrapper(interrogation_protocol)",
         }[a.protocol],
-        "probe_url": os.environ.get("PROBE_URL") if a.protocol == "probe" else None,
+        "probe_read_url": os.environ.get("PROBE_READ_URL") if a.protocol == "probe" else None,
         "godmode_model": JEV_MODEL,
         "untrusted_model": a.untrusted_model,
         "untrusted_provider": a.untrusted_provider,
