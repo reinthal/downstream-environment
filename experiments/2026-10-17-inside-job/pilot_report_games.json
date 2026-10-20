@@ -1,0 +1,16 @@
+{
+ "n_games": 50,
+ "failed": 1,
+ "fail_reasons": [
+  "GameFailed: Alice: no valid TeamMessage after 3 attempts"
+ ],
+ "G1_G2_mission_success": {
+  "incentive": 0.604,
+  "none": 0.844
+ },
+ "G3_solver": {
+  "top1": 0.449,
+  "n_games": 49
+ },
+ "n_scored_turns": 0
+}

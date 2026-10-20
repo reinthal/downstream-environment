@@ -66,7 +66,7 @@ def auroc(y, s):
 def top1(rows, s):
     per, mole = defaultdict(lambda: defaultdict(list)), {}
     for r, v in zip(rows, s):
-        if r["mole_type"] in ("liar", "silent"):
+        if r["mole_type"] in ("liar", "silent", "incentive"):
             per[r["game_id"]][r["speaker"]].append(v)
             if r["role"] == "mole":
                 mole[r["game_id"]] = r["speaker"]

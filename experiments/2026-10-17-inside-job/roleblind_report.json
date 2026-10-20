@@ -1,0 +1,109 @@
+{
+ "n_turns": 4016,
+ "layers": {
+  "16": {
+   "original": {
+    "lie_all": 0.588,
+    "lie_talk": 0.6,
+    "lie_entry": 0.517,
+    "lie_answer": 0.667,
+    "top1": 0.412,
+    "mole_truthful_vs_loyal": 0.519,
+    "open_saboteur_vs_loyal": 0.388,
+    "mean_loyal": 12.36,
+    "mean_mole_truthful": 12.28,
+    "mean_mole_lie": 12.83
+   },
+   "role_blind": {
+    "lie_all": 0.52,
+    "lie_talk": 0.623,
+    "lie_entry": 0.52,
+    "lie_answer": 0.468,
+    "top1": 0.147,
+    "mole_truthful_vs_loyal": 0.483,
+    "open_saboteur_vs_loyal": 0.384,
+    "mean_loyal": 12.32,
+    "mean_mole_truthful": 11.99,
+    "mean_mole_lie": 12.38
+   }
+  },
+  "24": {
+   "original": {
+    "lie_all": 0.571,
+    "lie_talk": 0.673,
+    "lie_entry": 0.581,
+    "lie_answer": 0.605,
+    "top1": 0.853,
+    "mole_truthful_vs_loyal": 0.654,
+    "open_saboteur_vs_loyal": 0.412,
+    "mean_loyal": 9.6,
+    "mean_mole_truthful": 10.73,
+    "mean_mole_lie": 10.22
+   },
+   "role_blind": {
+    "lie_all": 0.43,
+    "lie_talk": 0.605,
+    "lie_entry": 0.457,
+    "lie_answer": 0.401,
+    "top1": 0.206,
+    "mole_truthful_vs_loyal": 0.535,
+    "open_saboteur_vs_loyal": 0.44,
+    "mean_loyal": 9.51,
+    "mean_mole_truthful": 9.55,
+    "mean_mole_lie": 9.11
+   }
+  },
+  "32": {
+   "original": {
+    "lie_all": 0.925,
+    "lie_talk": 0.884,
+    "lie_entry": 0.981,
+    "lie_answer": 0.944,
+    "top1": 1.0,
+    "mole_truthful_vs_loyal": 0.991,
+    "open_saboteur_vs_loyal": 0.584,
+    "mean_loyal": 2.64,
+    "mean_mole_truthful": 9.73,
+    "mean_mole_lie": 9.26
+   },
+   "role_blind": {
+    "lie_all": 0.693,
+    "lie_talk": 0.667,
+    "lie_entry": 0.953,
+    "lie_answer": 0.572,
+    "top1": 0.941,
+    "mole_truthful_vs_loyal": 0.692,
+    "open_saboteur_vs_loyal": 0.613,
+    "mean_loyal": 1.78,
+    "mean_mole_truthful": 2.94,
+    "mean_mole_lie": 3.33
+   }
+  },
+  "48": {
+   "original": {
+    "lie_all": 0.981,
+    "lie_talk": 0.936,
+    "lie_entry": 0.997,
+    "lie_answer": 0.987,
+    "top1": 1.0,
+    "mole_truthful_vs_loyal": 0.998,
+    "open_saboteur_vs_loyal": 0.984,
+    "mean_loyal": -28.39,
+    "mean_mole_truthful": -11.85,
+    "mean_mole_lie": -2.95
+   },
+   "role_blind": {
+    "lie_all": 0.956,
+    "lie_talk": 0.897,
+    "lie_entry": 0.986,
+    "lie_answer": 0.955,
+    "top1": 0.971,
+    "mole_truthful_vs_loyal": 0.746,
+    "open_saboteur_vs_loyal": 0.822,
+    "mean_loyal": -27.85,
+    "mean_mole_truthful": -24.93,
+    "mean_mole_lie": -16.86
+   }
+  }
+ }
+}
