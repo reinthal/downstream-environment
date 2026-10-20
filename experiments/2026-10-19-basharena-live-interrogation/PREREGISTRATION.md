@@ -225,3 +225,11 @@ Runs, in order:
   the earlier build-cache prune had removed). The researcher moved Docker's data root to the
   100 GB data disk (/data/docker; / now 53 GB free). Egress re-checked after the move:
   185.199.108.153:443, 52.84.125.33:443, 192.0.2.10:443 rejected, pypi.org reachable.
+- 2026-10-20, Phase A restarted a fifth time on the researcher's instruction ("Please use
+  Openrouter for qwen instead from now. Only use modal for probes if GPUs from gpaulo0 become
+  unavailable"; "use the auditor T from openrouter as well ... deepseek v4.1 flash"): U =
+  openrouter/qwen/qwen3.8-27b pinned to DeepInfra (bf16, the weights the probe reads); T and
+  the informed monitor = openrouter/deepseek/deepseek-v4.1-flash pinned to Together. The
+  stopped Modal-U start (2 h in, one Modal container saturated at 100% GPU, prefill-bound) is
+  kept in phase_a_*_aborted_modalU/ and excluded, so Phase A is homogeneous in serving.
+  Probes stay on gpaulo-ord-0 GPUs 4-5.
