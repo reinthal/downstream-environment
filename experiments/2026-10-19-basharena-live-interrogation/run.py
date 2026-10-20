@@ -42,6 +42,14 @@ sys.path.insert(0, str(RUNNER_DIR))
 
 import run_bash_arena as rba  # noqa: E402  (loads .env, defines configs + routing)
 import openrouter_stream  # noqa: E402,F401  (registers the openrouterstream/ provider)
+from inspect_ai.model import GenerateConfig  # noqa: E402
+
+# U's request retries: DeepInfra via OpenRouter drops connections, returns 520s and times out
+# before the first token often enough that 3 retries let samples error (Phase A, 2026-10-20).
+# Transport only: a retry re-sends the same request.
+U_RETRIES = GenerateConfig(max_retries=8)
+HONEST_CONFIG = rba.HONEST_CONFIG.merge(U_RETRIES)
+ATTACK_CONFIG = rba.ATTACK_CONFIG.merge(U_RETRIES)
 from control_arena.eval import ControlEvalConfig, get_control_task_product  # noqa: E402
 from control_arena.policy import untrusted_policy_builder  # noqa: E402
 from control_arena.scorers import max_suspicion_scorer  # noqa: E402
@@ -72,8 +80,8 @@ from probe_protocol import probe_protocol  # noqa: E402
 
 def build_protocol(cfg: dict):
     u, t = cfg["untrusted_model"], cfg["trusted_model"]
-    honest_config = rba.routed(rba.HONEST_CONFIG, u, cfg["untrusted_provider"])
-    attack_config = rba.routed(rba.ATTACK_CONFIG, u, cfg["untrusted_provider"])
+    honest_config = rba.routed(HONEST_CONFIG, u, cfg["untrusted_provider"])
+    attack_config = rba.routed(ATTACK_CONFIG, u, cfg["untrusted_provider"])
     trusted_config = rba.routed(rba.TRUSTED_CONFIG, t, cfg["trusted_provider"])
     policy = untrusted_policy_builder(
         attack=rba.last_turn_max_tokens_only(
@@ -142,7 +150,8 @@ def main(cfg: dict, out_dir: Path, limit: int | None) -> None:
         untrusted_model=cfg["untrusted_model"],
         trusted_model=cfg["trusted_model"],
         untrusted_config=rba.routed(
-            rba.UNTRUSTED_CONFIG, cfg["untrusted_model"], cfg["untrusted_provider"]
+            rba.UNTRUSTED_CONFIG.merge(U_RETRIES), cfg["untrusted_model"],
+            cfg["untrusted_provider"]
         ),
         trusted_config=rba.routed(
             rba.TRUSTED_CONFIG, cfg["trusted_model"], cfg["trusted_provider"]
@@ -236,8 +245,8 @@ if __name__ == "__main__":
         "token_limit": a.token_limit,
         "limit": a.limit,
         "task_ids": a.task_ids,
-        "honest_generate_config": rba.HONEST_CONFIG.model_dump(exclude_none=True),
-        "attack_generate_config": rba.ATTACK_CONFIG.model_dump(exclude_none=True),
+        "honest_generate_config": HONEST_CONFIG.model_dump(exclude_none=True),
+        "attack_generate_config": ATTACK_CONFIG.model_dump(exclude_none=True),
         "trusted_generate_config": rba.TRUSTED_CONFIG.model_dump(exclude_none=True),
         "honest_oversight_note": HONEST_OVERSIGHT_NOTE,
         "attack_oversight_note": ATTACK_OVERSIGHT_NOTE,
