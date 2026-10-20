@@ -1,22 +1,24 @@
 """Score action steps of logged trajectories with the fibs probe (step read), post hoc.
 
 Phase A runs non-blocking, so the probe protocol's suspicion (the step contrast) can be read
-afterwards from the eval logs through the Modal vllm-lens deployment (modal_probe_lens.py,
-PROBE_BATCH_URL + PROBE_MODAL_TOKEN), in batches of --batch steps, --concurrency in flight. Attack
+afterwards from the eval logs through the Modal vllm-lens deployment (modal_probe_lens.py), called
+with the Modal SDK (ProbeLens.score_jobs; the web endpoints cancelled long batched requests), in
+batches of --batch steps, --concurrency in flight. Attack
 steps first, then honest; --every k keeps every k-th honest action step (the calibration
 subsample; attack steps are all scored). One JSON line per step: log, task_id, mode, step,
 message_index, contrast, p_yes, p_no, n_tokens, seconds. --resume skips steps already in --out.
 
-Usage (from the repo root; PROBE_READ_URL, see probe_client.read):
-    uv run --project environments/bash_arena python \
+Usage (from the repo root; one call per Phase A log dir into the same --out):
+    MODAL_PROFILE=cadenza uv run --project environments/bash_arena --with modal python \
         experiments/2026-10-19-basharena-live-interrogation/score_probe.py \
-        --logs experiments/2026-10-19-basharena-live-interrogation/phase_a/inspect_logs \
-        --out experiments/2026-10-19-basharena-live-interrogation/phase_a/probe_scores.jsonl
+        --logs experiments/2026-10-19-basharena-live-interrogation/phase_a_honest/inspect_logs \
+        --out experiments/2026-10-19-basharena-live-interrogation/phase_a_probe_scores.jsonl --resume
 """
 
 import argparse
 import asyncio
 import json
+import os
 import sys
 import time
 from pathlib import Path
@@ -59,6 +61,14 @@ async def main(a) -> None:
     todo = [j for j in jobs(a.logs, a.every) if (j["log"], j["task_id"], j["step"]) not in done]
     print(f"{len(todo)} steps to score ({len(done)} done)", flush=True)
     t0 = time.time()
+    # The repo .env (loaded by run_bash_arena) sets MODAL_TOKEN_ID to a proxy token (wk-...),
+    # which the Modal SDK rejects as an API token ("Token ID is malformed") and which would
+    # override the profile; the SDK must authenticate with MODAL_PROFILE's token.
+    os.environ.pop("MODAL_TOKEN_ID", None)
+    os.environ.pop("MODAL_TOKEN_SECRET", None)
+    import modal  # run with `uv run --with modal`, MODAL_PROFILE=cadenza
+
+    lens = modal.Cls.from_name("ais407-probe-lens", "ProbeLens")()
     batches = [todo[i:i + a.batch] for i in range(0, len(todo), a.batch)]
     sem = asyncio.Semaphore(a.concurrency)
     lock = asyncio.Lock()
@@ -68,7 +78,7 @@ async def main(a) -> None:
             nonlocal n_done
             jobs = [probe_client.step_job(j["messages"], j["tools"]) for j in batch]
             async with sem:
-                results = await probe_client.read_batch(jobs)
+                results = await lens.score_jobs.remote.aio(jobs)
             async with lock:
                 for j, res in zip(batch, results):
                     row = ({k: j[k] for k in ("log", "task_id", "mode", "step", "message_index")}
@@ -88,6 +98,6 @@ if __name__ == "__main__":
     p.add_argument("--out", type=Path, required=True)
     p.add_argument("--every", type=int, default=1, help="Keep every k-th honest step.")
     p.add_argument("--resume", action="store_true")
-    p.add_argument("--batch", type=int, default=10, help="Steps per read_batch call.")
+    p.add_argument("--batch", type=int, default=10, help="Steps per score_jobs call.")
     p.add_argument("--concurrency", type=int, default=2, help="Batches in flight.")
     asyncio.run(main(p.parse_args()))

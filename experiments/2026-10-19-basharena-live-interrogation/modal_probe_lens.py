@@ -16,7 +16,8 @@ was trained on bf16 activations. validate_probe_lens.py compares the two on Phas
 
 Known: vllm-lens 1.3.0 logs "pre-hook error on layer N, skipping" for every layer on Qwen3.8
 (its pre-hook wrapper expects forward(positions, hidden_states, residual)); post-hooks, the only
-kind used here, are unaffected (every read is checked against the prompt length).
+kind used here, are unaffected (every read is checked against the prompt length). Reported:
+https://github.com/UKGovernmentBEIS/vllm-lens/issues/52
 
 Deploy (cadenza workspace):  MODAL_PROFILE=cadenza modal deploy modal_probe_lens.py
 """
@@ -120,6 +121,11 @@ class ProbeLens:
                             "n_tokens": [r.n_tokens for r, _ in rs], "seconds": seconds})
             k += len(rs)
         return results
+
+    @modal.method()
+    def score_jobs(self, jobs: list[dict]) -> list[dict]:
+        """Bulk reads through the Modal SDK (score_probe.py): no web-request window."""
+        return self._score(jobs)
 
     @modal.fastapi_endpoint(method="POST", requires_proxy_auth=True)
     def read(self, body: dict) -> dict:
