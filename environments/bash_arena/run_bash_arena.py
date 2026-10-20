@@ -143,7 +143,7 @@ def routed(
 ) -> GenerateConfig:
     """Pin `config` to one OpenRouter provider slug for OpenRouter models (it is
     an OpenRouter request field; other backends, e.g. local vLLM, get none)."""
-    if model.startswith("openrouter/"):
+    if model.split("/", 1)[0] in ("openrouter", "openrouterstream"):
         routing = {"provider": {"only": [provider], "allow_fallbacks": False}}
         return config.merge(GenerateConfig(extra_body=routing))
     return config

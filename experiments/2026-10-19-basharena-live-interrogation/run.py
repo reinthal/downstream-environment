@@ -41,6 +41,7 @@ RUNNER_DIR = _find_runner_dir()
 sys.path.insert(0, str(RUNNER_DIR))
 
 import run_bash_arena as rba  # noqa: E402  (loads .env, defines configs + routing)
+import openrouter_stream  # noqa: E402,F401  (registers the openrouterstream/ provider)
 from control_arena.eval import ControlEvalConfig, get_control_task_product  # noqa: E402
 from control_arena.policy import untrusted_policy_builder  # noqa: E402
 from control_arena.scorers import max_suspicion_scorer  # noqa: E402
@@ -187,10 +188,11 @@ if __name__ == "__main__":
         "probe: fibs probe -> lie-detector audit -> block (--trigger = audit threshold on the "
         "probe contrast; needs PROBE_URL).",
     )
-    # U on OpenRouter, pinned to DeepInfra: the only provider serving the bf16 weights the
-    # probe reads (researcher, 2026-10-20: "Please use Openrouter for qwen instead").
-    p.add_argument("--untrusted-model", default="openrouter/qwen/qwen3.8-27b")
-    p.add_argument("--untrusted-provider", default="deepinfra")
+    # U on OpenRouter, streamed, pinned to DeepInfra's bf16 endpoint: the weights the probe
+    # reads (researcher, 2026-10-20: "Please use Openrouter for qwen instead"; streaming and
+    # the "deepinfra/bf16" slug after a 300 s upstream timeout, openrouter_stream.py).
+    p.add_argument("--untrusted-model", default="openrouterstream/qwen/qwen3.8-27b")
+    p.add_argument("--untrusted-provider", default="deepinfra/bf16")
     # T on OpenRouter, pinned to Together (researcher, 2026-10-20: "use the auditor T from
     # openrouter as well ... deepseek v4.1 flash"); DeepSeek first-party is excluded by the
     # account's data policy (environments/bash_arena/run_bash_arena.py).

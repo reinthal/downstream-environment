@@ -239,3 +239,9 @@ Runs, in order:
   values, so it overrode the repo key. The GLM-5.3 Flash pilot's 402 of 2026-10-19 had the
   same cause. Runs are now launched with `env -u OPENROUTER_API_KEY -u OPENROUTER_BASE_URL`
   (repo key, billed as expected).
+- 2026-10-20: U's requests are now streamed (`openrouterstream/` provider,
+  environments/bash_arena/openrouter_stream.py) and pinned to the "deepinfra/bf16" endpoint
+  (researcher's instruction). Non-streamed, a long Qwen3.8 generation hit OpenRouter's ~300 s
+  upstream timeout ("Provider timed out after 307152ms"); such failures select the longest
+  generations and would bias which samples survive. The non-streamed start (45 min, no
+  finished trajectory) is kept in phase_a_*_aborted_nostream/ and excluded.
