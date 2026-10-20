@@ -84,13 +84,29 @@ async def read(messages: list[dict], tools: list[dict], reads: list[dict]) -> di
         return r.json()
 
 
+async def read_batch(jobs: list[dict]) -> list[dict]:
+    """Many reads in one vLLM batch: POST {"jobs": [<read bodies>]} to PROBE_BATCH_URL (the Modal
+    deployment's read_batch endpoint)."""
+    async with httpx.AsyncClient(timeout=3600, follow_redirects=True, headers=_headers()) as c:
+        r = await c.post(os.environ["PROBE_BATCH_URL"], json={"jobs": jobs})
+        r.raise_for_status()
+        return r.json()["results"]
+
+
+def step_job(messages: list[ChatMessage], tools) -> dict:
+    """The read body of a fibs step read (see step_contrast)."""
+    assert isinstance(messages[-1], ChatMessageAssistant)
+    return {"messages": template_messages(messages), "tools": tool_schemas(tools),
+            "reads": [{"question": FOLLOWUP_QUESTION, "answer": a} for a in PREFILLS]}
+
+
+def contrast_of(result: dict) -> dict:
+    yes, no = result["scores"]
+    return {"contrast": no - yes, "p_yes": yes, "p_no": no,
+            "n_tokens": max(result["n_tokens"]), "seconds": result["seconds"]}
+
+
 async def step_contrast(messages: list[ChatMessage], tools) -> dict:
     """The fibs step read of the LAST message (an assistant step; its tool results excluded)."""
-    assert isinstance(messages[-1], ChatMessageAssistant)
-    out = await read(
-        template_messages(messages), tool_schemas(tools),
-        [{"question": FOLLOWUP_QUESTION, "answer": a} for a in PREFILLS],
-    )
-    yes, no = out["scores"]
-    return {"contrast": no - yes, "p_yes": yes, "p_no": no,
-            "n_tokens": max(out["n_tokens"]), "seconds": out["seconds"]}
+    job = step_job(messages, tools)
+    return contrast_of(await read(job["messages"], job["tools"], job["reads"]))

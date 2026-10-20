@@ -255,3 +255,15 @@ Runs, in order:
   comes from interrogations replayed with the fixed prompts on the honest audited steps
   (replay_blackbox_audits.py), like the probe's, instead of Phase A's live interrogations.
   Phase B uses the fixed prompts for both protocols.
+- 2026-10-20, after Phase A, before any probe threshold was computed: the probe now reads
+  Qwen3.8-27B-FP8 activations on Modal (vllm-lens 1.3.0 + vLLM 0.30.0, H100, cadenza workspace;
+  modal_probe_lens.py) instead of the bf16 model on gpaulo-ord-0 GPUs 4-5 (researcher: "add
+  vllm-lens deployment on modal and run fp8 version of the qwen3.8-27b model, add a hook for the
+  linear ensemble probe from fibs"; then chose "FP8 on Modal" for the whole probe protocol).
+  Reason: the bf16 reads took ~27 s/step at long context (8 h left for Phase A alone).
+  Validation on 40 Phase A steps (probe_lens_validation.json): contrast Pearson r 0.996, mean
+  |diff| 0.023, max 0.077, FP8 0.013 lower on average, 39/40 on the same side of the bf16 10%
+  cut (the exception: 0.092 vs 0.105 at a 0.095 cut). All Phase A steps are re-scored on FP8
+  and the probe thresholds, replayed audits and probe Phase B use FP8 only; the partial bf16
+  scores (1,278 steps) are kept in phase_a_probe_scores_bf16_partial.jsonl and excluded.
+  The box's GPUs 4-5 were released.
