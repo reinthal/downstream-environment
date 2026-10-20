@@ -55,6 +55,8 @@ class RunConfig(ExperimentConfig):
     random_direction: str = "experiments/2026-10-16-auditor-uplift/random_direction.npy"   # = the live scorer's
     pilot_loyal_talk_sample: float = 0.4  # score_offline.py --pilot: share of loyal talk turns scored
     offline_service_threads: int = 4      # score_offline.py --via-service: concurrent requests to the scorer
+    ladder_layers: list[int] = field(default_factory=lambda: [16, 24, 32, 48])   # layer_ladder.py
+    ladder_random: int = 100              # layer_ladder.py: random directions per layer
     n_games: int = 150
     game_seed: int = 7000
     pilot_seed: int = 0

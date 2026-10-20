@@ -66,5 +66,12 @@
  "n_boot": 2000,
  "random_direction": "experiments/2026-10-16-auditor-uplift/random_direction.npy",
  "pilot_loyal_talk_sample": 0.4,
- "offline_service_threads": 4
+ "offline_service_threads": 4,
+ "ladder_layers": [
+  16,
+  24,
+  32,
+  48
+ ],
+ "ladder_random": 100
 }
