@@ -245,3 +245,13 @@ Runs, in order:
   upstream timeout ("Provider timed out after 307152ms"); such failures select the longest
   generations and would bias which samples survive. The non-streamed start (45 min, no
   finished trajectory) is kept in phase_a_*_aborted_nostream/ and excluded.
+- 2026-10-20, during Phase A (before any threshold was computed): T's prompts now show the held
+  action in its own <action_on_hold> block (commit 5d4b2f6; questions, judge, questions-only
+  judge, both probe-protocol prompts). With one numbered list ("the highest numbers are the
+  action on hold") DeepSeek V4.1 Flash sometimes refused to ask questions (sample 7099712 in
+  Phase A; once in a pilot), erroring the sample. The informed monitor's prompt is unchanged.
+  Researcher chose to keep Phase A running ("Keep running, replay"): the black-box audit
+  threshold still comes from Phase A's live monitor scores; the black-box BLOCK threshold now
+  comes from interrogations replayed with the fixed prompts on the honest audited steps
+  (replay_blackbox_audits.py), like the probe's, instead of Phase A's live interrogations.
+  Phase B uses the fixed prompts for both protocols.
