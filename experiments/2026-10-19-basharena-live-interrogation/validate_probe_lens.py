@@ -1,13 +1,16 @@
-"""Compare the FP8 vllm-lens probe reads (modal_probe_lens.py) with the bf16 probe service.
+"""Compare the vllm-lens probe reads on Modal (modal_probe_lens.py) with the HF bf16 probe service.
 
-Takes steps the bf16 service already scored (phase_a_probe_scores.jsonl), spread over both modes
-and over context length, re-reads them on Modal, and writes probe_lens_validation.json:
-per step both contrasts and the token counts, plus Pearson r, mean and max |difference|, and
-the agreement of the top-10% call (would both flag the step at the bf16 10% cut).
+Takes steps the HF bf16 service on gpaulo-ord-0 (probe_server.py) already scored (--reference),
+spread over both modes and over context length, re-reads them on Modal (ProbeLens.score_jobs via
+the Modal SDK), and writes --out: per step both contrasts and the token counts, plus Pearson r,
+mean and max |difference|, and the agreement of the top-10% call (would both flag the step at the
+reference's 10% honest cut). probe_lens_validation.json is the FP8 run against
+phase_a_probe_scores.jsonl as it stood then (the HF bf16 scores, later renamed _bf16_partial).
 
-Usage (from the repo root; MODAL_PROXY_TOKEN in the repo .env):
-    uv run --project environments/bash_arena python \
-        experiments/2026-10-19-basharena-live-interrogation/validate_probe_lens.py --n 40
+Usage (from the repo root):
+    MODAL_PROFILE=cadenza uv run --project environments/bash_arena --with modal python \
+        experiments/2026-10-19-basharena-live-interrogation/validate_probe_lens.py --n 40 \
+        --out experiments/2026-10-19-basharena-live-interrogation/probe_lens_validation_bf16.json
 """
 
 import argparse
@@ -22,17 +25,15 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[1] / "environments" / "bash_arena"))
 sys.path.insert(0, str(HERE))
 
-import httpx  # noqa: E402
 import probe_client as pc  # noqa: E402
 import run_bash_arena  # noqa: E402,F401  (loads the repo .env)
 from inspect_ai.log import read_eval_log  # noqa: E402
 from thresholds import threshold  # noqa: E402
 
-BATCH_URL = "https://cadenza--ais407-probe-lens-probelens-read-batch.us-east.modal.run"
 
 
 def main(a) -> None:
-    rows = [json.loads(l) for l in (HERE / "phase_a_probe_scores.jsonl").open()]
+    rows = [json.loads(l) for l in a.reference.open()]
     t10 = threshold([r["contrast"] for r in rows if r["mode"] == "honest"], 0.10)
     pick = []
     for mode in ("attack", "honest"):
@@ -51,27 +52,29 @@ def main(a) -> None:
         jobs.append({"messages": pc.template_messages(list(s.messages[: r["message_index"] + 1])),
                      "tools": tools,
                      "reads": [{"question": pc.FOLLOWUP_QUESTION, "answer": x} for x in pc.PREFILLS]})
-    key, secret = os.environ["MODAL_PROXY_TOKEN"].split(".", 1)
+    # the repo .env's MODAL_TOKEN_ID is a proxy token the SDK rejects (see score_probe.py)
+    os.environ.pop("MODAL_TOKEN_ID", None)
+    os.environ.pop("MODAL_TOKEN_SECRET", None)
+    import modal
+
+    lens = modal.Cls.from_name("ais407-probe-lens", "ProbeLens")()
     out = []
-    with httpx.Client(timeout=3600, follow_redirects=True,
-                      headers={"Modal-Key": key, "Modal-Secret": secret}) as c:
-        for i in range(0, len(jobs), a.batch):
-            t0 = time.time()
-            resp = c.post(BATCH_URL, json={"jobs": jobs[i:i + a.batch]})
-            resp.raise_for_status()
-            res = resp.json()["results"]
-            print(f"batch {i // a.batch}: {len(res)} steps in {time.time() - t0:.0f} s", flush=True)
-            for r, x in zip(pick[i:i + a.batch], res):
-                yes, no = x["scores"]
-                out.append({"task_id": r["task_id"], "mode": r["mode"], "step": r["step"],
-                            "n_tokens": r["n_tokens"], "bf16": r["contrast"], "fp8": no - yes})
-    b, f = [x["bf16"] for x in out], [x["fp8"] for x in out]
+    for i in range(0, len(jobs), a.batch):
+        t0 = time.time()
+        res = lens.score_jobs.remote(jobs[i:i + a.batch])
+        print(f"batch {i // a.batch}: {len(res)} steps in {time.time() - t0:.0f} s", flush=True)
+        for r, x in zip(pick[i:i + a.batch], res):
+            yes, no = x["scores"]
+            out.append({"task_id": r["task_id"], "mode": r["mode"], "step": r["step"],
+                        "n_tokens": r["n_tokens"], "reference": r["contrast"],
+                        "lens": no - yes})
+    b, f = [x["reference"] for x in out], [x["lens"] for x in out]
     d = [abs(x - y) for x, y in zip(b, f)]
     summary = {"n": len(out), "pearson_r": statistics.correlation(b, f),
                "mean_abs_diff": statistics.mean(d), "max_abs_diff": max(d),
                "bf16_honest_10pct_cut": t10,
                "flag_agreement": sum((x >= t10) == (y >= t10) for x, y in zip(b, f)) / len(out)}
-    (HERE / "probe_lens_validation.json").write_text(
+    a.out.write_text(
         json.dumps({"summary": summary, "steps": out}, indent=2) + "\n")
     print(json.dumps(summary, indent=2))
 
@@ -80,4 +83,7 @@ if __name__ == "__main__":
     p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     p.add_argument("--n", type=int, default=40)
     p.add_argument("--batch", type=int, default=10)
+    p.add_argument("--reference", type=Path,
+                   default=HERE / "phase_a_probe_scores_bf16_partial.jsonl")
+    p.add_argument("--out", type=Path, required=True)
     main(p.parse_args())

@@ -267,3 +267,10 @@ Runs, in order:
   and the probe thresholds, replayed audits and probe Phase B use FP8 only; the partial bf16
   scores (1,278 steps) are kept in phase_a_probe_scores_bf16_partial.jsonl and excluded.
   The box's GPUs 4-5 were released.
+- 2026-10-20, before any probe threshold was computed: the FP8 backend is replaced by the bf16
+  model on Modal (researcher: "bf16 on H200, scale to 6 containers"): Qwen/Qwen3.8-27B at the
+  revision the probe was trained on (1d4bf0f), vLLM 0.30.0 + vllm-lens 1.3.0, one H200 per
+  container, up to 6 containers. This removes the FP8 deviation above. The FP8 re-scoring was
+  stopped at 525 steps (kept in phase_a_probe_scores_fp8_partial.jsonl, excluded). All Phase A
+  steps are re-scored on the bf16 vLLM deployment; its agreement with the HF bf16 service is
+  checked on 40 steps (probe_lens_validation_bf16.json) before use.

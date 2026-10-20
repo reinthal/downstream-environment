@@ -1,4 +1,4 @@
-"""fibs probe reads on Modal: Qwen3.8-27B-FP8 under vLLM + vllm-lens, the linear ensemble as a hook.
+"""fibs probe reads on Modal: Qwen3.8-27B (bf16) under vLLM + vllm-lens, the linear ensemble as a hook.
 
 Same contract as probe_server.py (the bf16 service on gpaulo-ord-0), so PROBE_READ_URL can point here:
 POST /read {"messages", "tools", "reads": [{"question", "answer"}]} -> {"scores", "n_tokens",
@@ -11,8 +11,10 @@ activations depend only on what precedes it. A vllm-lens hook keeps the residual
 at layers 19-58; with max_tokens=1 the last chunk ends at the read token (checked: the hook's
 token count must equal the prompt length). The linear ensemble then scores it on the CPU.
 
-Deliberate difference from probe_server.py: FP8 weights (Qwen/Qwen3.8-27B-FP8) where the probe
-was trained on bf16 activations. validate_probe_lens.py compares the two on Phase A steps.
+Same weights and revision the probe was trained on (bf16, 1d4bf0f), on one H200 (141 GB: ~55 GB
+of weights + KV cache for 262k-token reads). An FP8 version (Qwen3.8-27B-FP8, H100) matched the
+bf16 reads at r 0.996 (probe_lens_validation.json) and was replaced to drop that deviation.
+validate_probe_lens.py compares this deployment with the bf16 HF service on Phase A steps.
 
 Known: vllm-lens 1.3.0 logs "pre-hook error on layer N, skipping" for every layer on Qwen3.8
 (its pre-hook wrapper expects forward(positions, hidden_states, residual)); post-hooks, the only
@@ -29,8 +31,8 @@ import modal
 # The add_local_* sources below are read only where the app is deployed from; inside the
 # container this module sits at /root/modal_probe_lens.py and has no repo around it.
 REPO = Path(__file__).resolve().parents[2] if modal.is_local() else Path("/root")
-MODEL = "Qwen/Qwen3.8-27B-FP8"
-REVISION = "017b9c7af6b5689d5dd426a76e0bc077eb5ca20a"
+MODEL = "Qwen/Qwen3.8-27B"
+REVISION = "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0"
 PROBE_DIR = "/root/probe"
 LAYERS = [19, 27, 35, 43, 51, 58]
 TEMPLATE_KWARGS = {"enable_thinking": False, "preserve_thinking": False}
@@ -54,8 +56,8 @@ hf_cache = modal.Volume.from_name("ais407-hf-cache", create_if_missing=True)
 app = modal.App("ais407-probe-lens", image=image)
 
 
-@app.cls(gpu="H100", volumes={"/hf": hf_cache}, timeout=3600, scaledown_window=300,
-         max_containers=2)
+@app.cls(gpu="H200", volumes={"/hf": hf_cache}, timeout=3600, scaledown_window=300,
+         max_containers=6)
 class ProbeLens:
     @modal.enter()
     def load(self):
