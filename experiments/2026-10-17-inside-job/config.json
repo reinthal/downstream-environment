@@ -56,9 +56,7 @@
  },
  "pilot_mole_mix": {
   "none": 0.2,
-  "liar": 0.3,
-  "silent": 0.3,
-  "open": 0.2
+  "incentive": 0.8
  },
  "n_games": 150,
  "game_seed": 7000,
@@ -73,5 +71,6 @@
   32,
   48
  ],
- "ladder_random": 100
+ "ladder_random": 100,
+ "incentive_framing": true
 }

@@ -57,6 +57,7 @@ class RunConfig(ExperimentConfig):
     offline_service_threads: int = 4      # score_offline.py --via-service: concurrent requests to the scorer
     ladder_layers: list[int] = field(default_factory=lambda: [16, 24, 32, 48])   # layer_ladder.py
     ladder_random: int = 100              # layer_ladder.py: random directions per layer
+    incentive_framing: bool = False      # game.py: neutral roles + private bonus notes (mole type "incentive")
     n_games: int = 150
     game_seed: int = 7000
     pilot_seed: int = 0
