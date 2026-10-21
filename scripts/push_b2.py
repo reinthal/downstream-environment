@@ -33,6 +33,11 @@ EXP = "experiments/2026-10-13-fibs-basharena"
 QWEN38 = "Qwen3.8-27B"
 QWEN35 = "Qwen3.5-27B"
 BASH = "downstream-environments/bash-arena"
+ABL = "experiments/2026-10-14-preonset-ablation"
+ABL_CONDITIONS = ("orig_honest", "orig_preonset", "swap", "ctrl_neutral", "ctrl_good", "ctrl_evil", "honest_attack")
+CP = "downstream-environments/carrot-parsnip"
+CPE = "experiments/2026-10-12-fibs-probes"
+CP_ARMS = ("3p", "5p", "3p_cc", "5p_cc")
 
 LAYOUT = {
     # fibs-v1 activations of Qwen3.8-27B (revision 1d4bf0f2), follow-up read, layers 19/27/35/43/51/58
@@ -51,6 +56,25 @@ LAYOUT = {
     f"{BASH}/scores/{QWEN38}/config.json": f"repo:{EXP}/config.json",
     f"{BASH}/activations/{QWEN38}/honest": "volume:steps/main/honest",
     f"{BASH}/activations/{QWEN38}/attack": "volume:steps/main/attack",
+    # BashArena pre-onset ablation (2026-10-14): the same steps re-read under 7 system-prompt conditions (local, gitignored)
+    **{f"{BASH}/activations/{QWEN38}/preonset-ablation/{c}": f"repo:{ABL}/acts/{c}" for c in ABL_CONDITIONS},
+    **{f"{BASH}/scores/{QWEN38}/preonset-ablation/scores_{c}.jsonl": f"repo:{ABL}/scores_main_{c}.jsonl"
+       for c in ABL_CONDITIONS},
+    f"{BASH}/scores/{QWEN38}/preonset-ablation/results_main.json": f"repo:{ABL}/results_main.json",
+    **{f"{BASH}/scores/{QWEN38}/preonset-ablation/{t}.txt": f"repo:{ABL}/{t}.txt"
+       for t in ("honest_system", "side_task_block", "attack_system")},
+    # Carrot-Parsnip games of Qwen3.5-27B (2026-10-12), judge labels, probe scores, activations (local, gitignored)
+    **{f"{CP}/transcripts/{QWEN35}/transcripts_{a}.jsonl": f"repo:{CPE}/transcripts_{a}.jsonl" for a in CP_ARMS},
+    **{f"{CP}/transcripts/{QWEN35}/games_{a}.json": f"repo:{CPE}/games_{a}.json" for a in CP_ARMS},
+    f"{CP}/transcripts/{QWEN35}/alpaca_rollouts.jsonl": "repo:data/qwen3.5-27b_alpaca_rollouts.jsonl",
+    **{f"{CP}/labels/{QWEN35}/judge_{a}.jsonl": f"repo:{CPE}/judge_{a}.jsonl" for a in ("3p", "5p")},
+    **{f"{CP}/scores/{QWEN35}/scores_{a}.csv": f"repo:{CPE}/scores_{a}.csv" for a in (*CP_ARMS, "alpaca")},
+    **{f"{CP}/activations/{QWEN35}/{a}": f"repo:{CPE}/acts_{a}" for a in (*CP_ARMS, "alpaca")},
+    f"{CP}/activations/{QWEN35}/apollo": f"repo:{CPE}/acts_apollo",
+    f"{CP}/activations/{QWEN35}/apollo-paper": f"repo:{CPE}/acts_apollo_paper",
+    f"{CP}/activations/{QWEN35}/aisi-dyl": f"repo:{CPE}/acts_aisi",
+    **{f"{CP}/activations/{QWEN35}/aisi-dyl/rollouts_aisi_fu_{a}.jsonl": f"repo:{CPE}/rollouts_aisi_fu_{a}.jsonl"
+       for a in (*CP_ARMS, "alpaca")},
 }
 
 image = modal.Image.debian_slim(python_version="3.12").uv_pip_install("boto3")
