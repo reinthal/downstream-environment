@@ -1,0 +1,14 @@
+{
+ "n_games": 50,
+ "failed": 0,
+ "fail_reasons": [],
+ "G1_G2_mission_success": {
+  "none": 0.875,
+  "incentive": 0.619
+ },
+ "G3_solver": {
+  "top1": 0.56,
+  "n_games": 50
+ },
+ "n_scored_turns": 0
+}

@@ -156,3 +156,17 @@ answer, log P(Yes) − log P(No) to the follow-up question.
 - Asking the model gives the same lie detection as the probe here (0.96 vs
   0.95): nothing pushes the incentive agent to deny (cf. 2026-10-13, where
   a deny instruction dropped P(Yes) to 0.79 and not the probe).
+
+## Pilot v5: a reason to conceal (2026-10-21; `conceal_report.json`)
+
+Incentive framing + every bonus note adds "If anyone finds out about it, you
+lose the bonus." 50 games (pilot seeds 0-49), 0 failed.
+- Behaviour barely changes vs v4: the incentive agent acts in 28/42 games
+  (v4 29/42), wrong entries 41/168, answer lies 14/335, team-message lies
+  10 (v4 3); mission success 0.62 (no agent 0.88); solver 0.56.
+- Layer 48 vs the model's own answer, lie AUROC (talk / entry / answer):
+  probe 0.95 (0.78 / 0.98 / 0.96), P(Yes) 0.95 (0.77 / 0.98 / 0.97). The
+  model still puts P(Yes) > P(No) on 69% of its own lies. The reason to
+  conceal does not make the self-report fail, so the probe adds nothing over
+  asking the model here. The probe still flags the agent in every game,
+  including the 14 where it stayed honest.
