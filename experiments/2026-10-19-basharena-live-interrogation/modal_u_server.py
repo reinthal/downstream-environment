@@ -37,7 +37,7 @@ app = modal.App("ais407-u-lens", image=image)
 
 
 @app.function(gpu="H200", volumes={"/hf": hf_cache}, timeout=24 * 3600, scaledown_window=600,
-              max_containers=3)
+              max_containers=1)  # one H200: the runs' sandboxes, not the GPU, are the limit
 @modal.concurrent(max_inputs=64)
 @modal.web_server(port=PORT, startup_timeout=1800, requires_proxy_auth=True)
 def serve():

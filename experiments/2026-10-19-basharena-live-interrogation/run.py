@@ -47,7 +47,8 @@ from inspect_ai.model import GenerateConfig  # noqa: E402
 # U's request retries: DeepInfra via OpenRouter drops connections, returns 520s and times out
 # before the first token often enough that 3 retries let samples error (Phase A, 2026-10-20).
 # Transport only: a retry re-sends the same request.
-U_RETRIES = GenerateConfig(max_retries=8)
+U_RETRIES = GenerateConfig(max_retries=8, timeout=1800)  # long generations on the shared
+# eager engine ran past 300 s per request (attack pilot, task 21892697)
 HONEST_CONFIG = rba.HONEST_CONFIG.merge(U_RETRIES)
 # T's output budget, explicit: DeepSeek V4.1 Flash ignores reasoning budgets and, with the
 # provider's default max_tokens, sometimes returned an empty completion (pilot matrix, 2026-10-21).
