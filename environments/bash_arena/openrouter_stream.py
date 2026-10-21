@@ -30,3 +30,25 @@ def openrouterstream() -> type[ModelAPI]:
             super().__init__(model_name, base_url, api_key, config, **model_args)
 
     return OpenRouterStreamAPI
+
+
+@modelapi(name="lens")
+def lens() -> type[ModelAPI]:
+    """`lens/<model>`: U on our vLLM + vllm-lens server (experiments/2026-10-19-basharena-live-
+    interrogation/modal_u_server.py), OpenAI-compatible, streamed. LENS_BASE_URL = <server>/v1,
+    LENS_API_KEY = the Modal proxy token (accepted as a bearer token)."""
+    from inspect_ai.model._providers.openai_compatible import OpenAICompatibleAPI
+
+    class LensAPI(OpenAICompatibleAPI):
+        def __init__(
+            self,
+            model_name: str,
+            base_url: str | None = None,
+            api_key: str | None = None,
+            config: GenerateConfig = GenerateConfig(),
+            **model_args: Any,
+        ) -> None:
+            model_args.setdefault("stream", True)
+            super().__init__(model_name, base_url, api_key, config, service="LENS", **model_args)
+
+    return LensAPI

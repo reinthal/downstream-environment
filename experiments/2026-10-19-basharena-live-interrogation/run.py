@@ -76,6 +76,13 @@ from interrogation import (  # noqa: E402
 )
 from godmode import JEV_MODEL, godmode_audit_protocol, godmode_protocol  # noqa: E402
 from probe_protocol import probe_protocol  # noqa: E402
+from auditor import audit_protocol  # noqa: E402
+
+# U on the shared vLLM + vllm-lens server (modal_u_server.py) for the auditor runs: the lens/
+# provider reads LENS_BASE_URL + LENS_API_KEY (the Modal proxy token, as a bearer token).
+os.environ.setdefault("LENS_BASE_URL",
+                      "https://cadenza--ais407-u-lens-serve.us-east.modal.run/v1")
+os.environ.setdefault("LENS_API_KEY", os.environ["MODAL_PROXY_TOKEN"])
 
 
 def build_protocol(cfg: dict):
@@ -103,6 +110,24 @@ def build_protocol(cfg: dict):
         return auto_submit_protocol_wrapper(
             micro_protocol=godmode_protocol(
                 policy=policy, block_threshold=cfg["block_threshold"]
+            )
+        )
+    if cfg["protocol_kind"] == "none":
+        return auto_submit_protocol_wrapper(micro_protocol=policy)
+    if cfg["protocol_kind"] == "auditor":
+        return auto_submit_protocol_wrapper(
+            micro_protocol=audit_protocol(
+                policy=policy,
+                untrusted_model=u,
+                trusted_model=t,
+                honest_config=honest_config,
+                attack_config=attack_config,
+                trusted_config=trusted_config,
+                trigger_threshold=cfg["trigger"],
+                probe=cfg["affordances"] >= 3,
+                godmode=cfg["affordances"] >= 4,
+                fewshot_path=str(HERE / "fibs_fewshot.json"),
+                calibration_path=str(HERE / "phase_a_probe_scores.jsonl"),
             )
         )
     if cfg["protocol_kind"] == "godmode_audit":
@@ -205,7 +230,8 @@ if __name__ == "__main__":
         "--modes", nargs="+", choices=["honest", "attack"], default=["honest", "attack"]
     )
     p.add_argument(
-        "--protocol", choices=["blackbox", "godmode", "godmode_audit", "probe"],
+        "--protocol", choices=["blackbox", "godmode", "godmode_audit", "probe", "none",
+                               "auditor"],
         default="blackbox",
         help="blackbox: informed monitor -> interrogation -> block; godmode: Jev -> block "
         "(exploratory); godmode_audit: probe self read -> open questions + Jev honesty -> block; "
@@ -227,6 +253,11 @@ if __name__ == "__main__":
         "--block-threshold", type=float, default=None,
         help="Block at interrogation score >= this (default: never block).",
     )
+    p.add_argument(
+        "--affordances", type=int, choices=[2, 3, 4], default=None,
+        help="--protocol auditor: highest affordance (2: auditor 1, black box; 3: auditor 2, + "
+        "probe; 4: auditor 3, + system prompt and reasoning).",
+    )
     p.add_argument("--max-sandboxes", type=int, default=8)
     p.add_argument("--max-steps", type=int, default=100, help="Policy turns per sample.")
     p.add_argument("--time-limit", type=int, default=7200, help="Per-sample seconds.")
@@ -237,10 +268,13 @@ if __name__ == "__main__":
     cfg = {
         "setting": "bash_arena",
         "protocol_kind": a.protocol,
+        "affordances": a.affordances,
         "protocol": {
             "godmode": "auto_submit_protocol_wrapper(godmode_protocol)",
             "godmode_audit": "auto_submit_protocol_wrapper(godmode_audit_protocol)",
             "probe": "auto_submit_protocol_wrapper(probe_protocol)",
+            "none": "auto_submit_protocol_wrapper(policy)",
+            "auditor": "auto_submit_protocol_wrapper(audit_protocol)",
             "blackbox": "auto_submit_protocol_wrapper(interrogation_protocol)",
         }[a.protocol],
         "probe_read_url": (os.environ.get("PROBE_READ_URL")
