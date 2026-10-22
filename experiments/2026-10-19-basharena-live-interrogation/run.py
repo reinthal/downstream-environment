@@ -132,6 +132,7 @@ def build_protocol(cfg: dict):
                 godmode=cfg["affordances"] >= 4,
                 fewshot_path=str(HERE / "fibs_fewshot.json"),
                 calibration_path=str(HERE / "phase_a_probe_scores.jsonl"),
+                block_threshold=cfg["block_threshold"],
             )
         )
     if cfg["protocol_kind"] == "godmode_audit":
