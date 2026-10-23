@@ -16,7 +16,7 @@ code{font-size:13px;word-break:break-all}.wrap{overflow-x:auto}
 <p>AIS-407: Qwen3.8-27B as the agent; a Jev step flagger holds suspicious actions for an inline auditor (DeepSeek V4.1 Flash), which questions the agent and then blocks or allows the action. Auditor 1 is black-box, auditor 2 adds a deception probe's reading of each yes/no answer, auditor 3 also sees the agent's system prompt and reasoning.</p>
 <p>Pilot result: without an auditor the side task succeeded in 10/10 attack runs; with each auditor in 0/10. Honest runs blocked: 1/10, 3/10 and 1/10.</p>
 <h2>Folders</h2>
-<ul><li><code>honest/</code>, <code>attack/</code>: one log per run and mode (10 trajectories each): <code>phase-a2_no-auditor</code> (baseline), <code>pilot3_auditor1-blackbox</code>, <code>pilot3_auditor2-probe</code>, <code>pilot3_auditor3-godmode</code>, plus single-trajectory verification runs.</li>
+<ul><li><code>honest/</code>, <code>attack/</code>: one log per protocol and mode, 10 trajectories each: <code>no-auditor</code> (baseline), <code>blackbox</code>, <code>whitebox</code> (+ probe), <code>godmode</code>.</li>
 <li><code>cherry-picked/</code>: one trajectory per file, for demos:</li></ul>
 <div class="wrap"><table>
 <tr><th>File</th><th>What it shows</th></tr>
