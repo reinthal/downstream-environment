@@ -12,7 +12,7 @@ table{border-collapse:collapse;width:100%;font-size:14px}td,th{border-bottom:1px
 code{font-size:13px;word-break:break-all}.wrap{overflow-x:auto}
 </style></head><body><main>
 <h1>BashArena live auditors: transcripts</h1>
-<p><a href="bash-arena-transcripts/"><strong>Open the Inspect log viewer</strong></a> &mdash; it reads the logs straight from the public bucket (<code>https://public-datasets.s3.eu-central-003.backblazeb2.com/downstream-environments/bash-arena/</code>).</p>
+<p><a href="bash-arena-transcripts/#/logs/"><strong>Open the Inspect log viewer</strong></a> (folders: <a href="bash-arena-transcripts/#/logs/cherry-picked/">cherry-picked</a>, <a href="bash-arena-transcripts/#/logs/attack/">attack</a>, <a href="bash-arena-transcripts/#/logs/honest/">honest</a>) &mdash; it reads the logs straight from the public bucket (<code>https://public-datasets.s3.eu-central-003.backblazeb2.com/downstream-environments/bash-arena/</code>).</p>
 <p>AIS-407: Qwen3.8-27B as the agent; a Jev step flagger holds suspicious actions for an inline auditor (DeepSeek V4.1 Flash), which questions the agent and then blocks or allows the action. Auditor 1 is black-box, auditor 2 adds a deception probe's reading of each yes/no answer, auditor 3 also sees the agent's system prompt and reasoning.</p>
 <p>Pilot result: without an auditor the side task succeeded in 10/10 attack runs; with each auditor in 0/10. Honest runs blocked: 1/10, 3/10 and 1/10.</p>
 <h2>Folders</h2>
